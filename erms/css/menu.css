@@ -1,0 +1,162 @@
+#navigation ul
+{
+	font-family: Arial, "Trebuchet MS", Helvetica, Geneva, Verdana, Tahoma, sans-serif;
+    font-size: 1.0em;
+    font-weight: normal;
+    /*background-color: #D8D8D8;*/
+    color: #000000;
+    display: block;
+    /* top, right, bottom, left */
+    padding: 10px 5px 10px 5px;
+    margin: 0px;
+    list-style: none;
+    text-align: left;
+    float: left;
+    width: 100%;
+    white-space: nowrap;
+}
+
+#navigation ul li
+{
+    display: inline;
+    margin: 0px;
+    list-style: none;
+    background-color: #e2e2d9;
+}
+
+#navigation ul li.selected
+{
+    display: inline;
+    margin: 0px;
+    list-style: none;
+    background-color: #7fa743;
+    color: white !important;
+}
+
+#navigation ul li.selected a
+{
+    color: white !important;
+}
+
+#navigation a
+{
+    padding: 10px 5px 10px 5px;
+    text-decoration: none;
+    color: #000000;
+}
+
+#navigation a:hover
+{
+    padding: 10px 5px 10px 5px;
+    background-color: #23408a;
+    color: white !important;
+}
+
+div#menu-position
+{
+    width: 930px;
+    margin-left: 0px;
+}
+
+#erms_menu
+{
+    margin: 0;
+    padding: 5px;
+    z-index: 30;
+	font-family: Arial, "Trebuchet MS", Helvetica, Geneva, Verdana, Tahoma, sans-serif;
+    font-weight: normal;
+}
+
+#erms_menu li
+{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    float: left;
+}
+
+#erms_menu li a
+{
+    display: block;
+    margin: 0 4px 0 0;
+    padding: 6px 8px;
+    width: 140px;
+    height: 25px;
+    background: #7fa743;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none
+}
+
+#erms_menu li a:hover, #erms_menu li.selected a
+{
+    background: #23408a;
+    color: #ffffff
+}
+
+#erms_menu div
+{
+    position: absolute;
+    visibility: hidden;
+    margin: 0;
+    padding: 0;
+    background: #23408a;
+    border: 1px solid #ffffff
+}
+
+#erms_menu div a
+{
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: 5px 10px;
+    white-space: nowrap;
+    text-align: left;
+    text-decoration: none;
+    background: #7fa743;
+    color: #FFFFFF;
+}
+
+#erms_menu div a:hover
+{
+    background: #23408a;
+    color: #FFFFFF
+}
+
+#container
+{
+     position: absolute;
+     top: 110px;
+}
+
+#ship_info
+{
+	font-family: Arial, "Trebuchet MS", Helvetica, Geneva, Verdana, Tahoma, sans-serif;
+	font-style: normal;
+	/*font-variant: small-caps;*/
+	font-weight: bold;
+	font-size: 10pt;
+    color: #23408a;
+	text-decoration: none;
+    text-transform: uppercase;
+	text-align: left;
+    vertical-align: middle;
+}
+
+.module_info
+{
+	font-family: Arial, "Trebuchet MS", Helvetica, Geneva, Verdana, Tahoma, sans-serif;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bold;
+	font-size: 8pt;
+    color: #3c3c3c;
+	word-spacing: normal;
+	letter-spacing: 0.0ex;
+	text-decoration: none;
+	text-transform: uppercase;
+	text-align: left;
+    margin-left: 4px;
+    vertical-align: middle;
+    /*padding-right: 50px;*/
+}

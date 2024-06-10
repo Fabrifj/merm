@@ -1,0 +1,36 @@
+Summary of changes to "AcquiSuite XML Upload Kit", v02.11.0814 compared to v02.11.0726b:
+
+-----------------------------------------------------
+1) If a <point> does not *have* a value, the AcquiSuite indicates this by sending value="NULL" where previously it sent value="".
+
+Typical reasons a point would not have a value:  The AcquiSuite got an error trying to query the meter, or the meter is in "Consumption Only" mode and the point is not a KWH-point, or the meter reported a float "NaN" value.  This change is for backward compatibility with the XML format used by existing products.
+
+Example:
+	<record>
+		...
+		<point number="1" name="Real Power" units="kW" value="NULL" /> 
+		...
+	</record>
+
+-----------------------------------------------------
+2) XML encoding is now specified as US-ASCII.  Non-ASCII characters are encoded as HTML character entities (e.g., &amp;)
+
+-----------------------------------------------------
+3) The <statuscode> and <status> fields, which gave the numeric code and corresponding text message of the error (if any) encountered by the AcquiSuite when logging a data-sample from a meter to create a <record>, has been changed to the <error> field.  The <error> field contains the numeric error code, and the <error text="..."> attribute contains the corresponding error text.
+
+Examples:
+	<record>
+		<time zone="UTC">2011-08-02 16:23:04</time>
+		<error text="Ok">0</error>
+		<point number="0" name="Energy Consumption" units="kWh" value="1478.59" />
+		<point number="1" name="Real Power" units="kW" value="0" />
+	</record>
+
+	<record>
+		<time zone="UTC">2011-08-02 16:23:04</time>
+		<error text="Device failed to respond">139</error>
+		<point number="0" name="Energy Consumption" units="kWh" value="1478.59" />
+		<point number="1" name="Real Power" units="kW" value="0" />
+	</record>
+
+-----------------------------------------------------

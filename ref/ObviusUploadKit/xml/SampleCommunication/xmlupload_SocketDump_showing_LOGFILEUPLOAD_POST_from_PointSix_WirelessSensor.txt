@@ -1,0 +1,37 @@
+POST /obvius/xmlupload_minimal.php5 HTTP/1.1
+Host: mark.shepard.org:80
+Connection: close
+Content-Length: 745
+Content-Type: text/xml
+Cache-Control: no-store
+Pragma: no-cache
+Authorization: Basic MDA1MEMyMzBFRjUyOnBhc3N3b3Jk
+User-Agent: Obvius xmlupload v02.11.0802b-mns; serial 0050C230EF52
+
+<?xml version="1.0" encoding="US-ASCII" ?>
+<DAS>
+<mode>LOGFILEUPLOAD</mode>
+<name>A8812 Dallas CNT:US CIT:DFW &amp; BLD:Mark1 &lt;mark@shepard.org&gt;</name>
+<serial>0050C230EF52</serial>
+<devices>
+<device>
+<name>S5</name>
+<serialnumber>8020310C00000000</serialnumber>
+<type>Point Six, Thermistor</type>
+<class>1011</class>
+<numpoints>1</numpoints>
+<records>
+<record>
+<time zone="UTC">2011-08-02 16:21:17</time>
+<error text="Ok">0</error>
+<point number="0" name="Temperature" units="Ohms" value="10955.43" />
+</record>
+<record>
+<time zone="UTC">2011-08-02 16:25:49</time>
+<error text="Ok">0</error>
+<point number="0" name="Temperature" units="Ohms" value="11172.06" />
+</record>
+</records>
+</device>
+</devices>
+</DAS>

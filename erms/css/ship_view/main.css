@@ -1,0 +1,30 @@
+.main-graph-container {
+  float: left;
+  width: 800px;
+  /* this is only temporary until I can get all of this garbage organized */
+  margin-right: -95px;
+}
+.filter-bar {
+  padding: 10px;
+  background: #efefef;
+  border: 1px solid #23408a;
+  width: 97%;
+  background-color: #7fa743;
+  color: #fff;
+  /* also temporary */
+  margin-top: 5px;
+}
+
+.filter-bar__header {
+    background: #23408a;
+    margin-top: -10px;
+    margin-right: -10px;
+    margin-left: -10px;
+    padding: 2px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.filter-bar label+label {
+  margin-left: 10px;
+}

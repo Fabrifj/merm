@@ -1,0 +1,329 @@
+[16-Mar-2017 20:54:53 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/bwolff/public_html/navisenergy.net/conn/mysql_connect-ro.php on line 16
+[16-Mar-2017 21:41:37 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[16-Mar-2017 21:41:37 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 59
+[16-Mar-2017 21:41:37 UTC] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 64
+[16-Mar-2017 21:41:37 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 69
+[16-Mar-2017 21:41:37 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 116
+[16-Mar-2017 21:41:37 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 563
+[16-Mar-2017 21:41:37 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 109
+[17-Mar-2017 17:24:15 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 69
+[17-Mar-2017 17:24:15 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 116
+[17-Mar-2017 17:24:15 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 563
+[17-Mar-2017 17:24:42 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 69
+[17-Mar-2017 17:24:42 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 116
+[17-Mar-2017 17:24:42 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 563
+[17-Mar-2017 17:46:08 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 69
+[17-Mar-2017 17:46:08 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 116
+[17-Mar-2017 17:46:08 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 563
+[17-Mar-2017 17:46:26 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 69
+[17-Mar-2017 17:46:26 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 116
+[17-Mar-2017 17:46:26 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 563
+[17-Mar-2017 18:36:21 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[17-Mar-2017 18:36:21 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 59
+[17-Mar-2017 18:36:21 UTC] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 64
+[17-Mar-2017 18:36:21 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 69
+[17-Mar-2017 18:36:21 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 116
+[17-Mar-2017 18:36:21 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 563
+[17-Mar-2017 18:36:21 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 109
+[17-Mar-2017 18:43:56 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[17-Mar-2017 18:43:56 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 59
+[17-Mar-2017 18:43:56 UTC] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 64
+[17-Mar-2017 18:43:56 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 69
+[17-Mar-2017 18:43:56 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 116
+[17-Mar-2017 18:43:56 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 563
+[17-Mar-2017 18:43:56 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 109
+[11-Apr-2017 17:04:23 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[11-Apr-2017 17:04:23 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 59
+[11-Apr-2017 17:04:23 UTC] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 64
+[11-Apr-2017 17:04:23 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 69
+[11-Apr-2017 17:04:23 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 116
+[11-Apr-2017 17:04:23 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 563
+[11-Apr-2017 17:04:23 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 109
+[12-Apr-2017 06:38:51 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[12-Apr-2017 06:38:51 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 59
+[12-Apr-2017 06:38:51 UTC] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 64
+[12-Apr-2017 06:38:51 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 69
+[12-Apr-2017 06:38:51 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 116
+[12-Apr-2017 06:38:51 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 563
+[12-Apr-2017 06:38:51 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 109
+[12-Apr-2017 14:33:37 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[12-Apr-2017 14:33:37 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 59
+[12-Apr-2017 14:33:37 UTC] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 64
+[12-Apr-2017 14:33:37 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 69
+[12-Apr-2017 14:33:37 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 116
+[12-Apr-2017 14:33:37 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 563
+[12-Apr-2017 14:33:37 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 109
+[12-Apr-2017 14:36:38 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[12-Apr-2017 14:36:38 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 59
+[12-Apr-2017 14:36:38 UTC] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 64
+[12-Apr-2017 14:36:38 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 69
+[12-Apr-2017 14:36:38 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 116
+[12-Apr-2017 14:36:38 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 563
+[12-Apr-2017 14:36:38 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 109
+[12-Apr-2017 14:37:41 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[12-Apr-2017 14:37:41 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 59
+[12-Apr-2017 14:37:41 UTC] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 64
+[12-Apr-2017 14:37:41 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 69
+[12-Apr-2017 14:37:41 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 116
+[12-Apr-2017 14:37:41 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 563
+[12-Apr-2017 14:37:41 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 109
+[13-Apr-2017 22:26:00 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[13-Apr-2017 22:26:00 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 59
+[13-Apr-2017 22:26:00 UTC] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 64
+[13-Apr-2017 22:26:00 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 69
+[13-Apr-2017 22:26:00 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 116
+[13-Apr-2017 22:26:00 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 563
+[13-Apr-2017 22:26:00 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 109
+[13-Apr-2017 22:26:05 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[13-Apr-2017 22:26:05 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 59
+[13-Apr-2017 22:26:05 UTC] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 64
+[13-Apr-2017 22:26:05 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 69
+[13-Apr-2017 22:26:05 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 116
+[13-Apr-2017 22:26:05 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 563
+[13-Apr-2017 22:26:05 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 109
+[14-Apr-2017 15:53:06 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[14-Apr-2017 15:53:06 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 59
+[14-Apr-2017 15:53:06 UTC] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 64
+[14-Apr-2017 15:53:06 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 69
+[14-Apr-2017 15:53:06 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 116
+[14-Apr-2017 15:53:06 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 563
+[14-Apr-2017 15:53:06 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 109
+[18-Apr-2017 14:43:29 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[18-Apr-2017 14:43:29 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 59
+[18-Apr-2017 14:43:29 UTC] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 64
+[18-Apr-2017 14:43:29 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 69
+[18-Apr-2017 14:43:29 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 116
+[18-Apr-2017 14:43:29 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 563
+[18-Apr-2017 14:43:29 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 109
+[18-Apr-2017 14:43:38 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[18-Apr-2017 14:43:38 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 59
+[18-Apr-2017 14:43:38 UTC] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 64
+[18-Apr-2017 14:43:38 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 69
+[18-Apr-2017 14:43:38 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 116
+[18-Apr-2017 14:43:38 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 563
+[18-Apr-2017 14:43:38 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 109
+[18-Apr-2017 14:43:43 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[18-Apr-2017 14:43:43 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 59
+[18-Apr-2017 14:43:43 UTC] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 64
+[18-Apr-2017 14:43:43 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 69
+[18-Apr-2017 14:43:43 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 116
+[18-Apr-2017 14:43:43 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 563
+[18-Apr-2017 14:43:43 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 109
+[18-Apr-2017 19:29:00 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[18-Apr-2017 19:29:00 UTC] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 80
+[18-Apr-2017 19:29:00 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 233
+[18-Apr-2017 19:29:00 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/energy_methods.php on line 310
+[18-Apr-2017 19:29:00 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[18-Apr-2017 19:29:00 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 182
+[18-Apr-2017 19:29:00 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[18-Apr-2017 19:29:00 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 182
+[18-Apr-2017 19:29:00 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[18-Apr-2017 19:29:00 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 321
+[18-Apr-2017 19:29:00 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/energy_methods.php on line 310
+[18-Apr-2017 19:29:00 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[18-Apr-2017 19:29:00 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 182
+[18-Apr-2017 19:29:00 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[18-Apr-2017 19:29:00 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 182
+[18-Apr-2017 19:29:00 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[18-Apr-2017 19:29:00 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 321
+[18-Apr-2017 19:29:35 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[18-Apr-2017 19:29:35 UTC] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 80
+[18-Apr-2017 19:29:35 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 233
+[18-Apr-2017 19:29:35 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/energy_methods.php on line 310
+[18-Apr-2017 19:29:35 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[18-Apr-2017 19:29:35 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 182
+[18-Apr-2017 19:29:35 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[18-Apr-2017 19:29:35 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 182
+[18-Apr-2017 19:29:35 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[18-Apr-2017 19:29:35 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 321
+[18-Apr-2017 19:29:35 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/energy_methods.php on line 310
+[18-Apr-2017 19:29:35 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[18-Apr-2017 19:29:35 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 182
+[18-Apr-2017 19:29:35 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[18-Apr-2017 19:29:35 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 182
+[18-Apr-2017 19:29:35 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[18-Apr-2017 19:29:35 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 321
+[20-Apr-2017 01:17:26 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[20-Apr-2017 01:17:26 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 59
+[20-Apr-2017 01:17:26 UTC] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 64
+[20-Apr-2017 01:17:26 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 69
+[20-Apr-2017 01:17:26 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 116
+[20-Apr-2017 01:17:26 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 563
+[20-Apr-2017 01:17:26 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 109
+[20-Apr-2017 01:19:02 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[20-Apr-2017 01:19:02 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 59
+[20-Apr-2017 01:19:02 UTC] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 64
+[20-Apr-2017 01:19:02 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 69
+[20-Apr-2017 01:19:02 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 116
+[20-Apr-2017 01:19:02 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 563
+[20-Apr-2017 01:19:02 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 109
+[20-Apr-2017 01:19:13 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[20-Apr-2017 01:19:13 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 59
+[20-Apr-2017 01:19:13 UTC] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 64
+[20-Apr-2017 01:19:13 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 69
+[20-Apr-2017 01:19:13 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 116
+[20-Apr-2017 01:19:13 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 563
+[20-Apr-2017 01:19:13 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 109
+[20-Apr-2017 01:19:22 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[20-Apr-2017 01:19:22 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 59
+[20-Apr-2017 01:19:22 UTC] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 64
+[20-Apr-2017 01:19:22 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 69
+[20-Apr-2017 01:19:22 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 116
+[20-Apr-2017 01:19:22 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 563
+[20-Apr-2017 01:19:22 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 109
+[20-Apr-2017 01:19:30 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[20-Apr-2017 01:19:30 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 59
+[20-Apr-2017 01:19:30 UTC] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 64
+[20-Apr-2017 01:19:30 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 69
+[20-Apr-2017 01:19:30 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 116
+[20-Apr-2017 01:19:30 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 563
+[20-Apr-2017 01:19:30 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 109
+[20-Apr-2017 01:19:30 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[20-Apr-2017 01:19:30 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 77
+[20-Apr-2017 01:19:47 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[20-Apr-2017 01:19:47 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 59
+[20-Apr-2017 01:19:47 UTC] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 64
+[20-Apr-2017 01:19:47 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 69
+[20-Apr-2017 01:19:47 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 116
+[20-Apr-2017 01:19:47 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 563
+[20-Apr-2017 01:19:47 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 109
+[20-Apr-2017 01:20:46 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[20-Apr-2017 01:20:46 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 59
+[20-Apr-2017 01:20:46 UTC] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 64
+[20-Apr-2017 01:20:46 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 69
+[20-Apr-2017 01:20:46 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 116
+[20-Apr-2017 01:20:46 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 563
+[20-Apr-2017 01:20:46 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 109
+[20-Apr-2017 01:20:46 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[20-Apr-2017 01:20:46 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 77
+[20-Apr-2017 01:20:52 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[20-Apr-2017 01:20:52 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 59
+[20-Apr-2017 01:20:52 UTC] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 64
+[20-Apr-2017 01:20:52 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 69
+[20-Apr-2017 01:20:52 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 116
+[20-Apr-2017 01:20:52 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 563
+[20-Apr-2017 01:20:52 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 109
+[20-Apr-2017 03:59:02 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[20-Apr-2017 03:59:02 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 59
+[20-Apr-2017 03:59:02 UTC] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 64
+[20-Apr-2017 03:59:02 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 69
+[20-Apr-2017 03:59:02 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 116
+[20-Apr-2017 03:59:02 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 563
+[20-Apr-2017 03:59:02 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 109
+[20-Apr-2017 03:59:02 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[20-Apr-2017 03:59:02 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 77
+[20-Apr-2017 03:59:04 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[20-Apr-2017 03:59:04 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 59
+[20-Apr-2017 03:59:04 UTC] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 64
+[20-Apr-2017 03:59:04 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 69
+[20-Apr-2017 03:59:04 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 116
+[20-Apr-2017 03:59:04 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 563
+[20-Apr-2017 03:59:04 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 109
+[20-Apr-2017 04:03:44 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/bwolff/public_html/navisenergy.net/erms/includes/data_methods.php on line 15
+[20-Apr-2017 04:03:44 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 59
+[20-Apr-2017 04:03:44 UTC] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 64
+[20-Apr-2017 04:03:44 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 69
+[20-Apr-2017 04:03:44 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 116
+[20-Apr-2017 04:03:44 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bwolff/public_html/navisenergy.net/erms/includes/init.php on line 563
+[20-Apr-2017 04:03:44 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bwolff/public_html/navisenergy.net/erms/includes/access_control.php on line 109
+[01-Sep-2023 16:32:51 America/New_York] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 79 bytes) in /home/shipsenergy/public_html/erms/includes/gfx_methods.php on line 123
+[01-Sep-2023 16:33:02 America/New_York] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 79 bytes) in /home/shipsenergy/public_html/erms/includes/gfx_methods.php on line 123
+[01-Sep-2023 16:33:14 America/New_York] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 79 bytes) in /home/shipsenergy/public_html/erms/includes/gfx_methods.php on line 123
+[01-Sep-2023 16:33:25 America/New_York] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 79 bytes) in /home/shipsenergy/public_html/erms/includes/gfx_methods.php on line 123
+[31-Jan-2024 14:07:35 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[31-Jan-2024 14:07:35 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[31-Jan-2024 14:07:42 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[31-Jan-2024 14:07:42 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[31-Jan-2024 14:07:54 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[31-Jan-2024 14:07:54 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[31-Jan-2024 14:08:02 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-Mar-2024 19:51:56 UTC] PHP Fatal error:  Call to undefined function fb() in /home/shipsenergy/public_html/erms/includes/energy_methods.php on line 12
+[14-Mar-2024 19:53:51 UTC] PHP Fatal error:  Call to undefined function fb() in /home/shipsenergy/public_html/erms/includes/energy_methods.php on line 12
+[14-Mar-2024 19:54:13 UTC] PHP Fatal error:  Call to undefined function fb() in /home/shipsenergy/public_html/erms/includes/energy_methods.php on line 12
+[14-Mar-2024 19:54:19 UTC] PHP Fatal error:  Call to undefined function fb() in /home/shipsenergy/public_html/erms/includes/energy_methods.php on line 12
+[14-Mar-2024 19:55:16 UTC] PHP Fatal error:  Call to undefined function fb() in /home/shipsenergy/public_html/erms/includes/energy_methods.php on line 12
+[14-Mar-2024 19:55:20 UTC] PHP Fatal error:  Call to undefined function fb() in /home/shipsenergy/public_html/erms/includes/energy_methods.php on line 12
+[14-Mar-2024 19:55:21 UTC] PHP Fatal error:  Call to undefined function fb() in /home/shipsenergy/public_html/erms/includes/energy_methods.php on line 12
+[23-Mar-2024 19:11:26 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 12
+[23-Mar-2024 19:11:26 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 189
+[23-Mar-2024 19:11:26 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 12
+[23-Mar-2024 19:11:26 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 189
+[23-Mar-2024 19:11:26 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 12
+[23-Mar-2024 19:11:26 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 189
+[23-Mar-2024 19:11:26 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 12
+[23-Mar-2024 19:11:26 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 189
+[23-Mar-2024 19:11:33 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 12
+[23-Mar-2024 19:11:33 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 189
+[23-Mar-2024 19:11:33 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 12
+[23-Mar-2024 19:11:33 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 189
+[23-Mar-2024 19:11:33 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 12
+[23-Mar-2024 19:11:33 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 189
+[23-Mar-2024 19:11:33 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 12
+[23-Mar-2024 19:11:33 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 189
+[23-Mar-2024 19:12:14 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 12
+[23-Mar-2024 19:12:14 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 189
+[23-Mar-2024 19:12:14 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 12
+[23-Mar-2024 19:12:14 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 189
+[23-Mar-2024 19:12:14 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 12
+[23-Mar-2024 19:12:14 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 189
+[23-Mar-2024 19:12:14 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 12
+[23-Mar-2024 19:12:14 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 189
+[23-Mar-2024 20:19:05 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 12
+[23-Mar-2024 20:19:05 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 189
+[23-Mar-2024 20:19:05 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 12
+[23-Mar-2024 20:19:05 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 189
+[23-Mar-2024 20:19:05 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 12
+[23-Mar-2024 20:19:05 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 189
+[23-Mar-2024 20:19:05 UTC] PHP Warning:  mysql_errno() expects parameter 1 to be resource, object given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 12
+[23-Mar-2024 20:19:05 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 189
+[14-May-2024 02:53:34 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 02:53:36 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 02:53:37 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 02:53:38 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 02:53:39 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 02:53:41 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 02:53:42 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 03:12:47 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 03:12:48 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 03:12:50 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 03:12:51 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 03:12:52 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 03:12:53 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 03:12:54 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 03:14:20 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 03:14:22 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 03:14:23 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 03:14:24 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 03:14:25 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 03:14:27 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 03:14:28 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 03:16:32 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 03:16:34 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 03:16:35 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 03:16:37 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 03:16:38 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 03:16:39 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 03:16:40 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 22:31:33 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 22:31:35 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 22:31:36 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 22:31:37 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 22:31:38 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 22:31:40 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 22:31:41 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 22:33:37 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 22:33:38 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 22:33:39 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 22:33:40 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 22:33:42 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 22:33:43 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[14-May-2024 22:33:44 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[28-May-2024 13:31:49 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[28-May-2024 13:31:50 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[28-May-2024 13:31:52 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[28-May-2024 13:31:53 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[28-May-2024 13:31:55 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[28-May-2024 13:31:56 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[28-May-2024 13:31:57 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[30-May-2024 23:28:16 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509
+[30-May-2024 23:31:26 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/shipsenergy/public_html/erms/includes/data_methods.php on line 509

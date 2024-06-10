@@ -1,0 +1,579 @@
+/* Desktops and laptops ----------- */
+@media only screen
+and (min-width : 1224px) {
+/* Styles */
+}
+
+/* Large screens ----------- */
+@media only screen
+and (min-width : 1824px) {
+/* Styles */
+}
+
+
+.wrapper
+{
+   position: relative;
+   float: left;
+   left: 12px;
+   width: 1100px;
+   margin-bottom: 5px;
+   background-color: #ffffff;
+   /* background-color: aquamarine; */ /* testing color */
+   font-family: Arial, "Trebuchet MS", Helvetica, Geneva, Verdana, Tahoma, sans-serif;
+   border-width: 0px;
+   padding: 0px;
+   margin: 0px;
+}
+
+.annualwrapper
+{
+   position: relative;
+   float: left;
+   left: 12px;
+   /*width: 930px;*/
+    width: 1450px;
+   margin-bottom: 5px;
+   background-color: #ffffff;
+   font-family: Arial, "Trebuchet MS", Helvetica, Geneva, Verdana, Tahoma, sans-serif;
+   border-width: 0px;
+   padding: 0px;
+   margin: 0px;
+}
+
+.wrapper2
+{
+   position: relative;
+   float: left;
+   left: 12px;
+   width: 930px;
+   margin-bottom: 5px;
+   background-color: #e2e2d9;
+   font-family: Arial, "Trebuchet MS", Helvetica, Geneva, Verdana, Tahoma, sans-serif;
+   border-width: 0px;
+   padding: 0px;
+   margin: 0px;
+}
+.wrappertight
+{
+   position: relative;
+   float: left;
+   left: 12px;
+   width: 930px;
+   margin-bottom: 1px;
+   background-color: #ffffff;
+  /*  background-color : blueviolet; */ /* testing color */
+   font-family: Arial, "Trebuchet MS", Helvetica, Geneva, Verdana, Tahoma, sans-serif;
+   border-width: 0px;
+   padding: 0px;
+   margin: 0px;
+}
+.annualwrappertight
+{
+   position: relative;
+   float: left;
+   left: 12px;
+   width: 1600px;
+   margin-bottom: 1px;
+   background-color: #ffffff;
+   font-family: Arial, "Trebuchet MS", Helvetica, Geneva, Verdana, Tahoma, sans-serif;
+   border-width: 0px;
+   padding: 0px;
+   margin: 0px;
+}
+.tenhigh
+{
+    margin-top: 10px;
+    height: 10px;
+    background-color: #e2e2d9;
+}
+.tanvmargin
+{
+    margin-top: 5px;
+    height: 5px;
+    background-color: #e2e2d9;
+}
+.def_left{
+   position: relative;
+   float: left;
+   left: 5px;
+   width: 10px;
+   height: 60px;
+   background-color: #828282;
+}
+.def_mid{
+   position: relative;
+   float: left;
+   left: 15px;
+   width: 880px;
+   height: 60px;
+   background-color: #828282;
+}
+.def_right{
+   position: relative;
+   float: left;
+   left: 25px;
+   width: 10px;
+   height: 60px;
+   background-color: #828282;
+}
+.def_all{
+   position: relative;
+   float: left;
+   width: 990px;
+   left: 0px;
+   height: 50px;
+   background-color: #ffffff;
+   border: #23408a 1px solid;
+}
+.def_meter_all{
+   position: relative;
+   float: left;
+   width: 1015px;
+   left: 0px;
+   height: 50px;
+   background-color: #ffffff;
+   border: #23408a 1px solid;
+}
+.chart_all{
+   position: relative;
+   float: left;
+   width: 915px;
+   left: 0px;
+   background-color: #ffffff;
+   border: #23408a 1px solid;
+}
+.graph_left{
+   position: relative;
+   float: left;
+   width: 690px;
+   height: 330px;
+   background-color: #efefef;
+}
+.graph_mid{
+   position: relative;
+   float: left;
+   left: 15px;
+   width: 10px;
+   height: 630px;
+   background-color: #ffffff;
+}
+.graph_right{
+   position: relative;
+   float: left;
+   left: 95px;
+   width: 200px;
+   height: 530px;
+   margin-top: 5px;
+   background-color: #ffffff;
+}
+
+.graph_meter_right{
+   position: relative;
+   float: left;
+   left: 130px;
+   width: 200px;
+   height: 530px;
+   margin-top: 5px;
+   background-color: #ffffff;
+}
+
+.chart_left{
+   position: relative;
+   float: left;
+   width: 690px;
+   margin-top: 5px;
+   background-color: #efefef;
+   margin-left: 5px;
+}
+.chart_mid{
+   position: relative;
+   float: left;
+   left: 15px;
+   width: 10px;
+   background-color: #ffffff;
+}
+.chart_right{
+   position: relative;
+   float: left;
+   left: 25px;
+   width: 200px;
+   margin-top: 5px;
+   background-color: #ffffff;
+}
+
+.head_left{
+   position: relative;
+   float: left;
+   left: 5px;
+   width: 10px;
+   height: 40px;
+   background-color: #828282;
+}
+.head_mid{
+   position: relative;
+   float: left;
+   left: 15px;
+   width: 880px;
+   height: 40px;
+   background-color: #828282;
+}
+.head_right{
+   position: relative;
+   float: left;
+   left: 25px;
+   width: 10px;
+   height: 40px;
+   background-color: #828282;
+}
+.fhead_all{
+   position: relative;
+   float: left;
+   width: 930px;
+   height: 22px;
+   background-color: #ffffff;
+}
+.menu_all{
+   position: relative;
+   float: left;
+   width: 700px;
+   height: 50px;
+   background-color: #ffffff;
+  /* background-color: #D91056;red for testing*/
+
+}
+
+.foot_left{
+   position: relative;
+   float: left;
+   left: 1px;
+   width: 10px;
+   height: 40px;
+   background-color: #ffffff;
+}
+.foot_mid{
+   position: relative;
+   float: left;
+   left: 1px;
+   width: 780px;
+   height: 40px;
+   background-color: #ffffff;
+   padding-top: 12px;
+}
+.foot_right{
+   position: relative;
+   float: left;
+   left: 25px;
+   width: 105px;
+   height: 40px;
+   background-color: #ffffff;
+}
+.info_wrapper{
+   position: relative;
+   float: left;
+   width: 200px;
+   margin-bottom: 10px;
+   background-color: #ffffff;
+}
+.iwbox1{
+   position: relative;
+   float: left;
+   width: 200px;
+   margin-bottom: 10px;
+   background-color: #7fa743;
+   border: #23408a 1px solid;
+}
+.iwbox2{
+   position: relative;
+   float: left;
+   width: 200px;
+   margin-bottom: 10px;
+   background-color: #DBDBDB;
+   border: #23408a 1px solid;
+}
+
+.iwbox3{
+   position: relative;
+   float: left;
+   width: 240px;
+   margin-bottom: 10px;
+   background-color: #DBDBDB;
+   border: #23408a 1px solid;
+}
+#group_table
+{
+  width: 100%;
+  font-size: 1.25em;
+}
+
+.consumption_box
+{
+   position: relative;
+   float: left;
+   width: 690px;
+   width: 100%;
+   margin-bottom: 8px;
+   background-color: #DBDBDB;
+   border: #23408a 1px solid;
+   border-left: solid 1px black;
+   padding:04px;
+}
+
+
+.annualchart_left{
+   position: relative;
+   float: left;
+   width: 1150px;
+   margin-top: 5px;
+   background-color: #efefef;
+}
+.annual_consumption_box
+{
+   position: relative;
+   float: left;
+   width: 890px;
+   width: 100%;
+   margin-bottom: 8px;
+   background-color: #DBDBDB;
+   border: #23408a 1px solid;
+   border-left: solid 1px black;
+   padding:04px;
+}
+.annual_graph_right{
+   position: relative;
+   float: left;
+   /*left: 350px;*/
+   /*width: 200px;*/
+   /*height: 630px;*/
+   margin-top: 5px;
+   background-color: #ffffff;
+}
+
+.chart_group_left{
+   position: relative;
+   float: left;
+   /*width: 1050px;*/
+   width: 80%;
+   margin-top: 5px;
+   /*background-color: #efefef;*/
+}
+.chart_meter_left{
+   position: relative;
+   float: left;
+   /*width: 950px;*/
+   width: 93%;
+   margin-top: 5px;
+   background-color: #efefef;
+}
+.consumption_box_group
+{
+   position: relative;
+   float: left;
+  /* width: 990px;*/
+   width: 98%;
+   margin-bottom: 8px;
+   background-color: #DBDBDB;
+   border: #23408a 1px solid;
+   border-left: solid 1px black;
+   padding:04px;
+}
+.menu_right{
+   position: relative;
+   float: left;
+}
+.ship_info_wrapper{
+   position: relative;
+   float: left;
+   width: 230px;
+   height: 42px;
+   background-color: #ffffff;
+   /*background-color: #9DD910; green for testing*/
+   padding-top: 8px;
+   text-align: left;
+}
+.menu_logout{
+  text-decoration: none;
+  float: left;
+  position: relative;
+  padding-top: 8px;
+}
+#last30_summary_header
+{
+    color:white;
+    padding: 2px;
+    background-color: #23408a;
+}
+
+#graph_range_sel_header
+{
+    color:white;
+    padding: 2px;
+    background-color: #23408a;
+}
+
+#detailed_summary_header
+{
+    color:white;
+    padding: 2px;
+    background-color: #23408a;
+}
+table.tblDetailedSummaryRpt
+{
+    width: 100%;
+    font-size: 1.25em;
+}
+
+.tblDetailedSummaryRpt td
+{
+    padding: 2px;
+    width: 50%;
+}
+table.annualtblDetailedSummaryRpt
+{
+    width: 100%;
+    font-size: 1.00em;
+}
+
+.annualtblDetailedSummaryRpt td
+{
+    padding: 2px;
+   /* width: 20%;*/
+}
+
+
+Table.annualRatetblDetailedSummaryRpt
+{
+    width: 100%;
+    font-size: 1.00em;
+}
+
+.annualRatetblDetailedSummaryRpt td
+{
+    padding: 2px;
+     width: 50%;
+}
+
+
+table.tblDetailedSummary
+{
+    width: 100%;
+    font-size: .95em;
+
+ }
+
+.tblDetailedSummary table
+{
+    border-collapse: collapse;
+}
+
+.tblDetailedSummary table, td, th
+{
+    border-bottom: 1px solid #23408a;
+}
+
+tr.odd
+{
+    background-color: #DBDBDB;
+}
+
+tr:nth-child(even)
+{
+    background-color: #F5F4E9;
+}
+
+table.tblLast30
+{
+    /*width: 700px;*/
+    width: 100%;
+    font-size: .9em;
+}
+
+.tblLast30 table
+{
+    border-collapse: collapse;
+}
+
+.tblLast30 table, td, th
+{
+    border: 0px;
+    border-bottom: 0px;
+    border-collapse: collapse;
+}
+
+.tblLast30 td, th
+{
+    padding-right: 10px;
+    border-collapse: collapse;
+}
+
+#radio1 input
+{
+    width: 200px !important;
+}
+
+#radio2 input
+{
+    width: 200px !important;
+}
+
+#radio3 input
+{
+    width: 200px !important;
+}
+
+#radio4 input
+{
+    width: 200px !important;
+}
+.homeIcon{
+   position: relative;
+   float: right;
+   right: 15px;
+   padding-top:8px;
+   color: black;
+}
+.asterisk1{
+   position: relative;
+   float: right;
+   right: 15px;
+   padding-top:8px;
+   color: black;
+   font-size: 14px;
+}
+
+.printRptBtn button
+{
+    /*padding: 2px;*/
+    position: relative;
+    float:left;
+    left: 10px;
+    /*box-shadow: 3px 3px 3px rgba(0,0,0,0.5); -webkit-box-shadow:3px 3px 3px rgba(0,0,0,0.5); */
+    cursor:pointer;
+}
+.annualprintRptBtn button
+{
+    /*padding: 2px;*/
+    position: relative;
+    float:left;
+    left: 20px;
+    /*box-shadow: 3px 3px 3px rgba(0,0,0,0.5); -webkit-box-shadow:3px 3px 3px rgba(0,0,0,0.5); */
+    cursor:pointer;
+}
+.printGroupRptBtn button
+{
+    /*padding: 2px;*/
+    position: relative;
+    float:left;
+    left: 5px;
+    /*box-shadow: 3px 3px 3px rgba(0,0,0,0.5); -webkit-box-shadow:3px 3px 3px rgba(0,0,0,0.5); */
+    cursor:pointer;
+}
+
+body
+{
+   border-width: 0px;
+   padding: 0px;
+   margin: 0px;
+  /*background-color: #10D9CF; */ /*teal used for testing */
+   font-size: 12px;
+}

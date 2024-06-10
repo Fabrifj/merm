@@ -1,0 +1,327 @@
+<style type="text/css">
+<!--
+
+div.Table_01 {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:960px;
+    height:100px;
+}
+
+div.Head-Strip_ {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:960px;
+    height:6px;
+}
+
+div.Equate-Logo_ {
+    position:absolute;
+    left:0px;
+    top:6px;
+    width:184px;
+    height:54px;
+}
+
+div.ERMS-Name_ {
+    position:absolute;
+    left:184px;
+    top:6px;
+    width:666px;
+    height:54px;
+}
+
+div.Green-Ship_ {
+    position:absolute;
+    left:850px;
+    top:6px;
+    width:100px;
+    height:54px;
+}
+
+div.Untitled-1-05_ {
+    position:absolute;
+    left:950px;
+    top:6px;
+    width:10px;
+    height:54px;
+}
+
+div.Menu-Pad0_ {
+    position:absolute;
+    left:0px;
+    top:60px;
+    width:10px;
+    height:91px;
+}
+
+div.Menu-Power-Cost_ 
+{
+    background-image: url('images/Menu_Power_Cost.png');
+    cursor: pointer;
+	cursor: hand;
+    position:absolute;
+    left:10px;
+    top:60px;
+    width:132px;
+    height:91px;
+}
+
+div.Menu-Power-Cost_:hover 
+{
+    background-image: url('images/Menu_Power_Cost_Hover.png');
+}
+
+div.Menu-Power-Cost_Sel 
+{
+    background-image: url('images/Menu_Power_Cost_Selected.png');
+    cursor: pointer;
+	cursor: hand;
+    position:absolute;
+    left:10px;
+    top:60px;
+    width:132px;
+    height:91px;
+}
+
+div.Menu-Pad1_ {
+    position:absolute;
+    left:142px;
+    top:60px;
+    width:8px;
+    height:91px;
+}
+
+div.Menu-Meter-Data_ {
+    background-image: url('images/Menu_Meter_Data.png');
+    cursor: pointer;
+	cursor: hand;
+    position:absolute;
+    left:150px;
+    top:60px;
+    width:132px;
+    height:91px;
+}
+
+div.Menu-Meter-Data_:hover {
+    background-image: url('images/Menu_Meter_Data_Hover.png');
+}
+
+div.Menu-Meter-Data_Sel {
+    background-image: url('images/Menu_Meter_Data_Selected.png');
+    cursor: pointer;
+	cursor: hand;
+    position:absolute;
+    left:150px;
+    top:60px;
+    width:132px;
+    height:91px;
+}
+
+div.Menu-Pad2_ {
+    position:absolute;
+    left:282px;
+    top:60px;
+    width:8px;
+    height:91px;
+}
+
+div.Menu-Monthly-Report_ {
+    background-image: url('images/Menu_Monthly_Report.png');
+    cursor: pointer;
+	cursor: hand;
+    position:absolute;
+    left:290px;
+    top:60px;
+    width:132px;
+    height:91px;
+}
+
+div.Menu-Monthly-Report_:hover {
+    background-image: url('images/Menu_Monthly_Report_Hover.png');
+}
+
+div.Menu-Monthly-Report_Sel {
+    background-image: url('images/Menu_Monthly_Report_Selected.png');
+    cursor: pointer;
+	cursor: hand;
+    position:absolute;
+    left:290px;
+    top:60px;
+    width:132px;
+    height:91px;
+}
+
+div.Menu-Pad3_ {
+    position:absolute;
+    left:422px;
+    top:60px;
+    width:8px;
+    height:91px;
+}
+
+div.Menu-PadLong_ {
+    position:absolute;
+    left:430px;
+    top:60px;
+    width:412px;
+    height:91px;
+}
+
+div.Menu-Pad4_ {
+    position:absolute;
+    left:842px;
+    top:60px;
+    width:8px;
+    height:91px;
+}
+
+div.Menu-Account_ {
+    position:absolute;
+    left:850px;
+    top:60px;
+    width:100px;
+    height:91px;
+}
+
+div.Menu-Pad5_ {
+    position:absolute;
+    left:950px;
+    top:60px;
+    width:10px;
+    height:91px;
+}
+
+div.Ship-Info-Pad0_ {
+    position:absolute;
+    left:0px;
+    top:151px;
+    width:10px;
+    height:38px;
+}
+
+div.Ship-Info_ {
+    background-image: url('images/Ship_Info.png');
+    position:absolute;
+    left:10px;
+    top:151px;
+    width:940px;
+    height:38px;
+	font-family: Arial, "Trebuchet MS", Helvetica, Geneva, Verdana, Tahoma, sans-serif;
+	font-style: normal;
+	font-variant: small-caps;
+	font-weight: bold;
+	font-size: 22pt;
+    color: #23408a;
+	text-decoration: none;
+	text-align: left;
+}
+
+.Module-Info_ {
+	font-family: Arial, "Trebuchet MS", Helvetica, Geneva, Verdana, Tahoma, sans-serif;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bold;
+	font-size: 13pt;
+    color: #3c3c3c;
+	word-spacing: normal;
+	letter-spacing: 0.0ex;
+	text-decoration: none;
+	text-transform: uppercase;
+	text-align: left;
+    margin-left: 4px;
+    /*padding-right: 50px;*/
+}
+
+div.Ship-Info-Pad1_ {
+    position:absolute;
+    left:950px;
+    top:151px;
+    width:10px;
+    height:38px;
+}
+
+-->
+</style>
+<div class="Table_01">
+    <!-- Header Bar -->
+    <div class="Head-Strip_">
+        <img id="Head_Strip" src="images/Head_Strip.png" width="960" height="6" alt="" />
+    </div>
+    <div class="Equate-Logo_">
+        <img id="Equate_Logo" src="images/Equate_Logo.png" width="184" height="54" alt="EQUATE - Alaris Companies" />
+    </div>
+    <div class="ERMS-Name_">
+        <img id="ERMS_Name" src="images/ERMS_Name.png" width="666" height="54" alt="" />
+    </div>
+    <div class="Green-Ship_">
+        <img id="Green_Ship" src="images/Green_Ship.png" width="100" height="54" alt="" />
+    </div>
+    <!-- Menu/Navigation Bar -->
+    <div class="Untitled-1-05_">
+        <img id="Untitled_1_05" src="images/Untitled-1_05.png" width="10" height="54" alt="" />
+    </div>
+    <div class="Menu-Pad0_">
+        <img id="Menu_Pad0" src="images/Menu_Pad0.png" width="10" height="91" alt="" />
+    </div>
+    <div <?php if (stripos($_SERVER['REQUEST_URI'],'=mod1') !== false) {echo ' class="Menu-Power-Cost_Sel"';} else {echo ' class="Menu-Power-Cost_"';}?> onclick="javascript:location='/erms/upload/jp_graph/graphs/erms_module2.php?display=<?php echo $VAL["display"] ?>&user=<?php echo $_REQUEST['user'] ?>&module=mod1';">
+    </div>
+    <div class="Menu-Pad1_">
+        <img id="Menu_Pad1" src="images/Menu_Pad1.png" width="8" height="91" alt="" />
+    </div>
+    <div <?php if (stripos($_SERVER['REQUEST_URI'],'=mod3') !== false) {echo ' class="Menu-Meter-Data_Sel"';} else {echo ' class="Menu-Meter-Data_"';}?> onclick="javascript:location='/erms/upload/jp_graph/graphs/erms_module2.php?display=<?php echo $VAL["display"] ?>&user=<?php echo $_REQUEST['user'] ?>&module=mod3';">
+    </div>
+    <div class="Menu-Pad2_">
+        <img id="Menu_Pad2" src="images/Menu_Pad1.png" width="8" height="91" alt="" />
+    </div>
+    <div <?php if (stripos($_SERVER['REQUEST_URI'],'=mod6') !== false) {echo ' class="Menu-Monthly-Report_Sel"';} else {echo ' class="Menu-Monthly-Report_"';}?> onclick="javascript:location='/erms/upload/jp_graph/graphs/erms_module2.php?display=<?php echo $VAL["display"] ?>&user=<?php echo $_REQUEST['user'] ?>&module=mod6';">
+    </div>
+    <div class="Menu-Pad3_">
+        <img id="Menu_Pad3" src="images/Menu_Pad1.png" width="8" height="91" alt="" />
+    </div>
+    <div class="Menu-PadLong_">
+        <img id="Menu_PadLong" src="images/Menu_PadLong.png" width="412" height="91" alt="" />
+    </div>
+    <div class="Menu-Pad4_">
+        <img id="Menu_Pad4" src="images/Menu_Pad4.png" width="8" height="91" alt="" />
+    </div>
+    <div class="Menu-Account_">
+        <img id="Menu_Account" src="images/Menu_Account.png" width="100" height="91" alt="" />
+    </div>
+    <div class="Menu-Pad5_">
+        <img id="Menu_Pad5" src="images/Menu_Pad5.png" width="10" height="91" alt="" />
+    </div>
+    <!-- Ship and Report Information Bar -->
+    <div class="Ship-Info-Pad0_">
+        <img id="Ship_Info_Pad0" src="images/Ship_Info_Pad0.png" width="10" height="38" alt="" />
+    </div>
+    <div class="Ship-Info_">
+        <?php echo $Title ?>
+        <span class="Module-Info_">
+<?php 
+switch ($module)
+{	
+	// Energy Power and Cost Analysis
+    case ERMS_Modules::PowerAndCostAnalysis:
+        echo 'Energy: Power and Cost Analysis';
+        break;
+    case ERMS_Modules::EnergyMeterData:
+        echo 'Energy: Meter Data';
+        break;
+    case ERMS_Modules::MonthlyReports:
+        echo 'Monthly Reports';
+        break;
+}
+?>
+        </span>
+    </div>
+    <div class="Ship-Info-Pad1_">
+        <img id="Ship_Info_Pad1" src="images/Ship_Info_Pad1.png" width="10" height="38" alt="" />
+    </div>
+</div>
+<p>&nbsp;<br /></p>
+<p>&nbsp;<br /></p>
+<p>&nbsp;<br /></p>
+<p>&nbsp;<br /><br /></p>

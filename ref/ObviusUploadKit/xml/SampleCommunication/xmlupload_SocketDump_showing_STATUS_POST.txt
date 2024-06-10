@@ -1,0 +1,23 @@
+POST /obvius/xmlupload_minimal.php5 HTTP/1.1
+Host: mark.shepard.org:80
+Connection: close
+Content-Length: 499
+Content-Type: text/xml
+Cache-Control: no-store
+Pragma: no-cache
+Authorization: Basic MDA1MEMyMzBFRjUyOnBhc3N3b3Jk
+User-Agent: Obvius xmlupload v02.11.0802b-mns; serial 0050C230EF52
+
+<?xml version="1.0" encoding="US-ASCII" ?>
+<DAS>
+<mode>STATUS</mode>
+<name>A8812 Dallas CNT:US CIT:DFW &amp; BLD:Mark1 &lt;mark@shepard.org&gt;</name>
+<serial>0050C230EF52</serial>
+<uptime>4693</uptime>
+<percentblocksinuse>48</percentblocksinuse>
+<percentinodesused>0</percentinodesused>
+<acquisuiteversion>v02.11.0802b-mns</acquisuiteversion>
+<usrversion>v02.11.0727b</usrversion>
+<rootversion>v02.11.0727b</rootversion>
+<kernelversion>2.6.28.10-r1.89b-g39f0aec</kernelversion>
+</DAS>

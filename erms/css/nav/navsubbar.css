@@ -1,0 +1,41 @@
+.navsubbar {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: #f8f9fa;
+  box-shadow: 1px 1px 5px #aaa;
+}
+
+.navsubbar__logout {
+  color: #d00404;
+  font-size: 13px;
+  font-family: arial;
+  float: right;
+  margin-right: 12px;
+  text-decoration: none;
+}
+
+.navsubbar__list {
+  display: inline-block;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  padding-left: 12px;
+}
+
+.navsubbar__item {
+  display: inline-block;
+  padding-right: 25px;
+  padding-left: 25px;
+}
+
+.navsubbar__link {
+  color: #7fa743;
+  font-size: 14px;
+  font-family: arial;
+  text-decoration: none;
+}
+
+.navsubbar__link--selected, .navsubbar__link:hover  {
+  color: #23408a;
+}

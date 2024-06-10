@@ -1,0 +1,125 @@
+POST /obvius/xmlupload_minimal.php5 HTTP/1.1
+Host: mark.shepard.org:80
+Connection: close
+Content-Length: 6004
+Content-Type: text/xml
+Cache-Control: no-store
+Pragma: no-cache
+Authorization: Basic MDA1MEMyMzBFRjUyOnBhc3N3b3Jk
+User-Agent: Obvius xmlupload v02.11.0802b-mns; serial 0050C230EF52
+
+<?xml version="1.0" encoding="US-ASCII" ?>
+<DAS>
+<mode>LOGFILEUPLOAD</mode>
+<name>A8812 Dallas CNT:US CIT:DFW &amp; BLD:Mark1 &lt;mark@shepard.org&gt;</name>
+<serial>0050C230EF52</serial>
+<devices>
+<device>
+<name>MH with PointSix Sensors</name>
+<address>143</address>
+<type>Obvius, ModHopper, R9120-1</type>
+<class>17</class>
+<numpoints>10</numpoints>
+<records>
+<record>
+<time zone="UTC">2011-08-02 16:22:16</time>
+<error text="Ok">0</error>
+<point number="0" name="Pulse #1" units="" value="0" />
+<point number="1" name="Pulse #1 Rate" units="per minute" value="0" />
+<point number="2" name="Pulse #1 Instantaneous" units="per minute" value="0" />
+<point number="3" name="Pulse #1 Min" units="per minute" value="0" />
+<point number="4" name="Pulse #1 Max" units="per minute" value="0" />
+<point number="5" name="Pulse #2" units="" value="0" />
+<point number="6" name="Pulse #2 Rate" units="per minute" value="0" />
+<point number="7" name="Pulse #2 Instantaneous" units="per minute" value="0" />
+<point number="8" name="Pulse #2 Min" units="per minute" value="0" />
+<point number="9" name="Pulse #2 Max" units="per minute" value="0" />
+</record>
+<record>
+<time zone="UTC">2011-08-02 16:23:12</time>
+<error text="Ok">0</error>
+<point number="0" name="Pulse #1" units="" value="0" />
+<point number="1" name="Pulse #1 Rate" units="per minute" value="0" />
+<point number="2" name="Pulse #1 Instantaneous" units="per minute" value="0" />
+<point number="3" name="Pulse #1 Min" units="per minute" value="0" />
+<point number="4" name="Pulse #1 Max" units="per minute" value="0" />
+<point number="5" name="Pulse #2" units="" value="0" />
+<point number="6" name="Pulse #2 Rate" units="per minute" value="0" />
+<point number="7" name="Pulse #2 Instantaneous" units="per minute" value="0" />
+<point number="8" name="Pulse #2 Min" units="per minute" value="0" />
+<point number="9" name="Pulse #2 Max" units="per minute" value="0" />
+</record>
+<record>
+<time zone="UTC">2011-08-02 16:24:07</time>
+<error text="Ok">0</error>
+<point number="0" name="Pulse #1" units="" value="0" />
+<point number="1" name="Pulse #1 Rate" units="per minute" value="0" />
+<point number="2" name="Pulse #1 Instantaneous" units="per minute" value="0" />
+<point number="3" name="Pulse #1 Min" units="per minute" value="0" />
+<point number="4" name="Pulse #1 Max" units="per minute" value="0" />
+<point number="5" name="Pulse #2" units="" value="0" />
+<point number="6" name="Pulse #2 Rate" units="per minute" value="0" />
+<point number="7" name="Pulse #2 Instantaneous" units="per minute" value="0" />
+<point number="8" name="Pulse #2 Min" units="per minute" value="0" />
+<point number="9" name="Pulse #2 Max" units="per minute" value="0" />
+</record>
+<record>
+<time zone="UTC">2011-08-02 16:25:11</time>
+<error text="Ok">0</error>
+<point number="0" name="Pulse #1" units="" value="0" />
+<point number="1" name="Pulse #1 Rate" units="per minute" value="0" />
+<point number="2" name="Pulse #1 Instantaneous" units="per minute" value="0" />
+<point number="3" name="Pulse #1 Min" units="per minute" value="0" />
+<point number="4" name="Pulse #1 Max" units="per minute" value="0" />
+<point number="5" name="Pulse #2" units="" value="0" />
+<point number="6" name="Pulse #2 Rate" units="per minute" value="0" />
+<point number="7" name="Pulse #2 Instantaneous" units="per minute" value="0" />
+<point number="8" name="Pulse #2 Min" units="per minute" value="0" />
+<point number="9" name="Pulse #2 Max" units="per minute" value="0" />
+</record>
+<record>
+<time zone="UTC">2011-08-02 16:26:10</time>
+<error text="Ok">0</error>
+<point number="0" name="Pulse #1" units="" value="0" />
+<point number="1" name="Pulse #1 Rate" units="per minute" value="0" />
+<point number="2" name="Pulse #1 Instantaneous" units="per minute" value="0" />
+<point number="3" name="Pulse #1 Min" units="per minute" value="0" />
+<point number="4" name="Pulse #1 Max" units="per minute" value="0" />
+<point number="5" name="Pulse #2" units="" value="0" />
+<point number="6" name="Pulse #2 Rate" units="per minute" value="0" />
+<point number="7" name="Pulse #2 Instantaneous" units="per minute" value="0" />
+<point number="8" name="Pulse #2 Min" units="per minute" value="0" />
+<point number="9" name="Pulse #2 Max" units="per minute" value="0" />
+</record>
+<record>
+<time zone="UTC">2011-08-02 16:27:09</time>
+<error text="Ok">0</error>
+<point number="0" name="Pulse #1" units="" value="0" />
+<point number="1" name="Pulse #1 Rate" units="per minute" value="0" />
+<point number="2" name="Pulse #1 Instantaneous" units="per minute" value="0" />
+<point number="3" name="Pulse #1 Min" units="per minute" value="0" />
+<point number="4" name="Pulse #1 Max" units="per minute" value="0" />
+<point number="5" name="Pulse #2" units="" value="0" />
+<point number="6" name="Pulse #2 Rate" units="per minute" value="0" />
+<point number="7" name="Pulse #2 Instantaneous" units="per minute" value="0" />
+<point number="8" name="Pulse #2 Min" units="per minute" value="0" />
+<point number="9" name="Pulse #2 Max" units="per minute" value="0" />
+</record>
+<record>
+<time zone="UTC">2011-08-02 16:28:04</time>
+<error text="Ok">0</error>
+<point number="0" name="Pulse #1" units="" value="0" />
+<point number="1" name="Pulse #1 Rate" units="per minute" value="0" />
+<point number="2" name="Pulse #1 Instantaneous" units="per minute" value="0" />
+<point number="3" name="Pulse #1 Min" units="per minute" value="0" />
+<point number="4" name="Pulse #1 Max" units="per minute" value="0" />
+<point number="5" name="Pulse #2" units="" value="0" />
+<point number="6" name="Pulse #2 Rate" units="per minute" value="0" />
+<point number="7" name="Pulse #2 Instantaneous" units="per minute" value="0" />
+<point number="8" name="Pulse #2 Min" units="per minute" value="0" />
+<point number="9" name="Pulse #2 Max" units="per minute" value="0" />
+</record>
+</records>
+</device>
+</devices>
+</DAS>

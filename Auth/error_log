@@ -1,0 +1,6 @@
+[16-Mar-2017 19:52:35 UTC] PHP Warning:  mysql_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/bwolff/public_html/navisenergy.net/conn/mysql_connect-ro.php on line 9
+[16-Mar-2017 19:52:35 UTC] PHP Warning:  mysql_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/bwolff/public_html/navisenergy.net/conn/mysql_connect-ro.php on line 9
+[16-Mar-2017 20:01:30 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'bwolff_eqoff-ro'@'localhost' (using password: YES) in /home/bwolff/public_html/navisenergy.net/conn/mysql_connect-ro.php on line 17
+[16-Mar-2017 20:05:28 UTC] PHP Warning:  mysql_connect(): Access denied for user 'bwolff_eqoff-ro'@'localhost' (using password: YES) in /home/bwolff/public_html/navisenergy.net/conn/mysql_connect-ro.php on line 16
+[16-Mar-2017 20:11:47 UTC] PHP Warning:  mysql_connect(): Access denied for user 'bwolff_eqoff-ro'@'localhost' (using password: YES) in /home/bwolff/public_html/navisenergy.net/conn/mysql_connect-ro.php on line 16
+[16-Mar-2017 20:20:52 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/bwolff/public_html/navisenergy.net/Auth/checklogin.php:24) in /home/bwolff/public_html/navisenergy.net/Auth/checklogin.php on line 45

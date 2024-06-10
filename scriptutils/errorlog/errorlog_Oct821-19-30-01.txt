@@ -1,0 +1,6 @@
+== ERROR LOG FOR Oct-8-2021 19:30:01 ==
+
+Cape_Diamond_001EC6000AB7__device001_class2 : 139 Device Failed to Respond (the modbus device may be off or disconnected). First reported at 2021-10-08 12:05:02 since last email.
+
+Cape_Kennedy_001EC6001433__device001_class2 : 139 Device Failed to Respond (the modbus device may be off or disconnected). First reported at 2021-10-08 12:05:02 since last email.
+
