@@ -1,0 +1,7 @@
+# Merm proyect
+## Requirements 
+- Php == 5.6
+    - mysql
+    - phpunit 
+- Mysql == 5.7
+- 

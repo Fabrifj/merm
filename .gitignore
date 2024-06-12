@@ -52,3 +52,7 @@ Thumbs.db
 ./upload/error_log
 *.log
 *.log
+
+# Dockers
+Dockerfile
+/vendor/
