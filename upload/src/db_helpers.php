@@ -101,7 +101,7 @@ function db_delete($table, $where) {
 // Fetch records from a specific table
 function db_fetch_table_records($table) {
     $escape_table = mysql_real_escape_string($table);
-    $query = sprintf("SELECT * FROM `%s`", $escape_table);
+    $query = sprintf("SELECT * FROM `%s` ORDER BY time DESC LIMIT 1988;", $escape_table);
     $result = db_query($query);
     
     return db_fetch_all($result);

@@ -5,3 +5,6 @@
     - phpunit 
 - Mysql == 5.7
 - 
+
+## Intructions 
+run composer 
