@@ -132,7 +132,7 @@ function db_fetch_records_after_time($log, $table, $time) {
 
 //Function to fetch the last record of a specific loop name
 function db_fetch_last_ship_record($log, $loopname) {
-    $query = sprintf("SELECT MAX(time) as last_date FROM standard_ship_records WHERE Loopname = '%s'",
+    $query = sprintf("SELECT MAX(time) as last_date FROM Standard_ship_records WHERE Loopname = '%s'",
         mysql_real_escape_string($loopname)
     );
     $result = db_query($log, $query);
@@ -146,7 +146,7 @@ function db_fetch_last_ship_record($log, $loopname) {
 
 // Function to fetch the last four records of a specific loop name
 function db_fetch_last_three_ship_records($log, $loopname) {
-    $query = sprintf("SELECT * FROM standard_ship_records WHERE Loopname = '%s' ORDER BY time DESC LIMIT 3;",
+    $query = sprintf("SELECT * FROM Standard_ship_records WHERE Loopname = '%s' ORDER BY time DESC LIMIT 3;",
         mysql_real_escape_string($loopname)
     );
     $result = db_query($log, $query);
@@ -157,7 +157,7 @@ function db_fetch_last_three_ship_records($log, $loopname) {
 
 // Function to insert standard records into the database
 function db_insert_standar_records($log, $shipRecords) {
-    $query_insert = "INSERT INTO standard_ship_records (
+    $query_insert = "INSERT INTO Standard_ship_records (
         time, time_zone, error, energy_consumption, real_power, reactive_power,
         apparent_power, power_factor, current, real_power_phase_a, real_power_phase_b, real_power_phase_c,
         power_factor_phase_a, power_factor_phase_b, power_factor_phase_c, voltage_phase_ab, voltage_phase_bc,
