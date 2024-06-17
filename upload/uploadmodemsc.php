@@ -201,6 +201,11 @@ require_once  './process_config_files.php';
 require_once './relay_control.php';
 require_once './downloadconfig.php';
 
+require_once './src/db_helpers.php';
+require_once './src/functions.php';
+require_once './class_objects/logger.php';
+require_once './class_objects/records.php';
+require_once './class_objects/utility.php'; 
 /** define constants   **/
 const ONE_MIN = 60;
 const FIVE_MIN = 300;
@@ -2352,15 +2357,39 @@ include "../conn/mysql_pconnect-all.php"; // mySQL database connector.
         utility_cost($LOOPNAME, $aquisuitetable, $devicetablename, $log);  //calculate utility costs
        	printf("</pre>\n");  // end of logging script
 
-       /* Process Relay Output Control after config file manifest processing.  Move this to timed  kickoff someday */
-       if ($LOOPNAME == "Cornhusker")
-       {
-          // if (usesRelays($aquisuitetable, $log))
-          // {
-          //      $log->logInfo(sprintf("%s: Uses Relays\n",$LOOPNAME));
-          //      outputRelays($LOOPNAME, $aquisuitetable, $devicetablename, $log);
-          //  }
-        }
+       // Try 
+       $logger = new Logger($LOOPNAME);
+       $utility = utility_check($aquisuitetable);
+       $utilityData = db_fetch_utility_rate($logger, $utility);
+       $timezone = "EDT";
+       $logger->logInfo("Start proces");
+
+       try {
+           $ship_records = get_ships_records($logger,$timezone,$LOOPNAME,$devicetablename);
+           $last_record = db_fetch_last_ship_record($log, $LOOPNAME);
+           
+           if(!$last_record){
+               $last_records = [];
+           }else{
+               $last_records = get_last_four_records($logger,$timezone,$LOOPNAME );
+           }
+
+           $logger->logInfo( count($last_records) . "----" . count($ship_records) . "<br>");
+           $logger->logInfo( "Create utility class <br>");
+           $utilityRate = create_utility_class($logger,$utilityData);
+           $logger->logInfo( "Create calculate kw <br>");
+           $ship_records = calculate_kw($logger,$utilityRate,$last_records,$ship_records);
+
+           $logger->logInfo( "Create calculate cost <br>");
+           $ship_records =calculate_cost($logger, $utilityRate, $ship_records);
+
+           $logger->logInfo( "Create populate table <br>");
+           $erros = populate_standart_table($logger, $ship_records);
+
+           $logger->logInfo( "End  erors: " . $erros . "<br>");
+       } catch (Exception $e) {
+           $logger->logInfo('Excepción capturada: ' . $e->getMessage());
+       }
     }
 
 // CONFIGFILEMANIFEST MODE

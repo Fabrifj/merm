@@ -201,6 +201,11 @@ require_once  './process_config_files.php';
 require_once './relay_control.php';
 require_once './downloadconfig.php';
 
+require_once './src/db_helpers.php';
+require_once './src/functions.php';
+require_once './class_objects/logger.php';
+require_once './class_objects/records.php';
+require_once './class_objects/utility.php';
 /** define constants   **/
 const ONE_MIN = 60;
 const FIVE_MIN = 300;
