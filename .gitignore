@@ -56,3 +56,6 @@ Thumbs.db
 # Dockers
 Dockerfile
 /vendor/
+## Erros logs 
+/upload/error_log
+*/error_log
