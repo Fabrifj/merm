@@ -1,30 +1,64 @@
 <?php
 require './src/db_helpers.php';
 require './src/functions.php';
+require './class_objects/logger.php';
 require './class_objects/records.php';
+require './class_objects/utility.php';
 
-db_connect("dev");
 
 
 echo "Start query <br>";
 $devicetablename = "Cape_Kennedy_001EC6001433__device002_class103";
-$LOOPNAME = "Cape Kennedy";
+$loopName = "Cape Kennedy";
 $aquisuitetable = "";
 $log = "Keylogger";
 $timezone = "EDT";
-$utility = "SCE&G";
+$utilityData = [
+    'SCE&G',        // utiliy
+    'Rate1',        // rate
+    100,            // customerCharge
+    10,             // summerPeakCostKw
+    8,              // nonSummerPeakCostKw
+    5,              // offPeakCostKw
+    '', '', '', '', '', '',  // otros datos irrelevantes
+    '14:00:00',        // peakTimeSummer startTime
+    '18:00:00',        // peakTimeSummer endTime
+    '08:00:00',        // peakTimeNonSummer startTime 1
+    '12:00:00',        // peakTimeNonSummer endTime 1
+    '13:00:00',        // peakTimeNonSummer startTime 2
+    '17:00:00'         // peakTimeNonSummer endTime 2
+];
 
-$ship_records = get_ships_records($timezone,$LOOPNAME,$devicetablename);
-$last_records = get_last_four_records($timezone,$LOOPNAME );
+$logger = new Logger($loopName);
 
-echo count($last_records) . "----" . count($ship_records) . "<br>";
+db_connect($logger,"dev");
 
-$records = calculate_kw($utility,$last_records,$ship_records);
-foreach ($records as $record) {
-    $record_array = $record->getKwValues();
-    echo "offPeakKw:" . $record_array[0] . " offPeakKwh:" . $record_array[1] . " PeakKw:" . $record_array[2] . " PeakKwh:" . $record_array[3] . "<br>";
+
+$ship_records = get_ships_records($logger,$timezone,$loopName,$devicetablename);
+$last_record = db_fetch_last_ship_record($log, $loopName);
+
+if(!$last_record){
+    $last_records = [];
+}else{
+    $last_records = get_last_four_records($logger,$timezone,$loopName );
 }
 
+echo count($last_records) . "----" . count($ship_records) . "<br>";
+echo "Create utility class <br>";
+$utilityRate = create_utility_class($logger,$utilityData);
+echo "Create calculate kw <br>";
+$ship_records = calculate_kw($logger,$utilityRate,$last_records,$ship_records);
+
+echo "Create calculate cost <br>";
+$ship_records =calculate_cost($logger, $utilityRate, $ship_records);
+
+
+echo "Create populate table <br>";
+
+
+$erros = populate_standart_table($logger, $ship_records);
+
+echo "End  erors: " . $erros . "<br>";
 db_close()
 
 ?>

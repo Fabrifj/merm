@@ -4,148 +4,205 @@ session_start();
 require 'config.php';
 
 // Connect to the database
-function db_connect($use_remote = "") {
-    if ($use_remote == "dev") {
-        $db_host = DB_LOCAL_HOST;
-        $db_username = DB_LOCAL_USER;
-        $db_pass = DB_LOCAL_PASS;
-        $db_name = DB_LOCAL_NAME;
-    } else {
-        $db_host = DB_REMOTE_HOST;
-        $db_username = DB_REMOTE_USER;
-        $db_pass = DB_REMOTE_PASS;
-        $db_name = DB_REMOTE_NAME;
+// Function to connect to the database
+function db_connect($log, $use_remote = "") {
+    // Determine database connection parameters based on environment
+    $db_host = $use_remote == "dev" ? DB_LOCAL_HOST : DB_REMOTE_HOST;
+    $db_username = $use_remote == "dev" ? DB_LOCAL_USER : DB_REMOTE_USER;
+    $db_pass = $use_remote == "dev" ? DB_LOCAL_PASS : DB_REMOTE_PASS;
+    $db_name = $use_remote == "dev" ? DB_LOCAL_NAME : DB_REMOTE_NAME;
+
+    try {
+        // Try to connect to the database
+        $conn = @mysql_connect($db_host, $db_username, $db_pass);
+        if (!$conn) {
+            throw new Exception("Could not connect to MySQL: " . mysql_error());
+        }
+
+        // Select the database
+        $db_selected = @mysql_select_db($db_name, $conn);
+        if (!$db_selected) {
+            throw new Exception("No database: " . mysql_error());
+        }
+
+        echo "Connected successfully to the database <br>";
+        $_SESSION['con'] = $conn;
+        return $conn;
+    } catch (Exception $e) {
+        // Log error and stop script execution
+        $log->logInfo($e->getMessage());
+        die($e->getMessage());
     }
+}
 
-    $conn = @mysql_connect($db_host, $db_username, $db_pass);
+// Function to execute queries
+function db_query($log, $query) {
+    // $this->realPower = $realPower !== null ? $realPower : 0; 
 
+    $conn = isset($_SESSION['con']) && $_SESSION['con'] !== null ? $_SESSION['con'] : null;
     if (!$conn) {
-        die("Could not connect to MySQL: " . mysql_error());
+        $log->logInfo("No database connection.");
+        die("No database connection.");
     }
-    
-    $db_selected = @mysql_select_db($db_name, $conn);
-    
-    if (!$db_selected) {
-        die("No database: " . mysql_error());
+
+    try {
+        // Try to execute the query
+        $result = mysql_query($query, $conn);
+        if (!$result) {
+            throw new Exception(mysql_error($conn));
+        }
+        return $result;
+    } catch (Exception $e) {
+        // Log error and stop script execution
+        $log->logInfo("Query error: " . $e->getMessage());
+        die("Query error: " . $e->getMessage());
     }
-    echo "Connected successfully to the database <br>";
-
-    $_SESSION['con'] = $conn;
-
-    return $conn;
 }
 
-// Execute a query
-function db_query($query) {
-    $conn = $_SESSION['con'];
-    $result = mysql_query($query, $conn);
-
-    if (!$result) {
-        die("Query error: " . mysql_error($conn));
-    }
-
-    return $result;
-}
-
-// Fetch all results from a SELECT query
+// Function to fetch all results from a SELECT query
 function db_fetch_all($result) {
-    $rows = array();
-
+    $rows = [];
     if (mysql_num_rows($result) > 0) {
         while ($row = mysql_fetch_assoc($result)) {
             $rows[] = $row;
         }
-    } else {
-        echo "No rows found.<br>";
     }
-
     return $rows;
 }
 
-// Insert a record into a table
-function db_insert($table, $data) {
+// Function to insert a record into a table
+function db_insert($log, $table, $data) {
     $columns = implode(", ", array_keys($data));
     $values = implode("', '", array_map('mysql_real_escape_string', array_values($data)));
 
-    $escape_table = mysql_real_escape_string($table);
-    $query = sprintf("INSERT INTO '%s' ('%s') VALUES ('%s')",$escape_data, $columns, $values );
+    $query = sprintf("INSERT INTO `%s` (`%s`) VALUES ('%s')",
+        mysql_real_escape_string($table),
+        $columns,
+        $values
+    );
 
-    return db_query($query);
+    return db_query($log, $query);
 }
 
-// Update a record in a table
-function db_update($table, $data, $where) {
+// Function to update a record in a table
+function db_update($log, $table, $data, $where) {
     $set = "";
     foreach ($data as $column => $value) {
-        $set .= "$column = '" . mysql_real_escape_string($value) . "', ";
+        $set .= sprintf("%s = '%s', ", mysql_real_escape_string($column), mysql_real_escape_string($value));
     }
     $set = rtrim($set, ", ");
-    $escape_table = mysql_real_escape_string($table);
-    $escape_where = mysql_real_escape_string($where);
-    $escape_data = mysql_real_escape_string($data);
 
-    $query = sprintf("UPDATE '%s' SET '%s' WHERE '%s'", $escape_table, $escape_data, $escape_where);
+    $query = sprintf("UPDATE `%s` SET %s WHERE %s",
+        mysql_real_escape_string($table),
+        $set,
+        $where
+    );
 
-    return db_query($query);
+    return db_query($log, $query);
 }
 
-// Delete a record from a table
-function db_delete($table, $where) {
-    $escape_table = mysql_real_escape_string($table);
-    $escape_where = mysql_real_escape_string($where);
-    $query = sprintf("DELETE FROM '%s' WHERE '%s'", $escape_table, $escape_where);
+// Function to delete a record from a table
+function db_delete($log, $table, $where) {
+    $query = sprintf("DELETE FROM `%s` WHERE %s",
+        mysql_real_escape_string($table),
+        $where
+    );
 
-    return db_query($query);
+    return db_query($log, $query);
 }
 
-// Fetch records from a specific table
-function db_fetch_table_records($table) {
-    $escape_table = mysql_real_escape_string($table);
-    $query = sprintf("SELECT * FROM `%s` ORDER BY time DESC LIMIT 1988;", $escape_table);
-    $result = db_query($query);
-    
-    return db_fetch_all($result);
-}
-function db_fetch_records_after_time($table, $time) {
-    $escape_table = mysql_real_escape_string($table);
-    $escape_time = mysql_real_escape_string($time);
-
-    $query = sprintf("SELECT * FROM `%s` WHERE time > '%s'", $escape_table, $escape_time);
-    $result = db_query($query);
-    
+// Function to fetch records from a specific table
+function db_fetch_table_records($log, $table) {
+    $query = sprintf("SELECT * FROM `%s` ORDER BY time DESC LIMIT 1988;",
+        mysql_real_escape_string($table)
+    );
+    $result = db_query($log, $query);
     return db_fetch_all($result);
 }
 
-function db_fetch_last_ship_record($loopname) {
-    $escape_loopname = mysql_real_escape_string($loopname);
+// Function to fetch records from a table after a specific time
+function db_fetch_records_after_time($log, $table, $time) {
+    $query = sprintf("SELECT * FROM `%s` WHERE time > '%s'",
+        mysql_real_escape_string($table),
+        mysql_real_escape_string($time)
+    );
+    $result = db_query($log, $query);
+    return db_fetch_all($result);
+}
 
-    $query = sprintf("SELECT MAX(time) as last_date FROM standar_ships_records WHERE Loopname = '%s'",$escape_loopname);
-    $result = db_query($query);
-    if(!$result){
-        $lastDate = null; 
-    }else{
+//Function to fetch the last record of a specific loop name
+function db_fetch_last_ship_record($log, $loopname) {
+    $query = sprintf("SELECT MAX(time) as last_date FROM standard_ship_records WHERE Loopname = '%s'",
+        mysql_real_escape_string($loopname)
+    );
+    $result = db_query($log, $query);
+    $lastDate = null;
+    if ($result) {
         $lastDateRow = mysql_fetch_assoc($result);
-        $lastDate = $lastDateRow['last_date'] ;
+        $lastDate = isset($lastDateRow['last_date']) ? $lastDateRow['last_date'] : null;
     }
-    
     return $lastDate;
 }
-function db_fetch_last_four_ship_records($loopname) {
-    $escape_loopname = mysql_real_escape_string($loopname);
 
-    $query = sprintf("SELECT * FROM standar_ships_records WHERE Loopname = '%s' ORDER BY time DESC LIMIT 3;",$escape_loopname);
-    $result = db_query($query);
-    
-    
+// Function to fetch the last four records of a specific loop name
+function db_fetch_last_three_ship_records($log, $loopname) {
+    $query = sprintf("SELECT * FROM standard_ship_records WHERE Loopname = '%s' ORDER BY time DESC LIMIT 3;",
+        mysql_real_escape_string($loopname)
+    );
+    $result = db_query($log, $query);
     return db_fetch_all($result);
 }
 
 
-// Close the connection
-function db_close() {
-    $conn = $_SESSION['con'];
 
-    mysql_close($conn);
-    unset($_SESSION['con']);
+// Function to insert standard records into the database
+function db_insert_standar_records($log, $shipRecords) {
+    $query_insert = "INSERT INTO standard_ship_records (
+        time, time_zone, error, energy_consumption, real_power, reactive_power,
+        apparent_power, power_factor, current, real_power_phase_a, real_power_phase_b, real_power_phase_c,
+        power_factor_phase_a, power_factor_phase_b, power_factor_phase_c, voltage_phase_ab, voltage_phase_bc,
+        voltage_phase_ca, voltage_phase_an, voltage_phase_bn, voltage_phase_cn, current_phase_a, current_phase_b,
+        current_phase_c, average_demand, maximum_demand, peak_kw, peak_kwh, off_peak_kw, off_peak_kwh, cost_kw, loopname
+    ) VALUES ";
+    
+    
+    $values = [];
+    foreach ($shipRecords as $record) {
+        $values[] = $record->getData();
+
+    }
+    $query = $query_insert . implode(', ', $values);
+    $errors = 0;
+
+    try {
+        db_query($log, $query);
+    } catch (Exception $e) {
+        // Log batch insert error
+        $log->logInfo("Error in batch insert: " . $e->getMessage());
+        // Try individual inserts if batch insert fails
+        foreach ($shipRecords as $record) {
+            $query = $query_insert . $record->getData();
+            try {
+                db_query($log, $query);
+            } catch (Exception $e) {
+                $errors++;
+                $log->logInfo("Error in individual insert: " . $e->getMessage() . ' - Data: ' . json_encode($record));
+            }
+        }
+    }
+
+    return $errors;
+}
+
+
+// Function to close the connection
+function db_close() {
+    $conn = isset($_SESSION['con'])? $_SESSION['con'] : null;
+    if ($conn) {
+        mysql_close($conn);
+        unset($_SESSION['con']);
+    }
 }
 ?>
+
+

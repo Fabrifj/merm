@@ -46,7 +46,7 @@ class RecordType002 extends Record {
 
 class RecordsTypeStandard {
     private $timeZone;
-    private $datetime;
+    private $dateTime;
     private $error;
     private $energyConsumption;
     private $realPower;
@@ -76,9 +76,10 @@ class RecordsTypeStandard {
     private $offPeakKw;
     private $offPeakKwh;
     private $costKw;
+    private $shipName;
 
     public function __construct(
-        $timeZone, $time, $error, $energyConsumption, $realPower = null, $reactivePower = null, $apparentPower = null,
+        $timeZone, $time, $error, $energyConsumption, $shipName ,$realPower = null, $reactivePower = null, $apparentPower = null,
         $powerFactor = null, $current = null, $realPowerPhaseA = null, $realPowerPhaseB = null, $realPowerPhaseC = null,
         $powerFactorPhaseA = null, $powerFactorPhaseB = null, $powerFactorPhaseC = null,
         $voltagePhaseAB = null, $voltagePhaseBC = null, $voltagePhaseCA = null, $voltagePhaseAN = null,
@@ -86,7 +87,7 @@ class RecordsTypeStandard {
         $currentPhaseC = null, $averageDemand = null, $maximumDemand = null) 
         {    
         $this->timeZone = new DateTimeZone($timeZone);
-        $this->datetime = new DateTime($time, $this->timeZone);
+        $this->dateTime = new DateTime($time, $this->timeZone);
         $this->error = $error;
         $this->energyConsumption = $energyConsumption;
         $this->realPower = $realPower !== null ? $realPower : 0; 
@@ -111,6 +112,7 @@ class RecordsTypeStandard {
         $this->currentPhaseC = $currentPhaseC!== null ? $currentPhaseC : 0;
         $this->averageDemand = $averageDemand!== null ? $averageDemand : 0;
         $this->maximumDemand = $maximumDemand!== null ? $maximumDemand : 0;
+        $this->shipName = $shipName;
 
         // Start values in 0
         $this->peakKw = 0;
@@ -119,33 +121,31 @@ class RecordsTypeStandard {
         $this->offPeakKwh = 0;
         $this->costKw = 0;
     }
+
     public function getData(){
-        $values = [];
-        $values[] = "('" . mysql_real_escape_string($data->timeZone) . "', '". mysql_real_escape_string($data->datetime) . "', '"
-        . mysql_real_escape_string($data->error) . "', '" . mysql_real_escape_string($data->energyConsumption) . "', '"
-        . mysql_real_escape_string($data->realPower) . "', '" . mysql_real_escape_string($data->reactivePower) . "', '"
-        . mysql_real_escape_string($data->apparentPower) . "', '" . mysql_real_escape_string($data->powerFactor) . "', '"
-        . mysql_real_escape_string($data->current) . "', '" . mysql_real_escape_string($data->realPowerPhaseA) . "', '"
-        . mysql_real_escape_string($data->realPowerPhaseB) . "', '" . mysql_real_escape_string($data->realPowerPhaseC) . "', '"
-        . mysql_real_escape_string($data->powerFactorPhaseA) . "', '" . mysql_real_escape_string($data->powerFactorPhaseB) . "', '"
-        . mysql_real_escape_string($data->powerFactorPhaseC) . "', '" . mysql_real_escape_string($data->voltagePhaseAB) . "', '"
-        . mysql_real_escape_string($data->voltagePhaseBC) . "', '" . mysql_real_escape_string($data->voltagePhaseCA) . "', '"
-        . mysql_real_escape_string($data->voltagePhaseAN) . "', '" . mysql_real_escape_string($data->voltagePhaseBN) . "', '"
-        . mysql_real_escape_string($data->voltagePhaseCN) . "', '" . mysql_real_escape_string($data->currentPhaseA) . "', '"
-        . mysql_real_escape_string($data->currentPhaseB) . "', '" . mysql_real_escape_string($data->currentPhaseC) . "', '"
-        . mysql_real_escape_string($data->averageDemand) . "', '" . mysql_real_escape_string($data->maximumDemand) . "', '"
-        . mysql_real_escape_string($data->peakKw) . "', '" . mysql_real_escape_string($data->peakKwh) . "', '"
-        . mysql_real_escape_string($data->offPeakKw) . "', '" . mysql_real_escape_string($data->offPeakKwh) . "', '"
-        . mysql_real_escape_string($data->costKw) . "')";
-        return $values;
+        $value = sprintf(
+            "('%s', '%s', %d, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, '%f', '%s')",
+            mysql_real_escape_string((string)$this->dateTime->format("Y-m-d H:i:s")), mysql_real_escape_string((string)$this->timeZone->getName()),
+            (int)$this->error, (float)$this->energyConsumption, (float)$this->realPower, (float)$this->reactivePower,
+            (float)$this->apparentPower, (float)$this->powerFactor, (float)$this->current, (float)$this->realPowerPhaseA,
+            (float)$this->realPowerPhaseB, (float)$this->realPowerPhaseC,(float)$this->powerFactorPhaseA,
+            (float)$this->powerFactorPhaseB,(float)$this->powerFactorPhaseC,(float)$this->voltagePhaseAB,
+            (float)$this->voltagePhaseBC,(float)$this->voltagePhaseCA,(float)$this->voltagePhaseAN,
+            (float)$this->voltagePhaseBN,(float)$this->voltagePhaseCN, (float)$this->currentPhaseA,
+            (float)$this->currentPhaseB,(float)$this->currentPhaseC, (float)$this->averageDemand,
+            (float)$this->maximumDemand, (float)$this->peakKw, (float)$this->peakKwh, (float)$this->offPeakKw,     
+            (float)$this->offPeakKwh, (float)$this->costKw, mysql_real_escape_string((string)$this->shipName)
+        );
+        return $value;
     }
-
-
+    public function getShipName() {
+        return $this-> shipName;
+    }
     public function getTime() {
-        return $this->datetime;
+        return $this->dateTime;
     }
-    public function setTime($datetime) {
-        $this->datetime = $datetime;
+    public function setTime($dateTime) {
+        $this->dateTime = $dateTime;
     }
     public function getEnergyConsumption() {
         return $this->energyConsumption;
@@ -191,10 +191,10 @@ class RecordsTypeStandard {
 }
 // Record Factory !! 
 class RecordFactory {
-    public static function createRecord($timezone,$type, $data) {
+    public static function createRecord($timezone,$type, $data, $loopName) {
         switch ($type) {
             case 'device001':
-                return new RecordsTypeStandard($timezone,$data['time'],$data['error'],$data['Energy_Consumption'],
+                return new RecordsTypeStandard($timezone,$data['time'],$data['error'],$data['Energy_Consumption'],$loopName,
                     $data['Real_Power'],$data['Reactive_Power'],$data['Apparent_Power'],
                     $data['Power_Factor'],$data['Current'],$data['Real_Power_phase_A'],
                     $data['Real_Power_phase_B'],$data['Real_Power_phase_C'],$data['Power_Factor_phase_A'],
@@ -205,7 +205,7 @@ class RecordFactory {
                     $data['Maximum_Demand']
                 );
             case 'device002':
-                return new RecordsTypeStandard($timezone,$data['time'],$data['error'],$data['Accumulated_Real_Energy_Net_Import__Export'],
+                return new RecordsTypeStandard($timezone,$data['time'],$data['error'],$data['Accumulated_Real_Energy_Net_Import__Export'],$loopName,
                     $data['Total_Net_Instantaneous_Real_P_Power'],$data['Total_Net_Instantaneous_Reactive_Q_Power'],$data['Total_Net_Instantaneous_Apparent_S_Power_vector_sum'],
                     $data['Total_Power_Factor_Total_KW_/_Total_KVA'],$data['Current_Average_of_Active_Phases'],$data['Real_Power_Phase_A'],
                     $data['Real_Power_phase_B'],$data['Real_Power_phase_C'],$data['Power_Factor_phase_A'],
@@ -219,27 +219,27 @@ class RecordFactory {
                 // To complete
                     return new RecordType250($timezone,$data);
             case 'standard':
-                return new RecordsTypeStandard($timezone,$data['time'],$data['error'],$data['Energy_Consumption'],
-                    $data['Real_Power'],$data['Reactive_Power'],$data['Apparent_Power'],
-                    $data['Power_Factor'],$data['Current'],$data['Real_Power_phase_A'],
-                    $data['Real_Power_phase_B'],$data['Real_Power_phase_C'],$data['Power_Factor_phase_A'],
-                    $data['Power_Factor_phase_B'],$data['Power_Factor_phase_C'],$data['Voltage_phase_A_B'],
-                    $data['Voltage_phase_B_C'],$data['Voltage_phase_C_A'],$data['Voltage_phase_A_N'],
-                    $data['Voltage_phase_B_N'],$data['Voltage_phase_C_N'],$data['Current_phase_A'],
-                    $data['Current_phase_B'],$data['Current_phase_C'],$data['Average_Demand'],
-                    $data['Maximum_Demand']
+                return new RecordsTypeStandard($timezone,$data['time'],$data['error'],$data['energy_consumption'],$data['loopName'],
+                    $data['real_power'],$data['reactive_power'],$data['apparent_power'],
+                    $data['power_factor'],$data['current'],$data['real_power_phase_a'],
+                    $data['real_power_phase_b'],$data['real_power_phase_c'],$data['power_factor_phase_a'],
+                    $data['power_factor_phase_b'],$data['power_factor_phase_c'],$data['voltage_phase_a_Bb'],
+                    $data['voltage_phase_b_c'],$data['voltage_phase_c_a'],$data['voltage_phase_a_n'],
+                    $data['voltage_phase_b_n'],$data['voltage_phase_c_n'],$data['current_phase_a'],
+                    $data['current_phase_a'],$data['current_phase_c'],$data['average_demand'],
+                    $data['maximum_Demand']
                 );
             case 'test':
-                return new RecordsTypeStandard($timezone,$data['time'],$data['error'],$data['Energy_Consumption']);
+                return new RecordsTypeStandard($timezone,$data['time'],$data['error'],$data['Energy_Consumption'],$loopName);
             default:
                 throw new Exception("Invalid record type: $type");
         }
     }
 
-    public static function createRecords($timezone,$type, $dataList) {
+    public static function createRecords($timezone,$type, $dataList, $loopName) {
         $records = [];
         foreach ($dataList as $data) {
-            $records[] = self::createRecord($timezone,$type, $data);
+            $records[] = self::createRecord($timezone,$type, $data,$loopName);
         }
         return $records;
     }

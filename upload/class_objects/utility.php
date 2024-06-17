@@ -21,7 +21,9 @@ class UtilityRate {
         $this->offPeakCostKw = $offPeakCostKw;
         $this->peakTimeSummer = $peakTimeSummer;
         $this->peakTimeNonSummer = $peakTimeNonSummer;
+
     }
+
 
     public function getUtility() {
         return $this->utility;
@@ -50,9 +52,9 @@ class TimeRange {
     private $startTime;
     private $endTime;
 
-    public function __construct($startTime, $endTime) {
-        $this->startTime = DateTime::createFromFormat('H:i:s', $startTime);
-        $this->endTime = DateTime::createFromFormat('H:i:s', $endTime);
+    public function __construct($timeZone,$startTime, $endTime) {
+        $this->startTime = DateTime::createFromFormat('H:i:s', $startTime,$timeZone);
+        $this->endTime = DateTime::createFromFormat('H:i:s', $endTime,$timeZone);
         if ($this->startTime === false || $this->endTime === false) {
             throw new Exception("Invalid time format: startTime = $startTime, endTime = $endTime");
         }
@@ -68,12 +70,13 @@ class TimeRange {
 }
 
 class UtilityRateFactory {
-    public static function createStandardUtilityRate($data) {
+    public static function createStandardUtilityRate($timeZone, $data) {
+        $timeZone = new DateTimeZone($timeZone);
         $utility = $data[0];
         switch ($utility) {
             case 'SCE&G':
-                $peakTimeSummer = [new TimeRange($data[12], $data[13])];
-                $peakTimeNonSummer = [new TimeRange($data[14], $data[15]), new TimeRange($data[16], $data[17])];
+                $peakTimeSummer = [new TimeRange($timeZone,$data[12], $data[13])];
+                $peakTimeNonSummer = [new TimeRange($timeZone,$data[14], $data[15]), new TimeRange($timeZone,$data[16], $data[17])];
                 return new UtilityRate($data[0], $data[1], $data[2], $data[3], $data[4], $data[5], $peakTimeSummer, $peakTimeNonSummer);
             case 'Nav_Fed_Rate':
                 $peakTimeSummer = [];
