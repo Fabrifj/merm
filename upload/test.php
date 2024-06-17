@@ -30,8 +30,15 @@ $utilityData = [
 ];
 
 $logger = new Logger($loopName);
+if($_REQUEST['MODE'] == "dev"){
+    $mode = "dev";
+    echo "Dev mode";
+}else{
+    $mode = "host";
+    echo "Host mode";
+}
 
-db_connect($logger,"dev");
+db_connect($logger,"host");
 
 
 $ship_records = get_ships_records($logger,$timezone,$loopName,$devicetablename);

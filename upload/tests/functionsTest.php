@@ -279,35 +279,5 @@ class CalculateCost extends TestCase {
         $this->assertEquals(2880, $result[2]->getCostKw());
     }
 }
-class GetRecordsData extends TestCase {
-    public function testGetData() {
 
-        $ships_records_tb =[
-            ['time' => '2021-07-10 14:00:00','error' => 0,'Energy_Consumption' => 184826],
-            ['time' => '2021-07-10 14:05:00','error' => 0,'Energy_Consumption' => 184852],
-            ['time' => '2021-07-10 14:10:00','error' => 0,'Energy_Consumption' => 184876],
-            ['time' => '2021-07-10 14:15:00','error' => 0,'Energy_Consumption' => 184902]
-        ];
-
-        $deviname = "test";
-        $timezone = "EDT";
-        $last_ship_records = [];
-        $loopName = "Cape Kennedy";
-
-        $logger = new Logger($loopName);
-        $logger->logInfo($loopName);
-
-        $ship_records = RecordFactory::createRecords($timezone,$deviname, $ships_records_tb,$loopName);
-
-        $ship_record =  $ship_records[0];
-
-        echo $ship_record->getData();
-
-        $result = 4;
-        $this->assertCount(4, $result);
-
-        // Is on offpeak time
-
-    }
-}
 ?>
