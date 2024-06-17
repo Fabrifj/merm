@@ -115,6 +115,15 @@ function db_delete($log, $table, $where) {
 }
 
 // Function to fetch records from a specific table
+function db_fetch_utility_rate($log, $utility) {
+    $query = sprintf("SELECT * FROM `%s` ORDER BY Rate_Date_Start DESC LIMIT 1;",
+        mysql_real_escape_string($utility)
+    );
+    $result = db_query($log, $query);
+    return db_fetch_all($result);
+}
+
+// Function to fetch records from a specific table
 function db_fetch_table_records($log, $table) {
     $query = sprintf("SELECT * FROM `%s` ORDER BY time DESC LIMIT 1988;",
         mysql_real_escape_string($table)
