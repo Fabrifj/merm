@@ -11,6 +11,9 @@ function db_connect($log, $use_remote = "") {
     $db_username = $use_remote == "dev" ? DB_LOCAL_USER : DB_REMOTE_USER;
     $db_pass = $use_remote == "dev" ? DB_LOCAL_PASS : DB_REMOTE_PASS;
     $db_name = $use_remote == "dev" ? DB_LOCAL_NAME : DB_REMOTE_NAME;
+    
+    echo "User " . $db_username;
+
 
     try {
         // Try to connect to the database

@@ -38,7 +38,7 @@ if($_REQUEST['MODE'] == "dev"){
     echo "Host mode";
 }
 
-db_connect($logger,"host");
+db_connect($logger,$mode );
 
 
 $ship_records = get_ships_records($logger,$timezone,$loopName,$devicetablename);

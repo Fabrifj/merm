@@ -212,6 +212,9 @@ function calculate_cost($log, $utility, $ship_records) {
 
 // Function to populate standard table
 function populate_standart_table($log, $ship_records) {
+    if(count($ship_records)==0){
+        return 0;
+    }
     try {
         $errors = db_insert_standar_records($log, $ship_records);
         return $errors;
