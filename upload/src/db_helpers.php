@@ -40,7 +40,6 @@ function db_connect($log, $use_remote = "") {
 
 // Function to execute queries
 function db_query($log, $query) {
-    // $this->realPower = $realPower !== null ? $realPower : 0; 
 
     $conn = isset($_SESSION['con']) && $_SESSION['con'] !== null ? $_SESSION['con'] : null;
     if (!$conn) {
@@ -57,7 +56,9 @@ function db_query($log, $query) {
         return $result;
     } catch (Exception $e) {
         // Log error and stop script execution
-        $log->logInfo("Query error: " . $e->getMessage());
+
+        $log->logInfo("Query error: " . $query . $e->getMessage());
+
         die("Query error: " . $e->getMessage());
     }
 }

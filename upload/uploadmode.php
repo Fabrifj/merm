@@ -2374,9 +2374,9 @@ include "../conn/mysql_pconnect-all.php"; // mySQL database connector.
 
         if($LOOPNAME=="Cape_Kennedy"){ 
             // Try 
-            $logger->logInfo( "Start <br>");
 
             $logger = new Logger($LOOPNAME);
+
             $logger->logInfo("Get utility");
             $utility = utility_check($aquisuitetable);
             $logger->logInfo($utility);
