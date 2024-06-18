@@ -38,7 +38,7 @@ if($_REQUEST['MODE'] == "dev"){
     echo "Host mode";
 }
 
-db_connect($logger,$mode );
+//db_connect($logger,$mode );
 
 
 $ship_records = get_ships_records($logger,$timezone,$loopName,$devicetablename);
@@ -66,6 +66,5 @@ echo "Create populate table <br>";
 $erros = populate_standart_table($logger, $ship_records);
 
 echo "End  erors: " . $erros . "<br>";
-db_close()
 
 ?>
