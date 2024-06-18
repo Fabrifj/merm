@@ -375,21 +375,33 @@ function uploadcheck($aquisuitetable)
 	handled in the UTILITY COLUMN UPDATE section.
 */
 
-function counttablefields($log,$devicetablename, $LOOPNAME)
+function counttablefields($log, $devicetablename, $LOOPNAME)
 {
-	$sql="SELECT * FROM `$devicetablename` LIMIT 1";
-	$result=mysql_query($sql);
-	if(!$result)
-	{
-		MySqlFailure("unable to retreive $devicetablename data");
-	}
-	//$countdevicefields = mysqli_num_fields($result);
-       // $log->logInfo(sprintf("%s: countfields nbr = [%s] \n", $LOOPNAME, $countdevicefields));
+    // Sanitize the table name to avoid SQL injection
+    $devicetablename = mysql_real_escape_string($devicetablename);
 
-      	$countdevicefields = mysql_num_fields($result);
+    // Build the SQL query
+    $sql = "SELECT * FROM `$devicetablename` LIMIT 1";
+    
+    // Execute the query
+    $result = mysql_query($sql);
+    
+    // Check if there was an error in the query
+    if (!$result) {
+        MySqlFailure("unable to retrieve $devicetablename data");
+        return false; // Exit the function in case of error
+    }
 
-	return $countdevicefields;
+    // Count the number of fields in the result
+    $countdevicefields = mysql_num_fields($result);
+
+    // Log the information
+    $log->logInfo(sprintf("%s: countfields nbr = [%s] \n", $LOOPNAME, $countdevicefields));
+
+    // Return the number of fields
+    return $countdevicefields;
 }
+
 /*----------------------------------------------------------------------------------------------------*/
 /*	This function is used to check the Aquisuite_List table to see if an aquisuite table has already been created.
 */
@@ -2358,38 +2370,44 @@ include "../conn/mysql_pconnect-all.php"; // mySQL database connector.
        	printf("</pre>\n");  // end of logging script
 
 
-        // Try 
-        $logger = new Logger($LOOPNAME);
-        $utility = utility_check($aquisuitetable);
-        $utilityData = db_fetch_utility_rate($logger, $utility);
-        $timezone = "EDT";
-        $logger->logInfo("Start proces");
 
-        try {
-            $ship_records = get_ships_records($logger,$timezone,$LOOPNAME,$devicetablename);
-            $last_record = db_fetch_last_ship_record($log, $LOOPNAME);
-            
-            if(!$last_record){
-                $last_records = [];
-            }else{
-                $last_records = get_last_four_records($logger,$timezone,$LOOPNAME );
+
+        if($LOOPNAME=="Cape_Kennedy"){ 
+            // Try 
+            $logger->logInfo( "Start <br>");
+
+            $logger = new Logger($LOOPNAME);
+            $logger->logInfo("Get utility");
+            $utility = utility_check($aquisuitetable);
+            $logger->logInfo($utility);
+            $utilityData = db_fetch_utility_rate($logger, $utility);
+            $timezone = "EDT";
+            try {
+                $ship_records = get_ships_records($logger,$timezone,$LOOPNAME,$devicetablename);
+                $last_record = db_fetch_last_ship_record($log, $LOOPNAME);
+                
+                if(!$last_record){
+                    $last_records = [];
+                }else{
+                    $last_records = get_last_four_records($logger,$timezone,$LOOPNAME );
+                }
+
+                $logger->logInfo( count($last_records) . "----" . count($ship_records) . "<br>");
+                $logger->logInfo( "Create utility class <br>");
+                $utilityRate = create_utility_class($logger,$utilityData);
+                $logger->logInfo( "Create calculate kw <br>");
+                $ship_records = calculate_kw($logger,$utilityRate,$last_records,$ship_records);
+
+                $logger->logInfo( "Create calculate cost <br>");
+                $ship_records =calculate_cost($logger, $utilityRate, $ship_records);
+
+                $logger->logInfo( "Create populate table <br>");
+                $erros = populate_standart_table($logger, $ship_records);
+
+                $logger->logInfo( "End  erors: " . $erros . "<br>");
+            } catch (Exception $e) {
+                $logger->logInfo('Excepción capturada: ' . $e->getMessage());
             }
-
-            $logger->logInfo( count($last_records) . "----" . count($ship_records) . "<br>");
-            $logger->logInfo( "Create utility class <br>");
-            $utilityRate = create_utility_class($logger,$utilityData);
-            $logger->logInfo( "Create calculate kw <br>");
-            $ship_records = calculate_kw($logger,$utilityRate,$last_records,$ship_records);
-
-            $logger->logInfo( "Create calculate cost <br>");
-            $ship_records =calculate_cost($logger, $utilityRate, $ship_records);
-
-            $logger->logInfo( "Create populate table <br>");
-            $erros = populate_standart_table($logger, $ship_records);
-
-            $logger->logInfo( "End  erors: " . $erros . "<br>");
-        } catch (Exception $e) {
-            $logger->logInfo('Excepción capturada: ' . $e->getMessage());
         }
     }
 
