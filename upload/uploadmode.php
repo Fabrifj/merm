@@ -2379,9 +2379,9 @@ include "../conn/mysql_pconnect-all.php"; // mySQL database connector.
 
             $utility = utility_check($aquisuitetable);
             $logger->logInfo("Get utility" . $utility);
-            $utilityData = db_fetch_utility_rate($logger, $utility);
             $timezone = "EDT";
             try {
+                $utilityData = db_fetch_utility_rate($logger, $utility);
                 $ship_records = get_ships_records($logger,$timezone,$LOOPNAME,$devicetablename);
                 $last_record = db_fetch_last_ship_record($log, $LOOPNAME);
                 
@@ -2390,8 +2390,8 @@ include "../conn/mysql_pconnect-all.php"; // mySQL database connector.
                 }else{
                     $last_records = get_last_four_records($logger,$timezone,$LOOPNAME );
                 }
-                
-                $jsonArray = json_encode($array, JSON_PRETTY_PRINT);
+
+                $jsonArray = json_encode($utilityData, JSON_PRETTY_PRINT);
                 $logger->logDebug($jsonArray);
 
                 $logger->logInfo( "Creating utlity class");
