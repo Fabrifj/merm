@@ -2395,7 +2395,7 @@ include "../conn/mysql_pconnect-all.php"; // mySQL database connector.
                 $logger->logDebug($jsonArray);
 
                 $logger->logInfo( "Creating utility class");
-                $utilityRate = create_utility_class($logger,$utilityData);
+                $utilityRate = create_utility_class($logger,$utilityData[0]);
 
                 $logger->logInfo( "Calculating kWh and kW");
                 $ship_records = calculate_kw($logger,$utilityRate,$last_records,$ship_records);
