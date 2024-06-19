@@ -2394,7 +2394,7 @@ include "../conn/mysql_pconnect-all.php"; // mySQL database connector.
 
                 $logger->logInfo( count($last_records) . "----" . count($ship_records) . "<br>");
                 $logger->logInfo( "Create utility class <br>");
-                $utilityRate = create_utility_class($logger,$utilityData);
+                $utilityRate = create_utility_class($logger,$utilityData[0]);
                 $logger->logInfo( "Create calculate kw <br>");
                 $ship_records = calculate_kw($logger,$utilityRate,$last_records,$ship_records);
 
