@@ -209,10 +209,10 @@ class RecordFactory {
                     $data['Total_Net_Instantaneous_Real_P_Power'],$data['Total_Net_Instantaneous_Reactive_Q_Power'],$data['Total_Net_Instantaneous_Apparent_S_Power_vector_sum'],
                     $data['Total_Power_Factor_Total_KW_/_Total_KVA'],$data['Current_Average_of_Active_Phases'],$data['Real_Power_Phase_A'],
                     $data['Real_Power_Phase_B'],$data['Real_Power_Phase_C'],$data['Power_Factor_Phase_A'],
-                    $data['Power_Factor_phase_B'],$data['Power_Factor_phase_C'],$data['Voltage_Phase_A_B'],
-                    $data['Voltage_Phase_B_C'],$data['Voltage_Phase_C_A'],$data['Voltage_Phase_A_N'],
-                    $data['Voltage_Phase_B_N'],$data['Voltage_Phase_C_N'],$data['Current_Phase_A'],
-                    $data['Current_Phase_B'],$data['Current_phase_C'],$data['Total_Real_Power_Present_Demand'],
+                    $data['Power_Factor_Phase_B'],$data['Power_Factor_Phase_C'],$data['Voltage_Phase_AB'],
+                    $data['Voltage_Phase_BC'],$data['Voltage_Phase_CA'],$data['Voltage_Phase_AN'],
+                    $data['Voltage_Phase_BN'],$data['Voltage_Phase_CN'],$data['Current_Phase_A'],
+                    $data['Current_Phase_B'],$data['Current_Phase_C'],$data['Total_Real_Power_Present_Demand'],
                     $data['Total_Real_Power_Max_Demand_Export']
                 );
             case 'device250':
