@@ -2378,7 +2378,7 @@ include "../conn/mysql_pconnect-all.php"; // mySQL database connector.
             $logger = new Logger($LOOPNAME);
 
             $utility = utility_check($aquisuitetable);
-            $logger->logInfo("Get utility" . $utility);
+            $logger->logInfo("Get utility  " . $utility);
             $timezone = "EDT";
             try {
                 $utilityData = db_fetch_utility_rate($logger, $utility);
@@ -2394,9 +2394,9 @@ include "../conn/mysql_pconnect-all.php"; // mySQL database connector.
                 $jsonArray = json_encode($utilityData, JSON_PRETTY_PRINT);
                 $logger->logDebug($jsonArray);
 
-                $logger->logInfo( "Creating utlity class");
+                $logger->logInfo( "Creating utility class");
                 $logger->logInfo( $utilityData[0] );
-                $utilityRate = create_utility_class($logger,$utilityData[0]);
+                $utilityRate = create_utility_class($logger,$utilityData);
 
                 $logger->logInfo( "Calculating kWh and kW");
                 $ship_records = calculate_kw($logger,$utilityRate,$last_records,$ship_records);

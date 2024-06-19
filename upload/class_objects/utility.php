@@ -85,7 +85,7 @@ class UtilityRateFactory {
             case 'Entergy_NO_Rates':
                 $peakTimeSummer = [];
                 $peakTimeNonSummer = [];
-                return new UtilityRate($data[0],$data[1],0,$data[2],$data[2],$data[2],$peakTimeSummer,$peakTimeNonSummer);
+                return new UtilityRate($data["Utility"],$data["Rate"],0,$data["Energy_Rate_1"],$data["Energy_Rate_2"],$data["Energy_Rate_3"],$peakTimeSummer,$peakTimeNonSummer);
             default:
                 throw new Exception("Invalid record type: $utility");
         }
