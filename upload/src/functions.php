@@ -13,7 +13,7 @@ function get_ships_records($log, $timezone, $LOOPNAME, $devicetablename) {
         if (count($parts) >= 5) {
             $deviname = $parts[4];
         } else {
-            $log->logInfo("Invalid device table name: $devicetablename");
+            $log->logError("Invalid device table name: $devicetablename");
             return [];
         }
 
@@ -28,7 +28,7 @@ function get_ships_records($log, $timezone, $LOOPNAME, $devicetablename) {
 
         // Check if fetching records was successful
         if (!$ships_records_tb) {
-            $log->logInfo("Query failed for table $devicetablename.");
+            $log->logError("Query failed for table $devicetablename.");
             return [];
         }
 
@@ -36,7 +36,7 @@ function get_ships_records($log, $timezone, $LOOPNAME, $devicetablename) {
         try {
             $ships_records_ob = RecordFactory::createRecords($timezone, $deviname, $ships_records_tb, $LOOPNAME);
         } catch (Exception $e) {
-            $log->logInfo("Error creating records: " . $e->getMessage());
+            $log->logError("Error creating records: " . $e->getMessage());
             return [];
         }
 
@@ -44,7 +44,7 @@ function get_ships_records($log, $timezone, $LOOPNAME, $devicetablename) {
 
     } catch (Exception $e) {
         // Log any unexpected exceptions
-        $log->logInfo("Unexpected error: " . $e->getMessage());
+        $log->logError("Unexpected error: " . $e->getMessage());
         return [];
     }
 }
@@ -59,7 +59,7 @@ function get_last_four_records($log, $timezone, $LOOPNAME) {
 
         // Check if fetching records was successful
         if (!$last_records) {
-            $log->logInfo("Query failed for last four records of $LOOPNAME.");
+            $log->logError("Query failed for last four records of $LOOPNAME.");
             return [];
         }
 
@@ -67,7 +67,7 @@ function get_last_four_records($log, $timezone, $LOOPNAME) {
         try {
             $last_records_ob = RecordFactory::createRecords($timezone, $deviname, $last_records, $LOOPNAME);
         } catch (Exception $e) {
-            $log->logInfo("Error creating records: " . $e->getMessage());
+            $log->logError("Error creating records: " . $e->getMessage());
             return [];
         }
 
@@ -75,7 +75,7 @@ function get_last_four_records($log, $timezone, $LOOPNAME) {
 
     } catch (Exception $e) {
         // Log any unexpected exceptions
-        $log->logInfo("Unexpected error: " . $e->getMessage());
+        $log->logError("Unexpected error: " . $e->getMessage());
         return [];
     }
 }
@@ -140,7 +140,7 @@ function create_utility_class($log,$utility){
         // Create utility rate instance
         $utilityRate = UtilityRateFactory::createStandardUtilityRate($timezone, $utility);
     } catch (Exception $e) {
-        $log->logInfo("Error creating utility rate: " . $e->getMessage());
+        $log->logError("Error creating utility rate: " . $e->getMessage());
         return null;
     }
     return $utilityRate;
@@ -204,7 +204,7 @@ function calculate_cost($log, $utility, $ship_records) {
             }
             $ship_record->setCostKw($cost_kw);
         } catch (Exception $e) {
-            $log->logInfo("Error calculating cost for record: " . json_encode($ship_record) . ". Error: " . $e->getMessage());
+            $log->logError("Error calculating cost for record: " . json_encode($ship_record) . ". Error: " . $e->getMessage());
         }
     }
     return $ship_records;
@@ -219,7 +219,7 @@ function populate_standart_table($log, $ship_records) {
         $errors = db_insert_standar_records($log, $ship_records);
         return $errors;
     } catch (Exception $e) {
-        $log->logInfo("Error populating standard table: " . $e->getMessage());
+        $log->logError("Error populating standard table: " . $e->getMessage());
         return -1; // Return an error indicator
     }
 }

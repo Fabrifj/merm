@@ -2395,16 +2395,15 @@ include "../conn/mysql_pconnect-all.php"; // mySQL database connector.
                 $logger->logDebug($jsonArray);
 
                 $logger->logInfo( "Creating utility class");
-                $logger->logInfo( $utilityData[0] );
                 $utilityRate = create_utility_class($logger,$utilityData);
 
                 $logger->logInfo( "Calculating kWh and kW");
                 $ship_records = calculate_kw($logger,$utilityRate,$last_records,$ship_records);
 
-                $logger->logInfo( "Create calculate cost <br>");
+                $logger->logInfo( "Calculating cost");
                 $ship_records =calculate_cost($logger, $utilityRate, $ship_records);
 
-                $logger->logInfo( "Create populate table <br>");
+                $logger->logInfo( "Populating Standard table");
                 $erros = populate_standart_table($logger, $ship_records);
 
                 $logger->logInfo( "End  erors: " . $erros . "<br>");
