@@ -14,10 +14,23 @@ class Logger {
         fclose($this->logFile);
     }
 
-    public function logInfo($message) {
-        $timestamp = date('[Y-m-d H:i:s]'); // Obtén la fecha y hora actual en el formato deseado
-        $formattedMessage = sprintf("%s %s: %s\n", $timestamp, $this->loopName, $message);
+    public function log($level, $message) {
+        $timestamp = date('[Y-m-d H:i:s]');
+        $formattedMessage = sprintf("%s [%s] %s: %s\n", $timestamp, strtoupper($level), $this->loopName, $message);
         fwrite($this->logFile, $formattedMessage);
+    }
+
+    public function logDebug($message) {
+        $this->log('debug', $message);
+    }
+
+    public function logInfo($message) {
+        $this->log('Info', $message);
+    }
+
+    public function logError($message) {
+        $this->log('Error', $message);
+
     }
 }
 

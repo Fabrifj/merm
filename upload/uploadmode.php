@@ -2377,9 +2377,8 @@ include "../conn/mysql_pconnect-all.php"; // mySQL database connector.
 
             $logger = new Logger($LOOPNAME);
 
-            $logger->logInfo("Get utility");
             $utility = utility_check($aquisuitetable);
-            $logger->logInfo($utility);
+            $logger->logInfo("Get utility" . $utility);
             $utilityData = db_fetch_utility_rate($logger, $utility);
             $timezone = "EDT";
             try {
@@ -2391,11 +2390,15 @@ include "../conn/mysql_pconnect-all.php"; // mySQL database connector.
                 }else{
                     $last_records = get_last_four_records($logger,$timezone,$LOOPNAME );
                 }
+                
+                $jsonArray = json_encode($array, JSON_PRETTY_PRINT);
+                $logger->logDebug($jsonArray);
 
-                $logger->logInfo( count($last_records) . "----" . count($ship_records) . "<br>");
-                $logger->logInfo( "Create utility class <br>");
+                $logger->logInfo( "Creating utlity class");
+                $logger->logInfo( $utilityData[0] );
                 $utilityRate = create_utility_class($logger,$utilityData[0]);
-                $logger->logInfo( "Create calculate kw <br>");
+
+                $logger->logInfo( "Calculating kWh and kW");
                 $ship_records = calculate_kw($logger,$utilityRate,$last_records,$ship_records);
 
                 $logger->logInfo( "Create calculate cost <br>");
@@ -2406,7 +2409,7 @@ include "../conn/mysql_pconnect-all.php"; // mySQL database connector.
 
                 $logger->logInfo( "End  erors: " . $erros . "<br>");
             } catch (Exception $e) {
-                $logger->logInfo('Excepción capturada: ' . $e->getMessage());
+                $logger->logError('Excepción capturada: ' . $e->getMessage());
             }
         }
     }
