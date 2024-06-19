@@ -40,27 +40,20 @@ function db_connect($log, $use_remote = "") {
 
 // Function to execute queries
 function db_query($log, $query) {
-    // Check if a database connection exists in the session
-    if (isset($_SESSION['con']) && $_SESSION['con'] !== null) {
-        $conn = $_SESSION['con'];
-    } else {
-        $log->logInfo("No database connection.");
-        die("No database connection.");
-    }
-
+    // Intenta ejecutar la consulta
     try {
-        // Try to execute the query
-        $result = mysql_query($query, $conn);
+        $result = mysql_query($query);
         if (!$result) {
-            throw new Exception(mysql_error($conn));
+            throw new Exception(mysql_error());
         }
         return $result;
     } catch (Exception $e) {
-        // Log error and stop script execution
+        // Registra el error y detén la ejecución del script
         $log->logInfo("Query error: " . $query . " " . $e->getMessage());
         die("Query error: " . $e->getMessage());
     }
 }
+
 
 // Function to fetch all results from a SELECT query
 function db_fetch_all($result) {

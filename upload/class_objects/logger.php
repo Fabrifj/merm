@@ -15,7 +15,8 @@ class Logger {
     }
 
     public function logInfo($message) {
-        $formattedMessage = sprintf("%s: %s\n", $this->loopName, $message);
+        $timestamp = date('[Y-m-d H:i:s]'); // Obtén la fecha y hora actual en el formato deseado
+        $formattedMessage = sprintf("%s %s: %s\n", $timestamp, $this->loopName, $message);
         fwrite($this->logFile, $formattedMessage);
     }
 }
