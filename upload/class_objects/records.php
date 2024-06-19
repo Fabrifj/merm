@@ -62,7 +62,7 @@ class RecordsTypeStandard {
     private $powerFactorPhaseC;
     private $voltagePhaseAB;
     private $voltagePhaseBC;
-    private $voltagePhaseCA;
+    private $voltagePhaseAC;
     private $voltagePhaseAN;
     private $voltagePhaseBN;
     private $voltagePhaseCN;
@@ -82,7 +82,7 @@ class RecordsTypeStandard {
         $timeZone, $time, $error, $energyConsumption, $shipName ,$realPower = null, $reactivePower = null, $apparentPower = null,
         $powerFactor = null, $current = null, $realPowerPhaseA = null, $realPowerPhaseB = null, $realPowerPhaseC = null,
         $powerFactorPhaseA = null, $powerFactorPhaseB = null, $powerFactorPhaseC = null,
-        $voltagePhaseAB = null, $voltagePhaseBC = null, $voltagePhaseCA = null, $voltagePhaseAN = null,
+        $voltagePhaseAB = null, $voltagePhaseBC = null, $voltagePhaseAC = null, $voltagePhaseAN = null,
         $voltagePhaseBN = null, $voltagePhaseCN = null, $currentPhaseA = null, $currentPhaseB = null,
         $currentPhaseC = null, $averageDemand = null, $maximumDemand = null) 
         {    
@@ -103,7 +103,7 @@ class RecordsTypeStandard {
         $this->powerFactorPhaseC = $powerFactorPhaseC!== null ? $powerFactorPhaseC : 0;
         $this->voltagePhaseAB = $voltagePhaseAB!== null ? $voltagePhaseAB : 0;
         $this->voltagePhaseBC = $voltagePhaseBC!== null ? $voltagePhaseBC : 0;
-        $this->voltagePhaseCA = $voltagePhaseCA!== null ? $voltagePhaseCA : 0;
+        $this->voltagePhaseAC = $voltagePhaseAC!== null ? $voltagePhaseAC : 0;
         $this->voltagePhaseAN = $voltagePhaseAN!== null ? $voltagePhaseAN : 0;
         $this->voltagePhaseBN = $voltagePhaseBN!== null ? $voltagePhaseBN : 0;
         $this->voltagePhaseCN = $voltagePhaseCN!== null ? $voltagePhaseCN : 0;
@@ -130,7 +130,7 @@ class RecordsTypeStandard {
             (float)$this->apparentPower, (float)$this->powerFactor, (float)$this->current, (float)$this->realPowerPhaseA,
             (float)$this->realPowerPhaseB, (float)$this->realPowerPhaseC,(float)$this->powerFactorPhaseA,
             (float)$this->powerFactorPhaseB,(float)$this->powerFactorPhaseC,(float)$this->voltagePhaseAB,
-            (float)$this->voltagePhaseBC,(float)$this->voltagePhaseCA,(float)$this->voltagePhaseAN,
+            (float)$this->voltagePhaseBC,(float)$this->voltagePhaseAC,(float)$this->voltagePhaseAN,
             (float)$this->voltagePhaseBN,(float)$this->voltagePhaseCN, (float)$this->currentPhaseA,
             (float)$this->currentPhaseB,(float)$this->currentPhaseC, (float)$this->averageDemand,
             (float)$this->maximumDemand, (float)$this->peakKw, (float)$this->peakKwh, (float)$this->offPeakKw,     
@@ -210,7 +210,7 @@ class RecordFactory {
                     $data['Total_Power_Factor_Total_KW_/_Total_KVA'],$data['Current_Average_of_Active_Phases'],$data['Real_Power_Phase_A'],
                     $data['Real_Power_Phase_B'],$data['Real_Power_Phase_C'],$data['Power_Factor_Phase_A'],
                     $data['Power_Factor_Phase_B'],$data['Power_Factor_Phase_C'],$data['Voltage_Phase_AB'],
-                    $data['Voltage_Phase_BC'],$data['Voltage_Phase_CA'],$data['Voltage_Phase_AN'],
+                    $data['Voltage_Phase_BC'],$data['Voltage_Phase_AC'],$data['Voltage_Phase_AN'],
                     $data['Voltage_Phase_BN'],$data['Voltage_Phase_CN'],$data['Current_Phase_A'],
                     $data['Current_Phase_B'],$data['Current_Phase_C'],$data['Total_Real_Power_Present_Demand'],
                     $data['Total_Real_Power_Max_Demand_Export']
