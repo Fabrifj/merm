@@ -2391,9 +2391,6 @@ include "../conn/mysql_pconnect-all.php"; // mySQL database connector.
                     $last_records = get_last_four_records($logger,$timezone,$LOOPNAME );
                 }
 
-                $jsonArray = json_encode($utilityData, JSON_PRETTY_PRINT);
-                $logger->logDebug($jsonArray);
-
                 $logger->logInfo( "Creating utility class");
                 $utilityRate = create_utility_class($logger,$utilityData[0]);
 
@@ -2406,7 +2403,7 @@ include "../conn/mysql_pconnect-all.php"; // mySQL database connector.
                 $logger->logInfo( "Populating Standard table");
                 $erros = populate_standart_table($logger, $ship_records);
 
-                $logger->logInfo( "End  erors: " . $erros . "<br>");
+                $logger->logInfo( "End  erors: " . $erros );
             } catch (Exception $e) {
                 $logger->logError('Excepción capturada: ' . $e->getMessage());
             }

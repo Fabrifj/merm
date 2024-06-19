@@ -205,14 +205,14 @@ class RecordFactory {
                     $data['Maximum_Demand']
                 );
             case 'device002':
-                return new RecordsTypeStandard($timezone,$data['time'],$data['error'],$data['Accumulated_Real_Energy_Net_Import__Export'],$loopName,
+                return new RecordsTypeStandard($timezone,$data['time'],$data['error'],$data['Accumulated_Real_Energy:_Net_Import__Export'],$loopName,
                     $data['Total_Net_Instantaneous_Real_P_Power'],$data['Total_Net_Instantaneous_Reactive_Q_Power'],$data['Total_Net_Instantaneous_Apparent_S_Power_vector_sum'],
                     $data['Total_Power_Factor_Total_KW_/_Total_KVA'],$data['Current_Average_of_Active_Phases'],$data['Real_Power_Phase_A'],
-                    $data['Real_Power_phase_B'],$data['Real_Power_phase_C'],$data['Power_Factor_phase_A'],
-                    $data['Power_Factor_phase_B'],$data['Power_Factor_phase_C'],$data['Voltage_phase_A_B'],
-                    $data['Voltage_phase_B_C'],$data['Voltage_phase_C_A'],$data['Voltage_phase_A_N'],
-                    $data['Voltage_phase_B_N'],$data['Voltage_phase_C_N'],$data['Current_phase_A'],
-                    $data['Current_phase_B'],$data['Current_phase_C'],$data['Total_Real_Power_Present_Demand'],
+                    $data['Real_Power_Phase_B'],$data['Real_Power_Phase_C'],$data['Power_Factor_Phase_A'],
+                    $data['Power_Factor_phase_B'],$data['Power_Factor_phase_C'],$data['Voltage_Phase_A_B'],
+                    $data['Voltage_Phase_B_C'],$data['Voltage_Phase_C_A'],$data['Voltage_Phase_A_N'],
+                    $data['Voltage_Phase_B_N'],$data['Voltage_Phase_C_N'],$data['Current_Phase_A'],
+                    $data['Current_Phase_B'],$data['Current_phase_C'],$data['Total_Real_Power_Present_Demand'],
                     $data['Total_Real_Power_Max_Demand_Export']
                 );
             case 'device250':
