@@ -72,7 +72,7 @@ class TimeRange {
 class UtilityRateFactory {
     public static function createStandardUtilityRate($timeZone, $data) {
         $timeZone = new DateTimeZone($timeZone);
-        $utility = $data[0];
+        $utility = $data["Utility"];
         switch ($utility) {
             case 'SCE&G':
                 $peakTimeSummer = [new TimeRange($timeZone,$data[12], $data[13])];
