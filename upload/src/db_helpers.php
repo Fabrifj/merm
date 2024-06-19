@@ -40,9 +40,10 @@ function db_connect($log, $use_remote = "") {
 
 // Function to execute queries
 function db_query($log, $query) {
-
-    $conn = isset($_SESSION['con']) && $_SESSION['con'] !== null ? $_SESSION['con'] : null;
-    if (!$conn) {
+    // Check if a database connection exists in the session
+    if (isset($_SESSION['con']) && $_SESSION['con'] !== null) {
+        $conn = $_SESSION['con'];
+    } else {
         $log->logInfo("No database connection.");
         die("No database connection.");
     }
@@ -56,9 +57,7 @@ function db_query($log, $query) {
         return $result;
     } catch (Exception $e) {
         // Log error and stop script execution
-
-        $log->logInfo("Query error: " . $query . $e->getMessage());
-
+        $log->logInfo("Query error: " . $query . " " . $e->getMessage());
         die("Query error: " . $e->getMessage());
     }
 }

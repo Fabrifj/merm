@@ -82,7 +82,7 @@ class UtilityRateFactory {
                 $peakTimeSummer = [];
                 $peakTimeNonSummer = [];
                 return new UtilityRate($data[0],$data[1],0,$data[2],$data[2],$data[2],$peakTimeSummer,$peakTimeNonSummer);
-            case 'Nav_Fed_Rate':
+            case 'Entergy_NO_Rates':
                 $peakTimeSummer = [];
                 $peakTimeNonSummer = [];
                 return new UtilityRate($data[0],$data[1],0,$data[2],$data[2],$data[2],$peakTimeSummer,$peakTimeNonSummer);
