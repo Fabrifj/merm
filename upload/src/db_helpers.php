@@ -137,7 +137,7 @@ function db_fetch_records_after_time($log, $table, $time) {
 
 //Function to fetch the last record of a specific loop name
 function db_fetch_last_ship_record($log, $loopname) {
-    $query = sprintf("SELECT MAX(time) as last_date FROM Standard_ship_records WHERE Loopname = '%s'";,
+    $query = sprintf("SELECT MAX(time) as last_date FROM Standard_ship_records WHERE Loopname = '%s';",
         mysql_real_escape_string($loopname)
     );
     $result = db_query($log, $query);
