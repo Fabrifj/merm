@@ -127,7 +127,7 @@ class RecordsTypeStandard {
 
     public function getData(){
         $value = sprintf(
-            "('%s', '%s', %d, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, '%f', '%s')",
+            "('%s', '%s', %d, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, '%f','%f', '%s')",
             mysql_real_escape_string((string)$this->dateTime->format("Y-m-d H:i:s")), mysql_real_escape_string((string)$this->timeZone->getName()),
             (int)$this->error, (float)$this->energyConsumption, (float)$this->realPower, (float)$this->reactivePower,
             (float)$this->apparentPower, (float)$this->powerFactor, (float)$this->current, (float)$this->realPowerPhaseA,
