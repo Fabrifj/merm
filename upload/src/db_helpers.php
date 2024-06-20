@@ -118,7 +118,7 @@ function db_fetch_utility_rate($log, $utility) {
 
 // Function to fetch records from a specific table
 function db_fetch_table_records($log, $table) {
-    $query = sprintf("SELECT * FROM `%s` ORDER BY time DESC LIMIT 1988;",
+    $query = sprintf("SELECT * FROM `%s` ORDER BY time DESC LIMIT 3000;",
         mysql_real_escape_string($table)
     );
     $result = db_query($log, $query);
@@ -137,7 +137,7 @@ function db_fetch_records_after_time($log, $table, $time) {
 
 //Function to fetch the last record of a specific loop name
 function db_fetch_last_ship_record($log, $loopname) {
-    $query = sprintf("SELECT MAX(time) as last_date FROM Standard_ship_records WHERE Loopname = '%s'",
+    $query = sprintf("SELECT MAX(time) as last_date FROM Standard_ship_records WHERE Loopname = '%s'";,
         mysql_real_escape_string($loopname)
     );
     $result = db_query($log, $query);
@@ -151,7 +151,10 @@ function db_fetch_last_ship_record($log, $loopname) {
 
 // Function to fetch the last four records of a specific loop name
 function db_fetch_last_three_ship_records($log, $loopname) {
-    $query = sprintf("SELECT * FROM Standard_ship_records WHERE Loopname = '%s' ORDER BY time DESC LIMIT 3;",
+
+    $query = sprintf("SELECT * FROM (
+        SELECT * FROM Standard_ship_records WHERE Loopname = '%s' ORDER BY time DESC LIMIT 3
+        ) sub ORDER BY time ASC;",
         mysql_real_escape_string($loopname)
     );
     $result = db_query($log, $query);

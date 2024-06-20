@@ -8,8 +8,8 @@ require './class_objects/utility.php';
 
 
 echo "Start query <br>";
-$devicetablename = "Cape_Kennedy_001EC6001433__device002_class103";
-$loopName = "Cape Kennedy";
+$devicetablename = "Cape_Kennedy_001EC6001433__test_class103";
+$loopName = "Cape_Kennedy";
 $aquisuitetable = "";
 $log = "Keylogger";
 $timezone = "EDT";
@@ -34,7 +34,7 @@ if($_REQUEST['MODE'] == "dev"){
     echo "Host mode";
 }
 
-//db_connect($logger,$mode );
+db_connect($logger,$mode );
 
 
 $ship_records = get_ships_records($logger,$timezone,$loopName,$devicetablename);
@@ -62,5 +62,7 @@ echo "Create populate table <br>";
 $erros = populate_standart_table($logger, $ship_records);
 
 echo "End  erors: " . $erros . "<br>";
+
+db_close()
 
 ?>
