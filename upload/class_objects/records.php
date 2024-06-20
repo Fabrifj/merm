@@ -76,6 +76,7 @@ class RecordsTypeStandard {
     private $offPeakKw;
     private $offPeakKwh;
     private $costKw;
+    private $costKwH;
     private $shipName;
 
     public function __construct(
@@ -120,6 +121,8 @@ class RecordsTypeStandard {
         $this->offPeakKw = 0;
         $this->offPeakKwh = 0;
         $this->costKw = 0;
+        $this->costKwH = 0;
+
     }
 
     public function getData(){
@@ -134,7 +137,7 @@ class RecordsTypeStandard {
             (float)$this->voltagePhaseBN,(float)$this->voltagePhaseCN, (float)$this->currentPhaseA,
             (float)$this->currentPhaseB,(float)$this->currentPhaseC, (float)$this->averageDemand,
             (float)$this->maximumDemand, (float)$this->peakKw, (float)$this->peakKwh, (float)$this->offPeakKw,     
-            (float)$this->offPeakKwh, (float)$this->costKw, mysql_real_escape_string((string)$this->shipName)
+            (float)$this->offPeakKwh, (float)$this->costKw, (float)$this->costKwH, mysql_real_escape_string((string)$this->shipName)
         );
         return $value;
     }
@@ -183,6 +186,12 @@ class RecordsTypeStandard {
     }
     public function getCostKw() {
         return $this->costKw;
+    }
+    public function setCostKwH($costKwH) {
+        $this->costKwH = $costKwH;
+    }
+    public function getCostKwH() {
+        return $this->costKwH;
     }
     public function getKwValues() {
         return [$this->offPeakKw,$this->offPeakKwh,$this->peakKw,$this->peakKwh ];

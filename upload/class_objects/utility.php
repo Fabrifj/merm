@@ -7,11 +7,15 @@ class UtilityRate {
     private $summerPeakCostKw;
     private $nonSummerPeakCostKw;
     private $offPeakCostKw;
+    private $summerPeakCostKwH;
+    private $nonSummerPeakCostKwH;
+    private $offPeakCostKwH;
     private $peakTimeSummer;
     private $peakTimeNonSummer;
 
-    public function __construct($utility, $rate, $customerCharge, $summerPeakCostKw, 
-                                $nonSummerPeakCostKw, $offPeakCostKw, 
+    public function __construct($utility, $rate, $customerCharge, 
+                                $summerPeakCostKw,$nonSummerPeakCostKw, $offPeakCostKw,
+                                $summerPeakCostKwH,$nonSummerPeakCostKwH, $offPeakCostKwH, 
                                 $peakTimeSummer, $peakTimeNonSummer) {
         $this->utility = $utility;
         $this->rate = $rate;
@@ -19,6 +23,10 @@ class UtilityRate {
         $this->summerPeakCostKw = $summerPeakCostKw;
         $this->nonSummerPeakCostKw = $nonSummerPeakCostKw;
         $this->offPeakCostKw = $offPeakCostKw;
+        $this->summerPeakCostKwH = $summerPeakCostKwH;
+        $this->nonSummerPeakCostKwH = $nonSummerPeakCostKwH;
+        $this->offPeakCostKwH = $offPeakCostKwH;
+        // Peak
         $this->peakTimeSummer = $peakTimeSummer;
         $this->peakTimeNonSummer = $peakTimeNonSummer;
 
@@ -36,6 +44,15 @@ class UtilityRate {
     }
     public function getOffPeakCostKw() {
         return $this->offPeakCostKw;
+    }
+    public function getSummerPeakCostKwH() {
+        return $this->summerPeakCostKwH;
+    }
+    public function getNonSummerPeakCostKwH() {
+        return $this->nonSummerPeakCostKwH;
+    }
+    public function getOffPeakCostKwH() {
+        return $this->offPeakCostKwH;
     }
     public function getPeakTimeSummer() {
         return $this->peakTimeSummer;
@@ -75,17 +92,42 @@ class UtilityRateFactory {
         $utility = $data["Utility"];
         switch ($utility) {
             case 'SCE&G':
-                $peakTimeSummer = [new TimeRange($timeZone,$data[12], $data[13])];
-                $peakTimeNonSummer = [new TimeRange($timeZone,$data[14], $data[15]), new TimeRange($timeZone,$data[16], $data[17])];
-                return new UtilityRate($data[0], $data[1], $data[2], $data[3], $data[4], $data[5], $peakTimeSummer, $peakTimeNonSummer);
-            case 'Nav_Fed_Rate':
+                $peakTimeSummer = [new TimeRange($timeZone,$data["Peak_Time_Summer_Start"], $data["Peak_Time_Summer_Stop"])];
+                $peakTimeNonSummer = [new TimeRange($timeZone,$data["Peak_Time_Non_Summer_Start"], $data["Peak_Time_Non_Summer_Stop"]), new TimeRange($timeZone,$data["Peak_Time_Non_Summer_Start2"], $data["Peak_Time_Non_Summer_Stop2"])];
+                return new UtilityRate($data["Utility"], $data["Rate"], $data["Customer_Charge"], 
+                                $data["Summer_Peak_Demand_kW"], $data["Non_Summer_Peak_Demand_kW"], $data["Off_Peak_Demand_kW"],
+                                $data["Summer_Peak_kWh"], $data["Non_Summer_Peak_kWh"], $data["Off_Peak_kWh"],
+                                 $peakTimeSummer, $peakTimeNonSummer);
+            case 'Nav_Fed_Rate': // Miss Cost_kw
                 $peakTimeSummer = [];
                 $peakTimeNonSummer = [];
-                return new UtilityRate($data[0],$data[1],0,$data[2],$data[2],$data[2],$peakTimeSummer,$peakTimeNonSummer);
-            case 'Entergy_NO_Rates':
+                return new UtilityRate($data["Utility"],$data["Rate"],0,
+                                $data["Miss"],$data["Miss"],$data["Miss"],
+                                $data["Cost_kWh"],$data["Cost_kWh"],$data["Cost_kWh"],
+                                $peakTimeSummer,$peakTimeNonSummer);
+            case 'Entergy_NO_Rates': // Fix What is Whats
                 $peakTimeSummer = [];
                 $peakTimeNonSummer = [];
-                return new UtilityRate($data["Utility"],$data["Rate"],0,$data["Energy_Rate_1"],$data["Energy_Rate_2"],$data["Energy_Rate_3"],$peakTimeSummer,$peakTimeNonSummer);
+                return new UtilityRate($data["Utility"],$data["Rate"],0,
+                                $data["Demand_Rate_1"],$data["Demand_Rate_2"],$data["Demand_Rate_3"],
+                                $data["Energy_Rate_1"],$data["Energy_Rate_2"],$data["Energy_Rate_3"],
+                                $peakTimeSummer,$peakTimeNonSummer);
+            case 'Virginia_Dominion_Rates':
+                $peakTimeSummer = [new TimeRange($timeZone,$data["Peak_Time_Summer_Start"], $data["Peak_Time_Summer_Stop"])];
+                $peakTimeNonSummer = [new TimeRange($timeZone,$data["Peak_Time_Non_Summer_Start"], $data["Peak_Time_Non_Summer_Stop"])];
+                return new UtilityRate($data["Utility"],$data["Rate"],$data["Customer_Charge"],
+                                $data["Peak_kW"],$data["Peak_kW"],$data["Off_Peak_kW"],
+                                $data["Peak_kWh"],$data["Peak_kWh"],$data["Off_Peak_kWh"],
+                                $peakTimeSummer,$peakTimeNonSummer);
+            case 'Virginia_Electric_and_power_Co': ///  KWh Are not 
+                $peakTimeSummer = [new TimeRange($timeZone,$data["Peak_Time_Summer_Start"], $data["Peak_Time_Summer_Stop"])];
+                $peakTimeNonSummer = [new TimeRange($timeZone,$data["Peak_Time_Non_Summer_Start_AM"], $data["Peak_Time_Non_Summer_Stop_AM"]),
+                                new TimeRange($timeZone,$data["Peak_Time_Non_Summer_Start_PM"], $data["Peak_Time_Non_Summer_Stop_PM"])];
+                return new UtilityRate($data["Utility"],$data["Rate"],$data["Customer_Charge"],
+                                $data["Peak_kW_Demand_1"],$data["Peak_kW_Demand_1"],$data["Peak_kW_Demand_1"],
+                                $data["Energy_Rate_1"],$data["Energy_Rate_2"],$data["Energy_Rate_3"],
+                                $peakTimeSummer,$peakTimeNonSummer);
+            
             default:
                 throw new Exception("Invalid record type: $utility");
         }

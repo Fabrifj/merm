@@ -14,19 +14,15 @@ $aquisuitetable = "";
 $log = "Keylogger";
 $timezone = "EDT";
 $utilityData = [
-    'SCE&G',        // utiliy
-    'Rate1',        // rate
-    100,            // customerCharge
-    10,             // summerPeakCostKw
-    8,              // nonSummerPeakCostKw
-    5,              // offPeakCostKw
-    '', '', '', '', '', '',  // otros datos irrelevantes
-    '14:00:00',        // peakTimeSummer startTime
-    '18:00:00',        // peakTimeSummer endTime
-    '08:00:00',        // peakTimeNonSummer startTime 1
-    '12:00:00',        // peakTimeNonSummer endTime 1
-    '13:00:00',        // peakTimeNonSummer startTime 2
-    '17:00:00'         // peakTimeNonSummer endTime 2
+    "Utility" => 'Entergy_NO_Rates',         // utility
+    "Rate" => 'Rate1',                      // rate
+    "Custom" => 100,                        // customerCharge
+    "Demand_Rate_1" => 10,                  // summerPeakCostKw
+    "Demand_Rate_2" => 8,                   // nonSummerPeakCostKw
+    "Demand_Rate_3" => 5,                   // offPeakCostKwH
+    "Energy_Rate_1" => 0.1,                 // summerPeakCostKwH
+    "Energy_Rate_2" => 0.8,                 // nonSummerPeakCostKwH
+    "Energy_Rate_3" => 0.5                  // offPeakCostKwH
 ];
 
 $logger = new Logger($loopName);

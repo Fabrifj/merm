@@ -197,12 +197,18 @@ function calculate_cost($log, $utility, $ship_records) {
     foreach ($ship_records as $ship_record) {
         try {
             $cost_kw = 0;
+            $cost_kwH = 0;
             if (is_summer($ship_record->getTime())) {
                 $cost_kw = $ship_record->getPeakKw() * $utility->getSummerPeakCostKw() + $ship_record->getOffPeakKw() * $utility->getOffPeakCostKw();
+                $cost_kwH = $ship_record->getPeakKwH() * $utility->getSummerPeakCostKwH() + $ship_record->getOffPeakKwH() * $utility->getOffPeakCostKwH();
+            
             } else {
                 $cost_kw = $ship_record->getPeakKw() * $utility->getNonSummerPeakCostKw() + $ship_record->getOffPeakKw() * $utility->getOffPeakCostKw();
+                $cost_kwH = $ship_record->getPeakKwH() * $utility->getNonSummerPeakCostKwH() + $ship_record->getOffPeakKwH() * $utility->getOffPeakCostKwH();
             }
             $ship_record->setCostKw($cost_kw);
+            $ship_record->setCostKwH($cost_kwH);
+
         } catch (Exception $e) {
             $log->logError("Error calculating cost for record: " . json_encode($ship_record) . ". Error: " . $e->getMessage());
         }
