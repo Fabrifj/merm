@@ -118,7 +118,9 @@ function db_fetch_utility_rate($log, $utility) {
 
 // Function to fetch records from a specific table
 function db_fetch_table_records($log, $table) {
-    $query = sprintf("SELECT * FROM `%s` ORDER BY time DESC LIMIT 3000;",
+    $query = sprintf("SELECT * FROM ( 
+                SELECT * FROM `%s` ORDER BY time DESC LIMIT 3000
+                ) sub ORDER BY time ASC;",
         mysql_real_escape_string($table)
     );
     $result = db_query($log, $query);
@@ -127,7 +129,9 @@ function db_fetch_table_records($log, $table) {
 
 // Function to fetch records from a table after a specific time
 function db_fetch_records_after_time($log, $table, $time) {
-    $query = sprintf("SELECT * FROM `%s` WHERE time > '%s'",
+    $query = sprintf("SELECT * FROM (
+                SELECT * FROM `%s` WHERE time > '%s'
+                ) sub ORDER BY time ASC;",
         mysql_real_escape_string($table),
         mysql_real_escape_string($time)
     );
