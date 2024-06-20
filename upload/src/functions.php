@@ -161,6 +161,7 @@ function calculate_kw($log, $utilityRate, $last_ship_records, $ship_records) {
         $log->logInfo("Table empty.");
         $index = 1;
         $newRecords = true;
+        $diference = 1;
     }
 
     // Calculate kW and kWh for each record
@@ -169,7 +170,7 @@ function calculate_kw($log, $utilityRate, $last_ship_records, $ship_records) {
 
         $power_kwh = abs($current_record->getEnergyConsumption() - $concatenated_records[$index - 1]->getEnergyConsumption());
         
-        $previous_record = $newRecords ? $concatenated_records[$index - 1] : $concatenated_records[$index - $diference];
+        $previous_record = $concatenated_records[$index - $diference];
         $diff_power_kw = abs($current_record->getEnergyConsumption() - $previous_record->getEnergyConsumption());
         $diff_time = get_time_dif($current_record->getTime(), $previous_record->getTime());
 
@@ -181,6 +182,9 @@ function calculate_kw($log, $utilityRate, $last_ship_records, $ship_records) {
         } else {
             $current_record->setOffPeakKw($power_kw);
             $current_record->setOffPeakKwh($power_kwh);
+        }
+        if($diference == 1 || $diference ==2){
+            $diference ++;
         }
     }
 
