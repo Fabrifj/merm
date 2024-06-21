@@ -46,6 +46,7 @@ include '../../../erms/includes/gfx_methods.php';
 include_once ('../../../conn/mysql_connect-ro.php');
 include_once ('../../../Auth/auth.php');
 
+$shipClass = $_REQUEST['shipClass'];
 
 // Redirect happens within isAuthenticated and isPermitted
 // but we still want to make sure we exit the main script
