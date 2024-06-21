@@ -1,4 +1,8 @@
 <?php
+date_default_timezone_set('UTC');
+
+require './src/logger.php';
+$testLogger = new Logger("Test");
 
 /**
  * Navis Energy Management
@@ -58,7 +62,7 @@ foreach ($ships AS $aq)
   // Currently this joined query is only used for bootstrapping
   // client data, but eventually we should be able to use it to
   // eliminate subsequent calls for duplicate data
-  $sql = "SELECT $aq.devicetablename, $aq.deviceclass, $aq.SerialNumber, timezone.timezonephp, Aquisuite_List.utility, Equate_User.Title, Equate_User_Access.Ship_Class, Equate_User_Access.Owner FROM $aq
+  $sql = "SELECT $aq.devicetablename, $aq.deviceclass, $aq.SerialNumber, timezone.timezonephp, Aquisuite_List.utility, Equate_User.Title, Equate_User_Access.Ship_Class, Equate_User_Access.Owner, Aquisuite_List.loopname FROM $aq
           LEFT JOIN Aquisuite_List
           ON Aquisuite_List.SerialNumber = $aq.SerialNumber
           LEFT JOIN timezone
@@ -78,7 +82,7 @@ foreach ($ships AS $aq)
 
   $ship[] = $row[0];
   $shipDeviceClass[] = $row[1];
-  debugPrint('(init) ship: '.$row[0].' ship_class: '.$row[6].' owner: '.$row[7]);
+  debugPrint('(init) ship: '.$row[0].' ship_class: '.$row[6].' owner: '.$row[7].' loopname: '.$row[8] );
 
   $ships_data[$aq] = array(
     "aquisuite" => $aq,
@@ -88,7 +92,8 @@ foreach ($ships AS $aq)
     "utility" => $row[4],
     "title" => $row[5],
     "ship_class" => $row[6],
-    "owner" => $row[7]
+    "owner" => $row[7],
+    "loopname" => $row[8]
   );
 }
 
@@ -448,6 +453,11 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
     $Ship_daily_cost_baseline_g2[] = $b_gtldG2;
   }
 
+  // Fetch values from Standar_ship_records 
+  // $Ship_kWh_Average
+  // $Ship_Demand,
+  // $Ship_daily_cost,
+  //
   $graph = [
     "ship" => $Ship_Array,
     "months" => $months,
@@ -544,7 +554,8 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
     "values" => $VAL,
     "cost" => $COST_30
   ];
-  //$graph=erms_multibar_graph($Ship_kWh_Average,$Ship_Demand,$Ship_daily_cost,$Ship_Array, $Ship_available,$save_startdate,$save_enddate);
+  $formattedMessage = print_r($grap, true);
+  $testLogger->->logInfo($formattedMessage);
   // No idea what the following code section does for this module
 for ($imonth = 0; $imonth < $max_month; $imonth++)
 {

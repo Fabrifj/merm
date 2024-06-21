@@ -1097,8 +1097,7 @@ function erms_line_graph($Time_Field,$ship,$date_value_start,$Time_Meter_End,$da
  * @param mixed $date_value_end
  * @return
  */
-function erms_bar_graph($time,$table,$date_value_start,$date_value_end)
-{
+function erms_bar_graph($time,$table,$date_value_start,$date_value_end){
 	$module = $_REQUEST['module'];
 
 	global $key;
@@ -1381,8 +1380,7 @@ function erms_multibar_graph($datay,$datay2,$datay3,$titles, $ship_avail, $start
  * @param mixed $report_month
  * @return
  */
-function erms_pie_graph
-    (
+function erms_pie_graph(
         $Time_Field,
         $data,
         $ship,

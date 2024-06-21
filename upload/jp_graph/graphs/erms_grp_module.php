@@ -183,6 +183,7 @@ setBreadcrumbs("manager", $_SESSION['user_data']['mgrMods'][$module]["text"], $_
                          if($module == ERMS_Modules::PerformanceTrending) {
                            echo '<option value="last12" ';if ($VAL["report_year"]=="last12"){echo "selected";} echo '>Last 12 Months</option>';
                          }
+                                        echo '<option value="2024" ';if ($VAL["report_year"]=="2024"){echo "selected";} echo '>2024</option>';
                                         echo '<option value="2023" ';if ($VAL["report_year"]=="2023"){echo "selected";} echo '>2023</option>';
                                         echo '<option value="2022" ';if ($VAL["report_year"]=="2022"){echo "selected";} echo '>2022</option>';
                                         echo '<option value="2021" ';if ($VAL["report_year"]=="2021"){echo "selected";} echo '>2021</option>';

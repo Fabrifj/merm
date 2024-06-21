@@ -25,7 +25,7 @@ if ($shipData) {
 } else {
     $logger->logDebug("No data received");
 }
-$datay = $shipData['total_kw'];
+$datay = $shipData['total_kwH'];
 $datax = $shipData['time'];
 
 $graph = new Graph(800,600);
