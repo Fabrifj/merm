@@ -6,6 +6,7 @@ $log = new KLogger ( "log.txt" , KLogger::DEBUG );
 $log->logInfo('data methods hello ship' .$ship);
 //.....................................End KLogger..........................
 
+$testLogger->logInfo("Start init_mgr");
 
 function MySqlFailure($Reason) {
 	$con = $_SESSION['con'];
@@ -509,7 +510,6 @@ function utility_schedule_rates($utility, $date_value_end, $date_value_start) {
   else
   {
      $rates = mysql_fetch_array($rate_q);
-     // Aquí puedes continuar procesando los resultados
   }
 
   return $rates;

@@ -11,6 +11,7 @@ $log = new KLogger ( "log.txt" , KLogger::DEBUG );
 //.....................................End KLogger..........................
 //set a session variable count to determin if this is first time on page.  Used to set default meter page time interval.
 debugPrint('(init) START ');
+$testLogger->logInfo("Start init_mgr");
 
 $Ship_Table_Name = "";
 $Time_Field = "time";
@@ -93,7 +94,6 @@ foreach ($ships AS $aq)
 }
 
 $log->logInfo("Ship SQL: ".$sql);
-$testLogger->logInfo("Start init_mgr");
 
 $ship_count=count($ship);
 $log->logInfo('ship count: ('.$ship_count.')');

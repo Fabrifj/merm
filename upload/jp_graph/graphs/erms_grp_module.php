@@ -27,6 +27,7 @@ $testLogger = new Logger("Test");
 //.....................................End KLogger..........................
 
 error_reporting (E_ALL ^ E_NOTICE);
+$testLogger->logInfo("Start erms");
 
 class ERMS_Modules
 {

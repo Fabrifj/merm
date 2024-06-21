@@ -3,6 +3,8 @@
 //include Logger.php";
 $log = new KLogger ( "log.txt" , KLogger::DEBUG );
 $log->logInfo('gfx methods hello');
+$testLogger->logInfo("Start init_mgr");
+
 //.....................................End KLogger..........................
 
 function calculate_mod1_graph_data($ship, $utility, $date_value_start, $date_value_end) {

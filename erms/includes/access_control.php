@@ -1,4 +1,5 @@
 <?php
+$testLogger->logInfo("Start init_mgr");
 
 function printArray($array)
 {
