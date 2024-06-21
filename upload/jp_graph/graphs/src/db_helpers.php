@@ -58,6 +58,7 @@ function db_query($log, $query) {
         die("Query error: " . $e->getMessage());
     }
 }
+
 function fetch_data_for_graph($result) {
     $time = [];
     $cost_kw = [];
@@ -81,18 +82,16 @@ function fetch_data_for_graph($result) {
         'total_kwH' => $total_kwH
     ];
 }
-
-function fetch_last_24_hours($log, $loopname) {
-
+// this are unique, not by owner 
+function fetch_last_30_days($log, $loopname) {
     $query = sprintf(
         "SELECT 
-            time, 
-            cost_kw, 
-            cost_kwH, 
-            (peak_kw + off_peak_kw) AS total_kw, 
-            (peak_kwh + off_peak_kwh) AS total_kwh 
+            loopname,
+            AVG(cost_kw) + AVG(cost_kwH)  AS cost, 
+            AVG(peak_kw + off_peak_kw) AS total_kw, 
+            AVG(peak_kwh + off_peak_kwh) AS total_kwh 
         FROM Standard_ship_records 
-        WHERE Loopname = '%s' AND time >= NOW() - INTERVAL 1 DAY;",
+        WHERE Loopname = '%s' AND time >= NOW() - INTERVAL 30 DAY;",
         mysql_real_escape_string($loopname)
     );
 
@@ -103,8 +102,57 @@ function fetch_last_24_hours($log, $loopname) {
         return false;
     }
 
-    return fetch_data_for_graph($result);
+    return $result;
 }
+
+function fetch_last_year($log, $loopname) {
+    $query = sprintf(
+        "SELECT 
+            loopname,
+            AVG(cost_kw) + AVG(cost_kwH)  AS cost,  
+            AVG(peak_kw + off_peak_kw) AS total_kw, 
+            AVG(peak_kwh + off_peak_kwh) AS total_kwh 
+        FROM Standard_ship_records 
+        WHERE Loopname = '%s' AND time >= NOW() - INTERVAL 1 YEAR;",
+        mysql_real_escape_string($loopname)
+    );
+
+    $result = db_query($log, $query);
+
+    if (!$result) {
+        $log->logDebug("Query failed");
+        return false;
+    }
+
+    return $result;
+}
+
+function fetch_month_of_specific_year($log, $loopname, $year, $month) {
+    $query = sprintf(
+        "SELECT 
+            loopname,
+            AVG(cost_kw) + AVG(cost_kwH)  AS cost,  
+            AVG(peak_kw + off_peak_kw) AS avg_total_kw, 
+            AVG(peak_kwh + off_peak_kwh) AS avg_total_kwh 
+        FROM Standard_ship_records 
+        WHERE Loopname = '%s' 
+        AND YEAR(time) = %d 
+        AND MONTH(time) = %d;",
+        mysql_real_escape_string($loopname),
+        $year,
+        $month
+    );
+
+    $result = db_query($log, $query);
+
+    if (!$result) {
+        $log->logDebug("Query failed");
+        return false;
+    }
+
+    return $result;
+}
+
 
 
 
