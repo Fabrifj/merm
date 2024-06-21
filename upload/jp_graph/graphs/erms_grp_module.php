@@ -23,6 +23,7 @@ $log = new KLogger ( "log.txt" , KLogger::DEBUG );
 
 require './src/logger.php';
 $testLogger = new Logger("Test");
+
 //.....................................End KLogger..........................
 
 error_reporting (E_ALL ^ E_NOTICE);
@@ -58,7 +59,6 @@ $log->logInfo('Client IP['.$client_ip_address.']');
 setShipClass($shipClass);
 
 $log->logInfo('ERMS GRP MODULE 1');
-$testLogger->logInfo("Start erms");
 
 include '../../../erms/includes/init_mgr.php';
 $log->logInfo('ERMS GRP MODULE 2nd');

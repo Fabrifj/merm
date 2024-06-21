@@ -1,9 +1,4 @@
 <?php
-date_default_timezone_set('UTC');
-
-require './src/logger.php';
-$testLogger = new Logger("Test");
-
 /**
  * Navis Energy Management
  * @author Carole Snow
