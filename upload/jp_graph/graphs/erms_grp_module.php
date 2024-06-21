@@ -20,6 +20,9 @@
 //....................................KLogger...............................
 require '../../../erms/includes/KLogger.php';
 $log = new KLogger ( "log.txt" , KLogger::DEBUG );
+
+require './src/logger.php';
+$testLogger = new Logger("Test");
 //.....................................End KLogger..........................
 
 error_reporting (E_ALL ^ E_NOTICE);
@@ -42,7 +45,6 @@ include '../../../erms/includes/gfx_methods.php';
 include_once ('../../../conn/mysql_connect-ro.php');
 include_once ('../../../Auth/auth.php');
 
-$shipClass = $_REQUEST['shipClass'];
 
 // Redirect happens within isAuthenticated and isPermitted
 // but we still want to make sure we exit the main script
@@ -56,6 +58,8 @@ $log->logInfo('Client IP['.$client_ip_address.']');
 setShipClass($shipClass);
 
 $log->logInfo('ERMS GRP MODULE 1');
+$testLogger->logInfo("Start erms");
+
 include '../../../erms/includes/init_mgr.php';
 $log->logInfo('ERMS GRP MODULE 2nd');
 setModLinks($username, $shipClass);
