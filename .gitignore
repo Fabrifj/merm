@@ -48,6 +48,7 @@ log*.txt
 ehthumbs.db
 Thumbs.db
 
+./reset.sh
 # Vim Gen Files #
 *.swp
 ./upload/error_log
