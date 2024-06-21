@@ -504,9 +504,13 @@ function utility_schedule_rates($utility, $date_value_end, $date_value_start) {
   {
      echo "unable to process mysql request\n"; echo "$sql_rates\n";
      $log->logInfo(sprintf("mod_cost: unable to process mysql request\n"));
+     return false;
   }
-
-  $rates = mysql_fetch_array($rate_q);
+  else
+  {
+     $rates = mysql_fetch_array($rate_q);
+     // Aquí puedes continuar procesando los resultados
+  }
 
   return $rates;
 }
