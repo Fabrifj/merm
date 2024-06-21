@@ -451,31 +451,10 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
 
   // Fetch values from Standard_ship_records 
 if ($VAL["report_month"] == "Last 30 Days") {
-  foreach ($ships_data as $ship) {
-      $ship_date = fetch_last_30_days($testLogger, $ship["loopname"]);
-
-      $Ship_kWh_Average[] = isset($ship_date["total_kwh"]) ? $ship_date["total_kwh"] : 0;
-      $Ship_Demand[] = isset($ship_date["total_kw"]) ? $ship_date["total_kw"] : 0;
-      $Ship_daily_cost[] = isset($ship_date["cost"]) ? $ship_date["cost"] : 0;
-  }
-} elseif ($VAL["report_month"] == "Annual") {
-  foreach ($ships_data as $ship) {
-      $ship_date = fetch_last_year($testLogger, $ship["loopname"]);
-
-      $Ship_kWh_Average[] = isset($ship_date["total_kwh"]) ? $ship_date["total_kwh"] : 0;
-      $Ship_Demand[] = isset($ship_date["total_kw"]) ? $ship_date["total_kw"] : 0;
-      $Ship_daily_cost[] = isset($ship_date["cost"]) ? $ship_date["cost"] : 0;
-  }
-} else {
-  foreach ($ships_data as $ship) {
-      $ship_date = fetch_month_of_specific_year($testLogger, $ship["loopname"], $VAL["report_month"], $VAL["report_year"]);
-
-      $Ship_kWh_Average[] = isset($ship_date["total_kwh"]) ? $ship_date["total_kwh"] : 0;
-      $Ship_Demand[] = isset($ship_date["total_kw"]) ? $ship_date["total_kw"] : 0;
-      $Ship_daily_cost[] = isset($ship_date["cost"]) ? $ship_date["cost"] : 0;
-  }
-}
-
+  foreach ($ships AS $aq) {
+      $testLogger->logDebug($ships_data[$aq]["loopname"]);
+    }
+  } 
 
   //
   $graph = [
