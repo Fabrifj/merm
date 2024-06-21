@@ -550,7 +550,7 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
     "values" => $VAL,
     "cost" => $COST_30
   ];
-  $formattedMessage = print_r($grap, true);
+  $formattedMessage = print_r($graph, true);
   $testLogger->logInfo($formattedMessage);
 
   // No idea what the following code section does for this module
