@@ -98,6 +98,7 @@ foreach ($ships AS $aq)
 }
 
 $log->logInfo("Ship SQL: ".$sql);
+$testLogger->logInfo("Start init_mgr");
 
 $ship_count=count($ship);
 $log->logInfo('ship count: ('.$ship_count.')');
