@@ -11,7 +11,7 @@ $log = new KLogger ( "log.txt" , KLogger::DEBUG );
 //.....................................End KLogger..........................
 //set a session variable count to determin if this is first time on page.  Used to set default meter page time interval.
 debugPrint('(init) START ');
-$testLogger->logInfo("Start init_mgr");
+$testLogger->logInfo("Start --  init_mgr");
 
 $Ship_Table_Name = "";
 $Time_Field = "time";
@@ -552,6 +552,7 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
   ];
   $formattedMessage = print_r($grap, true);
   $testLogger->logInfo($formattedMessage);
+
   // No idea what the following code section does for this module
 for ($imonth = 0; $imonth < $max_month; $imonth++)
 {
