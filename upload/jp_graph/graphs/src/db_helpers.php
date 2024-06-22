@@ -82,16 +82,7 @@ function fetch_data_for_graph($result) {
         'total_kwH' => $total_kwH
     ];
 }
-// Function to fetch all results from a SELECT query
-function db_fetch_all($result) {
-    $rows = [];
-    if (mysql_num_rows($result) > 0) {
-        while ($row = mysql_fetch_assoc($result)) {
-            $rows[] = $row;
-        }
-    }
-    return $rows;
-}
+
 
 // this are unique, not by owner 
 function fetch_last_30_days($log, $loopname) {
