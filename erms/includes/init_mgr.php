@@ -458,9 +458,9 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
       
       foreach ($ships as $aq) {
         $ship_data = fetch_last_30_days($testLogger, $ships_data[$aq]["loopname"]);
-        $Ship_kWh_Average[] = $ship_data["avg_daily_total_kwh"] ; 
-        $Ship_Demand[] = $ship_data["avg_daily_total_kw"] ;
-        $Ship_daily_cost[] = $ship_data["avg_daily_cost_kw"] +  $ship_data["avg_daily_cost_kwh"] ;
+        $Ship_kWh_Average[] = $ship_data[0]["avg_daily_total_kwh"] ; 
+        $Ship_Demand[] = $ship_data[0]["avg_daily_total_kw"] ;
+        $Ship_daily_cost[] = $ship_data[0]["avg_daily_cost_kw"] +  $ship_data[0]["avg_daily_cost_kwh"] ;
   
       }
       
