@@ -452,25 +452,26 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
   // Fetch values from Standard_ship_records 
   if ($VAL["report_month"] == "Last 30 Days") {
     try {
-      // $Ship_kWh_Average = [];
-      // $Ship_Demand = [];
-      // $Ship_daily_cost = [];
+      $Ship_kWh_Average = [];
+      $Ship_Demand = [];
+      $Ship_daily_cost = [];
       
       foreach ($ships as $aq) {
         $ship_data = fetch_last_30_days($testLogger, $ships_data[$aq]["loopname"]);
-
-        $formattedMessage = print_r($ship_data, true);
-        $testLogger->logDebug($ships_data[$aq]["loopname"]." -- " . $formattedMessage);
+        $Ship_kWh_Average[] = $ship_data["avg_daily_total_kwh"] ; 
+        $Ship_Demand[] = $ship_data["avg_daily_total_kw"] ;
+        $Ship_daily_cost[] = $ship_data["avg_daily_cost_kw"] +  $ship_data["avg_daily_cost_kwh"] ;
+  
       }
       
-      // $formattedMessage = print_r($Ship_kWh_Average, true);
-      // $testLogger->logDebug("kWh : " . $formattedMessage);
+      $formattedMessage = print_r($Ship_kWh_Average, true);
+      $testLogger->logDebug("kWh : " . $formattedMessage);
       
-      // $formattedMessage = print_r($Ship_Demand, true);
-      // $testLogger->logDebug("Demand : " . $formattedMessage);
+      $formattedMessage = print_r($Ship_Demand, true);
+      $testLogger->logDebug("Demand : " . $formattedMessage);
       
-      // $formattedMessage = print_r($Ship_daily_cost, true);
-      // $testLogger->logDebug("Cost : " . $formattedMessage);
+      $formattedMessage = print_r($Ship_daily_cost, true);
+      $testLogger->logDebug("Cost : " . $formattedMessage);
     } catch (Exception $e) {
       $testLogger->logError("Error fetching data for the last 30 days: " . $e->getMessage());
     }
