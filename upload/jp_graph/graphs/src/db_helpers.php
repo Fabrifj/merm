@@ -82,6 +82,17 @@ function fetch_data_for_graph($result) {
         'total_kwH' => $total_kwH
     ];
 }
+// Function to fetch all results from a SELECT query
+function db_fetch_all($result) {
+    $rows = [];
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_assoc($result)) {
+            $rows[] = $row;
+        }
+    }
+    return $rows;
+}
+
 // this are unique, not by owner 
 function fetch_last_30_days($log, $loopname) {
     $query = sprintf(
@@ -102,7 +113,7 @@ function fetch_last_30_days($log, $loopname) {
         return false;
     }
 
-    return $result;
+    return db_fetch_all($result);
 }
 
 function fetch_last_year($log, $loopname) {
@@ -124,8 +135,9 @@ function fetch_last_year($log, $loopname) {
         return false;
     }
 
-    return $result;
+    return db_fetch_all($result);
 }
+
 
 function fetch_month_of_specific_year($log, $loopname, $year, $month) {
     $query = sprintf(
@@ -150,7 +162,7 @@ function fetch_month_of_specific_year($log, $loopname, $year, $month) {
         return false;
     }
 
-    return $result;
+    return db_fetch_all($result);
 }
 
 
