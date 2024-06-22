@@ -455,7 +455,8 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
   $testLogger->logDebug("Pre avg kWh : " . $formattedMessage);
   if ($VAL["report_month"] == "Last 30 Days") {
     try {
-      // $Ship_Demand = [];
+      // $Ship_kWh_Average
+      $Ship_Demand = [];
       $Ship_daily_cost = [];
       
       foreach ($ships as $aq) {
