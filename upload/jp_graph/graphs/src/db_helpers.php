@@ -89,11 +89,28 @@ function fetch_last_30_days($log, $loopname) {
     $query = sprintf(
         "SELECT 
             loopname,
-            AVG(cost_kw) + AVG(cost_kwH)  AS cost, 
-            AVG(peak_kw + off_peak_kw) AS total_kw, 
-            AVG(peak_kwh + off_peak_kwh) AS total_kwh 
-        FROM Standard_ship_records 
-        WHERE loopname = '%s' AND time >= NOW() - INTERVAL 30 DAY;",
+            AVG(daily_costkw) AS avg_daily_cost_kw, 
+            AVG(daily_cost_kwh) AS avg_daily_cost_kwh, 
+            AVG(daily_total_kw) AS avg_daily_total_kw, 
+            AVG(daily_total_kwh) AS avg_daily_total_kwh
+        FROM (
+            SELECT 
+                loopname,
+                DATE(time) AS day,
+                MAX(cost_kw) AS daily_costkw,
+                SUM(cost_kwh) AS daily_cost_kwh,
+                MAX(peak_kw + off_peak_kw) AS daily_total_kw,
+                SUM(peak_kwh + off_peak_kwh) AS daily_total_kwh
+            FROM 
+                Standard_ship_records 
+            WHERE 
+                loopname = '%s' 
+                AND time >= NOW() - INTERVAL 30 DAY
+            GROUP BY 
+                loopname, DATE(time)
+        ) AS daily_sums
+        GROUP BY 
+            loopname;",
         mysql_real_escape_string($loopname)
     );
 
@@ -111,11 +128,28 @@ function fetch_last_year($log, $loopname) {
     $query = sprintf(
         "SELECT 
             loopname,
-            AVG(cost_kw) + AVG(cost_kwH)  AS cost,  
-            AVG(peak_kw + off_peak_kw) AS total_kw, 
-            AVG(peak_kwh + off_peak_kwh) AS total_kwh 
-        FROM Standard_ship_records 
-        WHERE loopname = '%s' AND time >= NOW() - INTERVAL 1 YEAR;",
+            AVG(daily_costkw) AS avg_daily_cost_kw, 
+            AVG(daily_cost_kwh) AS avg_daily_cost_kwh, 
+            AVG(daily_total_kw) AS avg_daily_total_kw, 
+            AVG(daily_total_kwh) AS avg_daily_total_kwh
+        FROM (
+            SELECT 
+                loopname,
+                DATE(time) AS day,
+                MAX(cost_kw) AS daily_costkw,
+                SUM(cost_kwh) AS daily_cost_kwh,
+                MAX(peak_kw + off_peak_kw) AS daily_total_kw,
+                SUM(peak_kwh + off_peak_kwh) AS daily_total_kwh
+            FROM 
+                Standard_ship_records 
+            WHERE 
+                loopname = '%s' 
+               AND time >= NOW() - INTERVAL 1 YEAR
+            GROUP BY 
+                loopname, DATE(time)
+        ) AS daily_sums
+        GROUP BY 
+            loopname;",
         mysql_real_escape_string($loopname)
     );
 
@@ -134,16 +168,30 @@ function fetch_month_of_specific_year($log, $loopname, $year, $month) {
     $query = sprintf(
         "SELECT 
             loopname,
-            AVG(cost_kw) + AVG(cost_kwH)  AS cost,  
-            AVG(peak_kw + off_peak_kw) AS avg_total_kw, 
-            AVG(peak_kwh + off_peak_kwh) AS avg_total_kwh 
-        FROM Standard_ship_records 
-        WHERE loopname = '%s' 
-        AND YEAR(time) = %d 
-        AND MONTH(time) = %d;",
-        mysql_real_escape_string($loopname),
-        $year,
-        $month
+            AVG(daily_costkw) AS avg_daily_cost_kw, 
+            AVG(daily_cost_kwh) AS avg_daily_cost_kwh, 
+            AVG(daily_total_kw) AS avg_daily_total_kw, 
+            AVG(daily_total_kwh) AS avg_daily_total_kwh
+        FROM (
+            SELECT 
+                loopname,
+                DATE(time) AS day,
+                MAX(cost_kw) AS daily_costkw,
+                SUM(cost_kwh) AS daily_cost_kwh,
+                MAX(peak_kw + off_peak_kw) AS daily_total_kw,
+                SUM(peak_kwh + off_peak_kwh) AS daily_total_kwh
+            FROM 
+                Standard_ship_records 
+            WHERE 
+                loopname = '%s' 
+                AND YEAR(time) = %d 
+                AND MONTH(time) = %d
+            GROUP BY 
+                loopname, DATE(time)
+        ) AS daily_sums
+        GROUP BY 
+            loopname;"
+        mysql_real_escape_string($loopname), $year, $month
     );
 
     $result = db_query($log, $query);

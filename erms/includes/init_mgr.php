@@ -452,9 +452,9 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
   // Fetch values from Standard_ship_records 
   if ($VAL["report_month"] == "Last 30 Days") {
     try {
-      $Ship_kWh_Average = [];
-      $Ship_Demand = [];
-      $Ship_daily_cost = [];
+      // $Ship_kWh_Average = [];
+      // $Ship_Demand = [];
+      // $Ship_daily_cost = [];
       
       foreach ($ships as $aq) {
         $ship_data = fetch_last_30_days($testLogger, $ships_data[$aq]["loopname"]);
