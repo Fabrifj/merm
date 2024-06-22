@@ -89,10 +89,10 @@ function fetch_last_30_days($log, $loopname) {
     $query = sprintf(
         "SELECT 
             loopname,
-            ROUND(AVG(daily_costkw),2) AS avg_daily_cost_kw, 
-            ROUND(AVG(daily_cost_kwh),2) AS avg_daily_cost_kwh, 
-            ROUND(AVG(daily_total_kw),2) AS avg_daily_total_kw, 
-            ROUND(AVG(daily_total_kwh),2) AS avg_daily_total_kwh
+            AVG(daily_costkw) AS avg_daily_cost_kw, 
+            AVG(daily_cost_kwh) AS avg_daily_cost_kwh, 
+            AVG(daily_total_kw) AS avg_daily_total_kw, 
+            AVG(daily_total_kwh) AS avg_daily_total_kwh
         FROM (
             SELECT 
                 loopname,
@@ -128,10 +128,10 @@ function fetch_last_year($log, $loopname) {
     $query = sprintf(
         "SELECT 
             loopname,
-            ROUND(AVG(daily_costkw),2) AS avg_daily_cost_kw, 
-            ROUND(AVG(daily_cost_kwh),2) AS avg_daily_cost_kwh, 
-            ROUND(AVG(daily_total_kw),2) AS avg_daily_total_kw, 
-            ROUND(AVG(daily_total_kwh),2) AS avg_daily_total_kwh
+            AVG(daily_costkw) AS avg_daily_cost_kw, 
+            AVG(daily_cost_kwh) AS avg_daily_cost_kwh, 
+            AVG(daily_total_kw) AS avg_daily_total_kw, 
+            AVG(daily_total_kwh) AS avg_daily_total_kwh
         FROM (
             SELECT 
                 loopname,
@@ -168,10 +168,10 @@ function fetch_month_of_specific_year($log, $loopname, $year, $month) {
     $query = sprintf(
         "SELECT 
             loopname,
-            ROUND(AVG(daily_costkw),2) AS avg_daily_cost_kw, 
-            ROUND(AVG(daily_cost_kwh),2) AS avg_daily_cost_kwh, 
-            ROUND(AVG(daily_total_kw),2) AS avg_daily_total_kw, 
-            ROUND(AVG(daily_total_kwh),2) AS avg_daily_total_kwh
+            AVG(daily_costkw) AS avg_daily_cost_kw, 
+            AVG(daily_cost_kwh) AS avg_daily_cost_kwh, 
+            AVG(daily_total_kw) AS avg_daily_total_kw, 
+            AVG(daily_total_kwh) AS avg_daily_total_kwh
         FROM (
             SELECT 
                 loopname,
