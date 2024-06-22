@@ -47,6 +47,10 @@ include '../../../erms/includes/gfx_methods.php';
 include_once ('../../../conn/mysql_connect-ro.php');
 include_once ('../../../Auth/auth.php');
 
+//Update 2024
+require './src/db_helpers.php';
+
+
 $shipClass = $_REQUEST['shipClass'];
 
 // Redirect happens within isAuthenticated and isPermitted
