@@ -91,7 +91,7 @@ function fetch_last_30_days($log, $loopname) {
             AVG(peak_kw + off_peak_kw) AS total_kw, 
             AVG(peak_kwh + off_peak_kwh) AS total_kwh 
         FROM Standard_ship_records 
-        WHERE Loopname = '%s' AND time >= NOW() - INTERVAL 30 DAY;",
+        WHERE loopname = '%s' AND time >= NOW() - INTERVAL 30 DAY;",
         mysql_real_escape_string($loopname)
     );
 
@@ -113,7 +113,7 @@ function fetch_last_year($log, $loopname) {
             AVG(peak_kw + off_peak_kw) AS total_kw, 
             AVG(peak_kwh + off_peak_kwh) AS total_kwh 
         FROM Standard_ship_records 
-        WHERE Loopname = '%s' AND time >= NOW() - INTERVAL 1 YEAR;",
+        WHERE loopname = '%s' AND time >= NOW() - INTERVAL 1 YEAR;",
         mysql_real_escape_string($loopname)
     );
 
@@ -135,7 +135,7 @@ function fetch_month_of_specific_year($log, $loopname, $year, $month) {
             AVG(peak_kw + off_peak_kw) AS avg_total_kw, 
             AVG(peak_kwh + off_peak_kwh) AS avg_total_kwh 
         FROM Standard_ship_records 
-        WHERE Loopname = '%s' 
+        WHERE loopname = '%s' 
         AND YEAR(time) = %d 
         AND MONTH(time) = %d;",
         mysql_real_escape_string($loopname),
