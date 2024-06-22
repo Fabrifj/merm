@@ -190,7 +190,7 @@ function fetch_month_of_specific_year($log, $loopname, $year, $month) {
                 loopname, DATE(time)
         ) AS daily_sums
         GROUP BY 
-            loopname;"
+            loopname;",
         mysql_real_escape_string($loopname), $year, $month
     );
 
