@@ -6,8 +6,6 @@ $log = new KLogger ( "log.txt" , KLogger::DEBUG );
 $log->logInfo('data methods hello ship' .$ship);
 //.....................................End KLogger..........................
 
-$testLogger->logInfo("Start init_mgr");
-
 function MySqlFailure($Reason) {
 	$con = $_SESSION['con'];
 	$sql_errno = mysql_errno($con);

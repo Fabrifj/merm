@@ -3,7 +3,6 @@
 //include Logger.php";
 $log = new KLogger ( "log.txt" , KLogger::DEBUG );
 $log->logInfo('gfx methods hello');
-$testLogger->logInfo("Start init_gfx");
 
 //.....................................End KLogger..........................
 
