@@ -1,5 +1,4 @@
 <?php
-$testLogger->logInfo("Start init_access_control");
 
 function printArray($array)
 {
