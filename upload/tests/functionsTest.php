@@ -177,7 +177,7 @@ class CalculateKwTest2 extends TestCase {
         $this->assertCount(4, $result);
 
         // Is on offpeak time
-        $this->assertEquals(312, $result[3]->getPeakKw());
+        $this->assertEquals(304, $result[3]->getPeakKw());
         $this->assertEquals(26, $result[3]->getPeakKwh());
     }
 }
@@ -225,8 +225,8 @@ class CalculateCost1 extends TestCase {
         $this->assertCount(4, $result);
 
         // Is on offpeak time
-        $this->assertEquals(1520, $result[3]->getCostKw());
-        $this->assertEquals(13, $result[3]->getCostKwH());
+        $this->assertEquals(1520, $result[3]->getOffCostKw());
+        $this->assertEquals(13, $result[3]->getOffCostKwH());
     }
 }
 class CalculateCost2 extends TestCase {

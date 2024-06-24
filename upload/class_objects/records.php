@@ -120,14 +120,15 @@ class RecordsTypeStandard {
         $this->peakKwh = 0;
         $this->offPeakKw = 0;
         $this->offPeakKwh = 0;
-        $this->costKw = 0;
+        $this->offCostKw = 0;
         $this->costKwH = 0;
+        $this->offCostKwH = 0;
 
     }
 
     public function getData(){
         $value = sprintf(
-            "('%s', '%s', %d, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, '%f','%f', '%s')",
+            "('%s', '%s', %d, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, '%f','%f','%f','%f', '%s')",
             mysql_real_escape_string((string)$this->dateTime->format("Y-m-d H:i:s")), mysql_real_escape_string((string)$this->timeZone->getName()),
             (int)$this->error, (float)$this->energyConsumption, (float)$this->realPower, (float)$this->reactivePower,
             (float)$this->apparentPower, (float)$this->powerFactor, (float)$this->current, (float)$this->realPowerPhaseA,
@@ -137,7 +138,8 @@ class RecordsTypeStandard {
             (float)$this->voltagePhaseBN,(float)$this->voltagePhaseCN, (float)$this->currentPhaseA,
             (float)$this->currentPhaseB,(float)$this->currentPhaseC, (float)$this->averageDemand,
             (float)$this->maximumDemand, (float)$this->peakKw, (float)$this->peakKwh, (float)$this->offPeakKw,     
-            (float)$this->offPeakKwh, (float)$this->costKw, (float)$this->costKwH, mysql_real_escape_string((string)$this->shipName)
+            (float)$this->offPeakKwh, (float)$this->costKw, (float)$this->costKwH, (float)$this->offCostKw, (float)$this->offCostKwH, 
+            mysql_real_escape_string((string)$this->shipName)
         );
         return $value;
     }
@@ -193,6 +195,20 @@ class RecordsTypeStandard {
     public function getCostKwH() {
         return $this->costKwH;
     }
+
+    public function setOffCostKw($offCostKw) {
+        $this->offCostKw = $offCostKw;
+    }
+    public function getOffCostKw() {
+        return $this->offCostKw;
+    }
+    public function setOffCostKwH($offCostKwH) {
+        $this->offCostKwH = $offCostKwH;
+    }
+    public function getOffCostKwH() {
+        return $this->offCostKwH;
+    }
+
     public function getKwValues() {
         return [$this->offPeakKw,$this->offPeakKwh,$this->peakKw,$this->peakKwh ];
     }

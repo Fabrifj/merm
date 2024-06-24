@@ -174,7 +174,8 @@ function db_insert_standar_records($log, $shipRecords) {
         apparent_power, power_factor, current, real_power_phase_a, real_power_phase_b, real_power_phase_c,
         power_factor_phase_a, power_factor_phase_b, power_factor_phase_c, voltage_phase_ab, voltage_phase_bc,
         voltage_phase_ac, voltage_phase_an, voltage_phase_bn, voltage_phase_cn, current_phase_a, current_phase_b,
-        current_phase_c, average_demand, maximum_demand, peak_kw, peak_kwh, off_peak_kw, off_peak_kwh, cost_kw,cost_kwh, loopname
+        current_phase_c, average_demand, maximum_demand, peak_kw, peak_kwh, off_peak_kw, off_peak_kwh, 
+        cost_kw, cost_kwh, off_cost_kw, off_cost_kwh, loopname
     ) VALUES ";
     
     

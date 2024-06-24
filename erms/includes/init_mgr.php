@@ -180,20 +180,10 @@ foreach ($ship AS $key => $ship) {
       //$g2 = 0.8;
       $Ship_kWh_Average[] = $VAL["kWh_day"];
       $ships_data[$ship_aquisuite]["kWh_day"] = $VAL["kWh_day"];
-      //$Ship_kWh_Average_Baseline[] = $VAL["kWh_day_baseline"];
-      //$Ship_kWh_Average_Baseline_G1[] = ($VAL["kWh_day_baseline"]*$g1);
-      //$Ship_kWh_Average_Baseline_G2[] = ($VAL["kWh_day_baseline"]*$g2);
       $Ship_Demand[] = $VAL["Peak_Demand"]*1;
       $ships_data[$ship_aquisuite]["Peak_Demand"] = $VAL["Peak_Demand"]*1;
-      //$Ship_Demand_Baseline[] = $VAL["Peak_Demand_Baseline"];
-      //$Ship_Demand_Baseline_G1[] = ($VAL["Peak_Demand_Baseline"]*$g1);
-      //$Ship_Demand_Baseline_G2[] = ($VAL["Peak_Demand_Baseline"]*$g2);
       $Ship_daily_cost[] =$COST_30["Grand_Total_Lay_Day"];
       $ships_data[$ship_aquisuite]["Grand_Total_Lay_Day"] = $COST_30["Grand_Total_Lay_Day"];
-      //$Ship_daily_cost_baseline[] =$COST_30["Grand_Total_Lay_Day_Baseline"];
-      //$Ship_daily_cost_baseline[] =$COST_30["Grand_Total_Lay_Day_Baseline"];
-      //$Ship_daily_cost_baseline_g1[] = ($COST_30["Grand_Total_Lay_Day_Baseline"]*$g1);
-      //$Ship_daily_cost_baseline_g2[] = ($COST_30["Grand_Total_Lay_Day_Baseline"]*$g2);
       $Ship_laydays[] = $VAL["Lay_Days"];
       $ships_data[$ship_aquisuite]["Lay_Days"] = $VAL["Lay_Days"];
 
@@ -467,14 +457,6 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
         //                      (isset($ship_data[0]["avg_daily_cost_kwh"]) ? $ship_data[0]["avg_daily_cost_kwh"] : 0);
         $Ship_daily_cost[] = intval((isset($ship_data[0]["avg_daily_cost_kwh"]) ? $ship_data[0]["avg_daily_cost_kwh"] : 0));
     }
-      $formattedMessage = print_r($Ship_kWh_Average, true);
-      $testLogger->logDebug("kWh : " . $formattedMessage);
-      
-      $formattedMessage = print_r($Ship_Demand, true);
-      $testLogger->logDebug("Demand : " . $formattedMessage);
-      
-      $formattedMessage = print_r($Ship_daily_cost, true);
-      $testLogger->logDebug("Cost : " . $formattedMessage);
     } catch (Exception $e) {
       $testLogger->logError("Error fetching data for the last 30 days: " . $e->getMessage());
     }
@@ -579,8 +561,8 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
     "cost" => $COST_30
   ];
   /// Debugging
-  $formattedMessage = print_r($graph, true);
-  $testLogger->logInfo($formattedMessage);
+  // $formattedMessage = print_r($graph, true);
+  // $testLogger->logInfo($formattedMessage);
 
   // No idea what the following code section does for this module
 for ($imonth = 0; $imonth < $max_month; $imonth++)
