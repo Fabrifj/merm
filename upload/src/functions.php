@@ -7,11 +7,10 @@ function get_ships_records($log, $timezone, $LOOPNAME, $devicetablename) {
         // Fetch the last ship record for the given loop name
         $last_record = db_fetch_last_ship_record($log, $LOOPNAME);
 
-        // Parse device table name to extract device name
-        $parts = explode('_', $devicetablename);
+        $pattern = '/device\d+/';
 
-        if (count($parts) >= 5) {
-            $deviname = $parts[4];
+        if (preg_match($pattern, $devicetablename, $matches)) {
+            $deviname = $matches[0];
         } else {
             $log->logError("Invalid device table name: $devicetablename");
             return [];
