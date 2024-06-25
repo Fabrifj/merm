@@ -183,7 +183,7 @@ function calculate_kw($log, $utilityRate, $last_ship_records, $ship_records) {
         $power_kwh = abs($current_record->getEnergyConsumption() - $concatenated_records[$index - 1]->getEnergyConsumption());
         // Calculate accumulation 
         if(areDatesInSameMonth($current_record->getTime(),$concatenated_records[$index - 1]->getTime() )){
-            $current_record->setAccumulation($concatenated_records[$index - 1]->getAccumulation());
+            $current_record->setAccumulation($concatenated_records[$index - 1]->getAccumulation()+$power_kwh);
         }
 
         $previous_record = $concatenated_records[$index - $diference];
