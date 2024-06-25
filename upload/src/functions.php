@@ -134,18 +134,31 @@ function is_peak(RecordsTypeStandard $shipRecord, UtilityRate $utility) {
     return $is_peak;
 }
 function create_utility_class($log,$utility){
-    $timezone = "EDT";
+    $timezone = "EDT";/// cuidado
 
     try {
         // Create utility rate instance
-        $utilityRate = UtilityRateFactory::createStandardUtilityRate($timezone, $utility);
+        $utilityRate = UtilityRateFactory::createStandardUtilityRate($log,$timezone, $utility);
     } catch (Exception $e) {
         $log->logError("Error creating utility rate: " . $e->getMessage());
         return null;
     }
     return $utilityRate;
 }
-
+function areDatesInSameMonth($date1, $date2) {
+    // Extract the year and month from both dates
+    $year1 = $date1->format('Y');
+    $month1 = $date1->format('m');
+    $year2 = $date2->format('Y');
+    $month2 = $date2->format('m');
+    
+    // Check if both dates are in the same year and month
+    if ($year1 == $year2 && $month1 == $month2) {
+        return true;
+    } else {
+        return false;
+    }
+}
 // Function to calculate kW and kWh
 function calculate_kw($log, $utilityRate, $last_ship_records, $ship_records) {
     // Set the timezone to UTC
@@ -169,7 +182,11 @@ function calculate_kw($log, $utilityRate, $last_ship_records, $ship_records) {
         $current_record = $concatenated_records[$index];   
 
         $power_kwh = abs($current_record->getEnergyConsumption() - $concatenated_records[$index - 1]->getEnergyConsumption());
-        
+        // Calculate accumulation 
+        if(areDatesInSameMonth($current_record->getTime(),$concatenated_records[$index - 1]->getTime() )){
+            $current_record->setAccumulation($concatenated_records[$index - 1]->getAccumulation());
+        }
+
         $previous_record = $concatenated_records[$index - $diference];
         $diff_power_kw = abs($current_record->getEnergyConsumption() - $previous_record->getEnergyConsumption());
         $diff_time = get_time_dif($current_record->getTime(), $previous_record->getTime());
@@ -186,6 +203,7 @@ function calculate_kw($log, $utilityRate, $last_ship_records, $ship_records) {
         if($diference == 1 || $diference ==2){
             $diference ++;
         }
+        
     }
 
     // Trim the concatenated records if not new records
@@ -203,22 +221,22 @@ function calculate_cost($log, $utility, $ship_records) {
             $cost_kw = 0;
             $cost_kwH = 0;
             if (is_summer($ship_record->getTime())) {
-                $cost_kw = $ship_record->getPeakKw() * $utility->getSummerPeakCostKw();
-                $off_cost_kw = $ship_record->getOffPeakKw() * $utility->getOffPeakCostKw();
-                $cost_kwH = $ship_record->getPeakKwH() * $utility->getSummerPeakCostKwH();
-                $off_cost_kwH = $ship_record->getOffPeakKwH() * $utility->getOffPeakCostKwH();
+                $cost_kw = $ship_record->getPeakKw() * $utility->getCostKw("summerPeak", $ship_record->getPeakKw());
+                $off_cost_kw = $ship_record->getOffPeakKw() * $utility->getCostKw("offPeak",$ship_record->getOffPeakKw());
+                $cost_kwH = $ship_record->getPeakKwH() * $utility->getCostKwH("summerPeak",$ship_record->getAccumulation());
+                $off_cost_kwH = $ship_record->getOffPeakKwH() * $utility->getCostKwH("offPeak",$ship_record->getAccumulation());
             
             } else {
-                $cost_kw = $ship_record->getPeakKw() * $utility->getNonSummerPeakCostKw();
-                $off_cost_kw = $ship_record->getOffPeakKw() * $utility->getOffPeakCostKw();
-                $cost_kwH = $ship_record->getPeakKwH() * $utility->getNonSummerPeakCostKwH();
-                $off_cost_kwH = $ship_record->getOffPeakKwH() * $utility->getOffPeakCostKwH();
+
+                $cost_kw = $ship_record->getPeakKw() * $utility->getCostKw("nonSumerPeak",$ship_record->getPeakKw());
+                $off_cost_kw = $ship_record->getOffPeakKw() * $utility->getCostKw("offPeak",$ship_record->getOffPeakKw());
+                $cost_kwH = $ship_record->getPeakKwH() * $utility->getCostKwH("nonSumerPeak",$ship_record->getAccumulation());
+                $off_cost_kwH = $ship_record->getOffPeakKwH() * $utility->getCostKwH("offPeak",$ship_record->getAccumulation());
             }
             $ship_record->setCostKw($cost_kw);
             $ship_record->setCostKwH($cost_kwH);
             $ship_record->setOffCostKw($off_cost_kw);
             $ship_record->setOffCostKwH($off_cost_kwH);
-
         } catch (Exception $e) {
             $log->logError("Error calculating cost for record: " . json_encode($ship_record) . ". Error: " . $e->getMessage());
         }

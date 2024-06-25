@@ -2369,46 +2369,39 @@ include "../conn/mysql_pconnect-all.php"; // mySQL database connector.
         utility_cost($LOOPNAME, $aquisuitetable, $devicetablename, $log);  //calculate utility costs
        	printf("</pre>\n");  // end of logging script
 
+        $logger = new Logger($LOOPNAME);
 
-
-
-        if($LOOPNAME=="Cape_Kennedy"){ 
-            // Try 
-
-            $logger = new Logger($LOOPNAME);
-
-            $utility = utility_check($aquisuitetable);
-            $logger->logInfo("Get utility  " . $utility);
-            $timezone = "EDT";
-            try {
-                $utilityData = db_fetch_utility_rate($logger, $utility);
-                $ship_records = get_ships_records($logger,$timezone,$LOOPNAME,$devicetablename);
-                $last_record = db_fetch_last_ship_record($log, $LOOPNAME);
-                
-                if(!$last_record){
-                    $last_records = [];
-                }else{
-                    $last_records = get_last_four_records($logger,$timezone,$LOOPNAME );
-                }
-
-                $logger->logInfo( "Creating utility class");
-                $utilityRate = create_utility_class($logger,$utilityData[0]);
-
-                $logger->logInfo( "Calculating kWh and kW");
-                $ship_records = calculate_kw($logger,$utilityRate,$last_records,$ship_records);
-
-                $logger->logInfo( "Calculating cost");
-                $ship_records =calculate_cost($logger, $utilityRate, $ship_records);
-
-                $logger->logInfo( "Populating Standard table");
-                $erros = populate_standart_table($logger, $ship_records);
-
-                $logger->logInfo( "End  erors: " . $erros );
-            } catch (Exception $e) {
-                $logger->logError('Excepción capturada: ' . $e->getMessage());
+        $utility = utility_check($aquisuitetable);
+        $logger->logInfo("Get utility  " . $utility);
+        $timezone = "EDT";
+        try {
+            $utilityData = db_fetch_utility_rate($logger, $utility);
+            $ship_records = get_ships_records($logger,$timezone,$LOOPNAME,$devicetablename);
+            $last_record = db_fetch_last_ship_record($log, $LOOPNAME);
+            
+            if(!$last_record){
+                $last_records = [];
+            }else{
+                $last_records = get_last_four_records($logger,$timezone,$LOOPNAME );
             }
+            $logger->logInfo( "Creating utility class");
+            $utilityRate = create_utility_class($logger,$utilityData[0]);
+
+            $logger->logInfo( "Calculating kWh and kW");
+            $ship_records = calculate_kw($logger,$utilityRate,$last_records,$ship_records);
+
+            $logger->logInfo( "Calculating cost");
+            $ship_records =calculate_cost($logger, $utilityRate, $ship_records);
+
+            $logger->logInfo( "Populating Standard table");
+            $erros = populate_standart_table($logger, $ship_records);
+
+            $logger->logInfo( "End  erors: " . $erros );
+            } catch (Exception $e) {
+            $logger->logError('Excepción capturada: ' . $e->getMessage());
         }
     }
+    
 
 // CONFIGFILEMANIFEST MODE
     if ($_REQUEST['MODE'] == "CONFIGFILEMANIFEST")

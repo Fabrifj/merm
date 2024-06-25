@@ -123,12 +123,14 @@ class RecordsTypeStandard {
         $this->offCostKw = 0;
         $this->costKwH = 0;
         $this->offCostKwH = 0;
+        // Accumulation
+        $this->accumulation = 0;
 
     }
 
     public function getData(){
         $value = sprintf(
-            "('%s', '%s', %d, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, '%f','%f','%f','%f', '%s')",
+            "('%s', '%s', %d, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, '%f','%f','%f','%f','%f', '%s')",
             mysql_real_escape_string((string)$this->dateTime->format("Y-m-d H:i:s")), mysql_real_escape_string((string)$this->timeZone->getName()),
             (int)$this->error, (float)$this->energyConsumption, (float)$this->realPower, (float)$this->reactivePower,
             (float)$this->apparentPower, (float)$this->powerFactor, (float)$this->current, (float)$this->realPowerPhaseA,
@@ -139,7 +141,7 @@ class RecordsTypeStandard {
             (float)$this->currentPhaseB,(float)$this->currentPhaseC, (float)$this->averageDemand,
             (float)$this->maximumDemand, (float)$this->peakKw, (float)$this->peakKwh, (float)$this->offPeakKw,     
             (float)$this->offPeakKwh, (float)$this->costKw, (float)$this->costKwH, (float)$this->offCostKw, (float)$this->offCostKwH, 
-            mysql_real_escape_string((string)$this->shipName)
+            (float)$this->accumulation,mysql_real_escape_string((string)$this->shipName)
         );
         return $value;
     }
@@ -208,7 +210,13 @@ class RecordsTypeStandard {
     public function getOffCostKwH() {
         return $this->offCostKwH;
     }
-
+    // get set accumulation
+    public function setAccumulation($accumulation) {
+        $this->accumulation = $accumulation;
+    }
+    public function getAccumulation() {
+        return $this->accumulation;
+    }
     public function getKwValues() {
         return [$this->offPeakKw,$this->offPeakKwh,$this->peakKw,$this->peakKwh ];
     }
