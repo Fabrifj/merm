@@ -2360,12 +2360,12 @@ include "../conn/mysql_pconnect-all.php"; // mySQL database connector.
 
        // Try 
        $logger = new Logger($LOOPNAME);
+       
        $utility = utility_check($aquisuitetable);
-       $utilityData = db_fetch_utility_rate($logger, $utility);
+       $logger->logInfo("Get utility  " . $utility);
        $timezone = "EDT";
-       $logger->logInfo("Start proces");
-
        try {
+           $utilityData = db_fetch_utility_rate($logger, $utility);
            $ship_records = get_ships_records($logger,$timezone,$LOOPNAME,$devicetablename);
            $last_record = db_fetch_last_ship_record($log, $LOOPNAME);
            
@@ -2374,24 +2374,24 @@ include "../conn/mysql_pconnect-all.php"; // mySQL database connector.
            }else{
                $last_records = get_last_four_records($logger,$timezone,$LOOPNAME );
            }
+           $logger->logInfo( "Creating utility class");
+           $utilityRate = create_utility_class($logger,$utilityData[0]);
 
-           $logger->logInfo( count($last_records) . "----" . count($ship_records) . "<br>");
-           $logger->logInfo( "Create utility class <br>");
-           $utilityRate = create_utility_class($logger,$utilityData);
-           $logger->logInfo( "Create calculate kw <br>");
+           $logger->logInfo( "Calculating kWh and kW");
            $ship_records = calculate_kw($logger,$utilityRate,$last_records,$ship_records);
 
-           $logger->logInfo( "Create calculate cost <br>");
+           $logger->logInfo( "Calculating cost");
            $ship_records =calculate_cost($logger, $utilityRate, $ship_records);
 
-           $logger->logInfo( "Create populate table <br>");
+           $logger->logInfo( "Populating Standard table");
            $erros = populate_standart_table($logger, $ship_records);
 
-           $logger->logInfo( "End  erors: " . $erros . "<br>");
-       } catch (Exception $e) {
-           $logger->logInfo('Excepción capturada: ' . $e->getMessage());
+           $logger->logInfo( "End  erors: " . $erros );
+           } catch (Exception $e) {
+           $logger->logError('Excepción capturada: ' . $e->getMessage());
        }
-    }
+   }
+    
 
 // CONFIGFILEMANIFEST MODE
     if ($_REQUEST['MODE'] == "CONFIGFILEMANIFEST")
