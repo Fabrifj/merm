@@ -119,7 +119,7 @@ function db_fetch_utility_rate($log, $utility) {
 // Function to fetch records from a specific table
 function db_fetch_table_records($log, $table) {
     $query = sprintf("SELECT * FROM ( 
-                SELECT * FROM `%s` ORDER BY time DESC LIMIT 3000
+                SELECT * FROM `%s` ORDER BY time DESC LIMIT 10000
                 ) sub ORDER BY time ASC;",
         mysql_real_escape_string($table)
     );
