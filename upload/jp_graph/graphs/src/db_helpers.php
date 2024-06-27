@@ -152,17 +152,26 @@ function fetch_last_30_days($log, $loopname) {
     return fetch_data_for_graph_mod1($log,$result);
 }
 
-function fetch_last_year($log, $loopname) {
+function fetch_Annual($log, $loopname) {
     $query = sprintf(
         "SELECT 
+            loopname,
+            ROUND(AVG(max_demand_kw), 2) AS max_demand_kw,
+            ROUND(AVG(max_off_demand_kw), 2) AS max_off_demand_kw,
+            ROUND(AVG(max_cost_kw), 2) AS max_cost_kw,
+            ROUND(AVG(max_off_cost_kw), 2) AS max_off_cost_kw,
+            ROUND(AVG(avg_daily_cost_kwh), 2) AS avg_daily_cost_kwh,
+            ROUND(AVG(avg_daily_total_kwh), 2) AS avg_daily_total_kwh
+        FROM (
+            SELECT 
                 loopname,
-                ROUND(MAX(max_demand_kw), 2) AS max_demand_kw, 
-                ROUND(MAX(max_off_demand_kw), 2) AS max_off_demand_kw,
-                ROUND(MAX(max_cost_kw), 2) AS max_cost_kw, 
-                ROUND(MAX(max_off_cost_kw), 2) AS max_off_cost_kw,
-                ROUND(AVG(daily_cost_kwh), 2) AS avg_daily_cost_kwh, 
-                ROUND(AVG(daily_total_kwh), 2) AS avg_daily_total_kwh, 
-                COUNT(*) AS days
+                DATE_FORMAT(day, '%Y-%m') AS month,
+                MAX(max_demand_kw) AS max_demand_kw, 
+                MAX(max_off_demand_kw) AS max_off_demand_kw,
+                MAX(max_cost_kw) AS max_cost_kw, 
+                MAX(max_off_cost_kw) AS max_off_cost_kw,
+                AVG(daily_cost_kwh) AS avg_daily_cost_kwh, 
+                AVG(daily_total_kwh) AS avg_daily_total_kwh
             FROM (
                 SELECT 
                     loopname,
@@ -176,7 +185,7 @@ function fetch_last_year($log, $loopname) {
                 FROM 
                     Standard_ship_records 
                 WHERE 
-                    loopname = '%s' 
+                    loopname = 'Cape_Kennedy' 
                     AND time >= NOW() - INTERVAL 1 YEAR
                 GROUP BY 
                     loopname, DATE(time)
@@ -184,7 +193,10 @@ function fetch_last_year($log, $loopname) {
             WHERE 
                 daily_total_kwh > 0
             GROUP BY 
-                loopname;",
+                loopname, DATE_FORMAT(day, '%Y-%m')
+        ) AS monthly_sums
+        GROUP BY 
+            loopname;",
         mysql_real_escape_string($loopname)
     );
 
