@@ -443,6 +443,7 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
   
   $formattedMessage = print_r($Ship_kWh_Average, true);
   $testLogger->logDebug("Pre avg kWh : " . $formattedMessage);
+  
   if ($VAL["report_month"] == "Last 30 Days") {
     try {
       $Ship_kWh_Average= [];
@@ -559,8 +560,8 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
     "cost" => $COST_30
   ];
   /// Debugging
-  // $formattedMessage = print_r($graph, true);
-  // $testLogger->logInfo($formattedMessage);
+  $formattedMessage = print_r($graph, true);
+  $testLogger->logInfo($formattedMessage);
 
   // No idea what the following code section does for this module
 for ($imonth = 0; $imonth < $max_month; $imonth++)
