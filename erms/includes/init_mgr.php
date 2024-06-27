@@ -452,9 +452,9 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
         $formattedMessage = print_r($ship_data, true);
         $testLogger->logDebug("ShipCost : " . $formattedMessage);
 
-        $Ship_kWh_Average[] = intval(isset($ship_data[0]["avg_kwH"]) ? $ship_data[0]["avg_kwH"] : 0);
-        $Ship_Demand[] = intval(isset($ship_data[0]["avg_kw"]) ? $ship_data[0]["avg_kw"] : 0);
-        $Ship_daily_cost[] = intval((isset($ship_data[0]["avg_cost"]) ? $ship_data[0]["avg_cost"] : 0));
+        $Ship_kWh_Average[] = intval(isset($ship_data["avg_kwH"]) ? $ship_data["avg_kwH"] : 0);
+        $Ship_Demand[] = intval(isset($ship_data["avg_kw"]) ? $ship_data["avg_kw"] : 0);
+        $Ship_daily_cost[] = intval((isset($ship_data["avg_cost"]) ? $ship_data["avg_cost"] : 0));
         
         $formattedMessage = print_r($Ship_daily_cost, true);
         $testLogger->logDebug("ShipCost : " . $formattedMessage);
