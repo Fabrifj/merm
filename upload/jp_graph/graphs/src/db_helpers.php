@@ -59,27 +59,42 @@ function db_query($log, $query) {
     }
 }
 
+function getMax($a, $b) {
+    if ($a > $b) {
+        return $a;
+    } else {
+        return $b;
+    }
+}
+
 function fetch_data_for_graph($result) {
-    $time = [];
-    $cost_kw = [];
-    $cost_kwH = [];
-    $total_kw = [];
-    $total_kwH = [];
+
+    $avg_cost = [];
+    $avg_kw = [];
+    $avg_kwH = [];
 
     while ($row = mysql_fetch_assoc($result)) {
-        $time[] = $row['time'];
-        $cost_kw[] = $row['cost_kw'];
-        $cost_kwH[] = $row['cost_kwH'];
-        $total_kw[] = $row['total_kw'];
-        $total_kwH[] = $row['total_kwh'];
+        // force convertion
+        $max_cost_kw = (float)$row['max_cost_kw'];
+        $max_off_cost_kw = (float)$row['max_off_cost_kw'];
+        $days = (int)$row['days'];
+        $daily_cost_kwh = (float)$row['daily_cost_kwh'];
+        $max_demand_kw = (float)$row['max_demand_kw'];
+        $max_off_demand_kw = (float)$row['max_off_demand_kw'];
+        $avg_daily_total_kwh = (float)$row['avg_daily_total_kwh'];
+    
+        // Calculate
+        $avg_demand = ($max_cost_kw + $max_off_cost_kw) / $days;
+        $avg_cost[] = $avg_demand + $daily_cost_kwh;
+        $avg_kw[] = getMax($max_demand_kw, $max_off_demand_kw);
+        $avg_kwH[] = $avg_daily_total_kwh;
     }
+    
 
     return [
-        'time' => $time,
-        'cost_kw' => $cost_kw,
-        'cost_kwH' => $cost_kwH,
-        'total_kw' => $total_kw,
-        'total_kwH' => $total_kwH
+        'avg_cost' => $avg_cost,
+        'avg_kw' => $avg_kw,
+        'avg_kwH' => $avg_kwH,
     ];
 }
 

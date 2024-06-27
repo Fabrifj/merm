@@ -62,7 +62,7 @@ class ENRUtilityRate extends UtilityRate {
                 return $this->costKwH["Energy_Rate_" . ($i + 1)];
             }
         }
-        return $this->costKw["Demand_Rate_" . (count($this->kwHDemandRanges) + 1)];
+        return $this->costKwH["Energy_Rate_" . (count($this->kwHDemandRanges) + 1)];
     }
 }
 
