@@ -441,9 +441,6 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
 
   // Fetch values from Standard_ship_records
   
-  $formattedMessage = print_r($Ship_kWh_Average, true);
-  $testLogger->logDebug("Pre avg kWh : " . $formattedMessage);
-  
   if ($VAL["report_month"] == "Last 30 Days") {
     try {
       $Ship_kWh_Average= [];
@@ -455,7 +452,10 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
         $Ship_kWh_Average[] = intval(isset($ship_data[0]["avg_kwH"]) ? $ship_data[0]["avg_kwH"] : 0);
         $Ship_Demand[] = intval(isset($ship_data[0]["avg_kw"]) ? $ship_data[0]["avg_daily_total_kw"] : 0);
         $Ship_daily_cost[] = intval((isset($ship_data[0]["avg_cost"]) ? $ship_data[0]["avg_daily_cost_kwh"] : 0));
-    }
+        
+        $formattedMessage = print_r($Ship_daily_cost, true);
+        $testLogger->logDebug("ShipCost : " . $formattedMessage);
+      }
     } catch (Exception $e) {
       $testLogger->logError("Error fetching data for the last 30 days: " . $e->getMessage());
     }
@@ -560,8 +560,8 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
     "cost" => $COST_30
   ];
   /// Debugging
-  $formattedMessage = print_r($graph, true);
-  $testLogger->logInfo($formattedMessage);
+  // $formattedMessage = print_r($graph, true);
+  // $testLogger->logInfo($formattedMessage);
 
   // No idea what the following code section does for this module
 for ($imonth = 0; $imonth < $max_month; $imonth++)
