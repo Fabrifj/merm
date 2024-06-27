@@ -181,11 +181,11 @@ function fetch_Annual($log, $loopname) {
                     MAX(cost_kw) AS max_cost_kw,
                     MAX(off_cost_kw) AS max_off_cost_kw,
                     SUM(cost_kwh + off_cost_kwh) AS daily_cost_kwh,
-                    SUM(peak_kwh + off_peak_kwh) AS daily_total_kwh
+                    SUM(peak_kwh + off_peak_kwh) AS daily_total_kwh,
                 FROM 
                     Standard_ship_records 
                 WHERE 
-                    loopname = 'Cape_Kennedy' 
+                    loopname = '%s' 
                     AND time >= NOW() - INTERVAL 1 YEAR
                 GROUP BY 
                     loopname, DATE(time)
