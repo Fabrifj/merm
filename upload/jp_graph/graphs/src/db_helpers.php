@@ -67,7 +67,7 @@ function getMax($a, $b) {
     }
 }
 
-function fetch_data_for_graph($result) {
+function fetch_data_for_graph_mod1($result) {
 
     $avg_cost = [];
     $avg_kw = [];
@@ -143,7 +143,7 @@ function fetch_last_30_days($log, $loopname) {
         return false;
     }
 
-    return db_fetch_all($result);
+    return fetch_data_for_graph_mod1($result);
 }
 
 function fetch_last_year($log, $loopname) {
@@ -189,7 +189,7 @@ function fetch_last_year($log, $loopname) {
         return false;
     }
 
-    return db_fetch_all($result);
+    return fetch_data_for_graph_mod1($result);
 }
 
 
@@ -237,7 +237,7 @@ function fetch_month_of_specific_year($log, $loopname, $year, $month) {
         return false;
     }
 
-    return db_fetch_all($result);
+    return fetch_data_for_graph_mod1($result);
 }
 
 
