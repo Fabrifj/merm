@@ -69,9 +69,9 @@ function getMax($a, $b) {
 
 function fetch_data_for_graph_mod1($result) {
 
-    $avg_cost = [];
-    $avg_kw = [];
-    $avg_kwH = [];
+    $avg_cost;
+    $avg_kw ;
+    $avg_kwH ;
 
     while ($row = mysql_fetch_assoc($result)) {
         // force convertion
@@ -85,9 +85,9 @@ function fetch_data_for_graph_mod1($result) {
     
         // Calculate
         $avg_demand = ($max_cost_kw + $max_off_cost_kw) / $days;
-        $avg_cost[] = $avg_demand + $daily_cost_kwh;
-        $avg_kw[] = getMax($max_demand_kw, $max_off_demand_kw);
-        $avg_kwH[] = $avg_daily_total_kwh;
+        $avg_cost = $avg_demand + $daily_cost_kwh;
+        $avg_kw = getMax($max_demand_kw, $max_off_demand_kw);
+        $avg_kwH = $avg_daily_total_kwh;
     }
     
 
