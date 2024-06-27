@@ -67,29 +67,28 @@ function getMax($a, $b) {
     }
 }
 
-function fetch_data_for_graph_mod1($result) {
+function fetch_data_for_graph_mod1($log,$result) {
 
-    $avg_cost;
-    $avg_kw ;
-    $avg_kwH ;
-
-    while ($row = mysql_fetch_assoc($result)) {
+    $avg_cost = 0;
+    $avg_kw  = 0;
+    $avg_kwH =0;
+    $row = $result[0];
         // force convertion
-        $max_cost_kw = (float)$row['max_cost_kw'];
-        $max_off_cost_kw = (float)$row['max_off_cost_kw'];
-        $days = (int)$row['days'];
-        $daily_cost_kwh = (float)$row['daily_cost_kwh'];
-        $max_demand_kw = (float)$row['max_demand_kw'];
-        $max_off_demand_kw = (float)$row['max_off_demand_kw'];
-        $avg_daily_total_kwh = (float)$row['avg_daily_total_kwh'];
+    $max_cost_kw = (float)$row['max_cost_kw'];
+    $max_off_cost_kw = (float)$row['max_off_cost_kw'];
+    $days = (int)$row['days'];
+    $daily_cost_kwh = (float)$row['daily_cost_kwh'];
+    $max_demand_kw = (float)$row['max_demand_kw'];
+    $max_off_demand_kw = (float)$row['max_off_demand_kw'];
+    $avg_daily_total_kwh = (float)$row['avg_daily_total_kwh'];
     
         // Calculate
-        $avg_demand = ($max_cost_kw + $max_off_cost_kw) / $days;
-        $avg_cost = $avg_demand + $daily_cost_kwh;
-        $avg_kw = getMax($max_demand_kw, $max_off_demand_kw);
-        $avg_kwH = $avg_daily_total_kwh;
-    }
-    
+    $avg_demand = ($max_cost_kw + $max_off_cost_kw) / $days;
+    $avg_cost = $avg_demand + $daily_cost_kwh;
+    $avg_kw = getMax($max_demand_kw, $max_off_demand_kw);
+    $avg_kwH = $avg_daily_total_kwh;
+    $log->logDebug("max_cost_kw:" . $max_cost_kw . ", max_off_cost_kw: " . $max_off_cost_kw . ", days: " . $days . ", daily_cost_kwh: " . $daily_cost_kwh . ", max_demand_kw: " . $max_demand_kw . ", max_off_demand_kw: " . $max_off_demand_kw . ", avg_daily_total_kwh: " . $avg_daily_total_kwh . "\n");
+   
 
     return [
         'avg_cost' => $avg_cost,
@@ -143,7 +142,7 @@ function fetch_last_30_days($log, $loopname) {
         return false;
     }
 
-    return fetch_data_for_graph_mod1($result);
+    return fetch_data_for_graph_mod1($log,$result);
 }
 
 function fetch_last_year($log, $loopname) {
@@ -189,7 +188,7 @@ function fetch_last_year($log, $loopname) {
         return false;
     }
 
-    return fetch_data_for_graph_mod1($result);
+    return fetch_data_for_graph_mod1($log,$result);
 }
 
 
@@ -237,7 +236,7 @@ function fetch_month_of_specific_year($log, $loopname, $year, $month) {
         return false;
     }
 
-    return fetch_data_for_graph_mod1($result);
+    return fetch_data_for_graph_mod1($log,$result);
 }
 
 
