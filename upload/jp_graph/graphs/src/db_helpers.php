@@ -79,7 +79,7 @@ function fetch_data_for_graph_mod1($log,$result) {
         $max_cost_kw = (float)$row['max_cost_kw'];
         $max_off_cost_kw = (float)$row['max_off_cost_kw'];
         $days = (int)$row['days'];
-        $daily_cost_kwh = (float)$row['daily_cost_kwh'];
+        $daily_cost_kwh = (float)$row['avg_daily_cost_kwh'];
         $max_demand_kw = (float)$row['max_demand_kw'];
         $max_off_demand_kw = (float)$row['max_off_demand_kw'];
         $avg_daily_total_kwh = (float)$row['avg_daily_total_kwh'];
