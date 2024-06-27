@@ -73,7 +73,10 @@ function fetch_data_for_graph_mod1($log,$result) {
     $avg_kw  = 0;
     $avg_kwH =0;
     $row = $result[0];
+
         // force convertion
+    $formattedMessage = print_r($result, true);
+    $log->logDebug("Result quer : " . $formattedMessage);
     $max_cost_kw = (float)$row['max_cost_kw'];
     $max_off_cost_kw = (float)$row['max_off_cost_kw'];
     $days = (int)$row['days'];
