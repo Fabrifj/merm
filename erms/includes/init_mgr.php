@@ -440,7 +440,7 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
   }
 
   // Fetch values from Standard_ship_records
-  $testLogger->logDebug($VAL["report_month"]);
+  $testLogger->logDebug($_REQUEST["month"] ;
   
   switch ($VAL["report_month"]) {
     case "Last 30 Days":
