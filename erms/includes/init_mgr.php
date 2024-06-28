@@ -460,7 +460,7 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
       }
       break;
     
-    case "Anual":
+    case "Annual":
       try {
         $testLogger->logDebug("Annual");
         $Ship_kWh_Average = [];
