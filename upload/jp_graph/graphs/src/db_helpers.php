@@ -151,12 +151,11 @@ function fetch_last_30_days($log, $loopname) {
 
     return fetch_data_for_graph_mod1($log,$result);
 }
-
 function fetch_Annual($log, $loopname) {
-// Ensure that $loopname is defined and has a value
-    $log->logDebug("Loopname: ". $loopname);
+    // Ensure that $loopname is defined and has a value
+    $log->logDebug("Loopname: " . $loopname);
 
-    if (isset($loopname)) {
+    if (isset($loopname) && !empty($loopname)) {
         $query = sprintf(
             "SELECT 
                 loopname,
@@ -203,20 +202,22 @@ function fetch_Annual($log, $loopname) {
                 loopname;",
             mysql_real_escape_string($loopname)
         );
+
+        $log->logDebug("Generated Query: " . $query);
+        
+        $result = db_query($log, $query);
+
+        if (!$result) {
+            $log->logDebug("Query failed: " . mysql_error());
+            return false;
+        }
+
+        return fetch_data_for_graph_mod1($log, $result);
     } else {
-        // Handle the case where $loopname is not set
-        echo "Error: loopname is not defined.";
-    }
-
-
-    $result = db_query($log, $query);
-
-    if (!$result) {
-        $log->logDebug("Query failed");
+        // Handle the case where $loopname is not set or is empty
+        $log->logDebug("Error: loopname is not defined or is empty.");
         return false;
     }
-
-    return fetch_data_for_graph_mod1($log,$result);
 }
 
 
