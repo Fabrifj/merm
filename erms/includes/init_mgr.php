@@ -598,9 +598,9 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
     "values" => $VAL,
     "cost" => $COST_30
   ];
-  /// Debugging
-  // $formattedMessage = print_r($graph, true);
-  // $testLogger->logInfo($formattedMessage);
+  // // Debugging
+  $formattedMessage = print_r($graph, true);
+  $testLogger->logInfo($formattedMessage);
 
   // No idea what the following code section does for this module
 // for ($imonth = 0; $imonth < $max_month; $imonth++)
