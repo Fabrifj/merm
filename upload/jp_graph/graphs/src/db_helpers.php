@@ -153,6 +153,8 @@ function fetch_last_30_days($log, $loopname) {
 }
 
 function fetch_Annual($log, $loopname) {
+// Ensure that $loopname is defined and has a value
+if (isset($loopname)) {
     $query = sprintf(
         "SELECT 
             loopname,
@@ -199,6 +201,11 @@ function fetch_Annual($log, $loopname) {
             loopname;",
         mysql_real_escape_string($loopname)
     );
+    } else {
+        // Handle the case where $loopname is not set
+        echo "Error: loopname is not defined.";
+    }
+
 
     $result = db_query($log, $query);
 
