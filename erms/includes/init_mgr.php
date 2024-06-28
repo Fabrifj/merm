@@ -446,13 +446,19 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
   switch ($_REQUEST["month"] ) {
     case "month":
       try {
+
+        $save_startdate = date('F j, Y G:i:s T Y');
+        $save_enddate = date('F j, Y G:i:s T Y', strtotime('-30 days'));
+        $Ship_available = [];
+
         $Ship_kWh_Average = [];
         $Ship_Demand = [];
         $Ship_daily_cost = [];
           
         foreach ($ships as $aq) {
           $ship_data = fetch_last_30_days($testLogger, $ships_data[$aq]["loopname"]);
-                
+          $Ship_available[] = isset($ship_data["avg_kwH"]) ? 0 : 1;
+
           $Ship_kWh_Average[] = intval(isset($ship_data["avg_kwH"]) ? $ship_data["avg_kwH"] : 0);
           $Ship_Demand[] = intval(isset($ship_data["avg_kw"]) ? $ship_data["avg_kw"] : 0);       
           $Ship_daily_cost[] = intval((isset($ship_data["avg_cost"]) ? $ship_data["avg_cost"] : 0));
@@ -464,13 +470,18 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
     
     case "annual":
       try {
+        $save_startdate = date('F j, Y G:i:s T Y');
+        $save_enddate = date('F j, Y G:i:s T Y', strtotime('-1 year'));
+        $Ship_available = [];
+
         $Ship_kWh_Average = [];
         $Ship_Demand = [];
         $Ship_daily_cost = [];
           
         foreach ($ships as $aq) {
           $ship_data = fetch_Annual($testLogger, $ships_data[$aq]["loopname"]);
-                
+          $Ship_available[] = isset($ship_data["avg_kwH"]) ? 0 : 1;
+
           $Ship_kWh_Average[] = intval(isset($ship_data["avg_kwH"]) ? $ship_data["avg_kwH"] : 0);
           $Ship_Demand[] = intval(isset($ship_data["avg_kw"]) ? $ship_data["avg_kw"] : 0);
           $Ship_daily_cost[] = intval((isset($ship_data["avg_cost"]) ? $ship_data["avg_cost"] : 0));
@@ -482,13 +493,22 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
     
     default:
       try {
+        $year = isset($_REQUEST["year"]) ? intval($_REQUEST["year"]) : date('Y');
+        $month = isset($_REQUEST["month"]) ? intval($_REQUEST["month"]) : date('m');
+        
+        // Crear la fecha inicial del mes especificado
+        $save_startdate = date('F j, Y G:i:s T', mktime(0, 0, 0, $month, 1, $year));
+        $save_enddate = date('Y-m-t', strtotime($save_startdate));
+        $Ship_available = [];
+
         $Ship_kWh_Average = [];
         $Ship_Demand = [];
         $Ship_daily_cost = [];
           
         foreach ($ships as $aq) {
           $ship_data = fetch_month_of_specific_year($testLogger, $ships_data[$aq]["loopname"], $_REQUEST["year"],$_REQUEST["month"] );
-                
+          $Ship_available[] = isset($ship_data["avg_kwH"]) ? 0 : 1;
+
           $Ship_kWh_Average[] = intval(isset($ship_data["avg_kwH"]) ? $ship_data["avg_kwH"] : 0);
           $Ship_Demand[] = intval(isset($ship_data["avg_kw"]) ? $ship_data["avg_kw"] : 0);
           $Ship_daily_cost[] = intval((isset($ship_data["avg_cost"]) ? $ship_data["avg_cost"] : 0));
