@@ -442,6 +442,7 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
   // Fetch values from Standard_ship_records
   
   switch ($VAL["report_month"]) {
+    $testLogger->logDebug($VAL["report_month"]);
     case "Last 30 Days":
       try {
         $Ship_kWh_Average = [];
@@ -462,7 +463,6 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
     
     case "Annual":
       try {
-        $testLogger->logDebug("Annual");
         $Ship_kWh_Average = [];
         $Ship_Demand = [];
         $Ship_daily_cost = [];
