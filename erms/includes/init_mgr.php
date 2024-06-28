@@ -443,59 +443,59 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
   
   switch ($VAL["report_month"]) {
     case "Last 30 Days":
-        try {
-            $Ship_kWh_Average = [];
-            $Ship_Demand = [];
-            $Ship_daily_cost = [];
+      try {
+        $Ship_kWh_Average = [];
+        $Ship_Demand = [];
+        $Ship_daily_cost = [];
           
-            foreach ($ships as $aq) {
-                $ship_data = fetch_last_30_days($testLogger, $ships_data[$aq]["loopname"]);
+        foreach ($ships as $aq) {
+          $ship_data = fetch_last_30_days($testLogger, $ships_data[$aq]["loopname"]);
                 
-                $Ship_kWh_Average[] = intval(isset($ship_data["avg_kwH"]) ? $ship_data["avg_kwH"] : 0);
-                $Ship_Demand[] = intval(isset($ship_data["avg_kw"]) ? $ship_data["avg_kw"] : 0);
-                $Ship_daily_cost[] = intval((isset($ship_data["avg_cost"]) ? $ship_data["avg_cost"] : 0));
-            }
-        } catch (Exception $e) {
-            $testLogger->logError("Error fetching data for the last 30 days: " . $e->getMessage());
+          $Ship_kWh_Average[] = intval(isset($ship_data["avg_kwH"]) ? $ship_data["avg_kwH"] : 0);
+          $Ship_Demand[] = intval(isset($ship_data["avg_kw"]) ? $ship_data["avg_kw"] : 0);       
+          $Ship_daily_cost[] = intval((isset($ship_data["avg_cost"]) ? $ship_data["avg_cost"] : 0));
         }
-        break;
+      } catch (Exception $e) {
+        $testLogger->logError("Error fetching data for the last 30 days: " . $e->getMessage());
+      }
+      break;
     
     case "Anual":
-        try {
-          $testLogger->logDebug("Annual")
-            $Ship_kWh_Average = [];
-            $Ship_Demand = [];
-            $Ship_daily_cost = [];
+      try {
+        $testLogger->logDebug("Annual");
+        $Ship_kWh_Average = [];
+        $Ship_Demand = [];
+        $Ship_daily_cost = [];
           
-            foreach ($ships as $aq) {
-                $ship_data = fetch_Annual($testLogger, $ships_data[$aq]["loopname"]);
+        foreach ($ships as $aq) {
+          $ship_data = fetch_Annual($testLogger, $ships_data[$aq]["loopname"]);
                 
-                $Ship_kWh_Average[] = intval(isset($ship_data["avg_kwH"]) ? $ship_data["avg_kwH"] : 0);
-                $Ship_Demand[] = intval(isset($ship_data["avg_kw"]) ? $ship_data["avg_kw"] : 0);
-                $Ship_daily_cost[] = intval((isset($ship_data["avg_cost"]) ? $ship_data["avg_cost"] : 0));
-            }
-        } catch (Exception $e) {
-            $testLogger->logError("Error fetching data for the annual report: " . $e->getMessage());
+          $Ship_kWh_Average[] = intval(isset($ship_data["avg_kwH"]) ? $ship_data["avg_kwH"] : 0);
+          $Ship_Demand[] = intval(isset($ship_data["avg_kw"]) ? $ship_data["avg_kw"] : 0);
+          $Ship_daily_cost[] = intval((isset($ship_data["avg_cost"]) ? $ship_data["avg_cost"] : 0));
         }
-        break;
+      } catch (Exception $e) {
+        $testLogger->logError("Error fetching data for the annual report: " . $e->getMessage());
+      }
+      break;
     
     default:
-        try {
-            $Ship_kWh_Average = [];
-            $Ship_Demand = [];
-            $Ship_daily_cost = [];
+      try {
+        $Ship_kWh_Average = [];
+        $Ship_Demand = [];
+        $Ship_daily_cost = [];
           
-            foreach ($ships as $aq) {
-                $ship_data = fetch_month_of_specific_year($testLogger, $ships_data[$aq]["loopname"],$VAL["report_year"],$VAL["report_month"] );
+        foreach ($ships as $aq) {
+          $ship_data = fetch_month_of_specific_year($testLogger, $ships_data[$aq]["loopname"],$VAL["report_year"],$VAL["report_month"] );
                 
-                $Ship_kWh_Average[] = intval(isset($ship_data["avg_kwH"]) ? $ship_data["avg_kwH"] : 0);
-                $Ship_Demand[] = intval(isset($ship_data["avg_kw"]) ? $ship_data["avg_kw"] : 0);
-                $Ship_daily_cost[] = intval((isset($ship_data["avg_cost"]) ? $ship_data["avg_cost"] : 0));
-            }
-        } catch (Exception $e) {
-            $testLogger->logError("Error fetching data for the default report: " . $e->getMessage());
+          $Ship_kWh_Average[] = intval(isset($ship_data["avg_kwH"]) ? $ship_data["avg_kwH"] : 0);
+          $Ship_Demand[] = intval(isset($ship_data["avg_kw"]) ? $ship_data["avg_kw"] : 0);
+          $Ship_daily_cost[] = intval((isset($ship_data["avg_cost"]) ? $ship_data["avg_cost"] : 0));
         }
-        break;
+      } catch (Exception $e) {
+        $testLogger->logError("Error fetching data for the default report: " . $e->getMessage());
+      }
+      break;
   }
 
   
