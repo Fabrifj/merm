@@ -166,6 +166,8 @@ setBreadcrumbs("manager", $_SESSION['user_data']['mgrMods'][$module]["text"], $_
 <?php
    			 $VAL["report_year"] = str_replace(',', '', $VAL["report_year"]);
           $months = [
+              "Last 30 Days" => "month",
+              "Annual" => "annual",
               "January" => 1,
               "February" => 2,
               "March" => 3,
@@ -177,9 +179,8 @@ setBreadcrumbs("manager", $_SESSION['user_data']['mgrMods'][$module]["text"], $_
               "September" => 9,
               "October" => 10,
               "November" => 11,
-              "December" => 12,
-              "Last 30 Days" => "month",
-              "Annual" => "annual"
+              "December" => 12
+              
           ];
           
           echo '
