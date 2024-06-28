@@ -628,9 +628,7 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
     "values" => $VAL,
     "cost" => $COST_30
   ];
-  // // Debugging
-  $formattedMessage = print_r($graph, true);
-  $testLogger->logInfo($formattedMessage);
+
 
   // No idea what the following code section does for this module
 // for ($imonth = 0; $imonth < $max_month; $imonth++)
@@ -829,8 +827,18 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
   ];
   break;
   case ERMS_Modules::EnergyMeterTrending: //"mod3":
+    $startDate = date('F j?, Y');
+
+    $testLogger->logInfo("Mod3 ".$startDate);
+    $testLogger->logInfo("Values data: ".$_REQUEST['data1']."points ".$_REQUEST['datapts']);
+
     debugPrint('(init) erms line graph: ['.$VAL["date_value_start"].'] to: ['.$VAL["date_value_end"].'] (time meter end) ['.$VAL["Time_Meter_End"].']');
+    
+    
     $graph=mod3_graph_multi($ships_data,$VAL["date_value_start"],$VAL["date_value_end"]);
+      // // Debugging
+    $formattedMessage = print_r($graph, true);
+    $testLogger->logInfo($formattedMessage);
   break;
 }
 
