@@ -154,6 +154,8 @@ function fetch_last_30_days($log, $loopname) {
 
 function fetch_Annual($log, $loopname) {
 // Ensure that $loopname is defined and has a value
+    $log->logDebug("Loopname: ". $loopname);
+
     if (isset($loopname)) {
         $query = sprintf(
             "SELECT 
@@ -219,6 +221,7 @@ function fetch_Annual($log, $loopname) {
 
 
 function fetch_month_of_specific_year($log, $loopname, $year, $month) {
+    $log->logDebug("Loopname: ". $loopname. " Year: ". $year. " Month: ". $month);
     $query = sprintf(
         "SELECT 
                 loopname,
