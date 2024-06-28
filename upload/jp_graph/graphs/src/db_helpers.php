@@ -154,53 +154,53 @@ function fetch_last_30_days($log, $loopname) {
 
 function fetch_Annual($log, $loopname) {
 // Ensure that $loopname is defined and has a value
-if (isset($loopname)) {
-    $query = sprintf(
-        "SELECT 
-            loopname,
-            ROUND(AVG(max_demand_kw), 2) AS max_demand_kw,
-            ROUND(AVG(max_off_demand_kw), 2) AS max_off_demand_kw,
-            ROUND(AVG(max_cost_kw), 2) AS max_cost_kw,
-            ROUND(AVG(max_off_cost_kw), 2) AS max_off_cost_kw,
-            ROUND(AVG(avg_daily_cost_kwh), 2) AS avg_daily_cost_kwh,
-            ROUND(AVG(avg_daily_total_kwh), 2) AS avg_daily_total_kwh
-        FROM (
-            SELECT 
+    if (isset($loopname)) {
+        $query = sprintf(
+            "SELECT 
                 loopname,
-                DATE_FORMAT(day, '%Y-%m') AS month,
-                MAX(max_demand_kw) AS max_demand_kw, 
-                MAX(max_off_demand_kw) AS max_off_demand_kw,
-                MAX(max_cost_kw) AS max_cost_kw, 
-                MAX(max_off_cost_kw) AS max_off_cost_kw,
-                AVG(daily_cost_kwh) AS avg_daily_cost_kwh, 
-                AVG(daily_total_kwh) AS avg_daily_total_kwh
+                ROUND(AVG(max_demand_kw), 2) AS max_demand_kw,
+                ROUND(AVG(max_off_demand_kw), 2) AS max_off_demand_kw,
+                ROUND(AVG(max_cost_kw), 2) AS max_cost_kw,
+                ROUND(AVG(max_off_cost_kw), 2) AS max_off_cost_kw,
+                ROUND(AVG(avg_daily_cost_kwh), 2) AS avg_daily_cost_kwh,
+                ROUND(AVG(avg_daily_total_kwh), 2) AS avg_daily_total_kwh
             FROM (
                 SELECT 
                     loopname,
-                    DATE(time) AS day,
-                    MAX(peak_kw) AS max_demand_kw,
-                    MAX(off_peak_kw) AS max_off_demand_kw,
-                    MAX(cost_kw) AS max_cost_kw,
-                    MAX(off_cost_kw) AS max_off_cost_kw,
-                    SUM(cost_kwh + off_cost_kwh) AS daily_cost_kwh,
-                    SUM(peak_kwh + off_peak_kwh) AS daily_total_kwh
-                FROM 
-                    Standard_ship_records 
+                    DATE_FORMAT(day, '%Y-%m') AS month,
+                    MAX(max_demand_kw) AS max_demand_kw, 
+                    MAX(max_off_demand_kw) AS max_off_demand_kw,
+                    MAX(max_cost_kw) AS max_cost_kw, 
+                    MAX(max_off_cost_kw) AS max_off_cost_kw,
+                    AVG(daily_cost_kwh) AS avg_daily_cost_kwh, 
+                    AVG(daily_total_kwh) AS avg_daily_total_kwh
+                FROM (
+                    SELECT 
+                        loopname,
+                        DATE(time) AS day,
+                        MAX(peak_kw) AS max_demand_kw,
+                        MAX(off_peak_kw) AS max_off_demand_kw,
+                        MAX(cost_kw) AS max_cost_kw,
+                        MAX(off_cost_kw) AS max_off_cost_kw,
+                        SUM(cost_kwh + off_cost_kwh) AS daily_cost_kwh,
+                        SUM(peak_kwh + off_peak_kwh) AS daily_total_kwh
+                    FROM 
+                        Standard_ship_records 
+                    WHERE 
+                        loopname = '%s' 
+                        AND time >= NOW() - INTERVAL 1 YEAR
+                    GROUP BY 
+                        loopname, DATE(time)
+                ) AS daily_sums
                 WHERE 
-                    loopname = '%s' 
-                    AND time >= NOW() - INTERVAL 1 YEAR
+                    daily_total_kwh > 0
                 GROUP BY 
-                    loopname, DATE(time)
-            ) AS daily_sums
-            WHERE 
-                daily_total_kwh > 0
+                    loopname, month
+            ) AS monthly_sums
             GROUP BY 
-                loopname, month
-        ) AS monthly_sums
-        GROUP BY 
-            loopname;",
-        mysql_real_escape_string($loopname)
-    );
+                loopname;",
+            mysql_real_escape_string($loopname)
+        );
     } else {
         // Handle the case where $loopname is not set
         echo "Error: loopname is not defined.";

@@ -491,27 +491,31 @@ function calculate_bill_values($bill_demand, $peak_demand, $off_peak_demand, $po
  * utility_schedule()
  */
 function utility_schedule_rates($utility, $date_value_end, $date_value_start) {
-
   global $log;
 
-  $sql_rates = sprintf("SELECT * FROM `$utility` WHERE Rate_Date_End >= '%s' AND Rate_Date_Start <= '%s'", $date_value_end, $date_value_start);
+  $sql_rates = sprintf(
+      "SELECT * FROM `%s` WHERE Rate_Date_End >= '%s' AND Rate_Date_Start <= '%s'", 
+      mysql_real_escape_string($utility), 
+      mysql_real_escape_string($date_value_end), 
+      mysql_real_escape_string($date_value_start)
+  );
 
   debugPrint('(utility_schedule_rates): '.$sql_rates);
 
   $rate_q = mysql_query($sql_rates);
-  if(!$rate_q)
-  {
-     echo "unable to process mysql request\n"; echo "$sql_rates\n";
-     $log->logInfo(sprintf("mod_cost: unable to process mysql request\n"));
-     return false;
-  }
-  else
-  {
-     $rates = mysql_fetch_array($rate_q);
+  if (!$rate_q) {
+      echo "Unable to process MySQL request\n";
+      echo "Query: $sql_rates\n";
+      echo "MySQL Error: " . mysql_error() . "\n";
+      $log->logInfo(sprintf("mod_cost: unable to process mysql request\n"));
+      return false;
+  } else { 
+      $rates = mysql_fetch_array($rate_q);
   }
 
   return $rates;
 }
+
 /**
  * get_high_point
  *
