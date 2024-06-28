@@ -442,8 +442,8 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
   // Fetch values from Standard_ship_records
   $testLogger->logDebug($_REQUEST["month"] );
   
-  switch ($VAL["report_month"]) {
-    case "Last 30 Days":
+  switch ($_REQUEST["month"] ) {
+    case "month":
       try {
         $Ship_kWh_Average = [];
         $Ship_Demand = [];
@@ -461,7 +461,7 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
       }
       break;
     
-    case "Annual":
+    case "annual":
       try {
         $Ship_kWh_Average = [];
         $Ship_Demand = [];
@@ -486,7 +486,7 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
         $Ship_daily_cost = [];
           
         foreach ($ships as $aq) {
-          $ship_data = fetch_month_of_specific_year($testLogger, $ships_data[$aq]["loopname"],$VAL["report_year"],$VAL["report_month"] );
+          $ship_data = fetch_month_of_specific_year($testLogger, $ships_data[$aq]["loopname"],$VAL["report_year"],$_REQUEST["month"] );
                 
           $Ship_kWh_Average[] = intval(isset($ship_data["avg_kwH"]) ? $ship_data["avg_kwH"] : 0);
           $Ship_Demand[] = intval(isset($ship_data["avg_kw"]) ? $ship_data["avg_kw"] : 0);
