@@ -603,89 +603,89 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
   // $testLogger->logInfo($formattedMessage);
 
   // No idea what the following code section does for this module
-for ($imonth = 0; $imonth < $max_month; $imonth++)
-{
-  if ($annual_report)
-    $VAL = &$VAL_YEAR[$imonth];
-  foreach ($VAL AS $key => $value)
-  {
-    $sub_key = substr($key, 0, 1);
-    $time_key = substr($key, -4, 4);
+// for ($imonth = 0; $imonth < $max_month; $imonth++)
+// {
+//   if ($annual_report)
+//     $VAL = &$VAL_YEAR[$imonth];
+//   foreach ($VAL AS $key => $value)
+//   {
+//     $sub_key = substr($key, 0, 1);
+//     $time_key = substr($key, -4, 4);
 
-    if ($sub_key > 0 && $sub_key < 3 && is_numeric($value))
-    {
-      $VAL[$key] = number_format($value, $sub_key);
-    }
-    else if (is_numeric($value))
-    {
-      $VAL[$key] = number_format($value);
-      if ($key == "Lay_Days")
-        $VAL[$key] = number_format($value, 2); //keep 2 point precision
-      //debugPrint('(init) key '.$key.' '.$VAL[$key].' value '.$value);
+//     if ($sub_key > 0 && $sub_key < 3 && is_numeric($value))
+//     {
+//       $VAL[$key] = number_format($value, $sub_key);
+//     }
+//     else if (is_numeric($value))
+//     {
+//       $VAL[$key] = number_format($value);
+//       if ($key == "Lay_Days")
+//         $VAL[$key] = number_format($value, 2); //keep 2 point precision
+//       //debugPrint('(init) key '.$key.' '.$VAL[$key].' value '.$value);
 
-    }
+//     }
 
-    if ($time_key == "Time")
-    {
-      $VAL[$key] = date('Y-m-d H:i:s', strtotime($value."UTC"));
-      //debugPrint('(init) key '.$key.' '.$VAL[$key].' value '.$value."UTC".' local '.$value);
-    }
-  }
-  if ($annual_report)
-    $VAL["report_month"] = "Annual";
-}
+//     if ($time_key == "Time")
+//     {
+//       $VAL[$key] = date('Y-m-d H:i:s', strtotime($value."UTC"));
+//       //debugPrint('(init) key '.$key.' '.$VAL[$key].' value '.$value."UTC".' local '.$value);
+//     }
+//   }
+//   if ($annual_report)
+//     $VAL["report_month"] = "Annual";
+// }
 
-debugPrint('(init) reset month: '.$VAL["save_startdate"].' date_value_start '.$VAL["date_value_start"]. 'report month '.$VAL["report_month"]);
+// debugPrint('(init) reset month: '.$VAL["save_startdate"].' date_value_start '.$VAL["date_value_start"]. 'report month '.$VAL["report_month"]);
 
-if ($annual_report)
-{
-  foreach ($monthly_average AS $key => $value)
-  {
-    $sub_key = substr($key, 0, 1);
+// if ($annual_report)
+// {
+//   foreach ($monthly_average AS $key => $value)
+//   {
+//     $sub_key = substr($key, 0, 1);
 
-    if ($sub_key > 0 && $sub_key < 3 && is_numeric($value))
-    {
-      $monthly_average[$key] = number_format($value, $sub_key);
-      //debugPrint('(init) key '.$key.' '.$monthly_average[$key].' value '.$value);
+//     if ($sub_key > 0 && $sub_key < 3 && is_numeric($value))
+//     {
+//       $monthly_average[$key] = number_format($value, $sub_key);
+//       //debugPrint('(init) key '.$key.' '.$monthly_average[$key].' value '.$value);
 
-    }
-    else if (is_numeric($value))
-    {
-      $monthly_average[$key] = number_format($value,2);
-      // debugPrint('(init) key '.$key.' '.$monthly_average[$key].' value '.$value);
-    }
-  }
-  foreach ($monthly_running_totals AS $key => $value)
-  {
-    $sub_key = substr($key, 0, 1);
+//     }
+//     else if (is_numeric($value))
+//     {
+//       $monthly_average[$key] = number_format($value,2);
+//       // debugPrint('(init) key '.$key.' '.$monthly_average[$key].' value '.$value);
+//     }
+//   }
+//   foreach ($monthly_running_totals AS $key => $value)
+//   {
+//     $sub_key = substr($key, 0, 1);
 
-    if ($sub_key > 0 && $sub_key < 3 && is_numeric($value))
-    {
-      $monthly_running_totals[$key] = number_format($value, $sub_key);
-    }
-    else if (is_numeric($value))
-    {
-      $monthly_running_totals[$key] = number_format($value,2);
-      debugPrint('(init) key '.$key.' '.$VAL[$key].' value '.$value);
-    }
-  }
-}
-for ($imonth = 0; $imonth < $max_month; $imonth++)
-{
-  if ($annual_report)
-    $COST = &$COST_YEAR[$imonth];
-  if (isset($COST))
-  {
-    foreach ($COST AS $key => $value)
-    {
-      $sub_U = substr($key, 0, 1);
-      if ($sub_U != "U" && is_numeric($value))
-      {
-        $COST[$key] = number_format($value, 2);
-      }
-    }
-  }
-}
+//     if ($sub_key > 0 && $sub_key < 3 && is_numeric($value))
+//     {
+//       $monthly_running_totals[$key] = number_format($value, $sub_key);
+//     }
+//     else if (is_numeric($value))
+//     {
+//       $monthly_running_totals[$key] = number_format($value,2);
+//       debugPrint('(init) key '.$key.' '.$VAL[$key].' value '.$value);
+//     }
+//   }
+// }
+// for ($imonth = 0; $imonth < $max_month; $imonth++)
+// {
+//   if ($annual_report)
+//     $COST = &$COST_YEAR[$imonth];
+//   if (isset($COST))
+//   {
+//     foreach ($COST AS $key => $value)
+//     {
+//       $sub_U = substr($key, 0, 1);
+//       if ($sub_U != "U" && is_numeric($value))
+//       {
+//         $COST[$key] = number_format($value, 2);
+//       }
+//     }
+//   }
+// }
   break;
 case ERMS_Modules::PerformanceTrending: //"mod8":
   //$Ships_Average = number_format($Ships_Sum/$Ships_Sum_Count);
