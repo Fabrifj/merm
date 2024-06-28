@@ -440,6 +440,7 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
   }
 
   // Fetch values from Standard_ship_records
+  $_REQUEST["month"] =isset($_REQUEST["month"]) ? $_REQUEST["month"] : "month";
   $testLogger->logDebug($_REQUEST["month"] );
   
   switch ($_REQUEST["month"] ) {
