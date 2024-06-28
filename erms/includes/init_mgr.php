@@ -469,7 +469,6 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
         $Ship_daily_cost = [];
           
         foreach ($ships as $aq) {
-          $testLogger->logDebug("Loopname: ".$ships_data[$aq]["loopname"]);
           $ship_data = fetch_Annual($testLogger, $ships_data[$aq]["loopname"]);
                 
           $Ship_kWh_Average[] = intval(isset($ship_data["avg_kwH"]) ? $ship_data["avg_kwH"] : 0);

@@ -153,9 +153,12 @@ function fetch_last_30_days($log, $loopname) {
 }
 function fetch_Annual($log, $loopname) {
     // Ensure that $loopname is defined and has a value
-    $log->logDebug("Loopname: " . $loopname);
+    $log->logDebug(" Loopname: " . $loopname);
 
     if (isset($loopname) && !empty($loopname)) {
+        // Sanitize loopname
+        $loopname_sanitized = mysql_real_escape_string($loopname);
+
         $query = sprintf(
             "SELECT 
                 loopname,
@@ -168,7 +171,7 @@ function fetch_Annual($log, $loopname) {
             FROM (
                 SELECT 
                     loopname,
-                    DATE_FORMAT(day, '%Y-%m') AS month,
+                    DATE_FORMAT(day, '%%Y-%%m') AS month,
                     MAX(max_demand_kw) AS max_demand_kw, 
                     MAX(max_off_demand_kw) AS max_off_demand_kw,
                     MAX(max_cost_kw) AS max_cost_kw, 
@@ -200,22 +203,22 @@ function fetch_Annual($log, $loopname) {
             ) AS monthly_sums
             GROUP BY 
                 loopname;",
-            mysql_real_escape_string($loopname)
+            $loopname_sanitized
         );
 
-        $log->logDebug("Generated Query: " . $query);
+        $log->logDebug(" Generated Query: " . $query);
         
         $result = db_query($log, $query);
 
         if (!$result) {
-            $log->logDebug("Query failed: " . mysql_error());
+            $log->logDebug(" Query failed: " . mysql_error());
             return false;
         }
 
         return fetch_data_for_graph_mod1($log, $result);
     } else {
         // Handle the case where $loopname is not set or is empty
-        $log->logDebug("Error: loopname is not defined or is empty.");
+        $log->logDebug(" Error: loopname is not defined or is empty.");
         return false;
     }
 }
