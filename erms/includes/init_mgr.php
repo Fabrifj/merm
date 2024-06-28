@@ -212,7 +212,7 @@ foreach ($ship AS $key => $ship) {
       $Ship_available[] = $S_avail;
       // $Ship_available[] = ($VAL["Avail_Data"] == 0 ? 0 : 1);
 
-      // $Ship_Array[] = $TITLE;
+      $Ship_Array[] = $TITLE;
 
 
       //echo $TITLE." start date: ".$VAL["date_value_start"]." end date: ".$VAL["date_value_end"]." Average kW: ".$VAL["Demand_avg"]." Peak Demand: ".$VAL["Peak_Demand"]."</br>";
