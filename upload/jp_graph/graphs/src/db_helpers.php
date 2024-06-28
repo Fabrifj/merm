@@ -191,7 +191,7 @@ function fetch_Annual($log, $loopname) {
                     FROM 
                         Standard_ship_records 
                     WHERE 
-                        loopname = '%s' 
+                        loopname = '%s'
                         AND time >= NOW() - INTERVAL 1 YEAR
                     GROUP BY 
                         loopname, DATE(time)
