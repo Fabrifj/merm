@@ -167,7 +167,8 @@ function fetch_Annual($log, $loopname) {
                 ROUND(AVG(max_cost_kw), 2) AS max_cost_kw,
                 ROUND(AVG(max_off_cost_kw), 2) AS max_off_cost_kw,
                 ROUND(AVG(avg_daily_cost_kwh), 2) AS avg_daily_cost_kwh,
-                ROUND(AVG(avg_daily_total_kwh), 2) AS avg_daily_total_kwh
+                ROUND(AVG(avg_daily_total_kwh), 2) AS avg_daily_total_kwh,
+                AVG(days) AS days
             FROM (
                 SELECT 
                     loopname,
@@ -178,6 +179,8 @@ function fetch_Annual($log, $loopname) {
                     MAX(max_off_cost_kw) AS max_off_cost_kw,
                     AVG(daily_cost_kwh) AS avg_daily_cost_kwh, 
                     AVG(daily_total_kwh) AS avg_daily_total_kwh
+                    COUNT(*) AS days
+
                 FROM (
                     SELECT 
                         loopname,
