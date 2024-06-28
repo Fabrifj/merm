@@ -181,7 +181,7 @@ function fetch_Annual($log, $loopname) {
                     MAX(cost_kw) AS max_cost_kw,
                     MAX(off_cost_kw) AS max_off_cost_kw,
                     SUM(cost_kwh + off_cost_kwh) AS daily_cost_kwh,
-                    SUM(peak_kwh + off_peak_kwh) AS daily_total_kwh,
+                    SUM(peak_kwh + off_peak_kwh) AS daily_total_kwh
                 FROM 
                     Standard_ship_records 
                 WHERE 
@@ -193,7 +193,7 @@ function fetch_Annual($log, $loopname) {
             WHERE 
                 daily_total_kwh > 0
             GROUP BY 
-                loopname, DATE_FORMAT(day, '%Y-%m')
+                loopname, month
         ) AS monthly_sums
         GROUP BY 
             loopname;",
