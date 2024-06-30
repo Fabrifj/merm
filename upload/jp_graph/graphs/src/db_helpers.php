@@ -293,30 +293,33 @@ function fetch_data_for_graph_mod3($log,$result) {
 }
 
 
-function fetch_mod3_graph($log,$field,$loopname,$startDate, $endDate) {
-
+function fetch_mod3_graph($log, $field, $loopname, $startDate, $endDate) {
+    // Convert start and end dates to timestamps
     $startTimestamp = strtotime($startDate);
     $endTimestamp = strtotime($endDate);
 
-        // Calculate interval between dates in seconds
-    $intervalSeconds = round(($endTimestamp - $startTimestamp) / (287));
+    // Calculate interval between dates in seconds
+    $intervalSeconds = round(($endTimestamp - $startTimestamp) / 287);
 
-    $log->logDebug("Field: ".$field." Loopname: ". $loopname. " Start: ". $startDate. " End: ". $endDate, "Interval Seconds: "$intervalSeconds);
+    // Log interval seconds for debugging
+    $log->logDebug("Field: " . $field . " Loopname: " . $loopname . " Start: " . $startDate . " End: " . $endDate . " Interval Seconds: " . $intervalSeconds);
 
-    // Format the query
     $query = sprintf(
         "SELECT 
             DATE_FORMAT(time, '%%Y-%%m-%%d %%H:%%i:%%s') AS time_group,
             time_zone,
             loopname,
-            AVG(field_name) AS avg_value
+            AVG(%s) AS avg_value
         FROM Standard_ship_records 
         WHERE time BETWEEN '%s' AND '%s'
         GROUP BY UNIX_TIMESTAMP(time) DIV %d",
+        $mysqli->real_escape_string($field),
         $mysqli->real_escape_string($startDate),
         $mysqli->real_escape_string($endDate),
-        $intervalSeconds // Convert minutes to seconds
+        $intervalSeconds
     );
+
+    // Execute the query
     $result = db_query($log, $query);
 
     if (!$result) {
@@ -324,8 +327,10 @@ function fetch_mod3_graph($log,$field,$loopname,$startDate, $endDate) {
         return false;
     }
 
-    return fetch_data_for_graph_mod3($log,$result);
+    // Fetch data for the graph
+    return fetch_data_for_graph_mod3($log, $result);
 }
+
 
 // Function to close the connection
 function db_close() {
