@@ -315,9 +315,9 @@ function fetch_mod3_graph($log, $field, $loopname, $startDate, $endDate) {
         FROM Standard_ship_records 
         WHERE time BETWEEN '%s' AND '%s'
         GROUP BY UNIX_TIMESTAMP(time) DIV %d",
-        real_escape_string($sqlField),
-        real_escape_string($startDate),
-        real_escape_string($endDate),
+        mysql_real_escape_string($sqlField),
+        mysql_real_escape_string($startDate),
+        mysql_real_escape_string($endDate),
         $intervalSeconds
     );
 
