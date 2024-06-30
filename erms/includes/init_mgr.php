@@ -859,6 +859,9 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
         $formattedMessage = print_r($ship_data, true);
         $testLogger->logInfo($formattedMessage);
       }
+    } catch (Exception $e) {
+      $testLogger->logError("Error fetching data for the default report: " . $e->getMessage());
+    }
 
     $graph=mod3_graph_multi($ships_data,$VAL["date_value_start"],$VAL["date_value_end"]);
       // // Debugging
