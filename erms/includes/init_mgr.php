@@ -827,15 +827,31 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
   ];
   break;
   case ERMS_Modules::EnergyMeterTrending: //"mod3":
-    $startDate = date('F j?, Y');
+    $startDate = date('F j, Y');
 
     $testLogger->logInfo("Mod3 ".$startDate);
-    $testLogger->logInfo("Values data: ".$_REQUEST['data1']."points ".$_REQUEST['datapts']); 
-    $testLogger->logInfo('(init) erms line graph: ['.$VAL["date_value_start"].'] to: ['.$VAL["date_value_end"].'] (time meter end) ['.$VAL["Time_Meter_End"].']');
-    
-    debugPrint('(init) erms line graph: ['.$VAL["date_value_start"].'] to: ['.$VAL["date_value_end"].'] (time meter end) ['.$VAL["Time_Meter_End"].']');
-    
-    
+    $testLogger->logInfo("Values data: ".$VAL["display"]); 
+    $testLogger->logInfo("Values data point: ".$_REQUEST['datapts']); 
+    switch($VAL["display"]){
+      case "day":
+        $startDate =  date('Y-m-d H:i:s');
+        $startDateDay = date('Y-m-d H:i:s', strtotime('-1 day'));
+        break;
+      case "week":
+        $startDate =  date('Y-m-d H:i:s');
+        $startDateWeek = date('Y-m-d H:i:s', strtotime('-1 week'));
+        break;
+      case "month":
+        $startDate =  date('Y-m-d H:i:s');
+        $startDate = date('Y-m-d H:i:s', strtotime('-1 month'));
+        break;
+      case "anydate":
+        $startDate =  $VAL["date_value_start"];
+        $endDate =  $VAL["date_value_end"];
+        break;  
+    }
+    $testLogger->logInfo("Start date: ".$startDate." End date: ".$endDate); 
+
     $graph=mod3_graph_multi($ships_data,$VAL["date_value_start"],$VAL["date_value_end"]);
       // // Debugging
     // $formattedMessage = print_r($graph, true);
