@@ -370,24 +370,28 @@ function calculate_mod3_graph_units($data1, $data2, $aquisuite) {
 }
 function getEvenlySpacedDates($startDate, $endDate, $count = 287) {
     try {
+        // Convert start and end dates to DateTime objects
+        $startDateTime = new DateTime($startDate);
+        $endDateTime = new DateTime($endDate);
+
         // Calculate interval between dates
-        $intervalSeconds = round(($startDate->getTimestamp() - $endDate->getTimestamp()) / ($count - 1));
+        $intervalSeconds = round(($endDateTime->getTimestamp() - $startDateTime->getTimestamp()) / ($count - 1));
 
         // Initialize array for storing dates
         $dates = [];
 
         // Add the start date
-        $dates[] = $startDate>format('Y-m-d H:i:s');
+        $dates[] = $startDate;
 
         // Generate evenly spaced dates
-        $currentDate = clone $startDate; // Use clone to avoid modifying $startDateTime
+        $currentDate = clone $startDateTime; // Use clone to avoid modifying $startDateTime
         for ($i = 1; $i < $count - 1; $i++) {
             $currentDate->add(new DateInterval('PT' . $intervalSeconds . 'S'));
             $dates[] = $currentDate->format('Y-m-d H:i:s');
         }
 
         // Add the end date
-        $dates[] = $endDate>format('Y-m-d H:i:s');
+        $dates[] = $endDate;
 
         return $dates;
     } catch (Exception $e) {
