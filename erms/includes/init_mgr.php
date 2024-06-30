@@ -848,8 +848,8 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
         break;  
     }
     $testLogger->logInfo("Start date: ".$startDate." End date: ".$endDate); 
+    $field = "current";
     try {
-      $field = "current";
       $dates = getEvenlySpacedDates($startDate,$endDate );
       $formattedMessage = print_r($dates, true);
       $testLogger->logInfo($formattedMessage);
