@@ -830,15 +830,16 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
     $startDate = date('F j?, Y');
 
     $testLogger->logInfo("Mod3 ".$startDate);
-    $testLogger->logInfo("Values data: ".$_REQUEST['data1']."points ".$_REQUEST['datapts']);
-
+    $testLogger->logInfo("Values data: ".$_REQUEST['data1']."points ".$_REQUEST['datapts']); 
+    $testLogger->logInfo('(init) erms line graph: ['.$VAL["date_value_start"].'] to: ['.$VAL["date_value_end"].'] (time meter end) ['.$VAL["Time_Meter_End"].']');
+    
     debugPrint('(init) erms line graph: ['.$VAL["date_value_start"].'] to: ['.$VAL["date_value_end"].'] (time meter end) ['.$VAL["Time_Meter_End"].']');
     
     
     $graph=mod3_graph_multi($ships_data,$VAL["date_value_start"],$VAL["date_value_end"]);
       // // Debugging
-    $formattedMessage = print_r($graph, true);
-    $testLogger->logInfo($formattedMessage);
+    // $formattedMessage = print_r($graph, true);
+    // $testLogger->logInfo($formattedMessage);
   break;
 }
 
