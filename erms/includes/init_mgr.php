@@ -828,22 +828,19 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
   break;
   case ERMS_Modules::EnergyMeterTrending: //"mod3":
     $startDate = date('F j, Y');
-
     $testLogger->logInfo("Mod3 ".$startDate);
-    $testLogger->logInfo("Values data: ".$VAL["display"]); 
-    $testLogger->logInfo("Values data point: ".$_REQUEST['datapts']); 
     switch($VAL["display"]){
       case "day":
         $startDate =  date('Y-m-d H:i:s');
-        $startDateDay = date('Y-m-d H:i:s', strtotime('-1 day'));
+        $endDate = date('Y-m-d H:i:s', strtotime('-1 day'));
         break;
       case "week":
         $startDate =  date('Y-m-d H:i:s');
-        $startDateWeek = date('Y-m-d H:i:s', strtotime('-1 week'));
+        $endDate = date('Y-m-d H:i:s', strtotime('-1 week'));
         break;
       case "month":
         $startDate =  date('Y-m-d H:i:s');
-        $startDate = date('Y-m-d H:i:s', strtotime('-1 month'));
+        $endDate = date('Y-m-d H:i:s', strtotime('-1 month'));
         break;
       case "anydate":
         $startDate =  $VAL["date_value_start"];
@@ -851,6 +848,17 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
         break;  
     }
     $testLogger->logInfo("Start date: ".$startDate." End date: ".$endDate); 
+    try {
+      $field = "current"
+      $dates = getEvenlySpacedDates($startDate,$endDate );
+      $formattedMessage = print_r($dates, true);
+      $testLogger->logInfo($formattedMessage);
+
+      foreach ($ships as $aq) {
+        $ship_data = fetch_mod3_graph($testLogger,$field ,$ships_data[$aq]["loopname"], $startDate, $endDate);
+        $formattedMessage = print_r($ship_data, true);
+        $testLogger->logInfo($formattedMessage);
+      }
 
     $graph=mod3_graph_multi($ships_data,$VAL["date_value_start"],$VAL["date_value_end"]);
       // // Debugging

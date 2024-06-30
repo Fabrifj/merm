@@ -275,7 +275,51 @@ function fetch_month_of_specific_year($log, $loopname, $year, $month) {
     return fetch_data_for_graph_mod1($log,$result);
 }
 
+function fetch_data_for_graph_mod3($log,$result) {
+    $time = [];
+    $value = [];
+    // force convertion
+    while ($row = mysql_fetch_assoc($result)) {
+        $time[] =  $row["time_group"];
+        $value[] =  $row["avg_value"];   
+    }
+     
+    $formattedMessage = print_r($value, true);
+    $testLogger->logInfo($formattedMessage);
+    return [
+        'time' => $time,
+        'value' => $value
+    ];
+}
 
+
+function fetch_mod3_graph($log,$field,$loopname,$startDate, $endDate) {
+    $intervalSeconds = round(($endTime - $startTime) / 288);
+
+    $log->logDebug("Field: ".$field." Loopname: ". $loopname. " Start: ". $startDate. " End: ". $endDate, "Interval Seconds: "$intervalSeconds);
+
+    // Format the query
+    $query = sprintf(
+        "SELECT 
+            DATE_FORMAT(time, '%%Y-%%m-%%d %%H:%%i:%%s') AS time_group,
+            time_zone,
+            loopname,
+            AVG(field_name) AS avg_value
+        FROM Standard_ship_records 
+        WHERE time BETWEEN '%s' AND '%s'
+        GROUP BY UNIX_TIMESTAMP(time) DIV %d",
+        $mysqli->real_escape_string($startDate),
+        $mysqli->real_escape_string($endDate),
+        $intervalSeconds // Convert minutes to seconds
+    );
+    $result = db_query($log, $query);
+
+    if (!$result) {
+        $log->logDebug("Query failed");
+        return false;
+    }
+
+    return fetch_data_for_graph_mod3($log,$result);
 
 
 // Function to close the connection

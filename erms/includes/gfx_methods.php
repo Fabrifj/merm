@@ -368,6 +368,35 @@ function calculate_mod3_graph_units($data1, $data2, $aquisuite) {
   }
   return $units;
 }
+function getEvenlySpacedDates($startDate, $endDate, $count = 287) {
+    try {
+        // Calculate interval between dates
+        $intervalSeconds = round(($startDate->getTimestamp() - $endDate->getTimestamp()) / ($count - 1));
+
+        // Initialize array for storing dates
+        $dates = [];
+
+        // Add the start date
+        $dates[] = $startDate>format('Y-m-d H:i:s');
+
+        // Generate evenly spaced dates
+        $currentDate = clone $startDate; // Use clone to avoid modifying $startDateTime
+        for ($i = 1; $i < $count - 1; $i++) {
+            $currentDate->add(new DateInterval('PT' . $intervalSeconds . 'S'));
+            $dates[] = $currentDate->format('Y-m-d H:i:s');
+        }
+
+        // Add the end date
+        $dates[] = $endDate>format('Y-m-d H:i:s');
+
+        return $dates;
+    } catch (Exception $e) {
+        // Handle any exceptions thrown during date conversion or interval calculation
+        // For simplicity, just rethrow the exception in this example
+        throw $e;
+    }
+}
+
 
 function calculate_mod3_graph_data($ship_data, $data1,$data2,$date_value_start,$date_value_end) {
   #### GRAPH TIME INTERVAL ####
