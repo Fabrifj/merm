@@ -294,7 +294,7 @@ function fetch_data_for_graph_mod3($log,$result) {
 
 
 function fetch_mod3_graph($log,$field,$loopname,$startDate, $endDate) {
-    $intervalSeconds = round(($endTime - $startTime) / 288);
+    $intervalSeconds = round(($startDate->getTimestamp() - $endDate->getTimestamp()) / 288);
 
     $log->logDebug("Field: ".$field." Loopname: ". $loopname. " Start: ". $startDate. " End: ". $endDate, "Interval Seconds: "$intervalSeconds);
 
