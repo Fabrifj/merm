@@ -295,11 +295,11 @@ function fetch_data_for_graph_mod3($log,$result) {
 
 function fetch_mod3_graph($log,$field,$loopname,$startDate, $endDate) {
 
-    // Convert start and end dates to DateTime objects
-    $startDateTime = new DateTime($startDate);
-    $endDateTime = new DateTime($endDate);
+    $startTimestamp = strtotime($startDate);
+    $endTimestamp = strtotime($endDate);
 
-    $intervalSeconds = round(($startDateTime->getTimestamp() - $endDateTime->getTimestamp()) / 288);
+        // Calculate interval between dates in seconds
+    $intervalSeconds = round(($endTimestamp - $startTimestamp) / (287));
 
     $log->logDebug("Field: ".$field." Loopname: ". $loopname. " Start: ". $startDate. " End: ". $endDate, "Interval Seconds: "$intervalSeconds);
 
@@ -325,7 +325,7 @@ function fetch_mod3_graph($log,$field,$loopname,$startDate, $endDate) {
     }
 
     return fetch_data_for_graph_mod3($log,$result);
-
+}
 
 // Function to close the connection
 function db_close() {
