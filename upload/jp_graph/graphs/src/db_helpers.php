@@ -302,6 +302,7 @@ function fetch_mod3_graph($log, $field, $loopname, $startDate, $endDate) {
     // Calculate interval between dates in seconds
     $intervalSeconds = round(($endTimestamp - $startTimestamp) / 287);
     $sqlField = isset($field) ? $field: "current";
+
     // Log interval seconds for debugging
     $log->logDebug("Field: " . $sqlField . " Loopname: " . $loopname . " Start: " . $startDate . " End: " . $endDate . " Interval Seconds: " . $intervalSeconds);
 
@@ -314,9 +315,9 @@ function fetch_mod3_graph($log, $field, $loopname, $startDate, $endDate) {
         FROM Standard_ship_records 
         WHERE time BETWEEN '%s' AND '%s'
         GROUP BY UNIX_TIMESTAMP(time) DIV %d",
-        $mysqli->real_escape_string($sqlField),
-        $mysqli->real_escape_string($startDate),
-        $mysqli->real_escape_string($endDate),
+        real_escape_string($sqlField),
+        real_escape_string($startDate),
+        real_escape_string($endDate),
         $intervalSeconds
     );
 
