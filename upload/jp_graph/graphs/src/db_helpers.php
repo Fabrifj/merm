@@ -285,7 +285,7 @@ function fetch_data_for_graph_mod3($log,$result) {
     }
      
     $formattedMessage = print_r($value, true);
-    $testLogger->logInfo($formattedMessage);
+    $log->logInfo($formattedMessage);
     return [
         'time' => $time,
         'value' => $value
