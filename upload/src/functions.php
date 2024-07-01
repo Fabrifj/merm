@@ -11,7 +11,7 @@ function get_ships_records($log, $timezone, $LOOPNAME, $devicetablename) {
 
         if (preg_match($pattern, $devicetablename, $matches)) {
             $deviname = $matches[0];
-            $log->logError("Device Name".$deviname);
+            $log->logInfo("Device Name".$deviname);
         } else {
             $log->logError("Invalid device table name: $devicetablename");
             return [];

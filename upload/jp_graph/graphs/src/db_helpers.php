@@ -307,18 +307,21 @@ function fetch_mod3_graph($log, $field, $loopname, $startDate, $endDate) {
     $log->logDebug("Field: " . $sqlField . " Loopname: " . $loopname . " Start: " . $startDate . " End: " . $endDate . " Interval Seconds: " . $intervalSeconds);
 
     $query = sprintf(
-        "SELECT 
-            DATE_FORMAT(time, '%%Y-%%m-%%d %%H:%%i:%%s') AS time_group,
-            time_zone,
+        "SELECT
             loopname,
+            DATE_FORMAT(FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(time) / %d) * %d), '%%Y-%%m-%%d %%H:%%i:%%s') AS time_group,
             AVG(%s) AS avg_value
-        FROM Standard_ship_records 
-        WHERE time BETWEEN '%s' AND '%s'
-        GROUP BY UNIX_TIMESTAMP(time) DIV %d",
+        FROM Standard_ship_records
+        WHERE loopname = '%s'
+            AND time BETWEEN '%s' AND '%s'
+        GROUP BY loopname, time_group
+        ORDER BY time_group;",
+        mysql_real_escape_string($intervalSeconds),
+        mysql_real_escape_string($intervalSeconds),
         mysql_real_escape_string($sqlField),
+        mysql_real_escape_string($loopname),
         mysql_real_escape_string($startDate),
-        mysql_real_escape_string($endDate),
-        $intervalSeconds
+        mysql_real_escape_string($endDate)
     );
 
     // Execute the query
