@@ -752,14 +752,10 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
     $kWh_day = [];
     $Peak_Demand = [];    
     $Grand_Total_Lay_Day = [];
+    $Ship_available[];
     foreach ($ships as $aq){
       $results =  fetch_year_ago_mod8($testLogger, $ships_data[$aq]["loopname"], $startDate);
-      if(!$result){
-        $Ship_available[] =  0 ;
-      }else{
-        $Ship_available[] =  1 ;
-      }
-
+      $Ship_available[] =1;
       $ships_data[$ship_aquisuite]["kWh_day"] = $results["avg_cost"];
       $ships_data[$ship_aquisuite]["Peak_Demand"]= $results["avg_kw"];
       $ships_data[$ship_aquisuite]["Grand_Total_Lay_Day"] = $results["avg_cost"];
