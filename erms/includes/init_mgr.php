@@ -875,10 +875,6 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
     "cost" => $COST_30
   ];
 
-  $formattedMessage = print_r($metrics, true);
-  $testLogger->logInfo($formattedMessage);
-
-
 
   break;
 

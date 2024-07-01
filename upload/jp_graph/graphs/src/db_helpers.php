@@ -281,7 +281,10 @@ function pad_with_zeros($array, $desired_length = 12) {
     $array_length = count($array);
     if ($array_length < $desired_length) {
         $zeros_to_add = $desired_length - $array_length;
-        $array = array_merge(array_fill(0, $zeros_to_add, 0), $array);
+        $zeros = array_fill(0, $zeros_to_add, 0);
+        $array = array_merge($zeros, $array);
+    } else {
+        $array = array_slice($array, -$desired_length); // Keep only the last 12 elements if array length exceeds 12
     }
     return $array;
 }
@@ -292,6 +295,8 @@ function fetch_data_for_graph_mod8($log,$result) {
     $avg_kw  = [];
     $avg_kwH = [];
 
+    $formattedMessage = print_r($result, true);
+    $testLogger->logInfo("Results ".$formattedMessage);
         // force convertion
     while ($row = mysql_fetch_assoc($result)) {
         // force convertion
