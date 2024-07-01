@@ -851,8 +851,8 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
     $field = "current";
     try {
       $dates = getEvenlySpacedDates($startDate,$endDate );
-      $formattedMessage = print_r($dates, true);
-      $testLogger->logInfo($formattedMessage);
+      $testLogger->logInfo("Start date: ".$dates[0]." enddates : ".$endDate[286]);
+
 
       foreach ($ships as $aq) {
         $ship_data = fetch_mod3_graph($testLogger,$field ,$ships_data[$aq]["loopname"], $startDate, $endDate);

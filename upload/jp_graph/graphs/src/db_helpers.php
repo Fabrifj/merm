@@ -279,6 +279,9 @@ function fetch_data_for_graph_mod3($log,$result) {
     $time = [];
     $value = [];
     // force convertion
+    $formattedMessage = print_r($result, true);
+    $log->logInfo($formattedMessage);
+
     while ($row = mysql_fetch_assoc($result)) {
         $time[] =  $row["time_group"];
         $value[] =  $row["avg_value"];   
@@ -300,7 +303,7 @@ function fetch_mod3_graph($log, $field, $loopname, $startDate, $endDate) {
 
 
     // Calculate interval between dates in seconds
-    $intervalSeconds = round(($endTimestamp - $startTimestamp) / 287);
+    $intervalSeconds = round(($endTimestamp - $startTimestamp) / 286);
     $sqlField = isset($field) ? $field: "current";
 
     // Log interval seconds for debugging
