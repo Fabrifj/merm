@@ -54,7 +54,7 @@ function db_query($log, $query) {
         }
         return $result;
     } catch (Exception $e) {
-        $log->logInfo("Query error: " . $query . " " . $e->getMessage());
+        $log->logError("Query error: " . $query . " " . $e->getMessage());
         die("Query error: " . $e->getMessage());
     }
 }
@@ -92,7 +92,7 @@ function fetch_data_for_graph_mod1($log,$result) {
             $avg_kw []= getMax($max_demand_kw, $max_off_demand_kw);
             $avg_kwH []= $avg_daily_total_kwh;
         } else {
-            $log->logDebug("Error: 'days' is zero or less.\n");
+            $log->logError("Error: 'days' is zero or less.\n");
         }
     }
      
@@ -146,7 +146,7 @@ function fetch_last_30_days($log, $loopname) {
     $result = db_query($log, $query);
 
     if (!$result) {
-        $log->logDebug("Query failed");
+        $log->logError("Query failed");
         return false;
     }
 
@@ -216,13 +216,11 @@ function fetch_Annual($log, $loopname) {
                 loopname;",
             $loopname_sanitized
         );
-
-        $log->logDebug(" Generated Query: " . $query);
         
         $result = db_query($log, $query);
 
         if (!$result) {
-            $log->logDebug(" Query failed: " . mysql_error());
+            $log->logError(" Query failed: " . mysql_error());
             return false;
         }
 
@@ -235,7 +233,7 @@ function fetch_Annual($log, $loopname) {
         ];
     } else {
         // Handle the case where $loopname is not set or is empty
-        $log->logDebug(" Error: loopname is not defined or is empty.");
+        $log->logError(" Error: loopname is not defined or is empty.");
         return false;
     }
 }
@@ -282,7 +280,7 @@ function fetch_month_of_specific_year($log, $loopname, $year, $month) {
     $result = db_query($log, $query);
 
     if (!$result) {
-        $log->logDebug("Query failed");
+        $log->logError("Query failed");
         return false;
     }
 
@@ -331,15 +329,15 @@ function fetch_year_ago_mod8($log, $loopname, $startDate) {
         GROUP BY 
             loopname, DATE_FORMAT(day, '%Y-%m')
         ORDER BY 
-            month_year ASC;
-        ;",
-        mysql_real_escape_string($loopname), $startDate
+            month_year ASC;",
+        mysql_real_escape_string($loopname), 
+        mysql_real_escape_string($startDate)
     );
 
     $result = db_query($log, $query);
 
     if (!$result) {
-        $log->logDebug("Query failed");
+        $log->logError("Query failed");
         return false;
     }
 
@@ -400,7 +398,7 @@ function fetch_mod3_graph($log, $dbField, $loopname, $startDate, $endDate) {
     $result = db_query($log, $query);
 
     if (!$result) {
-        $log->logDebug("Query failed");
+        $log->logError("Query failed");
         return false;
     }
 
