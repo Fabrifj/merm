@@ -503,7 +503,6 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
         $year = isset($_REQUEST["year"]) ? intval($_REQUEST["year"]) : date('Y');
         $month = isset($_REQUEST["month"]) ? intval($_REQUEST["month"]) : date('m');
         
-        // Crear la fecha inicial del mes especificado
         $save_startdate = date('F j, Y G:i:s T', mktime(0, 0, 0, $month, 1, $year));
         $save_enddate = date('Y-m-t', strtotime($save_startdate));
         $Ship_available = [];
@@ -726,22 +725,30 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
   //
   $startDate = date('F j, Y');
   $testLogger->logInfo("Mod8 ".$VAL["report_year"]);
-  // try{
-  //   $ship_data = [];
-  //   $kWh_day = [];
-  //   $Peak_Demand = [];    
-  //   $Grand_Total_Lay_Day = [];
-  //   foreach ($ships as $aq){
-  //      $results = ;
-  // $ships_data[$ship_aquisuite]["kWh_day"][] = $results["kWh_day"];
-  // $ships_data[$ship_aquisuite]["Peak_Demand"][] = $results["Peak_Demand"]*1;
-  // $ships_data[$ship_aquisuite]["Grand_Total_Lay_Day"][] = $results["Grand_Total_Lay_Day"];
+  if($VAL["report_year"] =="2024"){
+    $startDate = date('Y-m-d');
+  }else{
+        // Start date is January 1st of the given year
+    $startDate = "$VAL['report_year']-01-01";
+  }
 
-  //   }
+  try{
+    $ship_data = [];
+    $kWh_day = [];
+    $Peak_Demand = [];    
+    $Grand_Total_Lay_Day = [];
+    foreach ($ships as $aq){
+      $results =  fetch_year_ago_mod8($testLogger, $ships_data[$aq]["loopname"], $startDate)
+      $ships_data[$ship_aquisuite]["kWh_day"][] = $results["kWh_day"];
+      $ships_data[$ship_aquisuite]["Peak_Demand"][] = $results["Peak_Demand"]*1;
+      $ships_data[$ship_aquisuite]["Grand_Total_Lay_Day"][] = $results["Grand_Total_Lay_Day"];
 
-  // } catch (Exception $e) {
-  //   $testLogger->logError("Error fetching data for the default report: " . $e->getMessage());
-  // }
+    }
+
+
+  } catch (Exception $e) {
+    $testLogger->logError("Error fetching data for the default report: " . $e->getMessage());
+  }
 
   $graph = [
     "categories" => $months,

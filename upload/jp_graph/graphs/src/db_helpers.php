@@ -295,7 +295,7 @@ function fetch_month_of_specific_year($log, $loopname, $year, $month) {
     ];
 }
 
-function fetch_year_ago($log, $loopname, $startDate) {
+function fetch_year_ago_mod8($log, $loopname, $startDate) {
     $log->logDebug("Loopname: ". $loopname. " StartDate: ". $startDate);
     $query = sprintf(
         "SELECT 
