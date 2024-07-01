@@ -277,10 +277,12 @@ function fetch_month_of_specific_year($log, $loopname, $year, $month) {
     return fetch_data_for_graph_mod1($log,$result);
 
 }
-function pad_with_zeros($array, $desired_length = 12) {
+function pad_with_zeros($log,$array, $desired_length = 12) {
     $array_length = count($array);
+    $log->logDebug("Array length ".$array_length);
     if ($array_length < $desired_length) {
         $zeros_to_add = $desired_length - $array_length;
+        $log->logDebug("zerros to add ".$zeros_to_add);
         $zeros = array_fill(0, $zeros_to_add, 0);
         $array = array_merge($zeros, $array);
     } else {
@@ -313,7 +315,8 @@ function fetch_data_for_graph_mod8($log,$result) {
             // Calculate
         if ($days > 0) {
             $avg_demand = ($max_cost_kw + $max_off_cost_kw) / $days;
-
+            $log->logInfo("avg_demand ". $avg_demand);
+  
             $avg_cost[] = !empty($avg_demand + $daily_cost_kwh) ? $avg_demand + $daily_cost_kwh : 0;
             $avg_kw[] = !empty(max($max_demand_kw, $max_off_demand_kw)) ? max($max_demand_kw, $max_off_demand_kw) : 0;
             $avg_kwH[] = !empty($avg_daily_total_kwh) ? $avg_daily_total_kwh : 0;
@@ -322,9 +325,9 @@ function fetch_data_for_graph_mod8($log,$result) {
         }
     }
     // Ensure each array has exactly 12 values by padding with zeros if necessary
-    $avg_cost = pad_with_zeros($avg_cost);
-    $avg_kw = pad_with_zeros($avg_kw);
-    $avg_kwH = pad_with_zeros($avg_kwH);
+    $avg_cost = pad_with_zeros($log,$avg_cost);
+    $avg_kw = pad_with_zeros($log,$avg_kw);
+    $avg_kwH = pad_with_zeros($log,$avg_kwH);
 
      
     return [
