@@ -275,17 +275,18 @@ function fetch_month_of_specific_year($log, $loopname, $year, $month) {
     return fetch_data_for_graph_mod1($log,$result);
 }
 
-function fetch_data_for_graph_mod3($log,$result) {
-    $time = [];
-    $value = [];
-    // force convertion
+function fetch_data_for_graph_mod3($log, $result) {
+    $values = [];
 
     while ($row = mysql_fetch_assoc($result)) {
-        $time[] =  $row["time_group"];
-        $value[] =  $row["avg_value"];   
+        $avgValue = floatval($row["avg_value"]);
+        
+        $avgValue = round($avgValue, 1); 
+        
+        $values[] = $avgValue;
     }
      
-    return $value;
+    return $values;
 }
 
 
