@@ -373,7 +373,7 @@ function getEvenlySpacedDates($startDate, $endDate, $count = 287) {
         // Calculate start and end timestamps
         $startTimestamp = strtotime($startDate);
         $endTimestamp = strtotime($endDate);
-		
+
 		if ($startTimestamp > $endTimestamp) {
             throw new Exception('Start date must be earlier than end date');
         }

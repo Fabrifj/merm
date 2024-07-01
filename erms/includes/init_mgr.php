@@ -831,16 +831,16 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
     $testLogger->logInfo("Mod3 ".$startDate);
     switch($VAL["display"]){
       case "day":
-        $startDate =  date('Y-m-d H:i:s');
-        $endDate = date('Y-m-d H:i:s', strtotime('-1 day'));
+        $endDate =  date('Y-m-d H:i:s');
+        $startDate = date('Y-m-d H:i:s', strtotime('-1 day'));
         break;
       case "week":
-        $startDate =  date('Y-m-d H:i:s');
-        $endDate = date('Y-m-d H:i:s', strtotime('-1 week'));
+        $endDate =  date('Y-m-d H:i:s');
+        $startDate = date('Y-m-d H:i:s', strtotime('-1 week'));
         break;
       case "month":
-        $startDate =  date('Y-m-d H:i:s');
-        $endDate = date('Y-m-d H:i:s', strtotime('-1 month'));
+        $endDate =  date('Y-m-d H:i:s');
+        $startDate = date('Y-m-d H:i:s', strtotime('-1 month'));
         break;
       case "anydate":
         $startDate =  $VAL["date_value_start"];
