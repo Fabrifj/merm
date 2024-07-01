@@ -294,11 +294,12 @@ function fetch_month_of_specific_year($log, $loopname, $year, $month) {
 }
 
 function fetch_year_ago_mod8($log, $loopname, $startDate) {
-    $log->logDebug("Loopname: ". $loopname. " StartDate: ". $startDate);
+    $log->logDebug("Loopname: " . $loopname . " StartDate: " . $startDate);
+
     $query = sprintf(
         "SELECT 
             loopname,
-            DATE_FORMAT(day, '%Y-%m') AS month_year,
+            DATE_FORMAT(day, '%%Y-%%m') AS month_year,
             ROUND(MAX(max_demand_kw), 2) AS max_demand_kw, 
             ROUND(MAX(max_off_demand_kw), 2) AS max_off_demand_kw,
             ROUND(MAX(max_cost_kw), 2) AS max_cost_kw, 
@@ -309,7 +310,7 @@ function fetch_year_ago_mod8($log, $loopname, $startDate) {
         FROM (
             SELECT 
                 loopname,
-                DATE_FORMAT(time, '%Y-%m-%d') AS day,
+                DATE_FORMAT(time, '%%Y-%%m-%%d') AS day,
                 MAX(peak_kw) AS max_demand_kw,
                 MAX(off_peak_kw) AS max_off_demand_kw,
                 MAX(cost_kw) AS max_cost_kw,
@@ -320,14 +321,14 @@ function fetch_year_ago_mod8($log, $loopname, $startDate) {
                 Standard_ship_records 
             WHERE 
                 loopname = '%s' 
-                AND time >= '%s', INTERVAL 12 MONTH)
+                AND time >= DATE_SUB('%s', INTERVAL 12 MONTH)
             GROUP BY 
-                loopname, DATE_FORMAT(time, '%Y-%m-%d')
+                loopname, DATE_FORMAT(time, '%%Y-%%m-%%d')
         ) AS daily_sums
         WHERE 
             daily_total_kwh > 0
         GROUP BY 
-            loopname, DATE_FORMAT(day, '%Y-%m')
+            loopname, DATE_FORMAT(day, '%%Y-%%m')
         ORDER BY 
             month_year ASC;",
         mysql_real_escape_string($loopname), 
@@ -341,7 +342,7 @@ function fetch_year_ago_mod8($log, $loopname, $startDate) {
         return false;
     }
 
-    return fetch_data_for_graph_mod1($log,$result);
+    return fetch_data_for_graph_mod1($log, $result);
 }
 
 function fetch_data_for_graph_mod3($log, $result) {
