@@ -850,14 +850,14 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
     }
 
     $testLogger->logInfo("Start date: ".$startDate." End date: ".$endDate); 
-    $field = "current";
     try {
-      $testLogger->logInfo("Start date: " . $dates[0] . " end date: " . $endDate. " Field: ". $_POST['data1']);
-
+      $testLogger->logInfo("Start date: " . $dates[0] . " end date: " . $endDate. " Name: ". $_POST['data1']);
+      $units = EnergyMetrics::get_units($name);
+      $field = $units["field"]
       // Convert start and end dates to timestamps
       $startTimestamp = strtotime($startDate);
       $endTimestamp = strtotime($endDate);
-  
+      
       if ($startTimestamp > $endTimestamp) {
           throw new Exception('Start date must be earlier than end date');
       }
@@ -868,11 +868,6 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
       $dates = getEvenlySpacedDates($startDate, $endDate, $intervalSeconds);
       // $units = EnergyMetrics::get_units($selectedField);
 
-      $units = [
-        "name" => "Current",
-        "units" => "Amps",
-        "field" => "Current"
-      ];
       $chartUnits = [];
       $chartUnits[] = $units;
   
