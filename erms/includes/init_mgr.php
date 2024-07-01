@@ -905,8 +905,8 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
     }
     
     
-    $graph=mod3_graph_multi($ships_data,$VAL["date_value_start"],$VAL["date_value_end"]);
-    $graph["times"] = $dates;
+    // $graph=mod3_graph_multi($ships_data,$VAL["date_value_start"],$VAL["date_value_end"]);
+    // $graph["times"] = $dates;
     // $graph["timezone"] = $timezone;
     // $graph["log_interval"] = 300000;
     // $graph["date_start"] = $dates[0];
