@@ -740,6 +740,8 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
         // Start date is January 1st of the given year
     $startDate = $VAL['report_year']."-01-01";
   }
+  $endDate = date('Y-m-d', strtotime("$startDate -12 months"));
+
   $months = [];
     for ($i = 11; $i >= 0; $i--) {
         $months[] = date("F", strtotime("-$i month", strtotime($startDate)));
@@ -753,13 +755,17 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
     $Grand_Total_Lay_Day = [];
     foreach ($ships as $aq){
       $results =  fetch_year_ago_mod8($testLogger, $ships_data[$aq]["loopname"], $startDate);
+      if(!$result){
+        $Ship_available[] =  0 ;
+      }else{
+        $Ship_available[] =  0 ;
+      }
       $ships_data[$ship_aquisuite]["kWh_day"][] = $results["kWh_day"];
       $ships_data[$ship_aquisuite]["Peak_Demand"][] = $results["Peak_Demand"]*1;
       $ships_data[$ship_aquisuite]["Grand_Total_Lay_Day"][] = $results["Grand_Total_Lay_Day"];
 
+
     }
-
-
   } catch (Exception $e) {
     $testLogger->logError("Error fetching data for the default report: " . $e->getMessage());
   }
@@ -768,7 +774,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
     "categories" => $months,
     "ship_link" => $Ship_Link_Array,
     "ship_available" => $Ship_available,
-    "dates" => [$save_startdate, $save_enddate]
+    "dates" => [$startDate, $endDate]
   ];
 
   $graph["data"] = [
@@ -862,7 +868,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
       "yaxis" => 1
     ];
   }
-
+  $metrics = array("kWh_day", "Peak_Demand", "Grand_Total_Lay_Day");
   $metrics = [
     "values" => $VAL,
     "cost" => $COST_30
