@@ -287,7 +287,6 @@ setBreadcrumbs("manager", $_SESSION['user_data']['mgrMods'][$module]["text"], $_
                   </div>
 
                   <?php
-                  include 'EnergyMetrics.php'; // Asegúrate de incluir el archivo donde está la clase EnergyMetrics
 
                   // Obtén todos los nombres de las métricas
                   $metricsNames = EnergyMetrics::get_names();
