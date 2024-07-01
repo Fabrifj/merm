@@ -100,7 +100,7 @@ $log->logInfo('ship count: ('.$ship_count.')');
 
 
 switch($module) {
-  case ERMS_Modules::PowerAndCostAnalysis:
+  case ERMS_Modules::PowerAndCostAnalysis: //mod 
     if($annual_report) {
       debugPrint('(init) Annual request Year '. $request_year);
       if ($current_year == $request_year)
@@ -124,7 +124,7 @@ switch($module) {
     }
   debugPrint('(init) Save Start '.$save_startdate.' End '.$save_enddate.' end day '.$endday);
     break;
-  case ERMS_Modules::PerformanceTrending:
+  case ERMS_Modules::PerformanceTrending: //
     if($request_year == "last12") {
       $startingMonth = date("Y-m-01 00:00:00", strtotime("-12 months"));
       $endingMonth = date("Y-m-01 00:00:00");
@@ -303,7 +303,7 @@ foreach ($ship AS $key => $ship) {
     //   $Ships_Sum_Count += $VAL["kW_count"];
     // }
     break;
-  case ERMS_Modules::PerformanceTrending:
+  case ERMS_Modules::PerformanceTrending: // mod 8
 
       for ($imonth = 0;$imonth< 12; $imonth++) {
         $startingMonthTime = strtotime("+".$imonth." month", strtotime($startingMonth));
@@ -721,6 +721,27 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
   //$VAL_30["kWh_day"] = $VAL_30["kWh_day"]/$ship_count;
   //$COST_30["Grand_Total_Lay_Day"] = $Grand_Total_Lay_Day/$ship_count;
   //$COST_30["Grand_Total_kWh"] = $Grand_Total_kWh/$ship_count;
+
+  // Get times ! 
+  //
+  $startDate = date('F j, Y');
+  $testLogger->logInfo("Mod8 ".$VAL["report_year"]);
+  // try{
+  //   $ship_data = [];
+  //   $kWh_day = [];
+  //   $Peak_Demand = [];    
+  //   $Grand_Total_Lay_Day = [];
+  //   foreach ($ships as $aq){
+  //      $results = ;
+  // $ships_data[$ship_aquisuite]["kWh_day"][] = $results["kWh_day"];
+  // $ships_data[$ship_aquisuite]["Peak_Demand"][] = $results["Peak_Demand"]*1;
+  // $ships_data[$ship_aquisuite]["Grand_Total_Lay_Day"][] = $results["Grand_Total_Lay_Day"];
+
+  //   }
+
+  // } catch (Exception $e) {
+  //   $testLogger->logError("Error fetching data for the default report: " . $e->getMessage());
+  // }
 
   $graph = [
     "categories" => $months,
