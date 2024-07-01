@@ -338,43 +338,43 @@ function fetch_year_ago_mod8($log, $loopname, $startDate) {
     $log->logDebug("Loopname: " . $loopname . " StartDate: " . $startDate);
 
     $query = sprintf(
-        "SELECT 
-            loopname,
-            DATE_FORMAT(day, '%Y-%m') AS month_year,
-            ROUND(MAX(max_demand_kw), 2) AS max_demand_kw, 
-            ROUND(MAX(max_off_demand_kw), 2) AS max_off_demand_kw,
-            ROUND(MAX(max_cost_kw), 2) AS max_cost_kw, 
-            ROUND(MAX(max_off_cost_kw), 2) AS max_off_cost_kw,
-            ROUND(AVG(daily_cost_kwh), 2) AS avg_daily_cost_kwh, 
-            ROUND(AVG(daily_total_kwh), 2) AS avg_daily_total_kwh, 
-            COUNT(*) AS days
-        FROM (
-            SELECT 
+            "SELECT 
                 loopname,
-                DATE_FORMAT(time, '%Y-%m-%d') AS day,
-                MAX(peak_kw) AS max_demand_kw,
-                MAX(off_peak_kw) AS max_off_demand_kw,
-                MAX(cost_kw) AS max_cost_kw,
-                MAX(off_cost_kw) AS max_off_cost_kw,
-                SUM(cost_kwh + off_cost_kwh) AS daily_cost_kwh,
-                SUM(peak_kwh + off_peak_kwh) AS daily_total_kwh
-            FROM 
-                Standard_ship_records 
+                MONTH(day) AS month_year,
+                ROUND(MAX(max_demand_kw), 2) AS max_demand_kw, 
+                ROUND(MAX(max_off_demand_kw), 2) AS max_off_demand_kw,
+                ROUND(MAX(max_cost_kw), 2) AS max_cost_kw, 
+                ROUND(MAX(max_off_cost_kw), 2) AS max_off_cost_kw,
+                ROUND(AVG(daily_cost_kwh), 2) AS avg_daily_cost_kwh, 
+                ROUND(AVG(daily_total_kwh), 2) AS avg_daily_total_kwh, 
+                COUNT(*) AS days
+            FROM (
+                SELECT 
+                    loopname,
+                    DATE(time) AS day,
+                    MAX(peak_kw) AS max_demand_kw,
+                    MAX(off_peak_kw) AS max_off_demand_kw,
+                    MAX(cost_kw) AS max_cost_kw,
+                    MAX(off_cost_kw) AS max_off_cost_kw,
+                    SUM(cost_kwh + off_cost_kwh) AS daily_cost_kwh,
+                    SUM(peak_kwh + off_peak_kwh) AS daily_total_kwh
+                FROM 
+                    Standard_ship_records 
+                WHERE 
+                    loopname = '%s' 
+                    AND time >= DATE_SUB('%s', INTERVAL 12 MONTH)
+                GROUP BY 
+                    loopname, day
+            ) AS daily_sums
             WHERE 
-                loopname = '%s' 
-                AND time >= DATE_SUB('%s', INTERVAL 12 MONTH)
+                daily_total_kwh > 0
             GROUP BY 
-                loopname, DATE_FORMAT(time, '%Y-%m-%d')
-        ) AS daily_sums
-        WHERE 
-            daily_total_kwh > 0
-        GROUP BY 
-            loopname, DATE_FORMAT(day, '%Y-%m')
-        ORDER BY 
-            month_year ASC;",
-        mysql_real_escape_string($loopname), 
-        mysql_real_escape_string($startDate)
-    );
+                loopname, MONTH(day)
+            ORDER BY 
+                month_year ASC;",
+            mysql_real_escape_string($loopname), 
+            mysql_real_escape_string($startDate)
+        );
 
     $result = db_query($log, $query);
 
