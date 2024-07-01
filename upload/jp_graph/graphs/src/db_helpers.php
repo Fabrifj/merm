@@ -279,20 +279,13 @@ function fetch_data_for_graph_mod3($log,$result) {
     $time = [];
     $value = [];
     // force convertion
-    $formattedMessage = print_r($result, true);
-    $log->logInfo($formattedMessage);
 
     while ($row = mysql_fetch_assoc($result)) {
         $time[] =  $row["time_group"];
         $value[] =  $row["avg_value"];   
     }
      
-    $formattedMessage = print_r($value, true);
-    $log->logInfo($formattedMessage);
-    return [
-        'time' => $time,
-        'value' => $value
-    ];
+    return $value
 }
 
 
@@ -318,7 +311,7 @@ function fetch_mod3_graph($log, $field, $loopname, $startDate, $endDate) {
         WHERE loopname = '%s'
             AND time BETWEEN '%s' AND '%s'
         GROUP BY loopname, time_group
-        ORDER BY time_group;",
+        ORDER BY time_group DESC;",
         mysql_real_escape_string($intervalSeconds),
         mysql_real_escape_string($intervalSeconds),
         mysql_real_escape_string($sqlField),

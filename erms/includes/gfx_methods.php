@@ -368,17 +368,11 @@ function calculate_mod3_graph_units($data1, $data2, $aquisuite) {
   }
   return $units;
 }
-function getEvenlySpacedDates($startDate, $endDate, $count = 287) {
+function getEvenlySpacedDates($startDate, $endDate, $intervalSeconds) {
     try {
         // Calculate start and end timestamps
         $startTimestamp = strtotime($startDate);
         $endTimestamp = strtotime($endDate);
-
-		if ($startTimestamp > $endTimestamp) {
-            throw new Exception('Start date must be earlier than end date');
-        }
-        // Calculate interval between dates in seconds
-        $intervalSeconds = round(($endTimestamp - $startTimestamp) / ($count - 1));
 
         // Initialize array for storing dates
         $dates = [];

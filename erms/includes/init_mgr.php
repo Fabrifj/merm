@@ -847,23 +847,64 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
         $endDate =  $VAL["date_value_end"];
         break;  
     }
+
     $testLogger->logInfo("Start date: ".$startDate." End date: ".$endDate); 
     $field = "current";
     try {
-      $dates = getEvenlySpacedDates($startDate,$endDate );
-      $testLogger->logInfo("Start date: ".$dates[0]." enddates : ".$endDate[286]);
-
-
-      foreach ($ships as $aq) {
-        $ship_data = fetch_mod3_graph($testLogger,$field ,$ships_data[$aq]["loopname"], $startDate, $endDate);
-        $formattedMessage = print_r($ship_data, true);
-        $testLogger->logInfo($formattedMessage);
+      // Convert start and end dates to timestamps
+      $startTimestamp = strtotime($startDate);
+      $endTimestamp = strtotime($endDate);
+  
+      if ($startTimestamp > $endTimestamp) {
+          throw new Exception('Start date must be earlier than end date');
       }
-    } catch (Exception $e) {
+  
+      // Calculate interval between dates in seconds
+      $intervalSeconds = round(($endTimestamp - $startTimestamp) / 286);
+  
+      $dates = getEvenlySpacedDates($startDate, $endDate, $intervalSeconds);
+      $timezone = new DateTimeZone("UTC");
+      $units = [
+          "name" => "current",
+          "units" => "Kw",
+          "field" => "current"
+      ]; // Add missing semicolon here
+  
+      // Logging start date and end date
+      $testLogger->logInfo("Start date: " . $dates[0] . " end date: " . $endDate);
+  
+      $data = [];
+      foreach ($ships as $aq) {
+          $shipValues = fetch_mod3_graph($testLogger, $field, $ships_data[$aq]["loopname"], $startDate, $endDate);
+          $shipName = $ships_data[$aq]["tile"];
+          
+          // Logging ship data
+          $formattedMessage = print_r($shipValues, true); // Use $shipValues instead of $ship_data
+          $testLogger->logInfo($formattedMessage);
+  
+          $shipData = [
+              "name" => $shipName,
+              "values" => $shipValues,
+              "units" => $units
+          ];
+          $data[] = $shipData;
+      }
+  
+      $graph = [
+          "times" => $dates,
+          "timezone" => $timezone,
+          "log_interval" => $intervalSeconds,
+          "date_start" => $dates[0],
+          "date_end" => $dates[count($dates) - 1],
+          "data" => $data,
+      ];
+  
+  } catch (Exception $e) {
       $testLogger->logError("Error fetching data for the default report: " . $e->getMessage());
-    }
-
-    $graph=mod3_graph_multi($ships_data,$VAL["date_value_start"],$VAL["date_value_end"]);
+  }
+    
+    
+    // $graph=mod3_graph_multi($ships_data,$VAL["date_value_start"],$VAL["date_value_end"]);
       // // Debugging
     // $formattedMessage = print_r($graph, true);
     // $testLogger->logInfo($formattedMessage);
