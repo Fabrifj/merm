@@ -869,6 +869,8 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
         "units" => "Amps",
         "field" => "Current"
       ];
+      $chartUnits = [];
+      $chartUnits[] = $units;
   
       // Logging start date and end date
       $testLogger->logInfo("Start date: " . $dates[0] . " end date: " . $endDate);
@@ -903,6 +905,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
           "log_interval" => 300000,
           "date_start" => $dates[0],
           "date_end" => $dates[count($dates) - 1],
+          "units" => $chartUnits,
           "data" => $shipsData,
       ];
   
