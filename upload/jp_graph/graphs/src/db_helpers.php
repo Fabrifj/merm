@@ -279,10 +279,8 @@ function fetch_month_of_specific_year($log, $loopname, $year, $month) {
 }
 function pad_with_zeros($log,$array, $desired_length = 12) {
     $array_length = count($array);
-    $log->logDebug("Array length ".$array_length);
     if ($array_length < $desired_length) {
         $zeros_to_add = $desired_length - $array_length;
-        $log->logDebug("zerros to add ".$zeros_to_add);
         $zeros = array_fill(0, $zeros_to_add, 0);
         $array = array_merge($zeros, $array);
     } else {
@@ -299,8 +297,6 @@ function fetch_data_for_graph_mod8($log,$result) {
 
     $log->logInfo(" Query results");
 
-    $formattedMessage = print_r(mysql_fetch_assoc($result), true);
-    $log->logInfo($formattedMessage);
         // force convertion
     while ($row = mysql_fetch_assoc($result)) {
         // force convertion
@@ -315,7 +311,6 @@ function fetch_data_for_graph_mod8($log,$result) {
             // Calculate
         if ($days > 0) {
             $avg_demand = ($max_cost_kw + $max_off_cost_kw) / $days;
-            $log->logInfo("avg_demand ". $avg_demand);
   
             $avg_cost[] = !empty($avg_demand + $daily_cost_kwh) ? $avg_demand + $daily_cost_kwh : 0;
             $avg_kw[] = !empty(max($max_demand_kw, $max_off_demand_kw)) ? max($max_demand_kw, $max_off_demand_kw) : 0;
