@@ -853,7 +853,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
     try {
       $testLogger->logInfo("Start date: " . $dates[0] . " end date: " . $endDate. " Name: ". $_POST['data1']);
       $units = EnergyMetrics::get_units($name);
-      $field = $units["field"]
+      $field = $units["field"];
       // Convert start and end dates to timestamps
       $startTimestamp = strtotime($startDate);
       $endTimestamp = strtotime($endDate);
