@@ -732,7 +732,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
   //$COST_30["Grand_Total_kWh"] = $Grand_Total_kWh/$ship_count;
 
   // Get times ! 
-  // Fabri updates 
+  //               Fabri updates 
   $testLogger->logInfo("Mod8 ".$VAL["report_year"]);
   // if($VAL["report_year"] =="2024"){
   //   $startDate = date('Y-m-d');
@@ -874,9 +874,17 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
     "cost" => $COST_30
   ];
 
-  $formattedMessage = print_r($graph["months"], true);
-    $testLogger->logInfo($formattedMessage);
+  $formattedMessage = print_r($graph["categories"], true);
+  $testLogger->logInfo($formattedMessage);
+
+  $formattedMessage = print_r($metrics, true);
+  $testLogger->logInfo($formattedMessage);
+
+
+
   break;
+
+
 
   case ERMS_Modules::EnergyMeterTrending: //"mod3":
     $startDate = date('F j, Y');
