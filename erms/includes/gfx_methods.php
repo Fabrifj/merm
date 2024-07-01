@@ -378,17 +378,17 @@ function getEvenlySpacedDates($startDate, $endDate, $intervalSeconds) {
         $dates = [];
 
         // Add the start date
-        $dates[] = $startDate;
+        $dates[] = date('Y-m-d H:i:s', $startTimestamp);
 
         // Generate evenly spaced dates
         $currentTimestamp = $startTimestamp;
-        for ($i = 1; $i < $count - 1; $i++) {
+        while ($currentTimestamp < $endTimestamp - $intervalSeconds) {
             $currentTimestamp += $intervalSeconds;
             $dates[] = date('Y-m-d H:i:s', $currentTimestamp);
         }
 
         // Add the end date
-        $dates[] = $endDate;
+        $dates[] = date('Y-m-d H:i:s', $endTimestamp);
 
         return $dates;
     } catch (Exception $e) {
@@ -397,6 +397,7 @@ function getEvenlySpacedDates($startDate, $endDate, $intervalSeconds) {
         throw $e;
     }
 }
+
 
 
 function calculate_mod3_graph_data($ship_data, $data1,$data2,$date_value_start,$date_value_end) {
