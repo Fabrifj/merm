@@ -290,7 +290,7 @@ function fetch_data_for_graph_mod3($log, $result) {
 }
 
 
-function fetch_mod3_graph($log, $field, $loopname, $startDate, $endDate) {
+function fetch_mod3_graph($log, $dbField, $loopname, $startDate, $endDate) {
     // Convert start and end dates to timestamps
     $startTimestamp = strtotime($startDate);
     $endTimestamp = strtotime($endDate);
@@ -298,8 +298,12 @@ function fetch_mod3_graph($log, $field, $loopname, $startDate, $endDate) {
 
     // Calculate interval between dates in seconds
     $intervalSeconds = round(($endTimestamp - $startTimestamp) / 287);
-    $sqlField = isset($field) ? $field: "current";
-
+    
+    if (!isset($dbField) || empty($dbField)) {
+        $sqlField = "current";
+    } else {
+        $sqlField = $dbField;
+    }
     // Log interval seconds for debugging
     $log->logDebug("Field: " . $sqlField . " Loopname: " . $loopname . " Start: " . $startDate . " End: " . $endDate . " Interval Seconds: " . $intervalSeconds);
 
@@ -319,31 +323,6 @@ function fetch_mod3_graph($log, $field, $loopname, $startDate, $endDate) {
         mysql_real_escape_string($loopname),
         mysql_real_escape_string($startDate),
         mysql_real_escape_string($endDate)
-    );
-
-    // Execute the query
-    $result = db_query($log, $query);
-
-    if (!$result) {
-        $log->logDebug("Query failed");
-        return false;
-    }
-
-    // Fetch data for the graph
-    return fetch_data_for_graph_mod3($log, $result);
-}
-
-function fetch_mod3_units($log, $field, $loopname) {
-    $sqlField = isset($field) ? $field: "current";
-
-    // Log interval seconds for debugging
-    $log->logDebug("Field: " . $sqlField . " Loopname: ");
-
-    $query = sprintf(
-        "SELECT DISTINCT Field, name, units 
-        FROM `Device_Config` 
-        WHERE ='%s' AND `aquisuitetablename`='$aquisuite';",
-        mysql_real_escape_string($sqlField)
     );
 
     // Execute the query
