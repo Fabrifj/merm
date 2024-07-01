@@ -889,6 +889,12 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
         else {
           $testLogger->logError("Error fetching ship data for $shipName: Data returned is not an array");
         }
+        if(count($values) > 0) {
+          $ships_data[$aq]["energy_meter_trending"] = array(
+            "avg" => array_sum($shipValues)/count($shipValues),
+            "units" => $units
+          );
+        }
       }
   
       $graph = [

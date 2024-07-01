@@ -435,7 +435,7 @@ setBreadcrumbs("manager", $_SESSION['user_data']['mgrMods'][$module]["text"], $_
   window.user = "<?php echo $username; ?>";
   window.ships_data = <?php echo json_encode($ships_data); ?>;
   window.access_level = "<?php echo $access_level; ?>";
-  window.module = "<?php echo $module; ?>";
+  window.module = "<?php echo $_REQUEST['module']; ?>";
   window.legacy = <?php echo json_encode($legacy? $legacy: $graph); ?>;
   window.graph = <?php echo json_encode($graph); ?>;
   window.metrics = <?php echo json_encode($metrics); ?>;
