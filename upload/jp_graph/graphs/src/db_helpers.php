@@ -69,9 +69,9 @@ function getMax($a, $b) {
 
 function fetch_data_for_graph_mod1($log,$result) {
 
-    $avg_cost = [];
-    $avg_kw  = [];
-    $avg_kwH = [];
+    $avg_cost = 0;
+    $avg_kw  = 0;
+    $avg_kwH = 0;
 
         // force convertion
     while ($row = mysql_fetch_assoc($result)) {
@@ -88,9 +88,9 @@ function fetch_data_for_graph_mod1($log,$result) {
         if ($days > 0) {
             $avg_demand = ($max_cost_kw + $max_off_cost_kw) / $days;
 
-            $avg_cost []= $avg_demand + $daily_cost_kwh;
-            $avg_kw []= getMax($max_demand_kw, $max_off_demand_kw);
-            $avg_kwH []= $avg_daily_total_kwh;
+            $avg_cost += $avg_demand + $daily_cost_kwh;
+            $avg_kw = getMax($max_demand_kw, $max_off_demand_kw);
+            $avg_kwH += $avg_daily_total_kwh;
         } else {
             $log->logError("Error: 'days' is zero or less.\n");
         }
@@ -150,13 +150,8 @@ function fetch_last_30_days($log, $loopname) {
         return false;
     }
 
-    $fetchData = fetch_data_for_graph_mod1($log,$result);
+    return fetch_data_for_graph_mod1($log,$result);
 
-    return [
-        'avg_cost' => $fetchData["avg_cost"][0],
-        'avg_kw' => $fetchData["avg_kw"][0],
-        'avg_kwH' => $fetchData["avg_kwH"][0],
-    ];
 
 }
 function fetch_Annual($log, $loopname) {
@@ -224,13 +219,8 @@ function fetch_Annual($log, $loopname) {
             return false;
         }
 
-        $fetchData = fetch_data_for_graph_mod1($log,$result);
+        return fetch_data_for_graph_mod1($log,$result);
 
-        return [
-            'avg_cost' => $fetchData["avg_cost"][0],
-            'avg_kw' => $fetchData["avg_kw"][0],
-            'avg_kwH' => $fetchData["avg_kwH"][0],
-        ];
     } else {
         // Handle the case where $loopname is not set or is empty
         $log->logError(" Error: loopname is not defined or is empty.");
@@ -284,12 +274,56 @@ function fetch_month_of_specific_year($log, $loopname, $year, $month) {
         return false;
     }
 
-    $fetchData = fetch_data_for_graph_mod1($log,$result);
+    return fetch_data_for_graph_mod1($log,$result);
 
+}
+function pad_with_zeros($array, $desired_length = 12) {
+    $array_length = count($array);
+    if ($array_length < $desired_length) {
+        $zeros_to_add = $desired_length - $array_length;
+        $array = array_merge(array_fill(0, $zeros_to_add, 0), $array);
+    }
+    return $array;
+}
+
+function fetch_data_for_graph_mod8($log,$result) {
+
+    $avg_cost = [];
+    $avg_kw  = [];
+    $avg_kwH = [];
+
+        // force convertion
+    while ($row = mysql_fetch_assoc($result)) {
+        // force convertion
+        $max_cost_kw = (float)$row['max_cost_kw'];
+        $max_off_cost_kw = (float)$row['max_off_cost_kw'];
+        $days = (int)$row['days'];
+        $daily_cost_kwh = (float)$row['avg_daily_cost_kwh'];
+        $max_demand_kw = (float)$row['max_demand_kw'];
+        $max_off_demand_kw = (float)$row['max_off_demand_kw'];
+        $avg_daily_total_kwh = (float)$row['avg_daily_total_kwh'];
+
+            // Calculate
+        if ($days > 0) {
+            $avg_demand = ($max_cost_kw + $max_off_cost_kw) / $days;
+
+            $avg_cost []= $avg_demand + $daily_cost_kwh;
+            $avg_kw []= getMax($max_demand_kw, $max_off_demand_kw);
+            $avg_kwH []= $avg_daily_total_kwh;
+        } else {
+            $log->logError("Error: 'days' is zero or less.\n");
+        }
+    }
+    // Ensure each array has exactly 12 values by padding with zeros if necessary
+    $avg_cost = pad_with_zeros($avg_cost);
+    $avg_kw = pad_with_zeros($avg_kw);
+    $avg_kwH = pad_with_zeros($avg_kwH);
+
+     
     return [
-        'avg_cost' => $fetchData["avg_cost"][0],
-        'avg_kw' => $fetchData["avg_kw"][0],
-        'avg_kwH' => $fetchData["avg_kwH"][0],
+        'avg_cost' => $avg_cost,
+        'avg_kw' => $avg_kw,
+        'avg_kwH' => $avg_kwH,
     ];
 }
 
@@ -342,7 +376,7 @@ function fetch_year_ago_mod8($log, $loopname, $startDate) {
         return false;
     }
 
-    return fetch_data_for_graph_mod1($log, $result);
+    return fetch_data_for_graph_mod8($log, $result);
 }
 
 function fetch_data_for_graph_mod3($log, $result) {
