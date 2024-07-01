@@ -742,11 +742,10 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
   }
   $endDate = date('Y-m-d', strtotime("$startDate -12 months"));
 
-  // $months = [];
-  //   for ($i = 11; $i >= 0; $i--) {
-  //       $months[] = date("F", strtotime("-$i month", strtotime($startDate)));
-  //   }
-  //   return $months;
+  $months = [];
+    for ($i = 11; $i >= 0; $i--) {
+        $months[] = date("F", strtotime("-$i month", strtotime($startDate)));
+    }
 
   try{
     $ship_data = [];
@@ -764,6 +763,8 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
       $ships_data[$ship_aquisuite]["Peak_Demand"][] = $results["Peak_Demand"]*1;
       $ships_data[$ship_aquisuite]["Grand_Total_Lay_Day"][] = $results["Grand_Total_Lay_Day"];
 
+      $formattedMessage = print_r($ships_data[$ship_aquisuite]["kWh_day"], true);
+      $testLogger->logInfo($formattedMessage);
 
     }
   } catch (Exception $e) {
@@ -873,9 +874,6 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
     "values" => $VAL,
     "cost" => $COST_30
   ];
-
-  $formattedMessage = print_r($graph["categories"], true);
-  $testLogger->logInfo($formattedMessage);
 
   $formattedMessage = print_r($metrics, true);
   $testLogger->logInfo($formattedMessage);
