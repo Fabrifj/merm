@@ -72,11 +72,5 @@ class EnergyMetrics
     }
 }
 
-// Ejemplo de uso:
-$names = EnergyMetrics::get_names();
-print_r($names);
-
-$units = EnergyMetrics::get_units('Real Power');
-print_r($units);
 
 ?>

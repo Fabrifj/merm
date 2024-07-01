@@ -69,9 +69,9 @@ function getMax($a, $b) {
 
 function fetch_data_for_graph_mod1($log,$result) {
 
-    $avg_cost = 0;
-    $avg_kw  = 0;
-    $avg_kwH =0;
+    $avg_cost = [];
+    $avg_kw  = [];
+    $avg_kwH = [];
 
         // force convertion
     while ($row = mysql_fetch_assoc($result)) {
@@ -87,9 +87,10 @@ function fetch_data_for_graph_mod1($log,$result) {
             // Calculate
         if ($days > 0) {
             $avg_demand = ($max_cost_kw + $max_off_cost_kw) / $days;
-            $avg_cost += $avg_demand + $daily_cost_kwh;
-            $avg_kw = getMax($max_demand_kw, $max_off_demand_kw);
-            $avg_kwH += $avg_daily_total_kwh;
+
+            $avg_cost []= $avg_demand + $daily_cost_kwh;
+            $avg_kw []= getMax($max_demand_kw, $max_off_demand_kw);
+            $avg_kwH []= $avg_daily_total_kwh;
         } else {
             $log->logDebug("Error: 'days' is zero or less.\n");
         }
@@ -149,7 +150,14 @@ function fetch_last_30_days($log, $loopname) {
         return false;
     }
 
-    return fetch_data_for_graph_mod1($log,$result);
+    $fetchData = fetch_data_for_graph_mod1($log,$result);
+
+    return [
+        'avg_cost' => $fetchData["avg_cost"][0],
+        'avg_kw' => $fetchData["avg_kw"][0],
+        'avg_kwH' => $fetchData["avg_kwH"][0],
+    ];
+
 }
 function fetch_Annual($log, $loopname) {
     // Ensure that $loopname is defined and has a value
@@ -218,7 +226,13 @@ function fetch_Annual($log, $loopname) {
             return false;
         }
 
-        return fetch_data_for_graph_mod1($log, $result);
+        $fetchData = fetch_data_for_graph_mod1($log,$result);
+
+        return [
+            'avg_cost' => $fetchData["avg_cost"][0],
+            'avg_kw' => $fetchData["avg_kw"][0],
+            'avg_kwH' => $fetchData["avg_kwH"][0],
+        ];
     } else {
         // Handle the case where $loopname is not set or is empty
         $log->logDebug(" Error: loopname is not defined or is empty.");
@@ -263,6 +277,63 @@ function fetch_month_of_specific_year($log, $loopname, $year, $month) {
             GROUP BY 
                 loopname;",
         mysql_real_escape_string($loopname), $year, $month
+    );
+
+    $result = db_query($log, $query);
+
+    if (!$result) {
+        $log->logDebug("Query failed");
+        return false;
+    }
+
+    $fetchData = fetch_data_for_graph_mod1($log,$result);
+
+    return [
+        'avg_cost' => $fetchData["avg_cost"][0],
+        'avg_kw' => $fetchData["avg_kw"][0],
+        'avg_kwH' => $fetchData["avg_kwH"][0],
+    ];
+}
+
+function fetch_year_ago($log, $loopname, $startDate) {
+    $log->logDebug("Loopname: ". $loopname. " StartDate: ". $startDate);
+    $query = sprintf(
+        "SELECT 
+            loopname,
+            DATE_FORMAT(day, '%Y-%m') AS month_year,
+            ROUND(MAX(max_demand_kw), 2) AS max_demand_kw, 
+            ROUND(MAX(max_off_demand_kw), 2) AS max_off_demand_kw,
+            ROUND(MAX(max_cost_kw), 2) AS max_cost_kw, 
+            ROUND(MAX(max_off_cost_kw), 2) AS max_off_cost_kw,
+            ROUND(AVG(daily_cost_kwh), 2) AS avg_daily_cost_kwh, 
+            ROUND(AVG(daily_total_kwh), 2) AS avg_daily_total_kwh, 
+            COUNT(*) AS days
+        FROM (
+            SELECT 
+                loopname,
+                DATE_FORMAT(time, '%Y-%m-%d') AS day,
+                MAX(peak_kw) AS max_demand_kw,
+                MAX(off_peak_kw) AS max_off_demand_kw,
+                MAX(cost_kw) AS max_cost_kw,
+                MAX(off_cost_kw) AS max_off_cost_kw,
+                SUM(cost_kwh + off_cost_kwh) AS daily_cost_kwh,
+                SUM(peak_kwh + off_peak_kwh) AS daily_total_kwh
+            FROM 
+                Standard_ship_records 
+            WHERE 
+                loopname = '%s' 
+                AND time >= '%s', INTERVAL 12 MONTH)
+            GROUP BY 
+                loopname, DATE_FORMAT(time, '%Y-%m-%d')
+        ) AS daily_sums
+        WHERE 
+            daily_total_kwh > 0
+        GROUP BY 
+            loopname, DATE_FORMAT(day, '%Y-%m')
+        ORDER BY 
+            month_year ASC;
+        ;",
+        mysql_real_escape_string($loopname), $startDate
     );
 
     $result = db_query($log, $query);
