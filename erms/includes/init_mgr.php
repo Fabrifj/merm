@@ -886,7 +886,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
           ];          
           $shipsData[] = $shipData;
         }
-        } else {
+        else {
           $testLogger->logError("Error fetching ship data for $shipName: Data returned is not an array");
         }
       }
