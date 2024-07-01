@@ -742,11 +742,11 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
   }
   $endDate = date('Y-m-d', strtotime("$startDate -12 months"));
 
-  $months = [];
-    for ($i = 11; $i >= 0; $i--) {
-        $months[] = date("F", strtotime("-$i month", strtotime($startDate)));
-    }
-    return $months;
+  // $months = [];
+  //   for ($i = 11; $i >= 0; $i--) {
+  //       $months[] = date("F", strtotime("-$i month", strtotime($startDate)));
+  //   }
+  //   return $months;
 
   // try{
   //   $ship_data = [];
