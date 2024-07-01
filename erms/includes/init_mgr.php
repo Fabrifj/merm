@@ -863,33 +863,38 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
       $intervalSeconds = round(($endTimestamp - $startTimestamp) / 286);
   
       $dates = getEvenlySpacedDates($startDate, $endDate, $intervalSeconds);
-      $timezone = new DateTimeZone("UTC");
+      $timezone = new DateTimeZone("America/New_York");
       $units = [
-          "name" => "current",
-          "units" => "Kw",
-          "field" => "current"
-      ]; // Add missing semicolon here
+        "name" => "Current",
+        "units" => "Amps",
+        "field" => "Current"
+      ];
   
       // Logging start date and end date
       $testLogger->logInfo("Start date: " . $dates[0] . " end date: " . $endDate);
   
       $shipsData = [];
       foreach ($ships as $aq) {
-          $shipValues = fetch_mod3_graph($testLogger, $field, $ships_data[$aq]["loopname"], $startDate, $endDate);
-          $shipName = $ships_data[$aq]["tile"];
-  
+        $shipValues = fetch_mod3_graph($testLogger, $field, $ships_data[$aq]["loopname"], $startDate, $endDate);
+        $shipName = $ships_data[$aq]["title"];
+        if (is_array($shipValues)) {
+          $numericValues = array_map('floatval', $shipValues);
           $shipData = [
-              "name" => $shipName,
-              "values" => $shipValues,
-              "units" => $units
-          ];
+            "name" => $shipName,
+            "values" => $shipValues,
+            "units" => $units
+          ];          
           $shipsData[] = $shipData;
+        }
+        } else {
+          $testLogger->logError("Error fetching ship data for $shipName: Data returned is not an array");
+        }
       }
   
       $graph = [
           "times" => $dates,
           "timezone" => $timezone,
-          "log_interval" => $intervalSeconds,
+          "log_interval" => 300000,
           "date_start" => $dates[0],
           "date_end" => $dates[count($dates) - 1],
           "data" => $shipsData,
