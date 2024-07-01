@@ -729,7 +729,8 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
     $startDate = date('Y-m-d');
   }else{
         // Start date is January 1st of the given year
-    $startDate = "$VAL['report_year']-01-01";
+
+    $startDate = $VAL['report_year']."-01-01";
   }
 
   try{
