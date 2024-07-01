@@ -739,7 +739,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
     $Peak_Demand = [];    
     $Grand_Total_Lay_Day = [];
     foreach ($ships as $aq){
-      $results =  fetch_year_ago_mod8($testLogger, $ships_data[$aq]["loopname"], $startDate)
+      $results =  fetch_year_ago_mod8($testLogger, $ships_data[$aq]["loopname"], $startDate);
       $ships_data[$ship_aquisuite]["kWh_day"][] = $results["kWh_day"];
       $ships_data[$ship_aquisuite]["Peak_Demand"][] = $results["Peak_Demand"]*1;
       $ships_data[$ship_aquisuite]["Grand_Total_Lay_Day"][] = $results["Grand_Total_Lay_Day"];
