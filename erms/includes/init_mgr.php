@@ -852,7 +852,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
     $testLogger->logInfo("Start date: ".$startDate." End date: ".$endDate); 
     $field = "current";
     try {
-      $testLogger->logInfo("Start date: " . $dates[0] . " end date: " . $endDate. " Field: ".$VAL["field"]);
+      $testLogger->logInfo("Start date: " . $dates[0] . " end date: " . $endDate. " Field: ". $_POST['data1']);
 
       // Convert start and end dates to timestamps
       $startTimestamp = strtotime($startDate);
