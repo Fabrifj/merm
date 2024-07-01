@@ -852,6 +852,8 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
     $testLogger->logInfo("Start date: ".$startDate." End date: ".$endDate); 
     $field = "current";
     try {
+      $testLogger->logInfo("Start date: " . $dates[0] . " end date: " . $endDate. " Field: ".$VAL["field"]);
+
       // Convert start and end dates to timestamps
       $startTimestamp = strtotime($startDate);
       $endTimestamp = strtotime($endDate);
@@ -864,6 +866,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
       $intervalSeconds = round(($endTimestamp - $startTimestamp) / 286);
   
       $dates = getEvenlySpacedDates($startDate, $endDate, $intervalSeconds);
+      // $units = EnergyMetrics::get_units($selectedField);
 
       $units = [
         "name" => "Current",
@@ -874,7 +877,6 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
       $chartUnits[] = $units;
   
       // Logging start date and end date
-      $testLogger->logInfo("Start date: " . $dates[0] . " end date: " . $endDate);
   
       $shipsData = [];
       foreach ($ships as $aq) {
