@@ -285,7 +285,7 @@ function fetch_data_for_graph_mod3($log,$result) {
         $value[] =  $row["avg_value"];   
     }
      
-    return $value
+    return $value;
 }
 
 
