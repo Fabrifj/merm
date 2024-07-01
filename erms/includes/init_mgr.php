@@ -863,7 +863,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
       $intervalSeconds = round(($endTimestamp - $startTimestamp) / 286);
   
       $dates = getEvenlySpacedDates($startDate, $endDate, $intervalSeconds);
-      $timezone = new DateTimeZone("America/New_York");
+      $timezone = "America/New_York";
       $units = [
         "name" => "Current",
         "units" => "Amps",
