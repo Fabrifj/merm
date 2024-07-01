@@ -758,7 +758,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
       if(!$result){
         $Ship_available[] =  0 ;
       }else{
-        $Ship_available[] =  0 ;
+        $Ship_available[] =  1 ;
       }
       $ships_data[$ship_aquisuite]["kWh_day"][] = $results["kWh_day"];
       $ships_data[$ship_aquisuite]["Peak_Demand"][] = $results["Peak_Demand"]*1;
