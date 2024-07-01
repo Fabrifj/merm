@@ -45,6 +45,18 @@ class EnergyMetrics
         return $names;
     }
 
+    public static function get_details($key)
+    {
+        if (isset(self::$metrics[$key])) {
+            $value = self::$metrics[$key];
+            return [
+                'field' => $key,
+                'name' => $value['name'],
+                'units' => $value['units']
+            ];
+        }
+        return null;
+    }
     public static function get_units($name)
     {
         foreach (self::$metrics as $key => $value) {

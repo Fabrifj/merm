@@ -292,12 +292,12 @@ setBreadcrumbs("manager", $_SESSION['user_data']['mgrMods'][$module]["text"], $_
                   $metricsNames = EnergyMetrics::get_names();
 
                   // Establece "Current" como la opción seleccionada por defecto
-                  $selectedField = isset($_POST['data1']) ? $_POST['data1'] : 'Current';
+                  $selectedField = isset($_POST['data1']) ? $_POST['data1'] : 'current';
 
                   echo '
                   <input name="datapts" type="hidden" value="points" />
                   <select name="data1" id="data1" onchange="updateMeter()">
-                      <option value="Current" selected>Current</option>';
+                      <option value="current" selected>Current</option>';
 
                   foreach ($metricsNames as $name) {
                       $metric = EnergyMetrics::get_units($name);
