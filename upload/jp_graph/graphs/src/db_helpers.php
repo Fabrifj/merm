@@ -296,7 +296,7 @@ function fetch_mod3_graph($log, $field, $loopname, $startDate, $endDate) {
 
 
     // Calculate interval between dates in seconds
-    $intervalSeconds = round(($endTimestamp - $startTimestamp) / 286);
+    $intervalSeconds = round(($endTimestamp - $startTimestamp) / 287);
     $sqlField = isset($field) ? $field: "current";
 
     // Log interval seconds for debugging
