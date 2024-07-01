@@ -295,9 +295,9 @@ function fetch_data_for_graph_mod8($log,$result) {
     $avg_kw  = [];
     $avg_kwH = [];
 
-    $formattedMessage = print_r($result, true);
     $log->logInfo(" Query results");
 
+    $formattedMessage = print_r(mysql_fetch_assoc($result), true);
     $log->logInfo($formattedMessage);
         // force convertion
     while ($row = mysql_fetch_assoc($result)) {
