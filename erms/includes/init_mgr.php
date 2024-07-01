@@ -864,7 +864,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
       $intervalSeconds = round(($endTimestamp - $startTimestamp) / 286);
   
       $dates = getEvenlySpacedDates($startDate, $endDate, $intervalSeconds);
-      
+
       $units = [
         "name" => "Current",
         "units" => "Amps",
@@ -880,7 +880,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
       foreach ($ships as $aq) {
         $shipValues = fetch_mod3_graph($testLogger, $field, $ships_data[$aq]["loopname"], $startDate, $endDate);
         $shipName = $ships_data[$aq]["title"];
-        $timezone = $ship_data[$aq]["timezone"];
+        $timezone = "UTC ";
 
         if (is_array($shipValues)) {
           $numericValues = array_map('floatval', $shipValues);
