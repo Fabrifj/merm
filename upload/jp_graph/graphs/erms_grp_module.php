@@ -315,6 +315,7 @@ setBreadcrumbs("manager", $_SESSION['user_data']['mgrMods'][$module]["text"], $_
               <br />
               <div id="change"></div>
           </form>
+        </div>
      </div>
 <?php
             break;
