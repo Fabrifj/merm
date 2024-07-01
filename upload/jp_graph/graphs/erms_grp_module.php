@@ -49,6 +49,7 @@ include_once ('../../../Auth/auth.php');
 
 //Update 2024
 require './src/db_helpers.php';
+require './src/class_helpers.php';
 
 
 $shipClass = $_REQUEST['shipClass'];
@@ -256,7 +257,7 @@ setBreadcrumbs("manager", $_SESSION['user_data']['mgrMods'][$module]["text"], $_
                             <div id="radio">
                                 <input type="radio" id="radio1" name="display" value="day" onclick="updateMeter()" <?php if($VAL["display"]=="day"){echo "checked";} else {echo '';} ?> /><label for="radio1">Last 24 Hours</label><br />
                                 <input type="radio" id="radio2" name="display" value="week" onclick="updateMeter()" <?php if($VAL["display"]=="week"){echo "checked";} else {echo '';} ?> /><label for="radio2">Last 7 Days</label><br />
-                                <input type="radio" id="radio3" name="display" value="month" onclick="updateMeter()" <?php if($VAL["display"]=="month"){echo "checked";} else {echo '';} ?> /><label for="radio3">Last 30 Days</label><br />
+                                <input type="radio" id="radio3" name="display" value="month" onclick="    " <?php if($VAL["display"]=="month"){echo "checked";} else {echo '';} ?> /><label for="radio3">Last 30 Days</label><br />
                                 <input type="radio" id="radio4" name="display" value="anydate" onclick="s()" <?php if($VAL["display"]=="anydate"){echo "checked";} else {echo '';} ?> /><label for="radio4">Date &amp; Time Selection</label><br />
                             </div>
                             <br />
@@ -283,48 +284,28 @@ setBreadcrumbs("manager", $_SESSION['user_data']['mgrMods'][$module]["text"], $_
             <div id="graph_range_sel_header">
               <span style="font-weight: bold;">Graph Data Point</span><br />
             </div>
+                <?php
+                    // Obtenemos todos los nombres de las métricas
+                    $metricsNames = EnergyMetrics::get_names();
+                    
+                    // Establecemos "Current" como la opción seleccionada por defecto
+                    $selectedField = isset($VAL["field"]) ? $VAL["field"] : 'Current';
 
- <?php
-                    $DATA = get_data($aquisuitetablename[0]);
-                    $Field = $DATA['Field'];
-                    $fcount = count($Field);
-                    $Title = $DATA['Title'];
-                    $tcount = count($Title);
-
-                    $utility=$VAL["utility"];
-
-                    echo'
+                    echo '
                     <input name="datapts" type="hidden" value="points" />
-                    <select name="data1" id="data1">
-                     <option value="'.$graph['units'][0]['field'].'" selected>'.$graph['units'][0]['name'].'</option>';
-                            $i=0;
+                    <select name="data1" id="data1" onchange="updateMeter()">
+                        <option value="Current" selected>Current</option>';
 
-                            while($i<$fcount)
-                            {
-                                    if($Field[$i]!=$graph['units'][0]['field'])
-                                    {
-                                    echo '<option value="'.$Field[$i].'">'.$Title[$i].'</option>';
-                                    }
-                                    $i++;
-                            }
-                            switch($utility)
-                            {
-                                    case "Virginia_Dominion_Rates":
-                                    if($graph['data1']!="30_Min_Reactive_kVAR")
-                                    {
-                                    echo '<option value="30_Min_Reactive_kVAR">Reactive Power Demand</option>';
-                                    }
-                                    break;
-                            }
+                    foreach ($metricsNames as $name) {
+                        $metric = EnergyMetrics::get_units($name);
+                        if ($metric && $metric['field'] !== 'Current') {
+                            $selected = $metric['field'] == $selectedField ? 'selected' : '';
+                            echo '<option value="'.$metric['field'].'" '.$selected.'>'.$metric['name'].'</option>';
+                        }
+                    }
 
                     echo '</select>';
-                    echo'
-                    </div>
-                    </br>
-                    <div id="change">
-                    </div>
-                    </form>';
-?>
+                ?>
                     </div>
                </div>
             </div>

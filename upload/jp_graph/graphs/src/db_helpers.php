@@ -333,6 +333,31 @@ function fetch_mod3_graph($log, $field, $loopname, $startDate, $endDate) {
     return fetch_data_for_graph_mod3($log, $result);
 }
 
+function fetch_mod3_units($log, $field, $loopname) {
+    $sqlField = isset($field) ? $field: "current";
+
+    // Log interval seconds for debugging
+    $log->logDebug("Field: " . $sqlField . " Loopname: ");
+
+    $query = sprintf(
+        "SELECT DISTINCT Field, name, units 
+        FROM `Device_Config` 
+        WHERE ='%s' AND `aquisuitetablename`='$aquisuite';",
+        mysql_real_escape_string($sqlField)
+    );
+
+    // Execute the query
+    $result = db_query($log, $query);
+
+    if (!$result) {
+        $log->logDebug("Query failed");
+        return false;
+    }
+
+    // Fetch data for the graph
+    return fetch_data_for_graph_mod3($log, $result);
+}
+
 
 // Function to close the connection
 function db_close() {

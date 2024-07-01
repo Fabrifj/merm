@@ -826,6 +826,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
     "cost" => $COST_30
   ];
   break;
+
   case ERMS_Modules::EnergyMeterTrending: //"mod3":
     $startDate = date('F j, Y');
     $testLogger->logInfo("Mod3 ".$startDate);
@@ -863,7 +864,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
       $intervalSeconds = round(($endTimestamp - $startTimestamp) / 286);
   
       $dates = getEvenlySpacedDates($startDate, $endDate, $intervalSeconds);
-      $timezone = "America/New_York";
+      
       $units = [
         "name" => "Current",
         "units" => "Amps",
@@ -879,6 +880,8 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
       foreach ($ships as $aq) {
         $shipValues = fetch_mod3_graph($testLogger, $field, $ships_data[$aq]["loopname"], $startDate, $endDate);
         $shipName = $ships_data[$aq]["title"];
+        $timezone = $ship_data[$aq]["timezone"];
+
         if (is_array($shipValues)) {
           $numericValues = array_map('floatval', $shipValues);
           $shipData = [
@@ -915,15 +918,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
     
     
     // $graph=mod3_graph_multi($ships_data,$VAL["date_value_start"],$VAL["date_value_end"]);
-    // $graph["times"] = $dates;
-    // $graph["timezone"] = $timezone;
-    // $graph["log_interval"] = 300000;
-    // $graph["date_start"] = $dates[0];
-    // $graph["date_end"] = $dates[count($dates) - 1];
-    // $graph["data"] = $shipsData;
-      // // Debugging
-    $formattedMessage = print_r($graph, true);
-    $testLogger->logInfo($formattedMessage);
+
   break;
 }
 
