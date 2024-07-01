@@ -880,7 +880,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
       foreach ($ships as $aq) {
         $shipValues = fetch_mod3_graph($testLogger, $field, $ships_data[$aq]["loopname"], $startDate, $endDate);
         $shipName = $ships_data[$aq]["title"];
-        $timezone = "UTC ";
+        $timezone = "America/New_York";
 
         if (is_array($shipValues)) {
           $numericValues = array_map('floatval', $shipValues);
