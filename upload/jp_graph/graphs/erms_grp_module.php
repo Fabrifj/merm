@@ -280,35 +280,41 @@ setBreadcrumbs("manager", $_SESSION['user_data']['mgrMods'][$module]["text"], $_
                 </div>
 
           <!-- Selected Data Points Summary -->
-          <div class="iwbox3">
-            <div id="graph_range_sel_header">
-              <span style="font-weight: bold;">Graph Data Point</span><br />
-            </div>
-                <?php
-                    // Obtenemos todos los nombres de las métricas
-                    $metricsNames = EnergyMetrics::get_names();
-                    
-                    // Establecemos "Current" como la opción seleccionada por defecto
-                    $selectedField = isset($VAL["field"]) ? $VAL["field"] : 'Current';
+          <form id="f2" action="procesar_seleccion.php" method="post">
+              <div class="iwbox3">
+                  <div id="graph_range_sel_header">
+                      <span style="font-weight: bold;">Graph Data Point</span><br />
+                  </div>
 
-                    echo '
-                    <input name="datapts" type="hidden" value="points" />
-                    <select name="data1" id="data1" onchange="updateMeter()">
-                        <option value="Current" selected>Current</option>';
+                  <?php
+                  include 'EnergyMetrics.php'; // Asegúrate de incluir el archivo donde está la clase EnergyMetrics
 
-                    foreach ($metricsNames as $name) {
-                        $metric = EnergyMetrics::get_units($name);
-                        if ($metric && $metric['field'] !== 'Current') {
-                            $selected = $metric['field'] == $selectedField ? 'selected' : '';
-                            echo '<option value="'.$metric['field'].'" '.$selected.'>'.$metric['name'].'</option>';
-                        }
-                    }
+                  // Obtén todos los nombres de las métricas
+                  $metricsNames = EnergyMetrics::get_names();
 
-                    echo '</select>';
-                ?>
-                    </div>
-               </div>
-            </div>
+                  // Establece "Current" como la opción seleccionada por defecto
+                  $selectedField = isset($VAL["display"]) ? $VAL["display"] : 'Current';
+
+                  echo '
+                  <input name="datapts" type="hidden" value="points" />
+                  <select name="data1" id="data1" onchange="updateMeter()">
+                      <option value="Current" selected>Current</option>';
+
+                  foreach ($metricsNames as $name) {
+                      $metric = EnergyMetrics::get_units($name);
+                      if ($metric && $metric['field'] !== 'Current') {
+                          $selected = $metric['field'] == $selectedField ? 'selected' : '';
+                          echo '<option value="'.$metric['field'].'" '.$selected.'>'.$metric['name'].'</option>';
+                      }
+                  }
+
+                  echo '</select>';
+                  ?>
+
+              </div>
+              <br />
+              <div id="change"></div>
+          </form>
      </div>
 <?php
             break;
@@ -368,6 +374,8 @@ setBreadcrumbs("manager", $_SESSION['user_data']['mgrMods'][$module]["text"], $_
   function updateMeter()
   {
       document.getElementById('f1').submit();
+      document.getElementById('f2').submit();
+
   }
   function s()
   {
