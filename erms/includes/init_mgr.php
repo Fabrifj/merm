@@ -868,8 +868,11 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
     "values" => $VAL,
     "cost" => $COST_30
   ];
-  $formattedMessage = print_r($graph, true);
-  $log->logInfo($formattedMessage);
+  $formattedMessage = print_r($graph["data"], true);
+  $log->logDebug($formattedMessage);
+
+  $formattedMessage = print_r($metrics, true);
+  $log->logDebug($formattedMessage);
 
   break;
 
