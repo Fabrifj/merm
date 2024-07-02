@@ -650,6 +650,9 @@ function fetch_monthly_report_mod6($log, $loopname, $year, $month) {
 
     // Calculate total peak cost
     $totalPeakCost = $generalData["sum_cost_kwh"] + $generalData["sum_off_cost_kwh"];
+    //	$VAL["2_Total_CO2"] =($VAL["kWh_Total"]*601.292474+$VAL["kWh_Total"]*0.899382565*310+$VAL["kWh_Total"]*0.01839836*21)/pow(10,6);
+
+    $totalCO2 =($totalPeak*601.292474+$totalPeak*0.899382565*310+$totalPeak*0.01839836*21)/pow(10,6);
 
     // Build monthly report array
 // Redondear cada valor numérico a 2 decimales en el array $monthlyReport
@@ -672,7 +675,7 @@ $monthlyReport = [
     'AvgPowerFactor' => round($generalData["avg_power_factor"], 3),
     'LowestPowerFactor' => round($generalData["min_power_factor"], 3),
     'HighestPowerFactor' => round($generalData["max_power_factor"], 3),
-    'TotalCO2' => round(0, 2), // Placeholder, update with actual calculation if applicable
+    'TotalCO2' => round($totalCO2, 2), // Placeholder, update with actual calculation if applicable
     'OnPeakEnergyCharges' => round($generalData["max_demand_cost_kw"], 2),
     'OffPeakEnergyCharges' => round($generalData["max_off_demand_cost_kw"], 2),
     'OtherEnergyCharges' => round(0, 2), // Placeholder, update with actual calculation if applicable

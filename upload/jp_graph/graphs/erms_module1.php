@@ -1038,11 +1038,11 @@ $testLogger->logDebug($formattedMessage);
     					<option value="-11-01 00:00:00" ';if ($VAL["report_month"]=="November"){echo "selected";} echo '>November</option>
     					<option value="-12-01 00:00:00" ';if ($VAL["report_month"]=="December"){echo "selected";} echo '>December</option>
     					<option value="month" ';if ($VAL["report_month"]=="Last 30 Days"){echo "selected";} echo '>Last 30 Days</option>
-    				    <option value="annual" ';if ($VAL["report_month"]=="Annual"){echo "selected";} echo '>Annual</option>
     					</select>
     					<label>Select Report Year</label><br />
     					<select name="year" id="year">
                         <br />
+                        <option value="2023" ';if ($VAL["report_year"]=="2024"){echo "selected";} echo '>2023</option>
                         <option value="2023" ';if ($VAL["report_year"]=="2023"){echo "selected";} echo '>2023</option>
                         <option value="2022" ';if ($VAL["report_year"]=="2022"){echo "selected";} echo '>2022</option>
                         <option value="2021" ';if ($VAL["report_year"]=="2021"){echo "selected";} echo '>2021</option>
