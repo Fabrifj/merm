@@ -976,21 +976,21 @@ $testLogger->logDebug($formattedMessage);
 			echo
                     '<tr>
 			<td>Billed Power Factor</font></td>
-			<td style="background:none;"><font color="black">'.number_format(($shipData["BilledPowerFactor"]/100), 2, '.', '').'</font></td>
+			<td style="background:none;"><font color="black">'.$shipData["BilledPowerFactor"].'</font></td>
                     </tr>';
 			}
 			echo
 		'<tr>
 			<td>Average Power Factor</font></td>
-			<td style="background:none;"><font color="black">'.number_format(($shipData["AvgPowerFactor"]/100), 2, '.', '').'</font></td>
+			<td style="background:none;"><font color="black">'.$shipData["AvgPowerFactor"].'</font></td>
 		</tr>
 		<tr>
 			<td>Lowest Power Factor</font></td>
-			<td style="background:none;"><font color="black">'.number_format(($shipData["LowestPowerFactor"]/100), 2, '.', '').'</font></td>
+			<td style="background:none;"><font color="black">'.$shipData["LowestPowerFactor"].'</font></td>
 		</tr>
 		<tr>
 			<td>Highest Power Factor</font></td>
-			<td style="background:none;"><font color="black">'.number_format(($shipData["HighestPowerFactor"]/100), 2, '.', '').'</font></td>
+			<td style="background:none;"><font color="black">'.$shipData["HighestPowerFactor"].'</font></td>
 		</tr>
                 <tr>
     		      <td>Total CO<sub>2</sub></font></td>
