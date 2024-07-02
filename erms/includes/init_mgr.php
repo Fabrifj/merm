@@ -764,7 +764,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
   } catch (Exception $e) {
     $testLogger->logError("Error fetching data for the default report: " . $e->getMessage());
   }
-  $log->logDebug("Check path, add headers ");
+  $testLogger->logDebug("Check path, add headers ");
 
   $graph = [
     "categories" => $months,
@@ -772,7 +772,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
     "ship_available" => $Ship_available,
     "dates" => [$startDate, $endDate]
   ];
-  $log->logDebug("Check path, add data ");
+  $testLogger->logDebug("Check path, add data ");
 
   $graph["data"] = [
     [ "name" => "Consumption(kWh) Avg per Day Baseline",
@@ -871,10 +871,10 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
     "cost" => $COST_30
   ];
   $formattedMessage = print_r($graph["data"], true);
-  $log->logDebug($formattedMessage);
+  $testLogger->logDebug($formattedMessage);
 
   $formattedMessage = print_r($metrics, true);
-  $log->logDebug($formattedMessage);
+  $testLogger->logDebug($formattedMessage);
 
   break;
 
