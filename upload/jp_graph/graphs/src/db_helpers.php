@@ -296,7 +296,10 @@ function fetch_data_for_graph_mod8($log,$result) {
     $avg_kwH = [];
 
     $log->logInfo(" Query results");
-
+    $log->logError("query : ");    
+    $formattedMessage = print_r(db_fetch_all($result), true);
+    $log->logDebug($formattedMessage);
+    
         // force convertion
     while ($row = mysql_fetch_assoc($result)) {
         // force convertion
@@ -320,7 +323,7 @@ function fetch_data_for_graph_mod8($log,$result) {
         }
     }
     $log->logError("avg cost : ");    
-    $formattedMessage = print_r($results, true);
+    $formattedMessage = print_r($avg_cost, true);
     $log->logDebug($formattedMessage);
 
     // Ensure each array has exactly 12 values by padding with zeros if necessary

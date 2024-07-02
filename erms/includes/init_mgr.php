@@ -759,7 +759,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
       $testLogger->logDebug("Test query result");
       $formattedMessage = print_r($results, true);
       $testLogger->logDebug($formattedMessage);
-      
+
       $Ship_available[] =1;
       $ships_data[$aq]["kWh_day"] = $results["avg_cost"];
       $ships_data[$aq]["Peak_Demand"]= $results["avg_kw"];
@@ -875,11 +875,11 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
     "values" => $VAL,
     "cost" => $COST_30
   ];
-  $formattedMessage = print_r($graph["data"], true);
-  $testLogger->logDebug($formattedMessage);
+  // $formattedMessage = print_r($graph["data"], true);
+  // $testLogger->logDebug($formattedMessage);
 
-  $formattedMessage = print_r($metrics, true);
-  $testLogger->logDebug($formattedMessage);
+  // $formattedMessage = print_r($metrics, true);
+  // $testLogger->logDebug($formattedMessage);
 
   break;
 
