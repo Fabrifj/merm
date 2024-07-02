@@ -535,12 +535,12 @@ function fetch_mod6_general_data($log,$loopname,$year, $month) {
     return mysql_fetch_assoc($result);
 
 }
-function fetch_mod6_max_peak($log,$loopname,$year, $month) {
+function fetch_mod6_max_peak($log, $loopname, $year, $month) {
     $query = sprintf(
         "SELECT 
             s.loopname,
-            s.max_peak_kw,
-            sr.time AS max_peak_time
+            IFNULL(s.max_peak_kw, 0) AS max_peak_kw,
+            IFNULL(sr.time, 0) AS max_peak_time
         FROM (
             SELECT 
                 loopname,
@@ -554,25 +554,39 @@ function fetch_mod6_max_peak($log,$loopname,$year, $month) {
             GROUP BY 
                 loopname
         ) AS s
-        JOIN 
+        LEFT JOIN 
             Standard_ship_records sr ON sr.loopname = s.loopname AND sr.peak_kw = s.max_peak_kw
         WHERE 
-            sr.loopname = 'Cape_Kennedy'
+            sr.loopname = '%s'
         ORDER BY 
             sr.time ASC
         LIMIT 1;",
-        mysql_real_escape_string($loopname), $year, $month,mysql_real_escape_string($loopname)
+        mysql_real_escape_string($loopname), $year, $month, mysql_real_escape_string($loopname)
     );
 
     $result = db_query($log, $query);
 
     if (!$result) {
         $log->logError("Query failed");
-        return false;
+        return [
+            'loopname' => $loopname,
+            'max_peak_kw' => 0,
+            'max_peak_time' => 0
+        ];
     }
 
-    return mysql_fetch_assoc($result);
+    $row = mysql_fetch_assoc($result);
+    if (!$row) {
+        return [
+            'loopname' => $loopname,
+            'max_peak_kw' => 0,
+            'max_peak_time' => 0
+        ];
+    }
+
+    return $row;
 }
+
 function fetch_mod6_max_off_peak($log, $loopname, $year, $month) {
     $query = sprintf(
         "SELECT 
