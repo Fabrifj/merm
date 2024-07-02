@@ -736,7 +736,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
   $testLogger->logInfo("Mod8 ".$VAL["report_year"]);
   if($VAL["report_year"] =="2024"){
     $endDate = date('Y-m-d');
-    $endDateSelected = = date('Y-m');
+    $endDateSelected = date('Y-m');
   }else{
         // Start date is January 1st of the given year
     $endDate = $VAL['report_year']."-01-1";
