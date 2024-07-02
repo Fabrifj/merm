@@ -735,16 +735,16 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
   //               Fabri updates 
   $testLogger->logInfo("Mod8 ".$VAL["report_year"]);
   if($VAL["report_year"] =="2024"){
-    $startDate = date('Y-m');
+    $endDate = date('Y-m');
   }else{
         // Start date is January 1st of the given year
-    $startDate = $VAL['report_year']."-01";
+    $endDate = $VAL['report_year']."-01";
   }
-  $endDate = date('Y-m', strtotime("$startDate -12 months"));
+  $startDate = date('Y-m', strtotime("$endDate -12 months"));
 
   $months = [];
     for ($i = 11; $i >= 0; $i--) {
-        $months[] = date("F", strtotime("-$i month", strtotime($startDate)));
+        $months[] = date("F", strtotime("-$i month", strtotime($endDate)));
     }
 
   try{
@@ -754,7 +754,12 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
     $Grand_Total_Lay_Day = [];
     $Ship_available = [];
     foreach ($ships as $aq){
-      $results =  fetch_year_ago_mod8($testLogger, $ships_data[$aq]["loopname"], $startDate);
+      $results =  fetch_year_ago_mod8($testLogger, $ships_data[$aq]["loopname"], $endDate);
+      
+      $testLogger->logDebug("Test query result");
+      $formattedMessage = print_r($results, true);
+      $testLogger->logDebug($formattedMessage);
+      
       $Ship_available[] =1;
       $ships_data[$aq]["kWh_day"] = $results["avg_cost"];
       $ships_data[$aq]["Peak_Demand"]= $results["avg_kw"];
