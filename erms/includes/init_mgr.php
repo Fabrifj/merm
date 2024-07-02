@@ -740,7 +740,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
   }else{
         // Start date is January 1st of the given year
     $endDate = $VAL['report_year']."-01-1";
-    $endDateSelected = = $VAL['report_year']."-01";
+    $endDateSelected = $VAL['report_year']."-01";
 
   }
   $startDateSelected = date('Y-m', strtotime("$endDate -12 months"));
