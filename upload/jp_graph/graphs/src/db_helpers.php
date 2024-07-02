@@ -300,7 +300,9 @@ function fetch_data_for_graph_mod8($log,$result) {
     $formattedMessage = print_r(db_fetch_all($result), true);
     $log->logDebug($formattedMessage);
     
-        // force convertion
+    $num_rows = mysql_num_rows($result);
+    $log->logDebug("Number of rows returned: " . $num_rows);    
+    
     if (mysql_num_rows($result) > 0) {
         while ($row = mysql_fetch_assoc($result)) {
             // Debug: Imprime la fila actual
