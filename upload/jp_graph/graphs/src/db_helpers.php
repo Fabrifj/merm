@@ -295,25 +295,9 @@ function fetch_data_for_graph_mod8($log,$result) {
     $avg_kw  = [];
     $avg_kwH = [];
 
-    $log->logInfo(" Query results");
-    $log->logError("query : ");    
-    $formattedMessage = print_r(db_fetch_all($result), true);
-    $log->logDebug($formattedMessage);
-    
-    // Obtén todas las filas en un array
-    $rows = [];
-    while ($row = mysql_fetch_assoc($result)) {
-        $rows[] = $row;
-    }
-
-    // Verifica si hay filas
-    $num_rows = count($rows);
-    $log->logDebug("Number of rows returned: " . $num_rows);
 
     if ($num_rows > 0) {
-        for ($i = 0; $i < $num_rows; $i++) {
-            $row = $rows[$i];
-
+        while ($row = mysql_fetch_assoc($result)) {
             // Debug: Imprime la fila actual
             $log->logDebug("Current row: " . print_r($row, true));
 
