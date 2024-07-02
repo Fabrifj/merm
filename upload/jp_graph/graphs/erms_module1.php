@@ -91,13 +91,14 @@ setBreadcrumbs("ship", $module_name, $indicator);
 
 //Request !! 
 $loopname = str_replace(' ', '_', $indicator);
+$year = date("Y", strtotime($VAL["date_value_start"])); // Obtener el año completo
+$month = date("m", strtotime($VAL["date_value_start"])); // Obtener el número del mes
 
-// $shipData = fetch_monthly_report_mod6($testLogger,$loopname  )
-
-$formattedMessage = print_r($ships_data, true);
-$testLogger->logDebug($formattedMessage);
-$testLogger->logDebug($loopname);
-$testLogger->logDebug($VAL["date_value_start"]);
+// Log para verificar los valores
+$testLogger->logDebug("Loopname: " . $loopname);
+$testLogger->logDebug("Date value start: " . $VAL["date_value_start"]);
+$testLogger->logDebug("Year: " . $year);
+$testLogger->logDebug("Month: " . $month)
 
 
 ?>
