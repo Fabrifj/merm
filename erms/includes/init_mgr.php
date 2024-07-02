@@ -764,9 +764,9 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
       $testLogger->logDebug($formattedMessage);
 
       $Ship_available[] =1;
-      $ships_data[$aq]["kWh_day"] = $results["avg_cost"];
+      $ships_data[$aq]["kWh_day"] = $results["avg_kwH"];
       $ships_data[$aq]["Peak_Demand"]= $results["avg_kw"];
-      $ships_data[$aq]["Grand_Total_Lay_Day"] = $results["avg_kwH"];
+      $ships_data[$aq]["Grand_Total_Lay_Day"] = $results["avg_cost"];
 
     }
   } catch (Exception $e) {
