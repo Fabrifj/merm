@@ -297,10 +297,7 @@ function fetch_data_for_graph_mod8($log,$result) {
 
 
     while ($row = mysql_fetch_assoc($result)) {
-        // Debug: Imprime la fila actual
-        $log->logDebug("Current row: " . print_r($row, true));
 
-        // Convierte los valores de la fila
         $max_cost_kw = (float)$row['max_cost_kw'];
         $max_off_cost_kw = (float)$row['max_off_cost_kw'];
         $days = (int)$row['days'];
@@ -309,10 +306,8 @@ function fetch_data_for_graph_mod8($log,$result) {
         $max_off_demand_kw = (float)$row['max_off_demand_kw'];
         $avg_daily_total_kwh = (float)$row['avg_daily_total_kwh'];
 
-        // Calcular si 'days' es mayor que 0
         if ($days > 0) {
             $avg_demand = ($max_cost_kw + $max_off_cost_kw) / $days;
-            $log->logDebug("avg_demand for the month: " . $avg_demand);
 
             $avg_cost[] = $avg_demand + $daily_cost_kwh;
             $avg_kw[] = max($max_demand_kw, $max_off_demand_kw);
@@ -321,10 +316,6 @@ function fetch_data_for_graph_mod8($log,$result) {
             $log->logError("Error: 'days' is zero or less.\n");
         }
     }
-
-    $log->logDebug("avg cost : ");    
-    $formattedMessage = print_r($avg_cost, true);
-    $log->logDebug($formattedMessage);
 
     // Ensure each array has exactly 12 values by padding with zeros if necessary
     $avg_cost = pad_with_zeros($log,$avg_cost);

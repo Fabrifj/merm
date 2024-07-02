@@ -376,7 +376,7 @@ foreach ($ship AS $key => $ship) {
         $Ship_available[] = ($VAL["Avail_Data"] == 0 ? 0 : 1);
 
 
-        echo $TITLE." start date: ".$VAL["date_value_start"]." end date: ".$VAL["date_value_end"]." Average kW: ".$VAL["Demand_avg"]." Peak Demand: ".$VAL["Peak_Demand"]."</br>";
+        // echo $TITLE." start date: ".$VAL["date_value_start"]." end date: ".$VAL["date_value_end"]." Average kW: ".$VAL["Demand_avg"]." Peak Demand: ".$VAL["Peak_Demand"]."</br>";
 
         $VAL["Peak_Demand"] += $VAL["Peak_Demand"];
         $VAL_30["kWh_day"] += $VAL_30["kWh_day"];
@@ -766,7 +766,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
       $Ship_available[] =1;
       $ships_data[$aq]["kWh_day"] = $results["avg_cost"];
       $ships_data[$aq]["Peak_Demand"]= $results["avg_kw"];
-      $ships_data[$aq]["Grand_Total_Lay_Day"] = $results["avg_cost"];
+      $ships_data[$aq]["Grand_Total_Lay_Day"] = $results["avg_kwH"];
 
     }
   } catch (Exception $e) {
