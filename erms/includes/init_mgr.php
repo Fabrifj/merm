@@ -735,12 +735,12 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
   //               Fabri updates 
   $testLogger->logInfo("Mod8 ".$VAL["report_year"]);
   if($VAL["report_year"] =="2024"){
-    $startDate = date('Y-m-d');
+    $startDate = date('Y-m');
   }else{
         // Start date is January 1st of the given year
-    $startDate = $VAL['report_year']."-01-01";
+    $startDate = $VAL['report_year']."-01";
   }
-  $endDate = date('Y-m-d', strtotime("$startDate -12 months"));
+  $endDate = date('Y-m', strtotime("$startDate -12 months"));
 
   $months = [];
     for ($i = 11; $i >= 0; $i--) {
@@ -764,6 +764,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
   } catch (Exception $e) {
     $testLogger->logError("Error fetching data for the default report: " . $e->getMessage());
   }
+  $log->logDebug("Check path, add headers ");
 
   $graph = [
     "categories" => $months,
@@ -771,6 +772,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
     "ship_available" => $Ship_available,
     "dates" => [$startDate, $endDate]
   ];
+  $log->logDebug("Check path, add data ");
 
   $graph["data"] = [
     [ "name" => "Consumption(kWh) Avg per Day Baseline",
