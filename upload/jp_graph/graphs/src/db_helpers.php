@@ -561,7 +561,7 @@ function fetch_mod6_max_peak($log,$loopname,$year, $month) {
         ORDER BY 
             sr.time ASC
         LIMIT 1;",
-        mysql_real_escape_string($loopname), $year, $month,mysql_real_escape_string($loopname),
+        mysql_real_escape_string($loopname), $year, $month,mysql_real_escape_string($loopname)
     );
 
     $result = db_query($log, $query);
