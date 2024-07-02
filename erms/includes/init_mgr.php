@@ -735,12 +735,15 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
   //               Fabri updates 
   $testLogger->logInfo("Mod8 ".$VAL["report_year"]);
   if($VAL["report_year"] =="2024"){
-    $endDate = date('Y-m');
+    $endDate = date('Y-m-d');
+    $endDateSelected = = date('Y-m');
   }else{
         // Start date is January 1st of the given year
-    $endDate = $VAL['report_year']."-01";
+    $endDate = $VAL['report_year']."-01-1";
+    $endDateSelected = = $VAL['report_year']."-01";
+
   }
-  $startDate = date('Y-m', strtotime("$endDate -12 months"));
+  $startDateSelected = date('Y-m', strtotime("$endDate -12 months"));
 
   $months = [];
     for ($i = 11; $i >= 0; $i--) {
@@ -775,7 +778,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
     "categories" => $months,
     "ship_link" => $Ship_Link_Array,
     "ship_available" => $Ship_available,
-    "dates" => [$startDate, $endDate]
+    "dates" => [$startDateSelected, $endDateSelected]
   ];
   $testLogger->logDebug("Check path, add data ");
 
