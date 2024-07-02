@@ -756,9 +756,9 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
     foreach ($ships as $aq){
       $results =  fetch_year_ago_mod8($testLogger, $ships_data[$aq]["loopname"], $startDate);
       $Ship_available[] =1;
-      $ships_data[$ship_aquisuite]["kWh_day"] = $results["avg_cost"];
-      $ships_data[$ship_aquisuite]["Peak_Demand"]= $results["avg_kw"];
-      $ships_data[$ship_aquisuite]["Grand_Total_Lay_Day"] = $results["avg_cost"];
+      $ships_data[$aq]["kWh_day"] = $results["avg_cost"];
+      $ships_data[$aq]["Peak_Demand"]= $results["avg_kw"];
+      $ships_data[$aq]["Grand_Total_Lay_Day"] = $results["avg_cost"];
 
     }
   } catch (Exception $e) {
