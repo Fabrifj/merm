@@ -314,15 +314,16 @@ function fetch_data_for_graph_mod8($log,$result) {
             // Calculate
         if ($days > 0) {
             $avg_demand = ($max_cost_kw + $max_off_cost_kw) / $days;
-  
-            $avg_cost[] = !empty($avg_demand + $daily_cost_kwh) ? $avg_demand + $daily_cost_kwh : 0;
-            $avg_kw[] = !empty(max($max_demand_kw, $max_off_demand_kw)) ? max($max_demand_kw, $max_off_demand_kw) : 0;
-            $avg_kwH[] = !empty($avg_daily_total_kwh) ? $avg_daily_total_kwh : 0;
+            $log->logDebug("avg cost  month: ".$avg_demand);    
+
+            $avg_cost[] = $avg_demand + $daily_cost_kwh ;
+            $avg_kw[] = max($max_demand_kw, $max_off_demand_kw);
+            $avg_kwH[] = $avg_daily_total_kwh;
         } else {
             $log->logError("Error: 'days' is zero or less.\n");
         }
     }
-    $log->logError("avg cost : ");    
+    $log->logDebug("avg cost : ");    
     $formattedMessage = print_r($avg_cost, true);
     $log->logDebug($formattedMessage);
 
