@@ -296,34 +296,30 @@ function fetch_data_for_graph_mod8($log,$result) {
     $avg_kwH = [];
 
 
-    if ($num_rows > 0) {
-        while ($row = mysql_fetch_assoc($result)) {
-            // Debug: Imprime la fila actual
-            $log->logDebug("Current row: " . print_r($row, true));
+    while ($row = mysql_fetch_assoc($result)) {
+        // Debug: Imprime la fila actual
+        $log->logDebug("Current row: " . print_r($row, true));
 
-            // Convierte los valores de la fila
-            $max_cost_kw = (float)$row['max_cost_kw'];
-            $max_off_cost_kw = (float)$row['max_off_cost_kw'];
-            $days = (int)$row['days'];
-            $daily_cost_kwh = (float)$row['avg_daily_cost_kwh'];
-            $max_demand_kw = (float)$row['max_demand_kw'];
-            $max_off_demand_kw = (float)$row['max_off_demand_kw'];
-            $avg_daily_total_kwh = (float)$row['avg_daily_total_kwh'];
+        // Convierte los valores de la fila
+        $max_cost_kw = (float)$row['max_cost_kw'];
+        $max_off_cost_kw = (float)$row['max_off_cost_kw'];
+        $days = (int)$row['days'];
+        $daily_cost_kwh = (float)$row['avg_daily_cost_kwh'];
+        $max_demand_kw = (float)$row['max_demand_kw'];
+        $max_off_demand_kw = (float)$row['max_off_demand_kw'];
+        $avg_daily_total_kwh = (float)$row['avg_daily_total_kwh'];
 
-            // Calcular si 'days' es mayor que 0
-            if ($days > 0) {
-                $avg_demand = ($max_cost_kw + $max_off_cost_kw) / $days;
-                $log->logDebug("avg_demand for the month: " . $avg_demand);
+        // Calcular si 'days' es mayor que 0
+        if ($days > 0) {
+            $avg_demand = ($max_cost_kw + $max_off_cost_kw) / $days;
+            $log->logDebug("avg_demand for the month: " . $avg_demand);
 
-                $avg_cost[] = $avg_demand + $daily_cost_kwh;
-                $avg_kw[] = max($max_demand_kw, $max_off_demand_kw);
-                $avg_kwH[] = $avg_daily_total_kwh;
-            } else {
-                $log->logError("Error: 'days' is zero or less.\n");
-            }
+            $avg_cost[] = $avg_demand + $daily_cost_kwh;
+            $avg_kw[] = max($max_demand_kw, $max_off_demand_kw);
+            $avg_kwH[] = $avg_daily_total_kwh;
+        } else {
+            $log->logError("Error: 'days' is zero or less.\n");
         }
-    } else {
-        $log->logError("Error: No rows returned in result set.\n");
     }
 
     $log->logDebug("avg cost : ");    
