@@ -28,6 +28,9 @@ session_start();
 //....................................KLogger...............................
 require '../../../erms/includes/KLogger.php';
 $log = new KLogger ( "log.txt" , KLogger::DEBUG );
+
+require './src/logger.php';
+$testLogger = new Logger("Test montly");
 //.....................................End KLogger..........................
 
 error_reporting (E_ALL ^ E_NOTICE);
@@ -54,6 +57,9 @@ include '../../../erms/includes/energy_methods.php';
 include '../../../erms/includes/gfx_methods.php';
 include_once ('../../../conn/mysql_connect-ro.php');
 include_once ('../../../Auth/auth.php');
+
+//Update 2024
+require './src/db_helpers.php';
 
 // Redirect happens within isAuthenticated and isPermitted
 // but we still want to make sure we exit the main script
@@ -82,6 +88,14 @@ if ($module == "mod6") {
 }
 $indicator = reset($ships_data)["title"];
 setBreadcrumbs("ship", $module_name, $indicator);
+
+//Request !! 
+// $shipData = fetch_monthly_report_mod6($testLogger, )
+$testLogger->logDebug($module_name);
+$testLogger->logDebug($shipDeviceClass[0]);
+$testLogger->logDebug("Year: ".$_REQUEST["year"]." Este es el mes : ".$_REQUEST["month"]);
+
+
 ?>
 
 <!DOCTYPE HTML>

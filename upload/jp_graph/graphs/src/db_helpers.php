@@ -95,9 +95,6 @@ function fetch_data_for_graph_mod1($log,$result) {
             $log->logError("Error: 'days' is zero or less.\n");
         }
     }
-     
-    $log->logDebug("max_cost_kw:" . $max_cost_kw . ", max_off_cost_kw: " . $max_off_cost_kw . ", days: " . $days . ", daily_cost_kwh: " . $daily_cost_kwh . ", max_demand_kw: " . $max_demand_kw . ", max_off_demand_kw: " . $max_off_demand_kw . ", avg_daily_total_kwh: " . $avg_daily_total_kwh . "\n");
-
     return [
         'avg_cost' => $avg_cost,
         'avg_kw' => $avg_kw,
@@ -443,6 +440,242 @@ function fetch_mod3_graph($log, $dbField, $loopname, $startDate, $endDate) {
     // Fetch data for the graph
     return fetch_data_for_graph_mod3($log, $result);
 }
+
+function fetch_data_for_graph_mod6($log,$result) {
+
+    $avg_cost = 0;
+    $avg_kw  = 0;
+    $avg_kwH = 0;
+
+        // force convertion
+    while ($row = mysql_fetch_assoc($result)) {
+        // force convertion
+        $max_cost_kw = (float)$row['max_cost_kw'];
+        $max_off_cost_kw = (float)$row['max_off_cost_kw'];
+        $days = (int)$row['days'];
+        $daily_cost_kwh = (float)$row['avg_daily_cost_kwh'];
+        $max_demand_kw = (float)$row['max_demand_kw'];
+        $max_off_demand_kw = (float)$row['max_off_demand_kw'];
+        $avg_daily_total_kwh = (float)$row['avg_daily_total_kwh'];
+
+            // Calculate
+        if ($days > 0) {
+            $avg_demand = ($max_cost_kw + $max_off_cost_kw) / $days;
+
+            $avg_cost += $avg_demand + $daily_cost_kwh;
+            $avg_kw = getMax($max_demand_kw, $max_off_demand_kw);
+            $avg_kwH += $avg_daily_total_kwh;
+        } else {
+            $log->logError("Error: 'days' is zero or less.\n");
+        }
+    }
+     
+    return [
+        'avg_cost' => $avg_cost,
+        'avg_kw' => $avg_kw,
+        'avg_kwH' => $avg_kwH,
+    ];
+}
+function fetch_mod6_general_data($log,$loopname,$year, $month) {
+    $query = sprintf(
+        "SELECT 
+            loopname,
+            MAX(energy_consumption) AS energy_consumption, 
+            MAX(accumulation) AS accumulation,
+            SUM(sum_peak_kwh) AS sum_peak_kwh,
+            SUM(sum_off_peak_kwh) AS sum_off_peak_kwh,
+            AVG(avg_real_power) AS avg_real_power,
+            AVG(avg_power_factor) AS avg_power_factor,
+            MIN(min_power_factor) AS min_power_factor,
+            MAX(max_power_factor) AS max_power_factor,
+            MAX(max_demand_cost_kw) AS max_demand_cost_kw,
+            MAX(max_off_demand_cost_kw) AS max_off_demand_cost_kw,
+            SUM(sum_cost_kwh) AS sum_cost_kwh,
+            SUM(sum_off_cost_kwh) AS sum_off_cost_kwh,
+            COUNT(*) AS days
+        FROM (
+            SELECT 
+                loopname,
+                DATE(time) AS day,
+                MAX(energy_consumption) AS energy_consumption, 
+                MAX(accumulation) AS accumulation,
+                SUM(peak_kwh) AS sum_peak_kwh,
+                SUM(off_peak_kwh) AS sum_off_peak_kwh,
+                AVG(real_power) AS avg_real_power,
+                AVG(power_factor) AS avg_power_factor,
+                MIN(power_factor) AS min_power_factor,
+                MAX(power_factor) AS max_power_factor,
+                MAX(cost_kw) AS max_demand_cost_kw,
+                MAX(off_cost_kw) AS max_off_demand_cost_kw,
+                SUM(cost_kwh) AS sum_cost_kwh,
+                SUM(off_cost_kwh) AS sum_off_cost_kwh
+            FROM 
+                Standard_ship_records
+            WHERE 
+                loopname = '%s'
+                AND YEAR(time) = '%d'
+                AND MONTH(time) = '%d'
+            GROUP BY 
+                loopname, DATE(time)
+        ) AS daily_sums
+        WHERE 
+            avg_real_power > 0
+        GROUP BY 
+            loopname;",
+        mysql_real_escape_string($loopname), $year, $month
+    );
+
+    $result = db_query($log, $query);
+
+    if (!$result) {
+        $log->logError("Query failed");
+        return false;
+    }
+
+    return mysql_fetch_assoc($result)[0];
+
+}
+function fetch_mod6_max_peak($log,$loopname,$year, $month) {
+    $query = sprintf(
+        "SELECT 
+            s.loopname,
+            s.max_peak_kw,
+            sr.time AS max_peak_time
+        FROM (
+            SELECT 
+                loopname,
+                MAX(peak_kw) AS max_peak_kw
+            FROM 
+                Standard_ship_records
+            WHERE 
+                loopname = '%s'
+                AND YEAR(time) = '%d'
+                AND MONTH(time) = '%d'
+            GROUP BY 
+                loopname
+        ) AS s
+        JOIN 
+            Standard_ship_records sr ON sr.loopname = s.loopname AND sr.peak_kw = s.max_peak_kw
+        WHERE 
+            sr.loopname = 'Cape_Kennedy'
+        ORDER BY 
+            sr.time ASC
+        LIMIT 1;",
+        mysql_real_escape_string($loopname), $year, $month,mysql_real_escape_string($loopname),
+    );
+
+    $result = db_query($log, $query);
+
+    if (!$result) {
+        $log->logError("Query failed");
+        return false;
+    }
+
+    return mysql_fetch_assoc($result)[0];
+}
+function fetch_mod6_max_off_peak($log, $loopname, $year, $month) {
+    $query = sprintf(
+        "SELECT 
+            s.loopname,
+            s.max_off_peak_kw,
+            sr.time AS max_off_peak_time
+        FROM (
+            SELECT 
+                loopname,
+                MAX(off_peak_kw) AS max_off_peak_kw
+            FROM 
+                Standard_ship_records
+            WHERE 
+                loopname = '%s'
+                AND YEAR(time) = '%d'
+                AND MONTH(time) = '%d'
+            GROUP BY 
+                loopname
+        ) AS s
+        JOIN 
+            Standard_ship_records sr ON sr.loopname = s.loopname AND sr.off_peak_kw = s.max_off_peak_kw
+        WHERE 
+            sr.loopname = '%s'
+        ORDER BY 
+            sr.time ASC
+        LIMIT 1;",
+        mysql_real_escape_string($loopname), $year, $month, mysql_real_escape_string($loopname)
+    );
+
+    $result = db_query($log, $query);
+
+    if (!$result) {
+        $log->logError("Query failed");
+        return false;
+    }
+
+    return mysql_fetch_assoc($result);
+}
+
+
+function fetch_monthly_report_mod6($log, $loopname, $year, $month) {
+    $log->logDebug("Loopname: " . $loopname . " Year: " . $year . " Month: " . $month);
+
+    // Fetch general data
+    $generalData = fetch_mod6_general_data($log, $loopname, $year, $month);
+
+    // Fetch max peak data
+    $maxPeak = fetch_mod6_max_peak($log, $loopname, $year, $month);
+
+    // Fetch max off peak data
+    $maxOffPeak = fetch_mod6_max_off_peak($log, $loopname, $year, $month);
+
+    // Calculate maximum demand
+    $maxDemand = max($generalData["max_demand_cost_kw"], $generalData["max_off_demand_cost_kw"]);
+
+    // Calculate total peak kWh
+    $totalPeak = $generalData["sum_peak_kwh"] + $generalData["sum_off_peak_kwh"];
+
+    // Calculate total demand cost
+    $totalDemandCost = $generalData["max_demand_cost_kw"] + $generalData["max_off_demand_cost_kw"];
+
+    // Calculate total peak cost
+    $totalPeakCost = $generalData["sum_cost_kwh"] + $generalData["sum_off_cost_kwh"];
+
+    // Build monthly report array
+    $monthlyReport = [
+        'EndOfMonthReading' => $generalData["energy_consumption"],
+        'TotalkWhConsumed' => $generalData["accumulation"],
+        'MaxOnPeakDemand' => $maxPeak["max_peak_kw"],
+        'OnPeakBilledDemand' => $maxPeak["max_peak_kw"], // Placeholder, update with correct key
+        'TimeOfMaxOnPeakDemand' => $maxPeak["max_peak_time"],
+        'MaxOffPeakDemand' => $maxOffPeak["max_off_peak_kw"],
+        'OffPeakBilledDemand' => $maxOffPeak["max_off_peak_kw"], // Placeholder, update with correct key
+        'TimeOfMaxOffPeakDemand' => $maxOffPeak["max_off_peak_time"],
+        'LayDays' => $generalData["days"],
+        'OnPeakkWh' => $generalData["sum_peak_kwh"],
+        'OffPeakkWh' => $generalData["sum_off_peak_kwh"],
+        'AvgPower' => $generalData["avg_real_power"],
+        'BilledPowerFactor' => $generalData["avg_power_factor"],
+        'AvgPowerFactor' => $generalData["avg_power_factor"],
+        'LowestPowerFactor' => $generalData["min_power_factor"],
+        'HighestPowerFactor' => $generalData["max_power_factor"],
+        'TotalCO2' => 0, // Placeholder, update with actual calculation if applicable
+        'OnPeakEnergyCharges' => $generalData["max_demand_cost_kw"],
+        'OffPeakEnergyCharges' => $generalData["max_off_demand_cost_kw"],
+        'OtherEnergyCharges' => 0, // Placeholder, update with actual calculation if applicable
+        'TotalEnergyCharges' => $totalPeakCost,
+        'OnPeakDemandCharges' => $generalData["sum_cost_kwh"],
+        'OffPeakDemandCharges' => $generalData["sum_off_cost_kwh"],
+        'OtherDemandCharges' => 0, // Placeholder, update with actual calculation if applicable
+        'TotalDemandCharges' => $totalDemandCost,
+        'TotalEstimatedBill' => $totalDemandCost + $totalPeakCost,
+        'FullBurdenPureDemandRate' => ($maxDemand != 0) ? $totalDemandCost / $maxDemand : 0,
+        'FullBurdenPureEnergyRate' => ($totalPeak != 0) ? $totalPeakCost / $totalPeak : 0,
+        'FullBurdenShorepowerRate' => ($totalPeak != 0) ? ($totalDemandCost + $totalPeakCost) / $totalPeak : 0,
+    ];
+
+    return $monthlyReport;
+}
+
+
+
+
 
 
 // Function to close the connection
