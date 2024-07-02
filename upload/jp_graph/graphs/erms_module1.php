@@ -91,7 +91,9 @@ setBreadcrumbs("ship", $module_name, $indicator);
 
 //Request !! 
 // $shipData = fetch_monthly_report_mod6($testLogger, )
-$testLogger->logDebug($module_name);
+$formattedMessage = print_r($ships_data, true);
+$testLogger->logDebug($formattedMessage);
+$testLogger->logDebug($indicator);
 $testLogger->logDebug($shipDeviceClass[0]);
 $testLogger->logDebug("Year: ".$_REQUEST["year"]." Este es el mes : ".$_REQUEST["month"]);
 
