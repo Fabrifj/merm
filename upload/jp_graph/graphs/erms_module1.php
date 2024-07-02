@@ -899,15 +899,15 @@ $testLogger->logDebug($formattedMessage);
     		<table id="TblConsumeDetailSummary" class="tblDetailedSummaryRpt">
 		<tr>
 			<td>Meter End of the Month Reading</font></td>
-			<td  style="background:none;"><font color="black">'.$VAL["kWh_Meter_End"].'</font></td>
+			<td  style="background:none;"><font color="black">'.$shipData["EndOfMonthReading"].'</font></td>
 		</tr>
     		<tr>
     			<td>Total kWh Consumed</font></td>
-    			<td style="background:none;"><font color="black">'.$VAL["kWh_Total"].' kWh</font></td>
+    			<td style="background:none;"><font color="black">'.$shipData["TotalkWhConsumed"].' kWh</font></td>
     		</tr>
      		<tr>
     			<td>Maximum On Peak Demand</font></td>
-    			<td style="background:none;"><font color="black">'.$VAL["Peak_Demand"].' kW</font></td>
+    			<td style="background:none;"><font color="black">'.$shipData["MaxOnPeakDemand"].' kW</font></td>
     		</tr>';
 
  		if ($utility=="SCE&G_Rates")
@@ -915,31 +915,31 @@ $testLogger->logDebug($formattedMessage);
 		  echo
 		  '<tr>
 			<td>On Peak Billed 15 Minute Demand</font></td>
-			<td style="background:none;"><font color="black">'.$VAL["Peak_Billed_Demand"].' kW</font></td>
+			<td style="background:none;"><font color="black">'.$shipData["OnPeakBilledDemand"].' kW</font></td>
 		  </tr>';
                  }
 
     		echo '<tr>
     			<td>Time of Occurrence</font></td>
-    			<td style="background:none;"><font color="black">'.makeDate($VAL["Peak_Demand_Time"]).'</font></td>
+    			<td style="background:none;"><font color="black">'.makeDate($shipData["TimeOfMaxOnPeakDemand"]).'</font></td>
     		</tr>
     		<tr>
     			<td>Maximum Off Peak Demand</font></td>
-    			<td style="background:none;"><font color="black">'.$VAL["Off_Peak_Demand"].' kW</font></td>
+    			<td style="background:none;"><font color="black">'.$shipData["MaxOffPeakDemand"].' kW</font></td>
     		</tr>';
               if ($utility=="SCE&G_Rates")
 	      {
 		echo
 		  '<tr>
 		     	<td>Off Peak Billed 15 Minute Demand</font></td>
-		        <td style="background:none;"><font color="black">'.$VAL["Off_Peak_Billed_Demand"].' kW</font></td>
+		        <td style="background:none;"><font color="black">'.$shipData["OffPeakBilledDemand"].' kW</font></td>
 		    </tr>';
 		}
 
                 echo
     		'<tr>
     			<td>Time of Occurrence</font></td>
-    			<td style="background:none;"><font color="black">'.makeDate($VAL["Off_Peak_Demand_Time"]).'</font></td>
+    			<td style="background:none;"><font color="black">'.makeDate($shipData["TimeOfMaxOffPeakDemand"]).'</font></td>
     		</tr>';
 
              if ($utility=="Virginia_Dominion_Rates")
@@ -947,28 +947,28 @@ $testLogger->logDebug($formattedMessage);
 		  echo
 		   '<tr>
 		 	<td>Maximum 30 Minute Reactive Demand</font></td>
-			<td style="background:none;"><font color="black">'.$VAL["kVAR_Demand"].' kVAR</font></td>
+			<td style="background:none;"><font color="black">'.$shipData["OnPeakBilledDemand"].' kVAR</font></td>
 		   </tr>';
 		}
 
                 echo
     		'<tr>
     			<td>Lay Days</font></td>
-    			<td style="background:none;"><font color="black">'.number_format($VAL["Lay_Days"],2).' Days</font></td>
+    			<td style="background:none;"><font color="black">'.number_format($shipData["LayDays"],2).' Days</font></td>
     		</tr>
     		<tr>
     			<td>On Peak kWh</font></td>
-    			<td style="background:none;"><font color="black">'.$VAL["Peak_kWh_Total"].' kWh</font></td>
+    			<td style="background:none;"><font color="black">'.$shipData["OnPeakkWh"].' kWh</font></td>
     		</tr>
     		<tr>
     			<td>Off Peak kWh</font></td>
-    			<td style="background:none;"><font color="black">'.$VAL["Off_Peak_kWh_Total"].' kWh</font></td>
+    			<td style="background:none;"><font color="black">'.$shipData["OffPeakkWh"].' kWh</font></td>
     		</tr>';
 
 			echo
 		'<tr>
 			<td>Average Power</font></td>
-			<td style="background:none;"><font color="black">'.$VAL["Demand_avg"].' kW</font></td>
+			<td style="background:none;"><font color="black">'.$shipData["AvgPower"].' kW</font></td>
 		</tr>';
 
 			if ($utility=="SCE&G_Rates")
@@ -976,25 +976,25 @@ $testLogger->logDebug($formattedMessage);
 			echo
                     '<tr>
 			<td>Billed Power Factor</font></td>
-			<td style="background:none;"><font color="black">'.number_format(($VAL["2_PF_Demand"]/100), 2, '.', '').'</font></td>
+			<td style="background:none;"><font color="black">'.number_format(($shipData["BilledPowerFactor"]/100), 2, '.', '').'</font></td>
                     </tr>';
 			}
 			echo
 		'<tr>
 			<td>Average Power Factor</font></td>
-			<td style="background:none;"><font color="black">'.number_format(($VAL["2_PF_Avg"]/100), 2, '.', '').'</font></td>
+			<td style="background:none;"><font color="black">'.number_format(($shipData["AvgPowerFactor"]/100), 2, '.', '').'</font></td>
 		</tr>
 		<tr>
 			<td>Lowest Power Factor</font></td>
-			<td style="background:none;"><font color="black">'.number_format(($VAL["2_PF_Min"]/100), 2, '.', '').'</font></td>
+			<td style="background:none;"><font color="black">'.number_format(($shipData["LowestPowerFactor"]/100), 2, '.', '').'</font></td>
 		</tr>
 		<tr>
 			<td>Highest Power Factor</font></td>
-			<td style="background:none;"><font color="black">'.number_format(($VAL["2_PF_Max"]/100), 2, '.', '').'</font></td>
+			<td style="background:none;"><font color="black">'.number_format(($shipData["HighestPowerFactor"]/100), 2, '.', '').'</font></td>
 		</tr>
                 <tr>
     		      <td>Total CO<sub>2</sub></font></td>
-    		      <td style="background:none;"><font color="black">'.$VAL["2_Total_CO2"].' MT</font></td>
+    		      <td style="background:none;"><font color="black">'.$shipData["TotalCO2"].' MT</font></td>
     		</tr>
             </table>
         </div>
@@ -1121,51 +1121,51 @@ $testLogger->logDebug($formattedMessage);
 
 				<tr>
 					<td>On Peak Energy Charges</font></td>
-					<td  style="background:none;"><font color="black">'.'$'.$COST["Peak_kWh_Cost"].'</font></td>
+					<td  style="background:none;"><font color="black">'.'$'.$shipData["OnPeakEnergyCharges"].'</font></td>
 				</tr>
 				<tr class="odd">
 					<td>Off Peak Energy Charges</font></td>
-         				<td  style="background:none;"><font color="black">'.'$'.$COST["Off_Peak_kWh_Cost"].'</font></td>
+         				<td  style="background:none;"><font color="black">'.'$'.$shipData["OffPeakEnergyCharges"].'</font></td>
 				</tr>
 				<tr>
 					<td>Other Energy Charges</td>
-					<td  style="background:none;"><font color="black">'.'$'.$COST["Other_Energy_Cost"].'</font></td>
+					<td  style="background:none;"><font color="black">'.'$'.$shipData["OtherEnergyCharges"].'</font></td>
 				</tr>
 				<tr class="odd">
 					<td>Total Energy Charges</td>
-					<td  style="background:none;"><font color="black">'.'$'.$COST["Total_kWh_Cost"].'</font></td>
+					<td  style="background:none;"><font color="black">'.'$'.$shipData["TotalEnergyCharges"].'</font></td>
 				</tr>
 				<tr>
 					<td>On Peak Demand Charges</td>
-					<td  style="background:none;"><font color="black">'.'$'.$COST["Peak_kW_Cost"].'</font></td>
+					<td  style="background:none;"><font color="black">'.'$'.$shipData["OnPeakDemandCharges"].'</font></td>
 				</tr>
 				<tr class="odd">
 					<td>Off Peak Demand Charges</td>
-					<td  style="background:none;"><font color="black">'.'$'.$COST["Off_Peak_kW_Cost"].'</font></td>
+					<td  style="background:none;"><font color="black">'.'$'.$shipData["OffPeakDemandCharges"].'</font></td>
 				</tr>
 				<tr>
 					<td>Other Demand Charges</td>
-					<td  style="background:none;"><font color="black">'.'$'.$COST["Other_Demand_Cost"].'</font></td>
+					<td  style="background:none;"><font color="black">'.'$'.$shipData["OtherDemandCharges"].'</font></td>
 				</tr>
 				<tr class="odd">
 					<td>Total Demand Charges</td>
-					<td  style="background:none;"><font color="black">'.'$'.$COST["Total_kW_Cost"].'</font></td>
+					<td  style="background:none;"><font color="black">'.'$'.$shipData["TotalDemandCharges"].'</font></td>
 				</tr>
 				<tr>
 					<td>Total Estimated Bill</td>
-					<td  style="background:none;"><font color="black">'.'$'.$COST["Grand_Total_Cost"].'</font></td>
+					<td  style="background:none;"><font color="black">'.'$'.$shipData["TotalEstimatedBill"].'</font></td>
 				</tr>
 				<tr class="odd">
 					<td>Full Burden Pure Demand Rate($/kW)</td>
-					<td  style="background:none;"><font color="black">'.'$'.$COST["Demand_Total_kW"].'/kW</font></td>
+					<td  style="background:none;"><font color="black">'.'$'.$shipData["FullBurdenPureDemandRate"].'/kW</font></td>
 				</tr>
 				<tr>
 					<td>Full Burden Pure Energy Rate($/kWh)</td>
-					<td  style="background:none;"><font color="black">'.'$'.$COST["Energy_Total_kWh"].'/kWh</font></td>
+					<td  style="background:none;"><font color="black">'.'$'.$shipData["FullBurdenPureEnergyRate"].'/kWh</font></td>
 				</tr>
 				<tr class="odd">
 					<td>Full Burden Rate of Shorepower($/kWh)</td>
-					<td  style="background:none;"><font color="black">'.'$'.$COST["Grand_Total_kWh"].'/kWh</font></td>
+					<td  style="background:none;"><font color="black">'.'$'.$shipData["FullBurdenShorepowerRate"].'/kWh</font></td>
 				</tr>
 <!-- end detailed report info -->
 </table>

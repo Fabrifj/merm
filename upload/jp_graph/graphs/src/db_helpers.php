@@ -653,6 +653,8 @@ function fetch_monthly_report_mod6($log, $loopname, $year, $month) {
 
     // Build monthly report array
     $monthlyReport = [
+        'Year' => $year ,
+        'Month' => $month,
         'EndOfMonthReading' => $generalData["energy_consumption"],
         'TotalkWhConsumed' => $generalData["accumulation"],
         'MaxOnPeakDemand' => $maxPeak["max_peak_kw"],
