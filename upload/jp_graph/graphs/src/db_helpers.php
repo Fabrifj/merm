@@ -300,15 +300,24 @@ function fetch_data_for_graph_mod8($log,$result) {
     $formattedMessage = print_r(db_fetch_all($result), true);
     $log->logDebug($formattedMessage);
     
-    $num_rows = mysql_num_rows($result);
-    $log->logDebug("Number of rows returned: " . $num_rows);    
-    
-    if (mysql_num_rows($result) > 0) {
-        while ($row = mysql_fetch_assoc($result)) {
+    // Obtén todas las filas en un array
+    $rows = [];
+    while ($row = mysql_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+
+    // Verifica si hay filas
+    $num_rows = count($rows);
+    $log->logDebug("Number of rows returned: " . $num_rows);
+
+    if ($num_rows > 0) {
+        for ($i = 0; $i < $num_rows; $i++) {
+            $row = $rows[$i];
+
             // Debug: Imprime la fila actual
             $log->logDebug("Current row: " . print_r($row, true));
 
-            // Converte los valores de la fila
+            // Convierte los valores de la fila
             $max_cost_kw = (float)$row['max_cost_kw'];
             $max_off_cost_kw = (float)$row['max_off_cost_kw'];
             $days = (int)$row['days'];
@@ -316,13 +325,14 @@ function fetch_data_for_graph_mod8($log,$result) {
             $max_demand_kw = (float)$row['max_demand_kw'];
             $max_off_demand_kw = (float)$row['max_off_demand_kw'];
             $avg_daily_total_kwh = (float)$row['avg_daily_total_kwh'];
-            $log->logDebug("amax_off_cost_kw: ".$max_off_cost_kw);  // Imprime el valor
 
+            // Debug: Imprime los valores convertidos
+            $log->logDebug("max_cost_kw: $max_cost_kw, max_off_cost_kw: $max_off_cost_kw, days: $days, daily_cost_kwh: $daily_cost_kwh, max_demand_kw: $max_demand_kw, max_off_demand_kw: $max_off_demand_kw, avg_daily_total_kwh: $avg_daily_total_kwh");
 
             // Calcular si 'days' es mayor que 0
             if ($days > 0) {
                 $avg_demand = ($max_cost_kw + $max_off_cost_kw) / $days;
-                $log->logDebug("avg_demand for the month: ".$avg_demand);  
+                $log->logDebug("avg_demand for the month: " . $avg_demand);
 
                 $avg_cost[] = $avg_demand + $daily_cost_kwh;
                 $avg_kw[] = max($max_demand_kw, $max_off_demand_kw);
@@ -334,6 +344,7 @@ function fetch_data_for_graph_mod8($log,$result) {
     } else {
         $log->logError("Error: No rows returned in result set.\n");
     }
+
     $log->logDebug("avg cost : ");    
     $formattedMessage = print_r($avg_cost, true);
     $log->logDebug($formattedMessage);
