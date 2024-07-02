@@ -652,39 +652,40 @@ function fetch_monthly_report_mod6($log, $loopname, $year, $month) {
     $totalPeakCost = $generalData["sum_cost_kwh"] + $generalData["sum_off_cost_kwh"];
 
     // Build monthly report array
-    $monthlyReport = [
-        'Year' => $year ,
-        'Month' => $month,
-        'EndOfMonthReading' => $generalData["energy_consumption"],
-        'TotalkWhConsumed' => $generalData["accumulation"],
-        'MaxOnPeakDemand' => $maxPeak["max_peak_kw"],
-        'OnPeakBilledDemand' => $maxPeak["max_peak_kw"], // Placeholder, update with correct key
-        'TimeOfMaxOnPeakDemand' => $maxPeak["max_peak_time"],
-        'MaxOffPeakDemand' => $maxOffPeak["max_off_peak_kw"],
-        'OffPeakBilledDemand' => $maxOffPeak["max_off_peak_kw"], // Placeholder, update with correct key
-        'TimeOfMaxOffPeakDemand' => $maxOffPeak["max_off_peak_time"],
-        'LayDays' => $generalData["days"],
-        'OnPeakkWh' => $generalData["sum_peak_kwh"],
-        'OffPeakkWh' => $generalData["sum_off_peak_kwh"],
-        'AvgPower' => $generalData["avg_real_power"],
-        'BilledPowerFactor' => $generalData["avg_power_factor"],
-        'AvgPowerFactor' => $generalData["avg_power_factor"],
-        'LowestPowerFactor' => $generalData["min_power_factor"],
-        'HighestPowerFactor' => $generalData["max_power_factor"],
-        'TotalCO2' => 0, // Placeholder, update with actual calculation if applicable
-        'OnPeakEnergyCharges' => $generalData["max_demand_cost_kw"],
-        'OffPeakEnergyCharges' => $generalData["max_off_demand_cost_kw"],
-        'OtherEnergyCharges' => 0, // Placeholder, update with actual calculation if applicable
-        'TotalEnergyCharges' => $totalPeakCost,
-        'OnPeakDemandCharges' => $generalData["sum_cost_kwh"],
-        'OffPeakDemandCharges' => $generalData["sum_off_cost_kwh"],
-        'OtherDemandCharges' => 0, // Placeholder, update with actual calculation if applicable
-        'TotalDemandCharges' => $totalDemandCost,
-        'TotalEstimatedBill' => $totalDemandCost + $totalPeakCost,
-        'FullBurdenPureDemandRate' => ($maxDemand != 0) ? $totalDemandCost / $maxDemand : 0,
-        'FullBurdenPureEnergyRate' => ($totalPeak != 0) ? $totalPeakCost / $totalPeak : 0,
-        'FullBurdenShorepowerRate' => ($totalPeak != 0) ? ($totalDemandCost + $totalPeakCost) / $totalPeak : 0,
-    ];
+// Redondear cada valor numérico a 2 decimales en el array $monthlyReport
+$monthlyReport = [
+    'Year' => $year,
+    'Month' => $month,
+    'EndOfMonthReading' => round($generalData["energy_consumption"], 2),
+    'TotalkWhConsumed' => round($generalData["accumulation"], 2),
+    'MaxOnPeakDemand' => round($maxPeak["max_peak_kw"], 2),
+    'OnPeakBilledDemand' => round($maxPeak["max_peak_kw"], 2), // Placeholder, update with correct key
+    'TimeOfMaxOnPeakDemand' => $maxPeak["max_peak_time"], // Assuming this is a date/time value
+    'MaxOffPeakDemand' => round($maxOffPeak["max_off_peak_kw"], 2),
+    'OffPeakBilledDemand' => round($maxOffPeak["max_off_peak_kw"], 2), // Placeholder, update with correct key
+    'TimeOfMaxOffPeakDemand' => $maxOffPeak["max_off_peak_time"], // Assuming this is a date/time value
+    'LayDays' => $generalData["days"],
+    'OnPeakkWh' => round($generalData["sum_peak_kwh"], 2),
+    'OffPeakkWh' => round($generalData["sum_off_peak_kwh"], 2),
+    'AvgPower' => round($generalData["avg_real_power"], 2),
+    'BilledPowerFactor' => round($generalData["avg_power_factor"], 2),
+    'AvgPowerFactor' => round($generalData["avg_power_factor"], 2),
+    'LowestPowerFactor' => round($generalData["min_power_factor"], 2),
+    'HighestPowerFactor' => round($generalData["max_power_factor"], 2),
+    'TotalCO2' => round(0, 2), // Placeholder, update with actual calculation if applicable
+    'OnPeakEnergyCharges' => round($generalData["max_demand_cost_kw"], 2),
+    'OffPeakEnergyCharges' => round($generalData["max_off_demand_cost_kw"], 2),
+    'OtherEnergyCharges' => round(0, 2), // Placeholder, update with actual calculation if applicable
+    'TotalEnergyCharges' => round($totalPeakCost, 2),
+    'OnPeakDemandCharges' => round($generalData["sum_cost_kwh"], 2),
+    'OffPeakDemandCharges' => round($generalData["sum_off_cost_kwh"], 2),
+    'OtherDemandCharges' => round(0, 2), // Placeholder, update with actual calculation if applicable
+    'TotalDemandCharges' => round($totalDemandCost, 2),
+    'TotalEstimatedBill' => round($totalDemandCost + $totalPeakCost, 2),
+    'FullBurdenPureDemandRate' => round(($maxDemand != 0) ? $totalDemandCost / $maxDemand : 0, 2),
+    'FullBurdenPureEnergyRate' => round(($totalPeak != 0) ? $totalPeakCost / $totalPeak : 0, 2),
+    'FullBurdenShorepowerRate' => round(($totalPeak != 0) ? ($totalDemandCost + $totalPeakCost) / $totalPeak : 0, 2),
+];
 
     return $monthlyReport;
 }
