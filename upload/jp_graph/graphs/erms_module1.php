@@ -94,13 +94,10 @@ $loopname = str_replace(' ', '_', $indicator);
 $year = date("Y", strtotime($VAL["date_value_start"])); // Obtener el año completo
 $month = date("m", strtotime($VAL["date_value_start"])); // Obtener el número del mes
 
-// Log para verificar los valores
-$testLogger->logDebug("Loopname: " . $loopname);
-$testLogger->logDebug("Date value start: " . $VAL["date_value_start"]);
-$testLogger->logDebug("Year: " . $year);
-$testLogger->logDebug("Month: " . $month)
+$shipData = fetch_monthly_report_mod6($log, $loopname, $year, $month);
 
-
+$formattedMessage = print_r($shipData, true);
+$testLogger->logDebug($formattedMessage);
 ?>
 
 <!DOCTYPE HTML>
