@@ -532,7 +532,7 @@ function fetch_mod6_general_data($log,$loopname,$year, $month) {
         return false;
     }
 
-    return mysql_fetch_assoc($result)[0];
+    return mysql_fetch_assoc($result);
 
 }
 function fetch_mod6_max_peak($log,$loopname,$year, $month) {
@@ -571,7 +571,7 @@ function fetch_mod6_max_peak($log,$loopname,$year, $month) {
         return false;
     }
 
-    return mysql_fetch_assoc($result)[0];
+    return mysql_fetch_assoc($result);
 }
 function fetch_mod6_max_off_peak($log, $loopname, $year, $month) {
     $query = sprintf(
