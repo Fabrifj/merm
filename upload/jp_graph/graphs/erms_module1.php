@@ -1100,7 +1100,7 @@ $testLogger->logDebug($formattedMessage);
                         <a title="Click image to view larger" id="monthly_report_image" href="<?php echo $graph['graph'] ?>"><img src="<?php echo $graph['graph'] ?>" width="<?php echo ($graph['width']/3.5) ?>" height="<?php echo ($graph['height']/3.5) ?>" border="0"></a>
                     </div>
                   </div>
-                 <div class="printRptBtn"><button onClick="write_to_excel('TblEnergyCostOverview');">Export</button> </div>
+                 <div class="printRptBtn"><button onClick="download_csv('shipDat');">Export</button> </div>
                </div>
           </div>
     </div>
@@ -2036,6 +2036,28 @@ $testLogger->logDebug($formattedMessage);
 	}, 333);
 	return true;
 } /* end download() */
+    function download_csv($dataShips) {
+        // Define the filename with current date
+        $filename = 'data_ships_' . date('Ymd') . '.csv';
+
+        // Set headers to force download
+        header('Content-Type: text/csv; charset=utf-8');
+        header('Content-Disposition: attachment; filename=' . $filename);
+
+        // Open the output stream
+        $output = fopen('php://output', 'w');
+
+        // Add the column headers
+        fputcsv($output, array('loopname', 'utility', 'timeZone', 'tableName'));
+
+        // Loop through the data and write each row to the CSV file
+        foreach ($dataShips as $row) {
+            fputcsv($output, $row);
+        }
+
+        // Close the output stream
+        fclose($output);
+    }
 
   function write_to_excel(tableid)
   {
