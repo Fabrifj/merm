@@ -2036,21 +2036,18 @@ $dataShipsJson = json_encode($shipData);
 	return true;
 } /* end download() */
     const dataShips = <?php echo $dataShipsJson; ?>;
+
+    function arrayToCSV(array) {
+        return array.map(row => row.map(String)
+            .map(v => v.replaceAll('"', '""'))
+            .map(v => `"${v}"`)
+            .join(','))
+            .join('\r\n');
+    }
+
     function downloadCSV() {
-
-        let csvContent = "data:text/csv;charset=utf-8,";
-        dataShips.forEach(function(rowArray) {
-            let row = rowArray.join(",");                
-            csvContent += row + "\r\n";
-        });
-
-        const encodedUri = encodeURI(csvContent);
-        const link = document.createElement("a");
-        link.setAttribute("href", encodedUri);
-        link.setAttribute("download", "data_ships.csv");            
-        document.body.appendChild(link); // Required for FF
-
-        link.click();
+        const csvContent = arrayToCSV(dataShips);
+        download(csvContent, "data_ships.csv", "text/csv");
     }
 
   function write_to_excel(tableid)
