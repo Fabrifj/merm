@@ -2033,13 +2033,13 @@ $dataShipsJson = json_encode($shipData);
     const dataShips = <?php echo $dataShipsJson; ?>;
 
     function arrayToCSV(array) {
-        var csvContent = "data:text/csv;charset=utf-8,";
-        array.forEach(function(rowArray) {
-            var row = rowArray.map(function(cell) {
+        var csvContent = '';
+        for (var i = 0; i < array.length; i++) {
+            var row = array[i].map(function(cell) {
                 return '"' + cell.replace(/"/g, '""') + '"';
             }).join(',');
-            csvContent += row + "\r\n";
-        });
+            csvContent += row + '\r\n';
+        }
         return csvContent;
     }
 
