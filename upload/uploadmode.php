@@ -2372,8 +2372,9 @@ include "../conn/mysql_pconnect-all.php"; // mySQL database connector.
         $logger = new Logger($LOOPNAME);
 
         $utility = utility_check($aquisuitetable);
+
         $logger->logInfo("Get utility  " . $utility);
-        $timezone = "EDT";
+        $timezone = time_zone_check($aquisuitetable);
         try {
             $utilityData = db_fetch_utility_rate($logger, $utility);
             $ship_records = get_ships_records($logger,$timezone,$LOOPNAME,$devicetablename);
@@ -2400,6 +2401,7 @@ include "../conn/mysql_pconnect-all.php"; // mySQL database connector.
             } catch (Exception $e) {
             $logger->logError('Excepción capturada: ' . $e->getMessage());
         }
+        get_miss_information_controller($logger);
     }
     
 

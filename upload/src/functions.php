@@ -257,4 +257,145 @@ function populate_standart_table($log, $ship_records) {
         return -1; // Return an error indicator
     }
 }
+function isTimeInRange() {
+    $currentTime = date('H:i');
+    
+    $ranges = [
+        ['12:30', '12:35'],
+        ['00:30', '00:35']
+    ];
+
+    foreach ($ranges as $range) {
+        $start = $range[0];
+        $end = $range[1];
+
+        if ($currentTime >= $start && $currentTime <= $end) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function get_miss_information_controller($logger){
+    if(isTimeInRange()){
+        $ships_data =  getLoopInfo();
+        foreach ($ships_data as $ship) {
+            get_miss_information($logger, $ship["utility"], $ship["loopname"], $ship["tableName"],$ship["timeZone"]);
+        }
+    }
+}
+
+
+function get_miss_information($logger, $utility, $LOOPNAME, $deviceTableName,$timezone) {
+    // Fetch the last record from the ship records table
+    $last_record = db_fetch_last_ship_record($logger, $LOOPNAME);
+    
+    // Check if the last record does not exist or if more than 12 hours have passed since the last record
+    if (!$last_record || (strtotime('now') - $last_record) > 12 * 3600) {
+        
+        try {
+            // Fetch the utility rate data
+            $utilityData = db_fetch_utility_rate($logger, $utility);
+            
+            // Fetch the ship records
+            $ship_records = get_ships_records($logger, $timezone, $LOOPNAME, $deviceTableName);
+            
+            // Fetch the last record again after obtaining the ship records
+            $last_record = db_fetch_last_ship_record($logger, $LOOPNAME);
+            
+            // Check if no last record exists, initialize the records array
+            if (!$last_record) {
+                $last_records = [];
+            } else {
+                // Get the last four records
+                $last_records = get_last_four_records($logger, $timezone, $LOOPNAME);
+            }
+            
+            $logger->logInfo("Creating utility class");
+            // Create an instance of the utility rate class
+            $utilityRate = create_utility_class($logger, $utilityData[0]);
+
+            $logger->logInfo("Calculating kWh and kW");
+            // Calculate kWh and kW
+            $ship_records = calculate_kw($logger, $utilityRate, $last_records, $ship_records);
+
+            $logger->logInfo("Calculating cost");
+            // Calculate the cost
+            $ship_records = calculate_cost($logger, $utilityRate, $ship_records);
+
+            $logger->logInfo("Populating Standard table");
+            // Populate the standard table
+            $errors = populate_standard_table($logger, $ship_records);
+
+            $logger->logInfo("End errors: " . $errors);
+        } catch (Exception $e) {
+            $logger->logError('Exception captured: ' . $e->getMessage());
+        }
+    }
+}
+
+function getLoopInfo() {
+    // Array representing the table
+    $data = [
+        [
+            'loopname' => 'Cape_Decision',
+            'utility' => 'SCE&G',
+            'timeZone' => 'US/Eastern',
+            'tableName' => 'Cape_Decision_001EC6000AD8__device001_class2'
+        ],
+        [
+            'loopname' => 'Cape_Diamond',
+            'utility' => 'SCE&G',
+            'timeZone' => 'US/Eastern',
+            'tableName' => 'Cape_Diamond_001EC6000AB7__device248_class103'
+        ],
+        [
+            'loopname' => 'Cape_Domingo',
+            'utility' => 'SCE&G',
+            'timeZone' => 'US/Eastern',
+            'tableName' => 'Cape_Domingo_001EC6000ACB__device001_class2'
+        ],
+        [
+            'loopname' => 'Cape_Douglas',
+            'utility' => 'SCE&G',
+            'timeZone' => 'US/Eastern',
+            'tableName' => 'Cape_Douglas_001EC6000ABC__device001_class2'
+        ],
+        [
+            'loopname' => 'Cape_Ducato_ECR',
+            'utility' => 'SCE&G',
+            'timeZone' => 'US/Central',
+            'tableName' => 'Cape_Ducato_ECR_001EC6000ABD__device001_class2'
+        ],
+        [
+            'loopname' => 'Cape_Kennedy',
+            'utility' => 'Entergy_NO_Rates',
+            'timeZone' => 'US/Central',
+            'tableName' => 'Cape_Kennedy_001EC6001433__device002_class103'
+        ],
+        [
+            'loopname' => 'Cape_Race',
+            'utility' => 'Virginia_Electric_and_Power_Co',
+            'timeZone' => 'US/Eastern',
+            'tableName' => 'Cape_Race_001EC600278E__device001_class2'
+        ],
+        [
+            'loopname' => 'Cape_Rise',
+            'utility' => 'Virginia_Electric_and_Power_Co',
+            'timeZone' => 'US/Eastern',
+            'tableName' => 'Cape_Rise_001EC6002792__device001_class2'
+        ],
+        [
+            'loopname' => 'Cape_Ray',
+            'utility' => 'Virginia_Electric_and_Power_Co',
+            'timeZone' => 'US/Eastern',
+            'tableName' => 'Cape_Ray_001EC6002828__device001_class2'
+        ]
+    ];
+
+    return $data;
+}
+
+
 ?>

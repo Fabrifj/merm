@@ -206,7 +206,23 @@ function db_insert_standar_records($log, $shipRecords) {
 
     return $errors;
 }
+function time_zone_check($ship)
+{
+	// query for finding the correct
+	// utility for a particular ship
 
+	$sql = "SELECT timezoneaquisuite FROM Aquisuite_List WHERE aquisuitetablename='$ship'";
+	$RESULT = mysql_query($sql);
+
+	if(!$RESULT) {
+		MySqlFailure("timeZone check failed");
+	}
+
+	$row_time=mysql_fetch_array($RESULT);
+	$timeZone=$row_time=[0];
+
+	return $timeZone;
+}
 
 // Function to close the connection
 function db_close() {
