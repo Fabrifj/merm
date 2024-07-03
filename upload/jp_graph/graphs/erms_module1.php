@@ -89,15 +89,14 @@ if ($module == "mod6") {
 $indicator = reset($ships_data)["title"];
 setBreadcrumbs("ship", $module_name, $indicator);
 
-//Request !! 
+//Request 2024!! 
 $loopname = str_replace(' ', '_', $indicator);
 $year = date("Y", strtotime($VAL["date_value_start"])); // Obtener el año completo
 $month = date("m", strtotime($VAL["date_value_start"])); // Obtener el número del mes
 
 $shipData = fetch_monthly_report_mod6($testLogger, $loopname, $year, $month);
+$dataShipsJson = json_encode($shipData);
 
-$formattedMessage = print_r($shipData, true);
-$testLogger->logDebug($formattedMessage);
 ?>
 
 <!DOCTYPE HTML>
@@ -1100,7 +1099,7 @@ $testLogger->logDebug($formattedMessage);
                         <a title="Click image to view larger" id="monthly_report_image" href="<?php echo $graph['graph'] ?>"><img src="<?php echo $graph['graph'] ?>" width="<?php echo ($graph['width']/3.5) ?>" height="<?php echo ($graph['height']/3.5) ?>" border="0"></a>
                     </div>
                   </div>
-                 <div class="printRptBtn"><button onClick="download_csv('shipDat');">Export</button> </div>
+                 <div class="printRptBtn"><button onClick="download_csv();">Export</button> </div>
                </div>
           </div>
     </div>
@@ -2036,6 +2035,7 @@ $testLogger->logDebug($formattedMessage);
 	}, 333);
 	return true;
 } /* end download() */
+    const dataShips = <?php echo $dataShipsJson; ?>;
     function downloadCSV() {
 
         let csvContent = "data:text/csv;charset=utf-8,";
