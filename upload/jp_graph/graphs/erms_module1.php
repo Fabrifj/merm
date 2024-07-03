@@ -95,7 +95,6 @@ $year = date("Y", strtotime($VAL["date_value_start"])); // Obtener el año compl
 $month = date("m", strtotime($VAL["date_value_start"])); // Obtener el número del mes
 
 $shipData = fetch_monthly_report_mod6($testLogger, $loopname, $year, $month);
-$dataShipsJson = json_encode($shipData);
 
 ?>
 
@@ -2031,38 +2030,37 @@ $dataShipsJson = json_encode($shipData);
     }
 /* end download() */
     function arrayToCSV(array) {
-        if (!array || !Array.isArray(array) || array.length === 0) {
-            console.error("array invalid");
-            console.print(array);
+        if (!array || typeof array !== 'object' || Object.keys(array).length === 0) {
+            console.error("Array invalido");
+            console.log(array);
             return '';
         }
 
         var csvContent = '';
-        var keys = Object.keys(array[0]);
+        var keys = Object.keys(array);
         csvContent += keys.join(',') + '\r\n';
 
-        for (var i = 0; i < array.length; i++) {
-            var row = keys.map(function(key) {
-                var cellValue = array[i][key] ? array[i][key].toString().replace(/"/g, '""') : '';
-                return '"' + cellValue + '"';
-            }).join(',');
-            csvContent += row + '\r\n';
-        }
+        var row = keys.map(function(key) {
+            var cellValue = array[key] ? array[key].toString().replace(/"/g, '""') : '';
+            return '"' + cellValue + '"';
+        }).join(',');
+        csvContent += row + '\r\n';
+
         return csvContent;
     }
 
     function downloadCSV() {
-        var dataShips = <?php echo $dataShipsJson; ?>;
+        var dataShips = <?php echo json_encode($shipData); ?>;
         var csvContent = arrayToCSV(dataShips);
         var encodedUri = encodeURI("data:text/csv;charset=utf-8," + csvContent);
         var link = document.createElement("a");
-        link.setAttribute("href", encodedUri);
         var shipName = "<?php echo $Title; ?>"; 
         var noSpacesName = shipName.replace(" ", "");
         var dt = new Date();
         var month = dt.getMonth() + 1;
         var year = dt.getFullYear();
-        var postfix = month +"-" + year;
+        var postfix = month + "-" + year;
+        link.setAttribute("href", encodedUri);
         link.setAttribute("download", noSpacesName + postfix + ".csv");
         document.body.appendChild(link); // Necesario para Firefox
         link.click();
