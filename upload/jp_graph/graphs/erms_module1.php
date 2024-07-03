@@ -2044,23 +2044,22 @@ $dataShipsJson = json_encode($shipData);
     }
 
     function downloadCSV() {
-        var csvContent = arrayToCSV(<?php echo $dataShipsJson; ?>);
-        var encodedUri = encodeURI(csvContent);
+        var dataShips = <?php echo $dataShipsJson; ?>;
+        var csvContent = arrayToCSV(dataShips);
+        var encodedUri = encodeURI("data:text/csv;charset=utf-8," + csvContent);
         var link = document.createElement("a");
         link.setAttribute("href", encodedUri);
-        var shipName = "<?php echo $Title; ?>";
+        var shipName = "<?php echo $Title; ?>"; 
         var noSpacesName = shipName.replace(" ", "");
         var dt = new Date();
-        var day = dt.getDate();
         var month = dt.getMonth() + 1;
         var year = dt.getFullYear();
-        var postfix = month + "-" + day + "-" + year;
+        var postfix = month +"-" + year;
         link.setAttribute("download", noSpacesName + postfix + ".csv");
-        document.body.appendChild(link); // Required for Firefox            
+        document.body.appendChild(link); // Necesario para Firefox
         link.click();
         document.body.removeChild(link);
     }
-
   function write_to_excel(tableid)
   {
      	 //alert( "Browser start " + navigator.appCodeName );
