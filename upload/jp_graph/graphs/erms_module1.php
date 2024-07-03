@@ -1099,7 +1099,7 @@ $dataShipsJson = json_encode($shipData);
                         <a title="Click image to view larger" id="monthly_report_image" href="<?php echo $graph['graph'] ?>"><img src="<?php echo $graph['graph'] ?>" width="<?php echo ($graph['width']/3.5) ?>" height="<?php echo ($graph['height']/3.5) ?>" border="0"></a>
                     </div>
                   </div>
-                 <div class="printRptBtn"><button onClick="download_csv();">Export</button> </div>
+                 <div class="printRptBtn"><button onClick="downloadCSV();">Export</button> </div>
                </div>
           </div>
     </div>
