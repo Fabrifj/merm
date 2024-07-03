@@ -2033,19 +2033,32 @@ $dataShipsJson = json_encode($shipData);
     const dataShips = <?php echo $dataShipsJson; ?>;
 
     function arrayToCSV(array) {
-        var csvContent = '';
-        for (var i = 0; i < array.length; i++) {
-            var row = array[i].map(function(cell) {
+        var csvContent = "data:text/csv;charset=utf-8,";
+        array.forEach(function(rowArray) {
+            var row = rowArray.map(function(cell) {
                 return '"' + cell.replace(/"/g, '""') + '"';
             }).join(',');
-            csvContent += row + '\r\n';
-        }
+            csvContent += row + "\r\n";
+        });
         return csvContent;
     }
 
     function downloadCSV() {
         var csvContent = arrayToCSV(dataShips);
-        download(csvContent, "data_ships.csv", "text/csv");
+        var encodedUri = encodeURI(csvContent);
+        var link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        var shipName = "<?php echo $Title; ?>";
+        var noSpacesName = shipName.replace(" ", "");
+        var dt = new Date();
+        var day = dt.getDate();
+        var month = dt.getMonth() + 1;
+        var year = dt.getFullYear();
+        var postfix = month + "-" + day + "-" + year;
+        link.setAttribute("download", noSpacesName + postfix + ".csv");
+        document.body.appendChild(link); // Required for Firefox            
+        link.click();
+        document.body.removeChild(link);
     }
 
   function write_to_excel(tableid)
