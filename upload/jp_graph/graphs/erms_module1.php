@@ -2044,7 +2044,7 @@ $dataShipsJson = json_encode($shipData);
     }
 
     function downloadCSV() {
-        var csvContent = arrayToCSV(dataShips);
+        var csvContent = arrayToCSV(<?php echo $dataShipsJson; ?>);
         var encodedUri = encodeURI(csvContent);
         var link = document.createElement("a");
         link.setAttribute("href", encodedUri);
