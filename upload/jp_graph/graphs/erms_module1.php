@@ -2039,7 +2039,7 @@ $dataShipsJson = json_encode($shipData);
     function downloadCSV() {
 
         let csvContent = "data:text/csv;charset=utf-8,";
-        shipDat.forEach(function(rowArray) {
+        dataShips.forEach(function(rowArray) {
             let row = rowArray.join(",");                
             csvContent += row + "\r\n";
         });
