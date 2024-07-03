@@ -2030,15 +2030,21 @@ $dataShipsJson = json_encode($shipData);
         return true;
     }
 /* end download() */
-    const dataShips = <?php echo $dataShipsJson; ?>;
-
     function arrayToCSV(array) {
+        if (!array || !Array.isArray(array) || array.length === 0) {
+            console.error("array invalid");
+            console.print(array);
+            return '';
+        }
+
         var csvContent = '';
         var keys = Object.keys(array[0]);
         csvContent += keys.join(',') + '\r\n';
+
         for (var i = 0; i < array.length; i++) {
             var row = keys.map(function(key) {
-                return '"' + array[i][key].toString().replace(/"/g, '""') + '"';
+                var cellValue = array[i][key] ? array[i][key].toString().replace(/"/g, '""') : '';
+                return '"' + cellValue + '"';
             }).join(',');
             csvContent += row + '\r\n';
         }
