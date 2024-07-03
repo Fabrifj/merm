@@ -2034,9 +2034,11 @@ $dataShipsJson = json_encode($shipData);
 
     function arrayToCSV(array) {
         var csvContent = '';
+        var keys = Object.keys(array[0]);
+        csvContent += keys.join(',') + '\r\n';
         for (var i = 0; i < array.length; i++) {
-            var row = array[i].map(function(cell) {
-                return '"' + cell.replace(/"/g, '""') + '"';
+            var row = keys.map(function(key) {
+                return '"' + array[i][key].toString().replace(/"/g, '""') + '"';
             }).join(',');
             csvContent += row + '\r\n';
         }
