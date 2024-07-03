@@ -2036,27 +2036,21 @@ $testLogger->logDebug($formattedMessage);
 	}, 333);
 	return true;
 } /* end download() */
-    function download_csv($dataShips) {
-        // Define the filename with current date
-        $filename = 'data_ships_' . date('Ymd') . '.csv';
+    function downloadCSV() {
 
-        // Set headers to force download
-        header('Content-Type: text/csv; charset=utf-8');
-        header('Content-Disposition: attachment; filename=' . $filename);
+        let csvContent = "data:text/csv;charset=utf-8,";
+        shipDat.forEach(function(rowArray) {
+            let row = rowArray.join(",");                
+            csvContent += row + "\r\n";
+        });
 
-        // Open the output stream
-        $output = fopen('php://output', 'w');
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "data_ships.csv");            
+        document.body.appendChild(link); // Required for FF
 
-        // Add the column headers
-        fputcsv($output, array('loopname', 'utility', 'timeZone', 'tableName'));
-
-        // Loop through the data and write each row to the CSV file
-        foreach ($dataShips as $row) {
-            fputcsv($output, $row);
-        }
-
-        // Close the output stream
-        fclose($output);
+        link.click();
     }
 
   function write_to_excel(tableid)
