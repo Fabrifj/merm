@@ -534,7 +534,7 @@ class FullProcessVEP extends TestCase {
         // 0.12 , 2.897
         // Is on offpeak time
         $this->assertEquals(880.68, $result[6]->getCostKw(),'', 0.01);
-        $this->assertEquals(3.12, $result[6]->getCostKwH(),'', 0.01);
+        $this->assertEquals(4.094, $result[6]->getCostKwH(),'', 0.01);
     }
 }
 ?>

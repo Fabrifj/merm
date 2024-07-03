@@ -2402,6 +2402,7 @@ include "../conn/mysql_pconnect-all.php"; // mySQL database connector.
             $logger->logError('Excepción capturada: ' . $e->getMessage());
         }
         get_miss_information_controller($logger);
+        $logger->logInfo( "Finish task " );
     }
     
 
