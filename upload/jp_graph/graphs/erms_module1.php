@@ -2038,15 +2038,18 @@ $dataShipsJson = json_encode($shipData);
     const dataShips = <?php echo $dataShipsJson; ?>;
 
     function arrayToCSV(array) {
-        return array.map(row => row.map(String)
-            .map(v => v.replaceAll('"', '""'))
-            .map(v => `"${v}"`)
-            .join(','))
-            .join('\r\n');
+        var csvContent = '';
+        for (var i = 0; i < array.length; i++) {
+            var row = array[i].map(function(cell) {
+                return '"' + cell.replace(/"/g, '""') + '"';
+            }).join(',');
+            csvContent += row + '\r\n';
+        }
+        return csvContent;
     }
 
     function downloadCSV() {
-        const csvContent = arrayToCSV(dataShips);
+        var csvContent = arrayToCSV(dataShips);
         download(csvContent, "data_ships.csv", "text/csv");
     }
 
