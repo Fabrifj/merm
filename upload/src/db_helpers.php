@@ -221,13 +221,10 @@ function time_zone_check($log,$ship)
 	$row_time=mysql_fetch_array($RESULT);
 	$timeZone=$row_time[0];
 
-    $log->logDebug("Time zone result " . json_encode($row_time));
-
     $log->logDebug("Time zone result " . $timeZone);
-    $log->logDebug("Time zone result 2  " . str_replace('/', '', $timeZone));
 
 
-	return $timeZone[0];
+	return $timeZone;
 }
 
 // Function to close the connection
