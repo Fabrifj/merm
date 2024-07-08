@@ -223,8 +223,9 @@ function time_zone_check($log,$ship)
 
     $log->logDebug("Time zone result " . json_encode($row_time));
 
-    $log->logDebug("Time zone result " . json_encode($timeZone));
-    $log->logDebug("Time zone result string ? " . $timeZone[0]);
+    $log->logDebug("Time zone result " . $timeZone);
+    $log->logDebug("Time zone result 2  " . str_replace('/', '', $timeZone));
+
 
 	return $timeZone[0];
 }
