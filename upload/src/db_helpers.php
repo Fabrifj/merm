@@ -219,7 +219,7 @@ function time_zone_check($log,$ship)
 	}
 
 	$row_time=mysql_fetch_array($RESULT);
-	$timeZone=$row_time=[0];
+	$timeZone=$row_time[0];
 
     $log->logDebug("Time zone result " . json_encode($timeZone));
     $log->logDebug("Time zone result string ? " . $timeZone[0]);
