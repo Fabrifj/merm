@@ -221,7 +221,7 @@ function time_zone_check($ship)
 	$row_time=mysql_fetch_array($RESULT);
 	$timeZone=$row_time=[0];
 
-	return $timeZone;
+	return $timeZone[0];
 }
 
 // Function to close the connection

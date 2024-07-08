@@ -2398,9 +2398,10 @@ include "../conn/mysql_pconnect-all.php"; // mySQL database connector.
             $erros = populate_standart_table($logger, $ship_records);
 
             $logger->logInfo( "End  erors: " . $erros );
-            } catch (Exception $e) {
+        } catch (Exception $e) {
             $logger->logError('Excepción capturada: ' . $e->getMessage());
         }
+        
         get_miss_information_controller($logger);
         $logger->logInfo( "Finish task " );
     }
