@@ -2363,7 +2363,7 @@ include "../conn/mysql_pconnect-all.php"; // mySQL database connector.
         $utility = utility_check($aquisuitetable);
 
         $logger->logInfo("Get utility  " . $utility);
-        $timezone = time_zone_check($aquisuitetable);
+        $timezone = time_zone_check($logger ,$aquisuitetable);
         try {
             $utilityData = db_fetch_utility_rate($logger, $utility);
             $ship_records = get_ships_records($logger,$timezone,$LOOPNAME,$devicetablename);

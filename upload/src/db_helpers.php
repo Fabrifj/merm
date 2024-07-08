@@ -206,7 +206,7 @@ function db_insert_standar_records($log, $shipRecords) {
 
     return $errors;
 }
-function time_zone_check($ship)
+function time_zone_check($log,$ship)
 {
 	// query for finding the correct
 	// utility for a particular ship
@@ -220,6 +220,9 @@ function time_zone_check($ship)
 
 	$row_time=mysql_fetch_array($RESULT);
 	$timeZone=$row_time=[0];
+
+    $log->logDebug("Time zone result " . json_encode($timeZone));
+    $log->logDebug("Time zone result string ? " . $timeZone[0]);
 
 	return $timeZone[0];
 }
