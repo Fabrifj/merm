@@ -931,7 +931,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
   
       // Calculate interval between dates in seconds
       $intervalSeconds = round(($endTimestamp - $startTimestamp) / 286);
-  
+      $log_interval = $intervalSeconds*1000;
       $dates = getEvenlySpacedDates($startDate, $endDate, $intervalSeconds);
       // $units = EnergyMetrics::get_units($selectedField);
 
@@ -969,7 +969,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
       $graph = [
           "times" => $dates,
           "timezone" => $timezone,
-          "log_interval" => 300000,
+          "log_interval" => $log_interval ,
           "date_start" => $dates[0],
           "date_end" => $dates[count($dates) - 1],
           "units" => $chartUnits,
