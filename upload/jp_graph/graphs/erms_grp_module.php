@@ -257,7 +257,7 @@ setBreadcrumbs("manager", $_SESSION['user_data']['mgrMods'][$module]["text"], $_
                             <div id="radio">
                                 <input type="radio" id="radio1" name="display" value="day" onclick="updateMeter()" <?php if($VAL["display"]=="day"){echo "checked";} else {echo '';} ?> /><label for="radio1">Last 24 Hours</label><br />
                                 <input type="radio" id="radio2" name="display" value="week" onclick="updateMeter()" <?php if($VAL["display"]=="week"){echo "checked";} else {echo '';} ?> /><label for="radio2">Last 7 Days</label><br />
-                                <input type="radio" id="radio3" name="display" value="month" onclick="    " <?php if($VAL["display"]=="month"){echo "checked";} else {echo '';} ?> /><label for="radio3">Last 30 Days</label><br />
+                                <input type="radio" id="radio3" name="display" value="month" onclick="updateMeter()" <?php if($VAL["display"]=="month"){echo "checked";} else {echo '';} ?> /><label for="radio3">Last 30 Days</label><br />
                                 <input type="radio" id="radio4" name="display" value="anydate" onclick="s()" <?php if($VAL["display"]=="anydate"){echo "checked";} else {echo '';} ?> /><label for="radio4">Date &amp; Time Selection</label><br />
                             </div>
                             <br />

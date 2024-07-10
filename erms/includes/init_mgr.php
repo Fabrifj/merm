@@ -911,12 +911,12 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
     }
 
     $testLogger->logInfo("Start date: ".$startDate." End date: ".$endDate); 
-    try {
-      $testLogger->logInfo("Start date: " . $dates[0] . " end date: " . $endDate. " Name: ". $_POST['data1']);
-      
+    try {      
       $selectedFields = isset($_POST['data1']) ? $_POST['data1'] : 'current';
 
       $units = EnergyMetrics::get_details($selectedFields);
+      $formattedMessage = print_r($units, true);
+      $testLogger->logDebug($formattedMessage);
 
       $field = $units["field"];
       $testLogger->logDebug("Fields: " . $field);

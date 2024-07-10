@@ -340,31 +340,31 @@ function getLoopInfo() {
     $data = [
         [
             'loopname' => 'Cape_Decision',
-            'utility' => 'SCE&G',
+            'utility' => '`SCE&G_Rates`',
             'timeZone' => 'US/Eastern',
             'tableName' => 'Cape_Decision_001EC6000AD8__device001_class2'
         ],
         [
             'loopname' => 'Cape_Diamond',
-            'utility' => 'SCE&G',
+            'utility' => '`SCE&G_Rates`',
             'timeZone' => 'US/Eastern',
             'tableName' => 'Cape_Diamond_001EC6000AB7__device248_class103'
         ],
         [
             'loopname' => 'Cape_Domingo',
-            'utility' => 'SCE&G',
+            'utility' => '`SCE&G_Rates`',
             'timeZone' => 'US/Eastern',
             'tableName' => 'Cape_Domingo_001EC6000ACB__device001_class2'
         ],
         [
             'loopname' => 'Cape_Douglas',
-            'utility' => 'SCE&G',
+            'utility' => '`SCE&G_Rates`',
             'timeZone' => 'US/Eastern',
             'tableName' => 'Cape_Douglas_001EC6000ABC__device001_class2'
         ],
         [
             'loopname' => 'Cape_Ducato_ECR',
-            'utility' => 'SCE&G',
+            'utility' => '`SCE&G_Rates`',
             'timeZone' => 'US/Central',
             'tableName' => 'Cape_Ducato_ECR_001EC6000ABD__device001_class2'
         ],
