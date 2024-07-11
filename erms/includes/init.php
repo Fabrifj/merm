@@ -355,6 +355,8 @@ foreach ($ship AS $key => $ship)
 
 
     $shipData = fetch_monthly_report_mod6($testLogger, $loopname, $year, $month);
+    $formattedMessage = print_r($shipData, true);
+    $testLogger->logDebug($formattedMessage);
 
 
     // if ($ship_count == 1)
