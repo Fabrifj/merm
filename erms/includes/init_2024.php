@@ -40,8 +40,9 @@ switch($module){
         $parts = explode('_', $ships[0]);
         $loopname = $parts[0] . '_' . $parts[1];
         $indicator =$loopname;
+        $utility = utility_check($ships[0]);
         $year = isset($_REQUEST["year"]) ? intval($_REQUEST["year"]) : date('Y');
-        $month = isset($_REQUEST["month"]) ? intval($_REQUEST["month"]) : 0;
+        $month = isset($_REQUEST["month"]) ? intval($_REQUEST["month"]) : $month = date('m');
         
         if ($month == 0) {
             $month = date('m'); 

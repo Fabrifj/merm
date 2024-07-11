@@ -622,6 +622,8 @@ function fetch_mod6_max_off_peak($log, $loopname, $year, $month) {
         $log->logError("Query failed");
         return false;
     }
+    $formattedMessage = print_r($result, true);
+    $log->logDebug($formattedMessage);
 
     return mysql_fetch_assoc($result);
 }
