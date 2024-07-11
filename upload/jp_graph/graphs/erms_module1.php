@@ -81,9 +81,9 @@ setModLinks($username, $_REQUEST['shipClass'], $shipDeviceClass[0]);
 $module_name = $_SESSION['user_data']['shipMods'][$module]["text"];
 if ($module == "mod6") {
   if($annual_report) {
-    $module_name = 'Annual Report for '.date("Y", strtotime($VAL["date_value_start"]));
+    $module_name = 'Annual Report for '.$_REQUEST["year"];
   } else {
-      $module_name = 'Monthly Report for '.date("F Y", strtotime($VAL["date_value_start"]));
+      $module_name = 'Monthly Report for '.$_REQUEST["year"].",".$_REQUEST["month"];
   }
 }
 $indicator = reset($ships_data)["title"];
@@ -874,8 +874,8 @@ $performance = fetch_last_30_days($testLogger, $loopname);
             </div>
     		<table class="tblLast30">
     		<tr>
-    			<td>kWh per day <b><?php echo $VAL["kWh_day"] ?></b></td>
-    			<td>Cost per day <b>$<?php echo $COST["Grand_Total_Lay_Day"] ?></b></td>
+    			<td>kWh per day <b><?php echo $performance["avg_kwH"] ?></b></td>
+    			<td>Cost per day <b>$<?php echo $performance["avg_cost"] ?></b></td>
     			<td>Cost per kWh <b>$<?php echo $COST["Grand_Total_kWh"] ?></b></td>
     		</tr>
             </table>

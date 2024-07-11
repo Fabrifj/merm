@@ -39,7 +39,7 @@ switch($module){
         try {
         $parts = explode('_', $ships[0]);
         $loopname = $parts[0] . '_' . $parts[1];
-    
+        $indicator =$loopname;
         $year = isset($_REQUEST["year"]) ? intval($_REQUEST["year"]) : date('Y');
         $month = isset($_REQUEST["month"]) ? intval($_REQUEST["month"]) : 0;
         
