@@ -340,7 +340,10 @@ foreach ($ship AS $key => $ship)
   case ERMS_Modules::MonthlyReports: //"mod6":
     $log->logInfo('mode 6a<br/>');
     debugPrint('(init) MODE 6 Monthly Report ' . $ship);
-    $loopname = $ships_data[0]["loopname"];
+
+    $parts = explode('_', $string);
+    $loopname =  $parts[0] . '_' . $parts[1];   
+     
     $year = isset($_REQUEST["year"]) ? intval($_REQUEST["year"]) : date('Y');
     $month = isset($_REQUEST["month"]) ? intval($_REQUEST["month"]) : 0;
     if ($month == 0) {
