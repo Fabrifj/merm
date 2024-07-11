@@ -45,18 +45,17 @@ switch($module){
           // Fetch values from Standard_ship_records
         $_REQUEST["month"] =isset($_REQUEST["month"]) ? $_REQUEST["month"] : "month";
         $testLogger->logDebug($_REQUEST["month"] );
-    
+
+        $values = [
+            "kWh_day" => 0,
+            "Peak_Demand" => 0,
+            "Lay_Days" => 0
+          ];
+          $cost = [
+            "Grand_Total_Lay_Day" => 0
+          ];
 
         switch ($_REQUEST["month"] ) {
-            $values = [
-                "kWh_day" => 0,
-                "Peak_Demand" => 0,
-                "Lay_Days" => 0
-              ];
-              $cost = [
-                "Grand_Total_Lay_Day" => 0
-              ];
-              
             case "month":
                 try {
 
