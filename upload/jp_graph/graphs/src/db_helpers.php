@@ -558,10 +558,13 @@ function fetch_mod6_max_peak($log, $loopname, $year, $month) {
             Standard_ship_records sr ON sr.loopname = s.loopname AND sr.peak_kw = s.max_peak_kw
         WHERE 
             sr.loopname = '%s'
+            AND YEAR(time) = '%d'
+            AND MONTH(time) = '%d'
         ORDER BY 
             sr.time ASC
         LIMIT 1;",
-        mysql_real_escape_string($loopname), $year, $month, mysql_real_escape_string($loopname)
+        mysql_real_escape_string($loopname), $year, $month,
+        mysql_real_escape_string($loopname), $year, $month
     );
 
     $result = db_query($log, $query);
@@ -588,6 +591,8 @@ function fetch_mod6_max_peak($log, $loopname, $year, $month) {
 }
 
 function fetch_mod6_max_off_peak($log, $loopname, $year, $month) {
+    $log->logDebug($loopname." , ". $year." , ". $month);
+
     $query = sprintf(
         "SELECT 
             s.loopname,
@@ -610,10 +615,13 @@ function fetch_mod6_max_off_peak($log, $loopname, $year, $month) {
             Standard_ship_records sr ON sr.loopname = s.loopname AND sr.off_peak_kw = s.max_off_peak_kw
         WHERE 
             sr.loopname = '%s'
+            AND YEAR(time) = '%d'
+            AND MONTH(time) = '%d'
         ORDER BY 
             sr.time ASC
         LIMIT 1;",
-        mysql_real_escape_string($loopname), $year, $month, mysql_real_escape_string($loopname)
+        mysql_real_escape_string($loopname), $year, $month,
+        mysql_real_escape_string($loopname), $year, $month
     );
 
     $result = db_query($log, $query);
@@ -622,8 +630,6 @@ function fetch_mod6_max_off_peak($log, $loopname, $year, $month) {
         $log->logError("Query failed");
         return false;
     }
-    $formattedMessage = print_r($result, true);
-    $log->logDebug($formattedMessage);
 
     return mysql_fetch_assoc($result);
 }
