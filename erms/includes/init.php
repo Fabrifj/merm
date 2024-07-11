@@ -8,8 +8,7 @@
 //....................................KLogger...............................
 //include Logger.php";
 $log = new KLogger ( "log.txt" , KLogger::DEBUG );
-require './src/logger.php';
-$testLogger = new Logger("Test montly");
+
 //.....................................End KLogger..........................
 //set a session variable count to determin if this is first time on page.  Used to set default meter page time interval.
 debugPrint('(init) START ');
