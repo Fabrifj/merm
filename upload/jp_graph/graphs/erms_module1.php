@@ -72,7 +72,7 @@ $client_ip_address =  getRealIpAddr();
 $log->logInfo('Client IP['.$client_ip_address.']');
 
 $log->logInfo('ERMS MODULE 1 erms_module1');
-include '../../../erms/includes/init.php';
+include '../../../erms/includes/init_2024.php';
 $log->logInfo('ERMS MODULE 2nd');
  debugPrint('(erms_module1) START ');
 
@@ -90,6 +90,7 @@ $indicator = reset($ships_data)["title"];
 setBreadcrumbs("ship", $module_name, $indicator);
 
 //Update 2024!! 
+$performance = fetch_last_30_days($testLogger, $loopname);
 
 
 ?>
