@@ -8,7 +8,8 @@
 //....................................KLogger...............................
 //include Logger.php";
 $log = new KLogger ( "log.txt" , KLogger::DEBUG );
-
+require './src/logger.php';
+$testLogger = new Logger("Test montly");
 //.....................................End KLogger..........................
 //set a session variable count to determin if this is first time on page.  Used to set default meter page time interval.
 debugPrint('(init) START ');
@@ -224,7 +225,7 @@ foreach ($ship AS $key => $ship)
 
     break;
 
-  case ERMS_Modules::Overview: //
+  case ERMS_Modules::Overview: //mod 0
     // Energy Power and Cost Analysis
   case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
     // Power Meter Data
@@ -338,37 +339,49 @@ foreach ($ship AS $key => $ship)
   case ERMS_Modules::MonthlyReports: //"mod6":
     $log->logInfo('mode 6a<br/>');
     debugPrint('(init) MODE 6 Monthly Report ' . $ship);
+    $loopname = str_replace(' ', '_', $indicator);
+    $year = isset($_REQUEST["year"]) ? intval($_REQUEST["year"]) : date('Y');
+    $month = isset($_REQUEST["month"]) ? intval($_REQUEST["month"]) : 0;
+    
+
+    $testLogger->logDebug("Year: ".$year );
+    $testLogger->logDebug("Month: ".$month );
 
     $utility = utility_check($aquisuitetablename[$key]);
 
-    if ($ship_count == 1)
-    {
-      if ($annual_report)
-      {
-        $valid_months = 0;
-        //debugPrint('(init) Annual Report Year ' . $request_year);
-        for ($imonth = 0; $imonth < $max_month; $imonth++)
-        {
-          $repMonth = sprintf("-%02d-01 00:00:00", $imonth + 1);
-          //debugPrint('(init) COST Annual Month ' . $repMonth);
-          $COST_YEAR[] = mod_cost($Time_Field, $ship, $VAL_YEAR[$imonth]);
-          if ($VAL_YEAR[$imonth]["Lay_Days"] > 0)
-          {
-            $valid_months++;
-          }
-          $monthly_running_totals = annualRunningTotals($imonth, $monthly_running_totals,$VAL_YEAR, $COST_YEAR);
-          //debugPrint('(init) cost/kWh total '.$monthly_running_totals["Grand_Total_kWh"].' Months '.$valid_months);
-        }
 
-        $monthly_average = annualAverages($valid_months, $monthly_running_totals);
-        //debugPrint('(init) cost/kWh total '.$monthly_running_totals["Grand_Total_kWh"].' Months '.($valid_months).' average '. $monthly_average["Grand_Total_kWh"]);
-      }
-      else
-        $COST = mod_cost($Time_Field, $ship, $VAL);
-    }
 
-    //$log->logInfo('VAL: ' . var_export($VAL));
-    $log->logInfo('Peak Billed VAL: ' . $VAL["Peak_Billed_Demand"]);
+    // $shipData = fetch_monthly_report_mod6($testLogger, $loopname, $year, $month);
+
+
+    // if ($ship_count == 1)
+    // {
+    //   if ($annual_report)
+    //   {
+    //     $valid_months = 0;
+    //     //debugPrint('(init) Annual Report Year ' . $request_year);
+    //     for ($imonth = 0; $imonth < $max_month; $imonth++)
+    //     {
+    //       $repMonth = sprintf("-%02d-01 00:00:00", $imonth + 1);
+    //       //debugPrint('(init) COST Annual Month ' . $repMonth);
+    //       $COST_YEAR[] = mod_cost($Time_Field, $ship, $VAL_YEAR[$imonth]);
+    //       if ($VAL_YEAR[$imonth]["Lay_Days"] > 0)
+    //       {
+    //         $valid_months++;
+    //       }
+    //       $monthly_running_totals = annualRunningTotals($imonth, $monthly_running_totals,$VAL_YEAR, $COST_YEAR);
+    //       //debugPrint('(init) cost/kWh total '.$monthly_running_totals["Grand_Total_kWh"].' Months '.$valid_months);
+    //     }
+
+    //     $monthly_average = annualAverages($valid_months, $monthly_running_totals);
+    //     //debugPrint('(init) cost/kWh total '.$monthly_running_totals["Grand_Total_kWh"].' Months '.($valid_months).' average '. $monthly_average["Grand_Total_kWh"]);
+    //   }
+    //   else
+    //     $COST = mod_cost($Time_Field, $ship, $VAL);
+    // }
+
+    // //$log->logInfo('VAL: ' . var_export($VAL));
+    // $log->logInfo('Peak Billed VAL: ' . $VAL["Peak_Billed_Demand"]);
     debugPrint('(init) End Monthly Report ' . $ship);
 
     break;
@@ -432,7 +445,11 @@ if($ship_count==1)
       $Ship_daily_cost_baseline = [($baselines["Grand_Total_Lay_Day"]*1)];
       $Ship_daily_cost_baseline_g1 = [$baselines["Grand_Total_Lay_Day"]*0.9];
       $Ship_daily_cost_baseline_g2 = [$baselines["Grand_Total_Lay_Day"]*0.8];
+    
 
+
+
+    
     $graph = [
       "ship" => $Title,
       "dates" => [$save_startdate, $save_enddate],

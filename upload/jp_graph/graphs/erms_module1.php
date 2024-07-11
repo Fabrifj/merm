@@ -104,11 +104,8 @@ switch ($module)
     case ERMS_Modules::MonthlyReports:
 
         $shipData = fetch_monthly_report_mod6($testLogger, $loopname, $year, $month);
+        break;
 
-        break;
-    // Energy Power and Cost Analysis
-    case ERMS_Modules::MonthlyReports:
-        break;
 }
 
 ?>
