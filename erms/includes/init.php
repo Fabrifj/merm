@@ -341,7 +341,11 @@ foreach ($ship AS $key => $ship)
     $loopname = str_replace(' ', '_', $indicator);
     $year = isset($_REQUEST["year"]) ? intval($_REQUEST["year"]) : date('Y');
     $month = isset($_REQUEST["month"]) ? intval($_REQUEST["month"]) : 0;
-    
+    if ($month == 0) {
+      $month = date('m'); 
+  } else {
+      $month = abs($month); 
+  }   
 
     $testLogger->logDebug("Year: ".$year );
     $testLogger->logDebug("Month: ".$month );
