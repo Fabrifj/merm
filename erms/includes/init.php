@@ -340,37 +340,7 @@ foreach ($ship AS $key => $ship)
   case ERMS_Modules::MonthlyReports: //"mod6":
     $log->logInfo('mode 6a<br/>');
     debugPrint('(init) MODE 6 Monthly Report ' . $ship);
-
-    if ($ship_count == 1)
-    {
-      if ($annual_report)
-      {
-        $valid_months = 0;
-        //debugPrint('(init) Annual Report Year ' . $request_year);
-        for ($imonth = 0; $imonth < $max_month; $imonth++)
-        {
-          $repMonth = sprintf("-%02d-01 00:00:00", $imonth + 1);
-          //debugPrint('(init) COST Annual Month ' . $repMonth);
-          $COST_YEAR[] = mod_cost($Time_Field, $ship, $VAL_YEAR[$imonth]);
-          if ($VAL_YEAR[$imonth]["Lay_Days"] > 0)
-          {
-            $valid_months++;
-          }
-          $monthly_running_totals = annualRunningTotals($imonth, $monthly_running_totals,$VAL_YEAR, $COST_YEAR);
-          //debugPrint('(init) cost/kWh total '.$monthly_running_totals["Grand_Total_kWh"].' Months '.$valid_months);
-        }
-
-        $monthly_average = annualAverages($valid_months, $monthly_running_totals);
-        //debugPrint('(init) cost/kWh total '.$monthly_running_totals["Grand_Total_kWh"].' Months '.($valid_months).' average '. $monthly_average["Grand_Total_kWh"]);
-      }
-      else
-        $COST = mod_cost($Time_Field, $ship, $VAL);
-    }
-
-    //$log->logInfo('VAL: ' . var_export($VAL));
-    $log->logInfo('Peak Billed VAL: ' . $VAL["Peak_Billed_Demand"]);
-    debugPrint('(init) End Monthly Report ' . $ship);
-    //Update 2024
+    // update 2024
     try {
       $parts = explode('_', $ships[0]);
       $loopname =  $parts[0] . '_' . $parts[1];   
@@ -390,8 +360,40 @@ foreach ($ship AS $key => $ship)
     } catch (Exception $e) {
       $testLogger->logError("Error fetching MonthlyReports: " . $e->getMessage());
     }
+
+
+    // if ($ship_count == 1)
+    // {
+    //   if ($annual_report)
+    //   {
+    //     $valid_months = 0;
+    //     //debugPrint('(init) Annual Report Year ' . $request_year);
+    //     for ($imonth = 0; $imonth < $max_month; $imonth++)
+    //     {
+    //       $repMonth = sprintf("-%02d-01 00:00:00", $imonth + 1);
+    //       //debugPrint('(init) COST Annual Month ' . $repMonth);
+    //       $COST_YEAR[] = mod_cost($Time_Field, $ship, $VAL_YEAR[$imonth]);
+    //       if ($VAL_YEAR[$imonth]["Lay_Days"] > 0)
+    //       {
+    //         $valid_months++;
+    //       }
+    //       $monthly_running_totals = annualRunningTotals($imonth, $monthly_running_totals,$VAL_YEAR, $COST_YEAR);
+    //       //debugPrint('(init) cost/kWh total '.$monthly_running_totals["Grand_Total_kWh"].' Months '.$valid_months);
+    //     }
+
+    //     $monthly_average = annualAverages($valid_months, $monthly_running_totals);
+    //     //debugPrint('(init) cost/kWh total '.$monthly_running_totals["Grand_Total_kWh"].' Months '.($valid_months).' average '. $monthly_average["Grand_Total_kWh"]);
+    //   }
+    //   else
+    //     $COST = mod_cost($Time_Field, $ship, $VAL);
+    // }
+
+    // //$log->logInfo('VAL: ' . var_export($VAL));
+    // $log->logInfo('Peak Billed VAL: ' . $VAL["Peak_Billed_Demand"]);
+    debugPrint('(init) End Monthly Report ' . $ship);
+
     break;
-  
+  }
 }
 
 if($ship_count==1)
