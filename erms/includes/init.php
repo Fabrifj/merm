@@ -343,12 +343,13 @@ foreach ($ship AS $key => $ship)
     // update 2024
     try {
       $parts = explode('_', $ships[0]);
-      $loopname =  $parts[0] . '_' . $parts[1];   
+      $loopname = $parts[0] . '_' . $parts[1];
   
       $year = isset($_REQUEST["year"]) ? intval($_REQUEST["year"]) : date('Y');
       $month = isset($_REQUEST["month"]) ? intval($_REQUEST["month"]) : 0;
+      
       if ($month == 0) {
-        $month = date('m'); 
+          $month = date('m'); 
       } else {
           $month = abs($month); 
       }   
@@ -356,9 +357,11 @@ foreach ($ship AS $key => $ship)
       $shipData = fetch_monthly_report_mod6($testLogger, $loopname, $year, $month);
       $formattedMessage = print_r($shipData, true);
       $testLogger->logDebug($formattedMessage);
-      $performance = fetch_last_30_days($testLogger, $loopname)
+  
+      $performance = fetch_last_30_days($testLogger, $loopname); // Punto y coma agregado aquí
+  
     } catch (Exception $e) {
-      $testLogger->logError("Error fetching MonthlyReports: " . $e->getMessage());
+        $testLogger->logError("Error fetching MonthlyReports: " . $e->getMessage());
     }
 
 
