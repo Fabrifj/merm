@@ -79,11 +79,15 @@ $log->logInfo('ERMS MODULE 2nd');
 setModLinks($username, $_REQUEST['shipClass'], $shipDeviceClass[0]);
 // TODO need to clean this up somehow
 $module_name = $_SESSION['user_data']['shipMods'][$module]["text"];
+$year = isset($_REQUEST["year"]) ? intval($_REQUEST["year"]) : date('Y');
+$month = isset($_REQUEST["month"]) ? intval($_REQUEST["month"]) : $month = date('m');
+
+
 if ($module == "mod6") {
   if($annual_report) {
-    $module_name = 'Annual Report for '.$_REQUEST["year"];
+    $module_name = 'Annual Report for '.$year;
   } else {
-      $module_name = 'Monthly Report for '.$_REQUEST["year"].",".$_REQUEST["month"];
+      $module_name = 'Monthly Report for '.$year.",".$month ;
   }
 }
 setBreadcrumbs("ship", $module_name, $indicator);
@@ -1020,18 +1024,18 @@ $performance = fetch_last_30_days($testLogger, $loopname);
     					<input name="report" type="hidden" value="report" />
     					<label>Select Report Month</label>
     					<select name="month" id="month">
-    					<option value="-01-01 00:00:00" ';if ($VAL["report_month"]=="January"){echo "selected";} echo '>January</option>
-    					<option value="-02-01 00:00:00" ';if ($VAL["report_month"]=="February"){echo "selected";} echo '>February</option>
-    					<option value="-03-01 00:00:00" ';if ($VAL["report_month"]=="March"){echo "selected";} echo '>March</option>
-    					<option value="-04-01 00:00:00" ';if ($VAL["report_month"]=="April"){echo "selected";} echo '>April</option>
-    					<option value="-05-01 00:00:00" ';if ($VAL["report_month"]=="May"){echo "selected";} echo '>May</option>
-    					<option value="-06-01 00:00:00" ';if ($VAL["report_month"]=="June"){echo "selected";} echo '>June</option>
-    					<option value="-07-01 00:00:00" ';if ($VAL["report_month"]=="July"){echo "selected";} echo '>July</option>
-    					<option value="-08-01 00:00:00" ';if ($VAL["report_month"]=="August"){echo "selected";} echo '>August</option>
-    					<option value="-09-01 00:00:00" ';if ($VAL["report_month"]=="September"){echo "selected";} echo '>September</option>
-    					<option value="-10-01 00:00:00" ';if ($VAL["report_month"]=="October"){echo "selected";} echo '>October</option>
-    					<option value="-11-01 00:00:00" ';if ($VAL["report_month"]=="November"){echo "selected";} echo '>November</option>
-    					<option value="-12-01 00:00:00" ';if ($VAL["report_month"]=="December"){echo "selected";} echo '>December</option>
+    					<option value="01" ';if ($VAL["report_month"]=="January"){echo "selected";} echo '>January</option>
+    					<option value="02" ';if ($VAL["report_month"]=="February"){echo "selected";} echo '>February</option>
+    					<option value="03" ';if ($VAL["report_month"]=="March"){echo "selected";} echo '>March</option>
+    					<option value="04" ';if ($VAL["report_month"]=="April"){echo "selected";} echo '>April</option>
+    					<option value="05" ';if ($VAL["report_month"]=="May"){echo "selected";} echo '>May</option>
+    					<option value="06" ';if ($VAL["report_month"]=="June"){echo "selected";} echo '>June</option>
+    					<option value="07" ';if ($VAL["report_month"]=="July"){echo "selected";} echo '>July</option>
+    					<option value="08" ';if ($VAL["report_month"]=="August"){echo "selected";} echo '>August</option>
+    					<option value="09" ';if ($VAL["report_month"]=="September"){echo "selected";} echo '>September</option>
+    					<option value="10" ';if ($VAL["report_month"]=="October"){echo "selected";} echo '>October</option>
+    					<option value="11" ';if ($VAL["report_month"]=="November"){echo "selected";} echo '>November</option>
+    					<option value="12" ';if ($VAL["report_month"]=="December"){echo "selected";} echo '>December</option>
     					<option value="month" ';if ($VAL["report_month"]=="Last 30 Days"){echo "selected";} echo '>Last 30 Days</option>
     					</select>
     					<label>Select Report Year</label><br />
