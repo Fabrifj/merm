@@ -25,48 +25,6 @@ $annual_report =  $_REQUEST["month"] == "annual" ? 1 : 0;
 $current_year = date("Y",strtotime("now")); //get the current year
 $max_month = 1;
 
-foreach ($ships AS $aq)
-{
-  $aquisuitetablename[] = $aq;
-
-  // Currently this joined query is only used for bootstrapping
-  // client data, but eventually we should be able to use it to
-  // eliminate subsequent calls for duplicate data
-  $sql = "SELECT $aq.devicetablename, $aq.deviceclass, $aq.SerialNumber, timezone.timezonephp, Aquisuite_List.utility, Equate_User.Title, Equate_User_Access.Ship_Class, Equate_User_Access.Owner Aquisuite_List.loopname FROM $aq
-          LEFT JOIN Aquisuite_List
-          ON Aquisuite_List.SerialNumber = $aq.SerialNumber
-          LEFT JOIN timezone
-          ON Aquisuite_List.timezoneaquisuite = timezone.timezoneaquisuite
-          LEFT JOIN Equate_User
-          ON Equate_User.aquisuitetablename = Aquisuite_List.aquisuitetablename
-          LEFT JOIN Equate_User_Access
-          ON Equate_User.aquisuitetablename = Equate_User_Access.aquisuitetablename
-          WHERE $aq.function='main_utility'";
-  $result = mysql_query($sql);
-
-  if(!$result)
-  {
-    MySqlFailure("Could not Find devicetable from ".$aq);
-  }
-  $row = mysql_fetch_row($result);
-
-  $ship[] = $row[0];
-  $shipDeviceClass[] = $row[1];
-  debugPrint('(init) ship: '.$row[0].' ship_class: '.$row[6].' owner: '.$row[7]);
-
-  $ships_data[$aq] = array(
-    "aquisuite" => $aq,
-    "device" => $row[0],
-    "class" => $row[1],
-    "timezone" => $row[3],
-    "utility" => $row[4],
-    "title" => $row[5],
-    "ship_class" => $row[6],
-    "owner" => $row[7],
-    "loopname" => $row[8]
-
-  );
-}
 
 switch($module){
     case "mod0":
