@@ -86,7 +86,6 @@ if ($module == "mod6") {
       $module_name = 'Monthly Report for '.$_REQUEST["year"].",".$_REQUEST["month"];
   }
 }
-$indicator = reset($ships_data)["title"];
 setBreadcrumbs("ship", $module_name, $indicator);
 
 //Update 2024!! 
