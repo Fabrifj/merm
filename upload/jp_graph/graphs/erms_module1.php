@@ -90,23 +90,7 @@ $indicator = reset($ships_data)["title"];
 setBreadcrumbs("ship", $module_name, $indicator);
 
 //Update 2024!! 
-$loopname = str_replace(' ', '_', $indicator);
-$year = isset($_REQUEST["year"]) ? intval($_REQUEST["year"]) : date('Y');
-$month = date("m", strtotime($VAL["date_value_start"]));
 
-switch ($module)
-{
-    // Energy Power and Cost Analysis
-    case ERMS_Modules::PowerAndCostAnalysis:
-        break;
-    case ERMS_Modules::EnergyMeterData:
-        break;
-    case ERMS_Modules::MonthlyReports:
-
-        $shipData = fetch_monthly_report_mod6($testLogger, $loopname, $year, $month);
-        break;
-
-}
 
 ?>
 

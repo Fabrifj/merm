@@ -357,7 +357,7 @@ foreach ($ship AS $key => $ship)
 
 
     $shipData = fetch_monthly_report_mod6($testLogger, $loopname, $year, $month);
-    $formattedMessage = print_r($$ships, true);
+    $formattedMessage = print_r($ships, true);
     $testLogger->logDebug($formattedMessage);
 
 
@@ -568,25 +568,25 @@ if($ship_count==1)
     break;
     // Monthly Reports
   case ERMS_Modules::MonthlyReports: //"mod6":
-    $log->logInfo('mode 6b<br/>');
-    $data   =
-      array
-      (
-        $shipData["TotalEnergyCharges"],
-        $shipData["TotalDemandCharges"],
-        1
-      );
-    if (!$annual_report)
-      $graph  =
-      erms_pie_graph
-      (
-        $Time_Field,
-        $data,
-        $ship,
-        $VAL["date_value_start"],
-        $VAL["date_value_end"],
-        $VAL["report_month"]
-      );
+    // $log->logInfo('mode 6b<br/>');
+    // $data   =
+    //   array
+    //   (
+    //     $shipData["TotalEnergyCharges"],
+    //     $shipData["TotalDemandCharges"],
+    //     1
+    //   );
+    // if (!$annual_report)
+    //   $graph  =
+    //   erms_pie_graph
+    //   (
+    //     $Time_Field,
+    //     $data,
+    //     $ship,
+    //     $VAL["date_value_start"],
+    //     $VAL["date_value_end"],
+    //     $VAL["report_month"]
+    //   );
     break;
   }
 }
