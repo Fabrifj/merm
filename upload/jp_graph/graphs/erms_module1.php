@@ -60,7 +60,7 @@ include_once ('../../../Auth/auth.php');
 
 //Update 2024
 require './src/db_helpers.php';
-
+require './src/functions.php';
 // Redirect happens within isAuthenticated and isPermitted
 // but we still want to make sure we exit the main script
 if(!isAuthenticated() || !isPermitted($_REQUEST['user'], $_REQUEST['shipClass'], $_REQUEST['ship'])) {
