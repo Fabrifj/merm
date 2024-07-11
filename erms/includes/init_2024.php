@@ -30,8 +30,6 @@ $max_month = 1;
 
 switch($module){
     case ERMS_Modules::Overview:
-        break;
-    case ERMS_Modules::PowerAndCostAnalysis:
         $metrics = array("kWh_day", "Peak_Demand", "Grand_Total_Lay_Day");
         $parts = explode('_', $ships[0]);
         $loopname = $parts[0] . '_' . $parts[1];
@@ -231,6 +229,8 @@ switch($module){
         $formattedMessage = print_r($graph, true);
         $testLogger->logDebug($formattedMessage);
 
+        break;
+    case ERMS_Modules::PowerAndCostAnalysis:
         break;
     case ERMS_Modules::EnergyMeterData:
         break;
