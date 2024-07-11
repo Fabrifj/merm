@@ -35,6 +35,7 @@ switch($module){
         $metrics = array("kWh_day", "Peak_Demand", "Grand_Total_Lay_Day");
         $parts = explode('_', $ships[0]);
         $loopname = $parts[0] . '_' . $parts[1];
+
         $Ship_kWh_Average_Baseline[] = 0;
         $Ship_kWh_Average_Baseline_G1[] = 0;
         $Ship_kWh_Average_Baseline_G2[] = 0;
@@ -45,8 +46,8 @@ switch($module){
         $Ship_daily_cost_baseline_g1[] = 0;
         $Ship_daily_cost_baseline_g2[] = 0;
           // Fetch values from Standard_ship_records
-        $_REQUEST["month"] =isset($_REQUEST["month"]) ? $_REQUEST["month"] : "month";
-        $testLogger->logDebug($_REQUEST["month"] );
+        $display =isset($_REQUEST['display']) ? $_REQUEST['display'] : "month";
+        $testLogger->logDebug($display );
 
         $values = [
             "kWh_day" => 0,
@@ -227,6 +228,9 @@ switch($module){
         "values" => $values,
         "cost" => $cost
         ];
+        $formattedMessage = print_r($graph, true);
+        $testLogger->logDebug($formattedMessage);
+
         break;
     case ERMS_Modules::EnergyMeterData:
         break;
