@@ -70,7 +70,7 @@ foreach ($ships AS $aq)
   // Currently this joined query is only used for bootstrapping
   // client data, but eventually we should be able to use it to
   // eliminate subsequent calls for duplicate data
-  $sql = "SELECT $aq.devicetablename, $aq.deviceclass, $aq.SerialNumber, timezone.timezonephp, Aquisuite_List.utility, Equate_User.Title, Equate_User_Access.Ship_Class, Equate_User_Access.Owner FROM $aq
+  $sql = "SELECT $aq.devicetablename, $aq.deviceclass, $aq.SerialNumber, timezone.timezonephp, Aquisuite_List.utility, Equate_User.Title, Equate_User_Access.Ship_Class, Equate_User_Access.Owner Aquisuite_List.loopname FROM $aq
           LEFT JOIN Aquisuite_List
           ON Aquisuite_List.SerialNumber = $aq.SerialNumber
           LEFT JOIN timezone
@@ -100,7 +100,9 @@ foreach ($ships AS $aq)
     "utility" => $row[4],
     "title" => $row[5],
     "ship_class" => $row[6],
-    "owner" => $row[7]
+    "owner" => $row[7],
+    "loopname" => $row[8]
+
   );
 }
 
@@ -338,7 +340,7 @@ foreach ($ship AS $key => $ship)
   case ERMS_Modules::MonthlyReports: //"mod6":
     $log->logInfo('mode 6a<br/>');
     debugPrint('(init) MODE 6 Monthly Report ' . $ship);
-    $loopname = str_replace(' ', '_', $indicator);
+    $loopname = $ships_data[0]["loopname"];
     $year = isset($_REQUEST["year"]) ? intval($_REQUEST["year"]) : date('Y');
     $month = isset($_REQUEST["month"]) ? intval($_REQUEST["month"]) : 0;
     if ($month == 0) {
