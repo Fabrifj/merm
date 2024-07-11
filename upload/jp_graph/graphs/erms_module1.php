@@ -108,6 +108,7 @@ switch ($module)
     // Energy Power and Cost Analysis
     case ERMS_Modules::MonthlyReports:
         break;
+}
 
 ?>
 
