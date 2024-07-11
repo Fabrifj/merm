@@ -1,4 +1,6 @@
 <?php
+
+
 $Ship_Table_Name = "";
 $Time_Field = "time";
 $module=$_REQUEST['module'];
@@ -53,8 +55,14 @@ switch($module){
         $shipData = fetch_monthly_report_mod6($testLogger, $loopname, $year, $month);
         $formattedMessage = print_r($shipData, true);
         $testLogger->logDebug($formattedMessage);
-    
+        
         $performance = fetch_last_30_days($testLogger, $loopname);
+
+        $utilityRate = create_utility_class($logger,$utility);
+
+        $taxesAddFees = $utilityRate->getCustomerCharge();
+        $totalCost = $shipData["TotalEnergyCharges"] + $shipData["TotalDemandCharges"] +$taxesAddFees ;
+
         // graph
     // $data   =
     //   array

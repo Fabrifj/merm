@@ -61,6 +61,8 @@ include_once ('../../../Auth/auth.php');
 //Update 2024
 require './src/db_helpers.php';
 require './src/functions.php';
+require './src/class_helpers.php';
+
 // Redirect happens within isAuthenticated and isPermitted
 // but we still want to make sure we exit the main script
 if(!isAuthenticated() || !isPermitted($_REQUEST['user'], $_REQUEST['shipClass'], $_REQUEST['ship'])) {
@@ -219,7 +221,7 @@ $performance = fetch_last_30_days($testLogger, $loopname);
     		<tr>
     			<td>Average Cost Per Lay Day <b>$<?php echo $performance["avg_cost"] ?></b></td>
     			<td>Average kWh Per Lay Day <b><?php echo $performance["avg_kwH"] ?></b></td>
-    			<td>Cost Per kWh <b>$<?php echo $performance["avg_kw"] ?></b></td>
+    			<td>Cost Per kWh <b>$<?php echo $performance["avg_cost"]/$performance["avg_kwH"] ?></b></td>
     		</tr>
             </table>
         </div>
@@ -879,7 +881,7 @@ $performance = fetch_last_30_days($testLogger, $loopname);
     		<tr>
     			<td>kWh per day <b><?php echo $performance["avg_kwH"] ?></b></td>
     			<td>Cost per day <b>$<?php echo $performance["avg_cost"] ?></b></td>
-    			<td>Cost per kWh <b>$<?php echo $COST["Grand_Total_kWh"] ?></b></td>
+    			<td>Cost per kWh <b>$<?php echo $performance["avg_cost"]/$performance["avg_kwH"] ?></b></td>
     		</tr>
             </table>
         </div>
@@ -1073,19 +1075,19 @@ $performance = fetch_last_30_days($testLogger, $loopname);
                         <table id="TblEnergyCostOverview" class="tblDetailedSummary">
                 		<tr>
                 			<td style="color:black;">Total Energy Charges</td>
-                			<td><b>$<?php echo $COST["Total_kWh_Cost"] ?></b></td>
+                			<td><b>$<?php echo $shipData["TotalEnergyCharges"] ?></b></td>
                 		</tr>
                 		<tr class="odd">
                 			<td style="color:black;">Total Demand Charges</td>
-                			<td><b>$<?php echo $COST["Total_kW_Cost"] ?></b></td>
+                			<td><b>$<?php echo $shipData["TotalDemandCharges"] ?></b></td>
                 		</tr>
                 		<tr>
                 			<td style="color:black;">Total Taxes &amp; Fees</td>
-                			<td><b>$<?php echo $COST["Taxes_Add_Fees"] ?></b></td>
+                			<td><b>$<?php echo $taxesAddFees ?></b></td>
                 		</tr>
                 		<tr class="odd">
                 			<td style="color:black; border-bottom: 0px;">Total Cost</td>
-                			<td><b>$<?php echo $COST["Grand_Total_Cost"] ?></b></td>
+                			<td><b>$<?php echo $totalCost ?></b></td>
                 		</tr>
                         </table>
                     </div>
@@ -1179,8 +1181,7 @@ $performance = fetch_last_30_days($testLogger, $loopname);
  <div class="wrapper">
         <div class="chart_left">
 <?php
-	if ($utility=="SCE&G_Rates")
-	{
+	
            	echo '
                    <div class="consumption_box">
                     <div id="graph_range_sel_header">
@@ -1190,252 +1191,37 @@ $performance = fetch_last_30_days($testLogger, $loopname);
                     <table class="tblDetailedSummaryRpt">
                     <tr>
                             <td>Basic Customer</td>
-                            <td  style="background:none;"><font color="black">$'.$COST["U_Customer_Charge"].'</font></td>
+                            <td  style="background:none;"><font color="black">$'.$utilityRate->getCustomerCharge().'</font></td>
                     </tr>
                     <tr class="odd">
                             <td>Summer On-Peak Billing Demand (per kW)</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Summer_Peak_Demand_kW"].'</font></td>
+                            <td style="background:none;"><font color="black">$'.$utilityRate->getCostKw("summerPeak",$shipData["MaxOnPeakDemand"] ).'</font></td>
                     </tr>
                     <tr>
                             <td>Non-Summer On-Peak Billing Demand (per kW)</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Non_Summer_Peak_Demand_kW"].'</font></td>
+                            <td style="background:none;"><font color="black">$'.$utilityRate->getCostKw("nonSumerPeak",$shipData["MaxOnPeakDemand"] ).'</font></td>
                     </tr>
                     <tr class="odd">
                             <td>Off-Peak Billing Demand</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Off_Peak_Demand_kW"].'</font></td>
+                            <td style="background:none;"><font color="black">$'.$utilityRate->getCostKw("offPeak",$shipData["MaxOffPeakDemand"] ).'</font></td>
                     </tr>
                     <tr>
                             <td>Summer On-Peak Energy. June-September</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Summer_Peak_kWh"].'</font></td>
+                            <td style="background:none;"><font color="black">$'.$utility->getCostKwH("summerPeak",$shipData["OnPeakkWh"] ).'</font></td>
                     </tr>
                     <tr class="odd">
                             <td>Non-Summer On-Peak Energy. October-May</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Non_Summer_Peak_kWh"].'</font></td>
+                            <td style="background:none;"><font color="black">$'.$utility->getCostKwH("nonSumerPeak",$shipData["OnPeakkWh"] ).'</font></td>
                     </tr>
                     <tr>
                             <td>Off-Peak Energy</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Off_Peak_kWh_rate"].'</font></td>
-                    </tr>
-                    <tr class="odd">
-                            <td>Franchise Fee</th>
-                            <td style="background:none;"><font color="black">'.$COST["U_Franchise_Fee"]*100.0.'%</font></td>
+                            <td style="background:none;"><font color="black">$'.$utility->getCostKwH("offPeak",$shipData["OffPeakkWh"] ).'</font></td>
                     </tr>
         <!-- end energy rate schedule report info -->
         </table>
       </div>
     ';
-   }
-    if($utility == "Virginia_Dominion_Rates") {
-           	echo '
-                   <div class="consumption_box">
-                    <div id="graph_range_sel_header">
-                        <span style="font-weight: bold;">Virginia Dominion Rate GS 3</span><br />
-                     </div>
-
-                    <table class="tblDetailedSummaryRpt">
-                    <tr>
-                            <td>Basic Customer</td>
-                            <td  style="background:none;"><font color="black">$'.$COST["U_Customer_Charge"].'</font></td>
-                    </tr>
-                    <tr class="odd">
-                            <td>On-Peak Demand (per kW)</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Peak_kW"].'</font></td>
-                    </tr>
-                    <tr>
-                            <td>Off-Peak Demand (per kW)</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Off_Peak_kW"].'</font></td>
-                    </tr>
-                    <tr class="odd">
-                            <td>Peak Energy</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Peak_kWh"].'</font></td>
-                    </tr>
-                    <tr>
-                            <td>Off-Peak Energy</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Off_Peak_kWh"].'</font></td>
-                    </tr>
-                    <tr class="odd">
-                            <td>Reactive Demand</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Demand_rkVA"].'</font></td>
-                    </tr>
-                    <tr>
-                            <td>Distribution Demand</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Distribution_Demand"].'</font></td>
-                    </tr>
-                    <tr class="odd">
-                            <td>ESS Adjustment</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_ESS_Adjustment_Charge"].'</font></td>
-                    </tr>
-                    <tr>
-                            <td>Fuel Charge (per kWh)</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Fuel_Charge"].'</font></td>
-                    </tr>
-                    <tr class="odd">
-                            <td>Sales Charge (per kWh)</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Sales_kWh"].'</font></td>
-                    </tr>
-                    <tr>
-                            <td>Rider R Peak Demand</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Rider_R_Peak_kW"].'</font></td>
-                    </tr>
-                    <tr class="odd">
-                            <td>Rider S Peak Demand</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Rider_S_Peak_kW"].'</font></td>
-                    </tr>
-                    <tr>
-                            <td>Rider T Peak Demand</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Rider_T_Peak_kW"].'</font></td>
-                    </tr>
-                    <tr class="odd">
-                            <td>Rider R Peak Demand Credit</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Rider_R_Credit"].'</font></td>
-                    </tr>
-                    <tr>
-                            <td>Rider S Peak Demand Credit</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Rider_S_Credit"].'</font></td>
-                    </tr>
-                    <tr class="odd">
-                            <td>Rider T Peak Demand Credit</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Rider_T_Credit"].'</font></td>
-                    </tr>
-                    <tr>
-                            <td>Tax Rate Tier 1 (2,500 kWh and below)</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Tax_Rate_1"].'</font></td>
-                    </tr>
-                    <tr class="odd">
-                            <td>Tax Rate Tier 2 (between 2,500 and 50,000 kWh)</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Tax_Rate_2"].'</font></td>
-                    </tr>
-                    <tr>
-                            <td>Tax Rate Tier 3 (greater than 50,000 kWh)</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Tax_Rate_3"].'</font></td>
-                    </tr>
-                    <tr class="odd">
-                            <td>Utility Tax</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Utility_tax"].'</font></td>
-                    </tr>
-        <!-- end energy rate schedule report info -->
-        </table>
-      </div>
-    ';
-
-    }
-	if ($utility=="Virginia_Electric_and_Power_Co")
-	{
-           	echo '
-                   <div class="consumption_box">
-                    <div id="graph_range_sel_header">
-                        <span style="font-weight: bold;">Virginia Electric and Power Company Schedule 10</span><br />
-                     </div>
-
-                    <table style="border-collapse: collapse" class="tblDetailedSummaryRpt">
-                    <tr>
-                            <td colspan="3">Basic Customer</td>
-                            <td colspan="3" style="background:none;"><font color="black">$'.$COST["U_Customer_Charge"].'</font></td>
-                    </tr>
-                    <tr>
-                            <td colspan="3">Peak Demand Charge (500 kW minimum)</td>
-                            <td colspan="3"  style="background:none;"><font color="black">$'.$COST["U_Peak_kW_Demand_1_Cost"].'</font></td>
-                    </tr>
-                    <tr style="border-top: 1px solid black; border-bottom: 1px solid black">
-                      <td style="width:33%" colspan="2">Month</td>
-                      <td style="width:33%" colspan="2">On Peak Energy</td>
-                      <td style="width:33%" colspan="2">Off Peak Energy</td>
-                    </tr>';
-                for($i = 1; $i < count($COST["U_Monthly_Rates"]) + 1; $i++) {
-                  $month_name = date('F', mktime(0, 0, 0, $i, 10));
-                  $peak_rate = number_format($COST["U_Monthly_Rates"][$i]["Peak_kWh"], 3);
-                  $off_peak_rate = number_format($COST["U_Monthly_Rates"][$i]["Off_Peak_kWh"], 3);
-                  $row_class = $i % 2 == 0 ? "" : "odd";
-
-                  echo '<tr class="'.$row_class.'">
-                        <td style="width:33%" colspan="2" style="background:none; color:black;">'.$month_name.'</td>
-                        <td style="width:33%" colspan="2" style="background:none; color:black;">$'.$peak_rate.'</td>
-                        <td style="width:33%" colspan="2" style="background:none; color:black;">$'.$off_peak_rate.'</td>
-                      </tr>';
-                }
-        echo '</table>
-      </div>';
-   }
-
-   if($utility=="Entergy_NO_Rates") {
-           	echo '
-                   <div class="consumption_box">
-                    <div id="graph_range_sel_header">
-                        <span style="font-weight: bold;">Entergy New Orleans Rate LE-HLF</span><br />
-                     </div>
-
-                    <table class="tblDetailedSummaryRpt">
-                    <tr>
-                            <td>Demand 0 to 50 kW</td>
-                            <td  style="background:none;"><font color="black">$'.$COST["U_Demand_Rate_1"].'</font></td>
-                    </tr>
-                    <tr class="odd">
-                            <td>Demand 50 to 100 kW</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Demand_Rate_2"].'</font></td>
-                    </tr>
-                    <tr>
-                            <td>Demand 100 to 200 kW</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Demand_Rate_3"].'</font></td>
-                    </tr>
-                    <tr class="odd">
-                            <td>Demand Additional kW</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Demand_Rate_4"].'</font></td>
-                    </tr>
-                    <tr>
-                            <td>Energy first 5,000 kWh</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Energy_Rate_1"].'</font></td>
-                    </tr>
-                    <tr class="odd">
-                            <td>Energy 5,000 to 10,000 kWh</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Energy_Rate_2"].'</font></td>
-                    </tr>
-                    <tr>
-                            <td>Energy 10,000 to 15,000 kWh</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Energy_Rate_3"].'</font></td>
-                    </tr>
-                    <tr class="odd">
-                            <td>Energy Additional 400 kWh/kW</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Energy_Rate_4"].'</font></td>
-                    </tr>
-                    <tr>
-                            <td>Energy All Additional kWh</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Energy_Rate_5"].'</font></td>
-                    </tr>
-                    <tr class="odd">
-                            <td>Rider Fuel Cost per kWh</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Rider_Fuel_kWh"].'</font></td>
-                    </tr>
-                    <tr>
-                            <td>Rider Capacity Aquisition</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Rider_Capacity_kWh"].'</font></td>
-                    </tr>
-                    <tr class="odd">
-                            <td>Rider EAC</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Rider_EAC_kWh"].'</font></td>
-                    </tr>
-                    <tr>
-                            <td>Street use Franchise Fee</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Street_Use_Franchise_Fee"].'</font></td>
-                    </tr>
-                    <tr class="odd">
-                            <td>Storm Securitization Fee</td>
-                            <td style="background:none;"><font color="black">$'.$COST["U_Storm_Securitization_Fee"].'</font></td>
-                    </tr>
-                    <tr>
-                            <td>Formula Rate Plan %</td>
-                            <td style="background:none;"><font color="black">'.$COST["U_Formula_Rate_Plan_Percentage"].'%</font></td>
-                    </tr>
-                    <tr class="odd">
-                            <td>MISO Recovery %</td>
-                            <td style="background:none;"><font color="black">'.$COST["U_MISO_Recovery_Percentage"].'%</font></td>
-                    </tr>
-        <!-- end energy rate schedule report info -->
-        </table>
-      </div>
-    ';
-
-   }
-
+   
 ?>
        </div>
     </div>
