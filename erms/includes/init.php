@@ -357,7 +357,7 @@ foreach ($ship AS $key => $ship)
 
 
     $shipData = fetch_monthly_report_mod6($testLogger, $loopname, $year, $month);
-    $formattedMessage = print_r($shipData, true);
+    $formattedMessage = print_r($$ships, true);
     $testLogger->logDebug($formattedMessage);
 
 
@@ -574,7 +574,7 @@ if($ship_count==1)
       (
         $shipData["TotalEnergyCharges"],
         $shipData["TotalDemandCharges"],
-        0
+        1
       );
     if (!$annual_report)
       $graph  =
