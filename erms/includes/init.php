@@ -553,7 +553,8 @@ if($ship_count==1)
       "values" => $values,
       "cost" => $cost
     ];
-
+    $formattedMessage = print_r($graph, true);
+    $testLogger->logDebug($formattedMessage);
     break;
     // Energy Power and Cost Analysis
   case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
