@@ -1207,15 +1207,15 @@ $performance = fetch_last_30_days($testLogger, $loopname);
                     </tr>
                     <tr>
                             <td>Summer On-Peak Energy. June-September</td>
-                            <td style="background:none;"><font color="black">$'.$utility->getCostKwH("summerPeak",$shipData["OnPeakkWh"] ).'</font></td>
+                            <td style="background:none;"><font color="black">$'.$utilityRate->getCostKwH("summerPeak",$shipData["OnPeakkWh"] ).'</font></td>
                     </tr>
                     <tr class="odd">
                             <td>Non-Summer On-Peak Energy. October-May</td>
-                            <td style="background:none;"><font color="black">$'.$utility->getCostKwH("nonSumerPeak",$shipData["OnPeakkWh"] ).'</font></td>
+                            <td style="background:none;"><font color="black">$'.$utilityRate->getCostKwH("nonSumerPeak",$shipData["OnPeakkWh"] ).'</font></td>
                     </tr>
                     <tr>
                             <td>Off-Peak Energy</td>
-                            <td style="background:none;"><font color="black">$'.$utility->getCostKwH("offPeak",$shipData["OffPeakkWh"] ).'</font></td>
+                            <td style="background:none;"><font color="black">$'.$utilityRate->getCostKwH("offPeak",$shipData["OffPeakkWh"] ).'</font></td>
                     </tr>
         <!-- end energy rate schedule report info -->
         </table>

@@ -700,6 +700,14 @@ function fetch_monthly_report_mod6($log, $loopname, $year, $month) {
     return $monthlyReport;
 }
 
+// Function to fetch records from a specific table
+function db_fetch_utility_rate($log, $utility) {
+    $query = sprintf("SELECT * FROM `%s` ORDER BY Rate_Date_Start DESC LIMIT 1;",
+        mysql_real_escape_string($utility)
+    );
+    $result = db_query($log, $query);
+    return db_fetch_all($result);
+}
 
 
 

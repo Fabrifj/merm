@@ -42,7 +42,7 @@ switch($module){
         $parts = explode('_', $ships[0]);
         $loopname = $parts[0] . '_' . $parts[1];
         $indicator =$loopname;
-        $utility = utility_check($ships[0]);
+        
         $year = isset($_REQUEST["year"]) ? intval($_REQUEST["year"]) : date('Y');
         $month = isset($_REQUEST["month"]) ? intval($_REQUEST["month"]) : $month = date('m');
         
@@ -58,7 +58,9 @@ switch($module){
         
         $performance = fetch_last_30_days($testLogger, $loopname);
 
-        $utilityRate = UtilityRateFactory::createStandardUtilityRate($logger,$utility);
+        $utility = utility_check($ships[0]);
+        $utilityData = db_fetch_utility_rate($logger, $utility);
+        $utilityRate = create_utility_class($logger,$utilityData[0]);
 
         $taxesAddFees = $utilityRate->getCustomerCharge();
         $totalCost = $shipData["TotalEnergyCharges"] + $shipData["TotalDemandCharges"] +$taxesAddFees ;
