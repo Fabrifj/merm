@@ -91,8 +91,8 @@ setBreadcrumbs("ship", $module_name, $indicator);
 
 //Update 2024!! 
 $loopname = str_replace(' ', '_', $indicator);
-$year = $VAL["report_year"]; 
-$month = $VAL["report_month"]; 
+$year = isset($_REQUEST["year"]) ? intval($_REQUEST["year"]) : date('Y');
+$month = isset($_REQUEST["month"]) ? intval($_REQUEST["month"]) : date('m'); 
 
 switch ($module)
 {
