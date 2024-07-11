@@ -92,7 +92,7 @@ setBreadcrumbs("ship", $module_name, $indicator);
 //Update 2024!! 
 $loopname = str_replace(' ', '_', $indicator);
 $year = isset($_REQUEST["year"]) ? intval($_REQUEST["year"]) : date('Y');
-$month = isset($_REQUEST["month"]) ? intval($_REQUEST["month"]) : date('m'); 
+$month = date("m", strtotime($VAL["date_value_start"]));
 
 switch ($module)
 {
@@ -102,6 +102,7 @@ switch ($module)
     case ERMS_Modules::EnergyMeterData:
         break;
     case ERMS_Modules::MonthlyReports:
+
         $shipData = fetch_monthly_report_mod6($testLogger, $loopname, $year, $month);
 
         break;
