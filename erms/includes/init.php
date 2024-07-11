@@ -391,7 +391,7 @@ foreach ($ship AS $key => $ship)
       $testLogger->logError("Error fetching MonthlyReports: " . $e->getMessage());
     }
     break;
-  }
+  
 }
 
 if($ship_count==1)
