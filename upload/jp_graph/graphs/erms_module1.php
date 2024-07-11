@@ -213,9 +213,9 @@ setBreadcrumbs("ship", $module_name, $indicator);
             </div>
     		<table class="tblLast30">
     		<tr>
-    			<td>Average Cost Per Lay Day <b>$<?php echo $COST_30["Grand_Total_Lay_Day"] ?></b></td>
-    			<td>Average kWh Per Lay Day <b><?php echo $VAL_30["kWh_day"] ?></b></td>
-    			<td>Cost Per kWh <b>$<?php echo $COST_30["Grand_Total_kWh"] ?></b></td>
+    			<td>Average Cost Per Lay Day <b>$<?php echo $performance["avg_cost"] ?></b></td>
+    			<td>Average kWh Per Lay Day <b><?php echo $performance["avg_kwH"] ?></b></td>
+    			<td>Cost Per kWh <b>$<?php echo $performance["avg_kw"] ?></b></td>
     		</tr>
             </table>
         </div>
