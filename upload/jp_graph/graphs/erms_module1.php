@@ -96,6 +96,7 @@ setBreadcrumbs("ship", $module_name, $indicator);
 
 //Update 2024!! 
 $performance = fetch_last_30_days($testLogger, $loopname);
+$cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $performance["avg_kwH"]) : 0;
 
 
 ?>
@@ -221,7 +222,7 @@ $performance = fetch_last_30_days($testLogger, $loopname);
     		<tr>
     			<td>Average Cost Per Lay Day <b>$<?php echo $performance["avg_cost"] ?></b></td>
     			<td>Average kWh Per Lay Day <b><?php echo $performance["avg_kwH"] ?></b></td>
-    			<td>Cost Per kWh <b>$<?php echo $performance["avg_cost"]/$performance["avg_kwH"] ?></b></td>
+    			<td>Cost Per kWh <b>$<?php echo $cost_per_kwH ?></b></td>
     		</tr>
             </table>
         </div>
