@@ -58,7 +58,7 @@ switch($module){
         
         $performance = fetch_last_30_days($testLogger, $loopname);
 
-        $utilityRate = UtilityRateFactory::create_utility_class($logger,$utility);
+        $utilityRate = UtilityRateFactory::createStandardUtilityRate($logger,$utility);
 
         $taxesAddFees = $utilityRate->getCustomerCharge();
         $totalCost = $shipData["TotalEnergyCharges"] + $shipData["TotalDemandCharges"] +$taxesAddFees ;
