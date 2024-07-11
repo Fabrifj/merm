@@ -60,7 +60,7 @@ switch($module){
 
         $utilityRate = create_utility_class($logger,$utility);
 
-        $taxesAddFees = $utilityRate->getCustomerCharge();
+        $taxesAddFees = UtilityRateFactory::$utilityRate->getCustomerCharge();
         $totalCost = $shipData["TotalEnergyCharges"] + $shipData["TotalDemandCharges"] +$taxesAddFees ;
 
         // graph
