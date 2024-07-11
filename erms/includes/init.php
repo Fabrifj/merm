@@ -358,7 +358,7 @@ foreach ($ship AS $key => $ship)
       $formattedMessage = print_r($shipData, true);
       $testLogger->logDebug($formattedMessage);
   
-      $performance = fetch_last_30_days($testLogger, $loopname); // Punto y coma agregado aquí
+      $performance = fetch_last_30_days($testLogger, $loopname);
   
     } catch (Exception $e) {
         $testLogger->logError("Error fetching MonthlyReports: " . $e->getMessage());

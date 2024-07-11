@@ -662,7 +662,7 @@ function fetch_monthly_report_mod6($log, $loopname, $year, $month) {
         'TotalkWhConsumed' => round($generalData["accumulation"], 2),
         'MaxOnPeakDemand' => round($maxPeak["max_peak_kw"], 2),
         'OnPeakBilledDemand' => round($maxPeak["max_peak_kw"], 2), // Placeholder, update with correct key
-        'TimeOfMaxOnPeakDemand' => $maxPeak["max_peak_time"], // Assuming this is a date/time value
+        'TimeOfMaxOnPeakDemand' => ($maxPeak["max_peak_kw"] != 0) ? $maxPeak["max_peak_time"] : 0, // Assuming this is a date/time value
         'MaxOffPeakDemand' => round($maxOffPeak["max_off_peak_kw"], 2),
         'OffPeakBilledDemand' => round($maxOffPeak["max_off_peak_kw"], 2), // Placeholder, update with correct key
         'TimeOfMaxOffPeakDemand' => $maxOffPeak["max_off_peak_time"], // Assuming this is a date/time value
