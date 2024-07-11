@@ -89,12 +89,25 @@ if ($module == "mod6") {
 $indicator = reset($ships_data)["title"];
 setBreadcrumbs("ship", $module_name, $indicator);
 
-//Request 2024!! 
+//Update 2024!! 
 $loopname = str_replace(' ', '_', $indicator);
-$year = date("Y", strtotime($VAL["date_value_start"])); // Obtener el año completo
-$month = date("m", strtotime($VAL["date_value_start"])); // Obtener el número del mes
+$year = $VAL["report_year"]; 
+$month = $VAL["report_month"]; 
 
-$shipData = fetch_monthly_report_mod6($testLogger, $loopname, $year, $month);
+switch ($module)
+{
+    // Energy Power and Cost Analysis
+    case ERMS_Modules::PowerAndCostAnalysis:
+        break;
+    case ERMS_Modules::EnergyMeterData:
+        break;
+    case ERMS_Modules::MonthlyReports:
+        $shipData = fetch_monthly_report_mod6($testLogger, $loopname, $year, $month);
+
+        break;
+    // Energy Power and Cost Analysis
+    case ERMS_Modules::MonthlyReports:
+        break;
 
 ?>
 
@@ -262,7 +275,8 @@ $shipData = fetch_monthly_report_mod6($testLogger, $loopname, $year, $month);
     					</select>
     					<label>Select Report Year</label><br />
     					<select name="year" id="year">
-                        <br />
+                        <br />                            	    	
+                                        <option value="2024" ';if ($VAL["report_year"]=="2024"){echo "selected";} echo '>2024</option>
                             	    	<option value="2023" ';if ($VAL["report_year"]=="2023"){echo "selected";} echo '>2023</option>
                             	    	<option value="2022" ';if ($VAL["report_year"]=="2022"){echo "selected";} echo '>2022</option>
                             	    	<option value="2021" ';if ($VAL["report_year"]=="2021"){echo "selected";} echo '>2021</option>
@@ -1040,7 +1054,7 @@ $shipData = fetch_monthly_report_mod6($testLogger, $loopname, $year, $month);
     					<label>Select Report Year</label><br />
     					<select name="year" id="year">
                         <br />
-                        <option value="2023" ';if ($VAL["report_year"]=="2024"){echo "selected";} echo '>2023</option>
+                        <option value="2024" ';if ($VAL["report_year"]=="2024"){echo "selected";} echo '>2024</option>
                         <option value="2023" ';if ($VAL["report_year"]=="2023"){echo "selected";} echo '>2023</option>
                         <option value="2022" ';if ($VAL["report_year"]=="2022"){echo "selected";} echo '>2022</option>
                         <option value="2021" ';if ($VAL["report_year"]=="2021"){echo "selected";} echo '>2021</option>
