@@ -464,8 +464,8 @@ function mod_values($Time_Field, $ship, $value_days, $ship_count,$report_month,$
 	// only counts time where the Voltage >
 	// 10 Volts.
 
-	$VAL["Lay_Days"] = day_count($Time_Field,$ship,$VAL["date_value_start"],$VAL["date_value_end"],$Voltage_Field,10);
-        debugPrint('(init mod_values) Lay Days '.$VAL["Lay_Days"]." start ".$VAL["date_value_start"].' end '.$VAL["date_value_end"].' kwh_total '.$VAL["kWh_Total"]);
+	// FA $VAL["Lay_Days"] = day_count($Time_Field,$ship,$VAL["date_value_start"],$VAL["date_value_end"],$Voltage_Field,10);
+  //       debugPrint('(init mod_values) Lay Days '.$VAL["Lay_Days"]." start ".$VAL["date_value_start"].' end '.$VAL["date_value_end"].' kwh_total '.$VAL["kWh_Total"]);
 
 	// In case the number of lay days is
 	// calculated to be 0. This prevents

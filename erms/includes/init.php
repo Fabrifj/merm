@@ -341,9 +341,9 @@ foreach ($ship AS $key => $ship)
     $log->logInfo('mode 6a<br/>');
     debugPrint('(init) MODE 6 Monthly Report ' . $ship);
 
-    $parts = explode('_', $string);
+    $parts = explode('_', $ships[0]);
     $loopname =  $parts[0] . '_' . $parts[1];   
-     
+
     $year = isset($_REQUEST["year"]) ? intval($_REQUEST["year"]) : date('Y');
     $month = isset($_REQUEST["month"]) ? intval($_REQUEST["month"]) : 0;
     if ($month == 0) {
