@@ -29,7 +29,9 @@ $max_month = 1;
 
 
 switch($module){
-    case "mod0":
+    case ERMS_Modules::Overview:
+        break;
+    case ERMS_Modules::PowerAndCostAnalysis:
         $metrics = array("kWh_day", "Peak_Demand", "Grand_Total_Lay_Day");
         $parts = explode('_', $ships[0]);
         $loopname = $parts[0] . '_' . $parts[1];
@@ -226,11 +228,9 @@ switch($module){
         "cost" => $cost
         ];
         break;
-    case "mod1":
+    case ERMS_Modules::EnergyMeterData:
         break;
-    case "mod3":
-        break;
-    case "mod6":
+    case ERMS_Modules::MonthlyReports:
         $testLogger->logInfo('mode 6');
         // update 2024
         try {
