@@ -795,3 +795,4 @@ $log->logInfo('SHIP TABLE: ' . $Title);
 
 $user = user_page();
 $rights = $_REQUEST['rights'];
+?>
