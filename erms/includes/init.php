@@ -231,52 +231,52 @@ foreach ($ship AS $key => $ship)
   case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
     // Power Meter Data
   case ERMS_Modules::EnergyMeterData: //"mod3":
-    $parts = explode('_', $ships[0]);
-    $loopname = $parts[0] . '_' . $parts[1];
-    $indicator =$loopname;
-    $testLogger->logInfo(' MODE 3 Monthly Report ' . $loopname . " Display: ".$VAL["display"]);
-    try {
-      $selectedField1 = isset($_POST['data1']) ? $_POST['data1'] : 'current';
-      $selectedField2 = isset($_POST['data2']) ? $_POST['data2'] : 'power_factor';
+    // $parts = explode('_', $ships[0]);
+    // $loopname = $parts[0] . '_' . $parts[1];
+    // $indicator =$loopname;
+    // $testLogger->logInfo(' MODE 3 Monthly Report ' . $loopname . " Display: ".$VAL["display"]);
+    // try {
+    //   $selectedField1 = isset($_POST['data1']) ? $_POST['data1'] : 'current';
+    //   $selectedField2 = isset($_POST['data2']) ? $_POST['data2'] : 'power_factor';
 
-      $units1 = EnergyMetrics::get_details($selectedField1);
-      $units2 = EnergyMetrics::get_details($selectedField2);
+    //   $units1 = EnergyMetrics::get_details($selectedField1);
+    //   $units2 = EnergyMetrics::get_details($selectedField2);
 
 
-      $field1 = $units1["field"];
-      $field2 = $units2["field"];
-      switch($VAL["display"]){
-        case "day":
-          $endDate =  date('Y-m-d H:i:s');
-          $startDate = date('Y-m-d H:i:s', strtotime('-1 day'));
-          break;
-        case "week":
-          $endDate =  date('Y-m-d H:i:s');
-          $startDate = date('Y-m-d H:i:s', strtotime('-1 week'));
-          break;
-        case "month":
-          $endDate =  date('Y-m-d H:i:s');
-          $startDate = date('Y-m-d H:i:s', strtotime('-1 month'));
-          break;
-        case "anydate":
-          $startDate =  $VAL["date_value_start"];
-          $endDate =  $VAL["date_value_end"];
-          break;  
-      }
-      // Get interval time
-      $intervalSeconds = round(($endTimestamp - $startTimestamp) / 286);
-      $log_interval = $intervalSeconds*1000;
-      $dates = getEvenlySpacedDates($startDate, $endDate, $intervalSeconds);
+    //   $field1 = $units1["field"];
+    //   $field2 = $units2["field"];
+    //   switch($VAL["display"]){
+    //     case "day":
+    //       $endDate =  date('Y-m-d H:i:s');
+    //       $startDate = date('Y-m-d H:i:s', strtotime('-1 day'));
+    //       break;
+    //     case "week":
+    //       $endDate =  date('Y-m-d H:i:s');
+    //       $startDate = date('Y-m-d H:i:s', strtotime('-1 week'));
+    //       break;
+    //     case "month":
+    //       $endDate =  date('Y-m-d H:i:s');
+    //       $startDate = date('Y-m-d H:i:s', strtotime('-1 month'));
+    //       break;
+    //     case "anydate":
+    //       $startDate =  $VAL["date_value_start"];
+    //       $endDate =  $VAL["date_value_end"];
+    //       break;  
+    //   }
+    //   // Get interval time
+    //   $intervalSeconds = round(($endTimestamp - $startTimestamp) / 286);
+    //   $log_interval = $intervalSeconds*1000;
+    //   $dates = getEvenlySpacedDates($startDate, $endDate, $intervalSeconds);
 
-      $chartUnits = [];
-      $chartUnits[] = $units;
+    //   $chartUnits = [];
+    //   $chartUnits[] = $units;
 
-      $summaryReport = fetch_summary_report_mod3($testLogger, $loopname, $startDate, $endDate);
+    //   $summaryReport = fetch_summary_report_mod3($testLogger, $loopname, $startDate, $endDate);
       
-      $testLogger->logDebug("Fields1: " . $field1 . " Field2: ".$field2);
-    } catch (Exception $e) {
-      $testLogger->logError("Error fetching EnergyMeters: " . $e->getMessage());
-    }
+    //   $testLogger->logDebug("Fields1: " . $field1 . " Field2: ".$field2);
+    // } catch (Exception $e) {
+    //   $testLogger->logError("Error fetching EnergyMeters: " . $e->getMessage());
+    // }
 
 
     debugPrint('(init) mod values 30 '.$ship);
