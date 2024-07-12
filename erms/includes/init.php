@@ -264,7 +264,7 @@ foreach ($ship AS $key => $ship)
           break;  
       }
 
-      $summaryReport = fetch_summary_report_mod3($log, $loopname, $startDate, $endDate);
+      $summaryReport = fetch_summary_report_mod3($testLogger, $loopname, $startDate, $endDate);
       
       $testLogger->logDebug("Fields1: " . $field1 . " Field2: ".$field2);
     } catch (Exception $e) {
