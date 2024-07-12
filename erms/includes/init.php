@@ -231,153 +231,92 @@ foreach ($ship AS $key => $ship)
   case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
     // Power Meter Data
   case ERMS_Modules::EnergyMeterData: //"mod3":
-    $parts = explode('_', $ships[0]);
-    $loopname = $parts[0] . '_' . $parts[1];
-    $indicator =$loopname;
-    $timezone = "America/New_York";
+    debugPrint('(init) mod values 30 '.$ship);
+    if (!$annual_report)
+    {
+      $VAL_30 = mod_values($Time_Field, $ship, 'month', $ship_count, $_REQUEST["month"],$request_year); //30 day summary for top of graph on individual ship page
 
-    $testLogger->logInfo(' MODE 3 Monthly Report ' . $loopname . " Display: ".$VAL["display"]);
-    try {
-      $selectedField1 = isset($_POST['data1']) ? $_POST['data1'] : 'current';
-      $selectedField2 = isset($_POST['data2']) ? $_POST['data2'] : 'power_factor';
+      debugPrint('(init) After mod values 30 '.$ship);
+      if ($VAL["Avail_Data"] == true)
+      {
+        //echo 'aGraphing from: '.$VAL_30["date_value_start"].' to: '.$VAL_30["date_value_end"].'<br />';
+        debugPrint('(init) Avail_Data TRUE');
+        debugPrint('(init)'.$ship.' Lay Days '.$VAL_30["Lay_Days"].' val kWh_Day ',$VAL["kWh_day"]);
 
-      $units1 = EnergyMetrics::get_details($selectedField1);
-      $units2 = EnergyMetrics::get_details($selectedField2);
-
-
-      $field1 = $units1["field"];
-      $field2 = $units2["field"];
-      switch($VAL["display"]){
-        case "day":
-          $endDate =  date('Y-m-d H:i:s');
-          $startDate = date('Y-m-d H:i:s', strtotime('-1 day'));
-          break;
-        case "week":
-          $endDate =  date('Y-m-d H:i:s');
-          $startDate = date('Y-m-d H:i:s', strtotime('-1 week'));
-          break;
-        case "month":
-          $endDate =  date('Y-m-d H:i:s');
-          $startDate = date('Y-m-d H:i:s', strtotime('-1 month'));
-          break;
-        case "anydate":
-          $startDate =  $VAL["date_value_start"];
-          $endDate =  $VAL["date_value_end"];
-          break;  
+        $COST_30 = mod_cost($Time_Field,$ship,$VAL_30);
+        debugPrint("(mod_cost): GRAND TOTAL LAY DAY ".$COST_30["Grand_Total_Lay_Day"]);
       }
-      // Get interval time
-      $intervalSeconds = round(($endTimestamp - $startTimestamp) / 286);
-      $log_interval = $intervalSeconds*1000;
-      $dates = getEvenlySpacedDates($startDate, $endDate, $intervalSeconds);
-
-      $chartUnits = [];
-      $chartUnits[] = $units1;
-      $chartUnits[] = $units2;
-
-      $summaryReport = fetch_summary_report_mod3($testLogger, $loopname, $startDate, $endDate);
-      $shipsData = fetch_unitary_mod3_graph($testLogger, $loopname,$field1, $field2, $startDate, $endDate);
-
-      $graph = [
-        "times" => $dates,
-        "timezone" => $timezone,
-        "log_interval" => $log_interval ,
-        "date_start" => $dates[0],
-        "date_end" => $dates[count($dates) - 1],
-        "units" => $chartUnits,
-        "data" => $shipsData,
-      ];
-      $testLogger->logDebug("Fields1: " . $field1 . " Field2: ".$field2);
-    } catch (Exception $e) {
-      $testLogger->logError("Error fetching EnergyMeters: " . $e->getMessage());
+      else
+      {
+        $COST_30["Grand_Total_Lay_Day"] = 0;
+      }
     }
+    else
+    {
+      //Annual Report
+      $valid_months = 0;
+      if (isset($monthly_running_totals))
+        unset($monthly_running_totals);
+      if (isset($monthly_average))
+        unset($monthly_average);
+      if (isset($COST_YEAR))
+        unset($COST_YEAR);
+
+      debugPrint('(init) mod3 Annual Report Year ' . $request_year);
+      for ($imonth = 0; $imonth < $max_month; $imonth++)
+      {
+        $repMonth = sprintf("-%02d-01 00:00:00", $imonth + 1);
+        debugPrint('(init) mod3 COST Annual Month ' . $repMonth);
+        $COST_YEAR[] = mod_cost($Time_Field,$ship,$VAL_YEAR[$imonth]);
+        if ($VAL_YEAR[$imonth]["Lay_Days"] > 0)
+        {
+          $valid_months++;
+        }
+        $monthly_running_totals = annualRunningTotals($imonth, $monthly_running_totals,$VAL_YEAR, $COST_YEAR);
+        debugPrint('(init) cost/kWh total '.$monthly_running_totals["Grand_Total_kWh"].' Months '.$valid_months);
+      }
+      debugPrint('(init)1 '.$ship.' Months '.$valid_months);
+      $monthly_average = annualAverages($valid_months, $monthly_running_totals);
+
+      if($module == ERMS_Modules::Overview)
+      {
+        $Ship_kWh_Average[] = $monthly_average["kWh_day"];
+        $Ship_Demand[] = $monthly_average["Peak_Demand"];
+        $Ship_daily_cost[] = $monthly_average["Grand_Total_Lay_Day"];
+        $Ship_laydays[] = $monthly_running_totals["Lay_Days"];
+        debugPrint('(init) ANNUAL kwh/day'.$monthly_average["kWh_day"].' Demand='.$monthly_average["Peak_Demand"].' Cost='.$monthly_average["Grand_Total_Lay_Day"].' Days='.$monthly_running_totals["Lay_Days"]);
 
 
-    // debugPrint('(init) mod values 30 '.$ship);
-    // if (!$annual_report)
-    // {
-    //   $VAL_30 = mod_values($Time_Field, $ship, 'month', $ship_count, $_REQUEST["month"],$request_year); //30 day summary for top of graph on individual ship page
+        $pattern = "/([a-zA-Z0-9])+_([a-zA-Z0-9_-])+/";
+        $space=preg_match($pattern, $aquisuitetablename[$key]);
+        if($space==1)
+        {
+          $TITLE=str_replace('_',' ',$aquisuitetablename[$key]);
+          $TITLE=substr_replace($TITLE,'',-12);
+          $TITLE=trim($TITLE);
+        }
 
-    //   debugPrint('(init) After mod values 30 '.$ship);
-    //   if ($VAL["Avail_Data"] == true)
-    //   {
-    //     //echo 'aGraphing from: '.$VAL_30["date_value_start"].' to: '.$VAL_30["date_value_end"].'<br />';
-    //     debugPrint('(init) Avail_Data TRUE');
-    //     debugPrint('(init)'.$ship.' Lay Days '.$VAL_30["Lay_Days"].' val kWh_Day ',$VAL["kWh_day"]);
+        if ($monthly_running_totals["Lay_Days"] == 0)
+          $Ship_available[] = 1;
+        else
+          $Ship_available[] = 0;
+        $Ship_Array[] = $TITLE;
 
-    //     $COST_30 = mod_cost($Time_Field,$ship,$VAL_30);
-    //     debugPrint("(mod_cost): GRAND TOTAL LAY DAY ".$COST_30["Grand_Total_Lay_Day"]);
-    //   }
-    //   else
-    //   {
-    //     $COST_30["Grand_Total_Lay_Day"] = 0;
-    //   }
-    // }
-    // else
-    // {
-    //   //Annual Report
-    //   $valid_months = 0;
-    //   if (isset($monthly_running_totals))
-    //     unset($monthly_running_totals);
-    //   if (isset($monthly_average))
-    //     unset($monthly_average);
-    //   if (isset($COST_YEAR))
-    //     unset($COST_YEAR);
+        //echo $TITLE." start date: ".$VAL["date_value_start"]." end date: ".$VAL["date_value_end"]." Average kW: ".$VAL["Demand_avg"]." Peak Demand: ".$VAL["Peak_Demand"]."</br>";
 
-    //   debugPrint('(init) mod3 Annual Report Year ' . $request_year);
-    //   for ($imonth = 0; $imonth < $max_month; $imonth++)
-    //   {
-    //     $repMonth = sprintf("-%02d-01 00:00:00", $imonth + 1);
-    //     debugPrint('(init) mod3 COST Annual Month ' . $repMonth);
-    //     $COST_YEAR[] = mod_cost($Time_Field,$ship,$VAL_YEAR[$imonth]);
-    //     if ($VAL_YEAR[$imonth]["Lay_Days"] > 0)
-    //     {
-    //       $valid_months++;
-    //     }
-    //     $monthly_running_totals = annualRunningTotals($imonth, $monthly_running_totals,$VAL_YEAR, $COST_YEAR);
-    //     debugPrint('(init) cost/kWh total '.$monthly_running_totals["Grand_Total_kWh"].' Months '.$valid_months);
-    //   }
-    //   debugPrint('(init)1 '.$ship.' Months '.$valid_months);
-    //   $monthly_average = annualAverages($valid_months, $monthly_running_totals);
+        $VAL["Peak_Demand"] += $VAL["Peak_Demand"];
+        $VAL_30["kWh_day"] += $VAL_30["kWh_day"];
 
-    //   if($module == ERMS_Modules::Overview)
-    //   {
-    //     $Ship_kWh_Average[] = $monthly_average["kWh_day"];
-    //     $Ship_Demand[] = $monthly_average["Peak_Demand"];
-    //     $Ship_daily_cost[] = $monthly_average["Grand_Total_Lay_Day"];
-    //     $Ship_laydays[] = $monthly_running_totals["Lay_Days"];
-    //     debugPrint('(init) ANNUAL kwh/day'.$monthly_average["kWh_day"].' Demand='.$monthly_average["Peak_Demand"].' Cost='.$monthly_average["Grand_Total_Lay_Day"].' Days='.$monthly_running_totals["Lay_Days"]);
+        $Grand_Total_Lay_Day += $COST_30["Grand_Total_Lay_Day"];
+        $Grand_Total_kWh += $COST_30["Grand_Total_kWh"];
 
+        debugPrint('(init) Grand Total Lay Day 30['.$COST_30["Grand_Total_Lay_Day"].'] Grand Total Lay Day['.$Grand_Total_Lay_Day.']');
+        debugPrint('(init) Grand Total kWh 30['.$COST_30["Grand_Total_kWh"].'] Grand Total kWh['.$Grand_Total_kWh.']');
 
-    //     $pattern = "/([a-zA-Z0-9])+_([a-zA-Z0-9_-])+/";
-    //     $space=preg_match($pattern, $aquisuitetablename[$key]);
-    //     if($space==1)
-    //     {
-    //       $TITLE=str_replace('_',' ',$aquisuitetablename[$key]);
-    //       $TITLE=substr_replace($TITLE,'',-12);
-    //       $TITLE=trim($TITLE);
-    //     }
-
-    //     if ($monthly_running_totals["Lay_Days"] == 0)
-    //       $Ship_available[] = 1;
-    //     else
-    //       $Ship_available[] = 0;
-    //     $Ship_Array[] = $TITLE;
-
-    //     //echo $TITLE." start date: ".$VAL["date_value_start"]." end date: ".$VAL["date_value_end"]." Average kW: ".$VAL["Demand_avg"]." Peak Demand: ".$VAL["Peak_Demand"]."</br>";
-
-    //     $VAL["Peak_Demand"] += $VAL["Peak_Demand"];
-    //     $VAL_30["kWh_day"] += $VAL_30["kWh_day"];
-
-    //     $Grand_Total_Lay_Day += $COST_30["Grand_Total_Lay_Day"];
-    //     $Grand_Total_kWh += $COST_30["Grand_Total_kWh"];
-
-    //     debugPrint('(init) Grand Total Lay Day 30['.$COST_30["Grand_Total_Lay_Day"].'] Grand Total Lay Day['.$Grand_Total_Lay_Day.']');
-    //     debugPrint('(init) Grand Total kWh 30['.$COST_30["Grand_Total_kWh"].'] Grand Total kWh['.$Grand_Total_kWh.']');
-
-    //     $Ships_Sum += $VAL["kW_sum"];
-    //     $Ships_Sum_Count += $VAL["kW_count"];
-    //   }
-    // }
+        $Ships_Sum += $VAL["kW_sum"];
+        $Ships_Sum_Count += $VAL["kW_count"];
+      }
+    }
 
     break;
 
@@ -732,10 +671,69 @@ if($ship_count==1){
   case ERMS_Modules::EnergyMeterData: //"mod3":
 
     
-    // $ship_data = $ships_data[$aquisuitetablename[$key]];
-    // debugPrint('(init) erms line graph: ['.$VAL["date_value_start"].'] to: ['.$VAL["date_value_end"].'] (time meter end) ['.$VAL["Time_Meter_End"].']');
-    // $graph=mod3_graph($ship_data,$VAL["date_value_start"],$VAL["date_value_end"]);
+    $ship_data = $ships_data[$aquisuitetablename[$key]];
+    debugPrint('(init) erms line graph: ['.$VAL["date_value_start"].'] to: ['.$VAL["date_value_end"].'] (time meter end) ['.$VAL["Time_Meter_End"].']');
+    $graph=mod3_graph($ship_data,$VAL["date_value_start"],$VAL["date_value_end"]);
+    
+    $parts = explode('_', $ships[0]);
+    $loopname = $parts[0] . '_' . $parts[1];
+    $indicator =$loopname;
+    $timezone = "America/New_York";
 
+    $testLogger->logInfo(' MODE 3 Monthly Report ' . $loopname . " Display: ".$VAL["display"]);
+    try {
+      $selectedField1 = isset($_POST['data1']) ? $_POST['data1'] : 'current';
+      $selectedField2 = isset($_POST['data2']) ? $_POST['data2'] : 'power_factor';
+
+      $units1 = EnergyMetrics::get_details($selectedField1);
+      $units2 = EnergyMetrics::get_details($selectedField2);
+
+
+      $field1 = $units1["field"];
+      $field2 = $units2["field"];
+      switch($VAL["display"]){
+        case "day":
+          $endDate =  date('Y-m-d H:i:s');
+          $startDate = date('Y-m-d H:i:s', strtotime('-1 day'));
+          break;
+        case "week":
+          $endDate =  date('Y-m-d H:i:s');
+          $startDate = date('Y-m-d H:i:s', strtotime('-1 week'));
+          break;
+        case "month":
+          $endDate =  date('Y-m-d H:i:s');
+          $startDate = date('Y-m-d H:i:s', strtotime('-1 month'));
+          break;
+        case "anydate":
+          $startDate =  $VAL["date_value_start"];
+          $endDate =  $VAL["date_value_end"];
+          break;  
+      }
+      // Get interval time
+      $intervalSeconds = round(($endTimestamp - $startTimestamp) / 286);
+      $log_interval = $intervalSeconds*1000;
+      $dates = getEvenlySpacedDates($startDate, $endDate, $intervalSeconds);
+
+      $chartUnits = [];
+      $chartUnits[] = $units1;
+      $chartUnits[] = $units2;
+
+      $summaryReport = fetch_summary_report_mod3($testLogger, $loopname, $startDate, $endDate);
+      $shipsData = fetch_unitary_mod3_graph($testLogger, $loopname,$field1, $field2, $startDate, $endDate);
+
+      $graph = [
+        "times" => $dates,
+        "timezone" => $timezone,
+        "log_interval" => $log_interval ,
+        "date_start" => $dates[0],
+        "date_end" => $dates[count($dates) - 1],
+        "units" => $chartUnits,
+        "data" => $shipsData,
+      ];
+      $testLogger->logDebug("Fields1: " . $field1 . " Field2: ".$field2);
+    } catch (Exception $e) {
+      $testLogger->logError("Error fetching EnergyMeters: " . $e->getMessage());
+    }
     $formattedMessage = print_r($graph, true);
     $testLogger->logDebug($formattedMessage);
 
