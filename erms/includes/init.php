@@ -231,6 +231,27 @@ foreach ($ship AS $key => $ship)
   case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
     // Power Meter Data
   case ERMS_Modules::EnergyMeterData: //"mod3":
+    $parts = explode('_', $ships[0]);
+    $loopname = $parts[0] . '_' . $parts[1];
+    $indicator =$loopname;
+    $testLogger->logInfo(' MODE 3 Monthly Report ' . $loopname . " Display: ".$VAL["display"]);
+    try {
+      $selectedFields = isset($_POST['data1']) ? $_POST['data1'] : 'current';
+      $selectedFields = isset($_POST['data2']) ? $_POST['data2'] : 'power_factor';
+
+      $units1 = EnergyMetrics::get_details($selectedFields);
+      $units2 = EnergyMetrics::get_details($selectedFields);
+
+
+      $field1 = $units1["field"];
+      $field2 = $units2["field"];
+
+      $testLogger->logDebug("Fields1: " . $field1 . " Field2: ".$field2);
+    } catch (Exception $e) {
+      $testLogger->logError("Error fetching EnergyMeters: " . $e->getMessage());
+    }
+
+
     debugPrint('(init) mod values 30 '.$ship);
     if (!$annual_report)
     {
@@ -342,7 +363,6 @@ foreach ($ship AS $key => $ship)
     debugPrint('(init) MODE 6 Monthly Report ' . $ship);
     // update 2024
     $testLogger->logInfo('mode 6');
-        // update 2024
     try {
       $parts = explode('_', $ships[0]);
       $loopname = $parts[0] . '_' . $parts[1];
@@ -358,8 +378,6 @@ foreach ($ship AS $key => $ship)
       }   
         
       $shipData = fetch_monthly_report_mod6($testLogger, $loopname, $year, $month);
-      $formattedMessage = print_r($shipData, true);
-      $testLogger->logDebug($formattedMessage);
             
       $performance = fetch_last_30_days($testLogger, $loopname);
       $utility = utility_check($ships[0]);
@@ -669,18 +687,13 @@ if($ship_count==1){
         "y2" => $data["estimatedPower"]
       )
     ];
-
-
-    // $graph=calculate_mod1_graph_data($ship, $utility, $VAL["date_value_start"], $VAL["date_value_end"]);
-    
-    $formattedMessage = print_r($graph, true);
-    $testLogger->logDebug($formattedMessage);
-
-
-
     break;
     // Energy Meter Data
   case ERMS_Modules::EnergyMeterData: //"mod3":
+    $parts = explode('_', $ships[0]);
+    $loopname = $parts[0] . '_' . $parts[1];
+    $testLogger->logDebug("Mod3: ".$loopname );
+    
     $ship_data = $ships_data[$aquisuitetablename[$key]];
     debugPrint('(init) erms line graph: ['.$VAL["date_value_start"].'] to: ['.$VAL["date_value_end"].'] (time meter end) ['.$VAL["Time_Meter_End"].']');
     $graph=mod3_graph($ship_data,$VAL["date_value_start"],$VAL["date_value_end"]);
