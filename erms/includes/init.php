@@ -236,8 +236,8 @@ foreach ($ship AS $key => $ship)
     $indicator =$loopname;
     $testLogger->logInfo(' MODE 3 Monthly Report ' . $loopname . " Display: ".$VAL["display"]);
     try {
-      $selectedField1 = isset($_POST['data1']) ? $_POST['data1'] : 'current';
-      $selectedField2 = isset($_POST['data2']) ? $_POST['data2'] : 'power_factor';
+      // $selectedField1 = isset($_POST['data1']) ? $_POST['data1'] : 'current';
+      // $selectedField2 = isset($_POST['data2']) ? $_POST['data2'] : 'power_factor';
 
       $units1 = EnergyMetrics::get_details($selectedField1);
       $units2 = EnergyMetrics::get_details($selectedField2);
