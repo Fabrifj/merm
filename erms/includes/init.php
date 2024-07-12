@@ -665,8 +665,8 @@ if($ship_count==1){
       "date_start" => $dates[0],
       "date_end" => $dates[count($dates) - 1],
       "data" => array(
-        "y1" => $data,
-        "y2" => $data
+        "y1" => $data["realPower"],
+        "y2" => $data["estimatedPower"]
       )
     ];
 
