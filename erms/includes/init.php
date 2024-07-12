@@ -236,8 +236,8 @@ foreach ($ship AS $key => $ship)
     $indicator =$loopname;
     $testLogger->logInfo(' MODE 3 Monthly Report ' . $loopname . " Display: ".$VAL["display"]);
     try {
-      // $selectedField1 = isset($_POST['data1']) ? $_POST['data1'] : 'current';
-      // $selectedField2 = isset($_POST['data2']) ? $_POST['data2'] : 'power_factor';
+      $selectedField1 = isset($_POST['data1']) ? $_POST['data1'] : 'current';
+      $selectedField2 = isset($_POST['data2']) ? $_POST['data2'] : 'power_factor';
 
       $units1 = EnergyMetrics::get_details($selectedField1);
       $units2 = EnergyMetrics::get_details($selectedField2);
@@ -263,6 +263,13 @@ foreach ($ship AS $key => $ship)
           $endDate =  $VAL["date_value_end"];
           break;  
       }
+      // Get interval time
+      $intervalSeconds = round(($endTimestamp - $startTimestamp) / 286);
+      $log_interval = $intervalSeconds*1000;
+      $dates = getEvenlySpacedDates($startDate, $endDate, $intervalSeconds);
+
+      $chartUnits = [];
+      $chartUnits[] = $units;
 
       $summaryReport = fetch_summary_report_mod3($testLogger, $loopname, $startDate, $endDate);
       
@@ -717,6 +724,21 @@ if($ship_count==1){
     $ship_data = $ships_data[$aquisuitetablename[$key]];
     debugPrint('(init) erms line graph: ['.$VAL["date_value_start"].'] to: ['.$VAL["date_value_end"].'] (time meter end) ['.$VAL["Time_Meter_End"].']');
     $graph=mod3_graph($ship_data,$VAL["date_value_start"],$VAL["date_value_end"]);
+
+    $formattedMessage = print_r($graph, true);
+    $testLogger->logDebug($formattedMessage);
+
+    // $graphData = ;
+
+    // $graph = [
+    //   "times" => $dates,
+    //   "timezone" => $timezone,
+    //   "log_interval" => $log_interval ,
+    //   "date_start" => $dates[0],
+    //   "date_end" => $dates[count($dates) - 1],
+    //   "units" => $chartUnits,
+    //   "data" => $shipsData,
+    // ];
     break;
     // Potable Water Meter
   case ERMS_Modules::WaterMeterData:   // mod5
