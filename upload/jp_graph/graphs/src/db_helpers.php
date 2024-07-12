@@ -807,7 +807,7 @@ function fetch_summary_report_mod3($log, $loopname, $start_date, $end_date) {
         'MaxCurrent' => isset($maxCurrent["max_field"]) ? $maxCurrent["max_field"] : 0, 
         'TimeMaxCurrent' => isset($maxCurrent["max_field"])==0 ? $maxCurrent["max_time"] : '1970-01-01 00:00:00',
         'MaxReactivePower' => isset($maxReactivePower["max_field"]) ? $maxReactivePower["max_field"] : 0, 
-        'TimeMaxReactivePower' => isset($maxReactivePower["max_field"])==0 ? $maxReactivePower["max_time"] : '1970-01-01 00:00:00'
+        'TimeMaxReactivePower' => isset($maxReactivePower["max_field"])==0 ? $maxReactivePower["max_time"] : '1970-01-01 00:00:00',
         'OnPeakEnergy' => $generalData["peak_kwh"],
         'OffPeakEnergy' => $generalData["off_peak_kwh"],
         'AvgPowerFactor' => $generalData["avg_power_factor"],
