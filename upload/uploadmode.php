@@ -2369,6 +2369,7 @@ include "../conn/mysql_pconnect-all.php"; // mySQL database connector.
         utility_cost($LOOPNAME, $aquisuitetable, $devicetablename, $log);  //calculate utility costs
        	printf("</pre>\n");  // end of logging script
 
+        // Update
         $logger = new Logger($LOOPNAME);
 
         $utility = utility_check($aquisuitetable);

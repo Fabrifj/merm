@@ -704,8 +704,8 @@ function fetch_mod3_max_field($log, $loopname, $field_name, $start_date, $end_da
     $query = sprintf(
         "SELECT 
             s.loopname,
-            s.max_value AS max_field,
-            sr.time AS max_time
+            ROUND(s.max_value,2) AS max_field,
+            ROUND(sr.time,2) AS max_time
         FROM (
             SELECT 
                 loopname,
@@ -745,6 +745,37 @@ function fetch_mod3_max_field($log, $loopname, $field_name, $start_date, $end_da
     return mysql_fetch_assoc($result);
 }
 
+function fetch_mod3_general_data($log, $loopname, $start_date, $end_date){
+    $query = sprintf(
+        "SELECT 
+            loopname,
+            ROUND(SUM(peak_kwh),2) AS peak_kwh,
+            ROUND(SUM(off_peak_kwh),2) AS off_peak_kwh,
+            ROUND(AVG(power_factor),2) AS avg_power_factor,
+            ROUND(MAX(power_factor),2) AS max_power_factor,
+            ROUND(MIN(power_factor),2) AS min_power_factor,
+            ROUND(AVG(current),2) AS current,
+            ROUND(AVG(voltage_phase_ab),2) AS avg_voltage,
+            ROUND(MAX(voltage_phase_ab),2) AS max_voltage,
+            ROUND(MIN(voltage_phase_ab),2) AS min_voltage,
+            ROUND(AVG(reactive_power),2) AS reactive_power
+        FROM Standard_ship_records
+        WHERE loopname='%s'
+            AND time BETWEEN '%s' AND '%s'
+        GROUP BY loopname;", 
+        mysql_real_escape_string($loopname),
+        mysql_real_escape_string($start_date),
+        mysql_real_escape_string($end_date)
+    );
+    $result = db_query($log, $query);
+
+    if (!$result) {
+        $log->logError("Query failed");
+        return false;
+    }
+
+    return mysql_fetch_assoc($result);
+}
 
 
 function fetch_summary_report_mod3($log, $loopname, $start_date, $end_date) {
@@ -762,20 +793,31 @@ function fetch_summary_report_mod3($log, $loopname, $start_date, $end_date) {
     // Fetch max off peak data
     $maxOffPeak = fetch_mod3_max_field($log, $loopname,"off_peak_kw" , $start_date, $end_date);
 
-   
+    //Fetch general data
+    $generalData = fetch_mod3_general_data($log, $loopname, $start_date, $end_date); 
+
     // Build sumarry report array
     $monthlyReport = [
         'Year' => $start_date,
         'Month' => $end_date,
-        'OnPeakDemand' => round(isset($maxPeak["max_field"]) ? $maxPeak["max_field"] : 0, 2),
-        'TimeOnPeakDemand' => isset($maxPeak["max_time"]) ? $maxPeak["max_time"] : '1970-01-01 00:00:00',
-        'OffPeakDemand' => round(isset($maxOffPeak["max_field"]) ? $maxOffPeak["max_field"] : 0, 2),
-        'TimeOffPeakDemand' => isset($maxOffPeak["max_time"]) ? $maxOffPeak["max_time"] : '1970-01-01 00:00:00',
-        'MaxCurrent' => round(isset($maxCurrent["max_field"]) ? $maxCurrent["max_field"] : 0, 2),
-        'TimeMaxCurrent' => isset($maxCurrent["max_time"]) ? $maxCurrent["max_time"] : '1970-01-01 00:00:00',
-        'MaxReactivePower' => round(isset($maxReactivePower["max_field"]) ? $maxReactivePower["max_field"] : 0, 2),
-        'TimeMaxReactivePower' => isset($maxReactivePower["max_time"]) ? $maxReactivePower["max_time"] : '1970-01-01 00:00:00'
-
+        'OnPeakDemand' => isset($maxPeak["max_field"]) ? $maxPeak["max_field"] : 0,
+        'TimeOnPeakDemand' => isset($maxPeak["max_field"])==0 ? $maxPeak["max_time"] : '1970-01-01 00:00:00',
+        'OffPeakDemand' => isset($maxOffPeak["max_field"]) ? $maxOffPeak["max_field"] : 0, 
+        'TimeOffPeakDemand' => isset($maxOffPeak["max_field"])==0 ? $maxOffPeak["max_time"] : '1970-01-01 00:00:00',
+        'MaxCurrent' => isset($maxCurrent["max_field"]) ? $maxCurrent["max_field"] : 0, 
+        'TimeMaxCurrent' => isset($maxCurrent["max_field"])==0 ? $maxCurrent["max_time"] : '1970-01-01 00:00:00',
+        'MaxReactivePower' => isset($maxReactivePower["max_field"]) ? $maxReactivePower["max_field"] : 0, 
+        'TimeMaxReactivePower' => isset($maxReactivePower["max_field"])==0 ? $maxReactivePower["max_time"] : '1970-01-01 00:00:00'
+        'OnPeakEnergy' => $generalData["peak_kwh"],
+        'OffPeakEnergy' => $generalData["off_peak_kwh"],
+        'AvgPowerFactor' => $generalData["avg_power_factor"],
+        'MaxPowerFactor' => $generalData["max_power_factor"],
+        'MinPowerFactor' => $generalData["min_power_factor"],
+        'AvgCurrent' => $generalData["current"],
+        'AvgVoltage' => $generalData["avg_voltage"],
+        'MaxVoltage' => $generalData["max_voltage"],
+        'MinVoltage' => $generalData["min_voltage"],
+        'AvgReactivePower' => $generalData["reactive_power"],
        
     ];
 
