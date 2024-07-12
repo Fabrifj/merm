@@ -47,15 +47,6 @@ switch($module){
         $display =isset($_REQUEST['month']) ? $_REQUEST['month'] : "month";
         $testLogger->logDebug($display );
 
-        $values = [
-            "kWh_day" => 0,
-            "Peak_Demand" => 0,
-            "Lay_Days" => 0
-          ];
-          $cost = [
-            "Grand_Total_Lay_Day" => 0
-          ];
-
         switch ($_REQUEST["month"] ) {
             case "month":
                 try {
@@ -113,7 +104,7 @@ switch($module){
                     $month = isset($_REQUEST["month"]) ? intval($_REQUEST["month"]) : date('m');
                     
                     $save_startdate = date('F j, Y G:i:s T', mktime(0, 0, 0, $month, 1, $year));
-                    $save_enddate = date('Y-m-t', strtotime($save_startdate));
+                    $save_enddate = date('F j, Y G:i:s T Y', strtotime($save_startdate));
                     $Ship_available = [];
 
                     $Ship_kWh_Average = 0;
