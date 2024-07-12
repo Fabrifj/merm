@@ -714,14 +714,14 @@ function fetch_data_mod1($log,  $loopname, $startDate, $endDate){
     // Convert start and end dates to timestamps
     $startTimestamp = strtotime($startDate);
     $endTimestamp = strtotime($endDate);
-    $intervalSeconds = round(($endTimestamp - $startTimestamp) / 287);
+    $intervalSeconds = round(($endTimestamp - $startTimestamp) / 288);
     $log->logDebug( " Loopname: " . $loopname . " Start: " . $startDate . " End: " . $endDate . " Interval Seconds: " . $intervalSeconds);
     $query = sprintf(
         "SELECT
             loopname,
             DATE_FORMAT(FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(time) / %d) * %d), '%%Y-%%m-%%d %%H:%%i:%%s') AS time_group,
             AVG(`peak_kw`+`off_peak_kw`) AS dkW,
-      		AVG(`real_power`)
+      		AVG(`real_power`) AS real_power
         FROM Standard_ship_records
         WHERE loopname = '%s'
             AND time BETWEEN '%s' AND '%s'
