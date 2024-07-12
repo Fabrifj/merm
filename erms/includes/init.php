@@ -441,22 +441,22 @@ if($ship_count==1){
       case "month":
         try {
 
-          $save_enddate = date('F j, Y G:i:s T Y');
-          $save_startdate = date('F j, Y G:i:s T Y', strtotime('-30 days'));
+          $save_enddate = date('F j, Y G:i');
+          $save_startdate = date('F j, Y G:i', strtotime('-30 days'));
           $Ship_available = [];
 
-          $Ship_kWh_Average = [];
-          $Ship_Demand = [];
-          $Ship_daily_cost = [];
+          $Ship_kWh_Average = 0;
+          $Ship_Demand = 0;
+          $Ship_daily_cost = 0;
           $ship_data = fetch_last_30_days($testLogger, $loopname);
           if ($ship_data["avg_cost"] == 0) {
               $Ship_available[] = 1;
           } else {
               $Ship_available[] = 0;
           }
-          $Ship_kWh_Average[] = intval(isset($ship_data["avg_kwH"]) ? $ship_data["avg_kwH"] : 0);
-          $Ship_Demand[] = intval(isset($ship_data["avg_kw"]) ? $ship_data["avg_kw"] : 0);       
-          $Ship_daily_cost[]= intval((isset($ship_data["avg_cost"]) ? $ship_data["avg_cost"] : 0));
+          $Ship_kWh_Average = intval(isset($ship_data["avg_kwH"]) ? $ship_data["avg_kwH"] : 0);
+          $Ship_Demand = intval(isset($ship_data["avg_kw"]) ? $ship_data["avg_kw"] : 0);       
+          $Ship_daily_cost= intval((isset($ship_data["avg_cost"]) ? $ship_data["avg_cost"] : 0));
           
         } catch (Exception $e) {
             $testLogger->logError("Error fetching data for the last 30 days: " . $e->getMessage());
@@ -464,13 +464,13 @@ if($ship_count==1){
         break;     
       case "annual":
         try {
-          $save_enddate = date('F j, Y G:i:s T Y');
-          $save_startdate = date('F j, Y G:i:s T Y', strtotime('-1 year'));
+          $save_enddate = date('F j, Y G:i');
+          $save_startdate = date('F j, Y G:i', strtotime('-1 year'));
           $Ship_available = [];
 
-          $Ship_kWh_Average = [];
-          $Ship_Demand = [];
-          $Ship_daily_cost = [];
+          $Ship_kWh_Average = 0;
+          $Ship_Demand = 0;
+          $Ship_daily_cost = 0;
           $ship_data = fetch_Annual($testLogger, $loopname);
 
           if ($ship_data["avg_cost"] == 0) {
@@ -492,8 +492,8 @@ if($ship_count==1){
           $year = isset($_REQUEST["year"]) ? intval($_REQUEST["year"]) : date('Y');
           $month = isset($_REQUEST["month"]) ? intval($_REQUEST["month"]) : date('m');
           
-          $save_startdate = date('F j, Y G:i:s T Y', mktime(0, 0, 0, $month, 1, $year));
-          $save_enddate = date('F j, Y G:i:s T Y', mktime(23, 59, 59, $month + 1, 0, $year)); // 0th day of the next month gives us the last day of the current month
+          $save_startdate = date('F j, Y G:i', mktime(0, 0, 0, $month, 1, $year));
+          $save_enddate = date('F j, Y G:i', mktime(23, 59, 59, $month + 1, 0, $year)); // 0th day of the next month gives us the last day of the current month
           
           $Ship_available = [];
 
