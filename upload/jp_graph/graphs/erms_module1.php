@@ -578,7 +578,7 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
                     
                     echo '
                     <input name="datapts" type="hidden" value="points" />
-                    <select name="data1" id="data1" onchange="updateMeter()">
+                    <select name="data1" id="data1" onchange="update2()">
                         <option value="current" '.($selectedField1 == 'current' ? 'selected' : '').'>Current</option>';
                     
                     foreach ($metricsNames as $name) {
@@ -593,7 +593,7 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
                     
                     echo '
                     <input name="datapts" type="hidden" value="points" />
-                    <select name="data2" id="data2" onchange="updateMeter()">
+                    <select name="data2" id="data2" onchange="update2()">
                         <option value="power_factor" '.($selectedField2 == 'power_factor' ? 'selected' : '').'>Power Factor</option>';
                     
                     foreach ($metricsNames as $name) {
