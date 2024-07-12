@@ -681,8 +681,8 @@ function date_range_alert($time,$date_to_start,$date_to_end,$table,$sort, $error
         {
 ?>
 <script type="text/javascript">
-    alert("There is no data available for <?php echo $alert_start_date ?> to <?php echo $alert_end_date ?>!\n\nPlease select an available data range");
-    window.history.back();
+    // alert("There is no data available for <?php echo $alert_start_date ?> to <?php echo $alert_end_date ?>!\n\nPlease select an available data range");
+    // window.history.back();
 </script>
 <?php
 

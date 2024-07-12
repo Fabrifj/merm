@@ -1191,7 +1191,7 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
            	echo '
                    <div class="consumption_box">
                     <div id="graph_range_sel_header">
-                        <span style="font-weight: bold;">South Carolina Electric & Gas Company Rate 24</span><br />
+                        <span style="font-weight: bold;"><font color="black"><?php echo $utilityRate->getUtility(); ?></font></span><br />
                      </div>
 
                     <table class="tblDetailedSummaryRpt">
@@ -1324,6 +1324,13 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
     					<label>Select Report Year</label><br />
     					<select name="year" id="year">
                         <br />
+                        <option value="2024" ';if ($VAL["report_year"]=="2024"){echo "selected";} echo '>2024</option>
+                       	<option value="2023" ';if ($VAL["report_year"]=="2023"){echo "selected";} echo '>2023</option>
+                       	<option value="2022" ';if ($VAL["report_year"]=="2022"){echo "selected";} echo '>2022</option>
+                        <option value="2021" ';if ($VAL["report_year"]=="2021"){echo "selected";} echo '>2021</option>
+                       	<option value="2020" ';if ($VAL["report_year"]=="2020"){echo "selected";} echo '>2020</option>
+                       	<option value="2019" ';if ($VAL["report_year"]=="2019"){echo "selected";} echo '>2019</option>
+                       	<option value="2018" ';if ($VAL["report_year"]=="2018"){echo "selected";} echo '>2018</option>
                        	<option value="2017" ';if ($VAL["report_year"]=="2017"){echo "selected";} echo '>2017</option>
     				  	<option value="2016" ';if ($VAL["report_year"]=="2016"){echo "selected";} echo '>2016</option>
                     	<option value="2015" ';if ($VAL["report_year"]=="2015"){echo "selected";} echo '>2015</option>
