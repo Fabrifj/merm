@@ -878,6 +878,76 @@ function fetch_data_mod1($log,  $loopname, $startDate, $endDate){
     return $values;
 }
 
+function  fetch_unitary_mod3_graph($testLogger, $loopname,$field1, $field2, $startDate, $endDate){
+   // Convert start and end dates to timestamps
+   $startTimestamp = strtotime($startDate);
+   $endTimestamp = strtotime($endDate);
+
+
+   // Calculate interval between dates in seconds
+   $intervalSeconds = round(($endTimestamp - $startTimestamp) / 287);
+
+   if (!isset($field1) || empty($field1)) {
+       $sqlField1 = "current";
+   } else {
+       $sqlField1 = $field1;
+   }
+   if (!isset($field2) || empty($field2)) {
+    $sqlField2 = "power_factor";
+    } else {
+        $sqlField2 = $field2;
+    }
+   // Log interval seconds for debugging
+   $log->logDebug("Fields: " . $sqlField1."--".$sqlField2 . " Loopname: " . $loopname . " Start: " . $startDate . " End: " . $endDate . " Interval Seconds: " . $intervalSeconds);
+
+   $query = sprintf(
+       "SELECT
+           loopname,
+           DATE_FORMAT(FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(time) / %d) * %d), '%%Y-%%m-%%d %%H:%%i:%%s') AS time_group,
+           AVG(%s) AS avg_value_1,
+           AVG(%s) AS avg_value_2
+       FROM Standard_ship_records
+       WHERE loopname = '%s'
+           AND time BETWEEN '%s' AND '%s'
+       GROUP BY loopname, time_group
+       ORDER BY time_group ASC;",
+       mysql_real_escape_string($intervalSeconds),
+       mysql_real_escape_string($intervalSeconds),
+       mysql_real_escape_string($sqlField1),
+       mysql_real_escape_string($sqlField2),
+       mysql_real_escape_string($loopname),
+       mysql_real_escape_string($startDate),
+       mysql_real_escape_string($endDate)
+   );
+
+   // Execute the query
+   $result = db_query($log, $query);
+
+   if (!$result) {
+       $log->logError("Query failed");
+       return false;
+   }
+   $values1 = [];
+   $values2 = [];
+
+    while ($row = mysql_fetch_assoc($result)) {
+        $avgValue1 = floatval($row["avg_value_1"]);
+        $avgValue2 = floatval($row["avg_value_2"]);
+        
+        $avgValue1 = round($avgValue1, 1); 
+        $avgValue2 = round($avgValue2, 1); 
+        
+        $values1[] = $avgValue1;
+        $values2[] = $avgValue2;
+
+    }
+     
+    return [$values1, $values2];
+
+   // Fetch data for the graph
+   return fetch_data_for_graph_mod3($log, $result);
+}
+
 // Function to close the connection
 function db_close() {
     $conn = isset($_SESSION['con'])? $_SESSION['con'] : null;
