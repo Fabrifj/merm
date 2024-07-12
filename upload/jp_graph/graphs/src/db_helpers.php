@@ -705,7 +705,7 @@ function fetch_mod3_max_field($log, $loopname, $field_name, $start_date, $end_da
         "SELECT 
             s.loopname,
             ROUND(s.max_value,2) AS max_field,
-            ROUND(sr.time,2) AS max_time
+            sr.time AS max_time
         FROM (
             SELECT 
                 loopname,
