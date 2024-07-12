@@ -236,16 +236,35 @@ foreach ($ship AS $key => $ship)
     $indicator =$loopname;
     $testLogger->logInfo(' MODE 3 Monthly Report ' . $loopname . " Display: ".$VAL["display"]);
     try {
-      $selectedFields = isset($_POST['data1']) ? $_POST['data1'] : 'current';
-      $selectedFields = isset($_POST['data2']) ? $_POST['data2'] : 'power_factor';
+      $selectedField1 = isset($_POST['data1']) ? $_POST['data1'] : 'current';
+      $selectedField2 = isset($_POST['data2']) ? $_POST['data2'] : 'power_factor';
 
-      $units1 = EnergyMetrics::get_details($selectedFields);
-      $units2 = EnergyMetrics::get_details($selectedFields);
+      $units1 = EnergyMetrics::get_details($selectedField1);
+      $units2 = EnergyMetrics::get_details($selectedField2);
 
 
       $field1 = $units1["field"];
       $field2 = $units2["field"];
+      switch($VAL["display"]){
+        case "day":
+          $endDate =  date('Y-m-d H:i:s');
+          $startDate = date('Y-m-d H:i:s', strtotime('-1 day'));
+          break;
+        case "week":
+          $endDate =  date('Y-m-d H:i:s');
+          $startDate = date('Y-m-d H:i:s', strtotime('-1 week'));
+          break;
+        case "month":
+          $endDate =  date('Y-m-d H:i:s');
+          $startDate = date('Y-m-d H:i:s', strtotime('-1 month'));
+          break;
+        case "anydate":
+          $startDate =  $VAL["date_value_start"];
+          $endDate =  $VAL["date_value_end"];
+          break;  
+      }
 
+      $summaryReport = fetch_summary_report_mod3($log, $loopname, $startDate, $endDate);
       $testLogger->logDebug("Fields1: " . $field1 . " Field2: ".$field2);
     } catch (Exception $e) {
       $testLogger->logError("Error fetching EnergyMeters: " . $e->getMessage());

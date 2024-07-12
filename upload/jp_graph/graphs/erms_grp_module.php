@@ -288,10 +288,10 @@ setBreadcrumbs("manager", $_SESSION['user_data']['mgrMods'][$module]["text"], $_
 
                   <?php
 
-                  // Obtén todos los nombres de las métricas
+                  // Get the meters
                   $metricsNames = EnergyMetrics::get_names();
 
-                  // Establece "Current" como la opción seleccionada por defecto
+                  // Current as 
                   $selectedField = isset($_POST['data1']) ? $_POST['data1'] : 'current';
 
                   echo '

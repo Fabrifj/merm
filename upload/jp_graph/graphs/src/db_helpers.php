@@ -700,6 +700,89 @@ function fetch_monthly_report_mod6($log, $loopname, $year, $month) {
 
     return $monthlyReport;
 }
+function fetch_mod3_max_field($log, $loopname, $field_name, $start_date, $end_date){
+    $query = sprintf(
+        "SELECT 
+            s.loopname,
+            s.max_value AS max_field,
+            sr.time AS max_time
+        FROM (
+            SELECT 
+                loopname,
+                MAX(%s) AS max_value
+            FROM 
+                Standard_ship_records
+            WHERE 
+                loopname = '%s'
+                AND time BETWEEN '%s' AND '%s'
+            GROUP BY 
+                loopname
+        ) AS s
+        JOIN 
+            Standard_ship_records sr ON sr.loopname = s.loopname AND sr.%s = s.max_value
+        WHERE 
+            sr.loopname = '%s'
+            AND sr.time BETWEEN '%s' AND '%s'
+        ORDER BY 
+            sr.time ASC
+        LIMIT 1;",
+        mysql_real_escape_string($field_name), 
+        mysql_real_escape_string($loopname),
+        mysql_real_escape_string($start_date),
+        mysql_real_escape_string($end_date),
+        mysql_real_escape_string($field_name), 
+        mysql_real_escape_string($loopname),
+        mysql_real_escape_string($start_date),
+        mysql_real_escape_string($end_date)
+    );
+    $result = db_query($log, $query);
+
+    if (!$result) {
+        $log->logError("Query failed");
+        return false;
+    }
+
+    return mysql_fetch_assoc($result);
+}
+
+
+
+function fetch_summary_report_mod3($log, $loopname, $start_date, $end_date) {
+    $log->logDebug("Loopname: " . $loopname . " start_date: " . $start_date . " end_date: " . $end_date);
+
+    // Fetch max current
+    $maxCurrent = fetch_mod3_max_field($log, $loopname,"current" ,$start_date, $end_date);
+    
+    // Fetch max rective powe
+    $maxReactivePower = fetch_mod3_max_field($log, $loopname,"reactive_power" ,$start_date, $end_date);
+
+    // Fetch max peak data
+    $maxPeak = fetch_mod3_max_field($log, $loopname,"peak_kw" , $start_date, $end_date);
+
+    // Fetch max off peak data
+    $maxOffPeak = fetch_mod3_max_field($log, $loopname,"off_peak_kw" , $start_date, $end_date);
+
+   
+    // Build sumarry report array
+    $monthlyReport = [
+        'Year' => $start_date,
+        'Month' => $end_date,
+        'OnPeakDemand' => round($maxPeak["max_field"], 2),
+        'TimeOnPeakDemand' => round($maxPeak["max_time"], 2),
+        'OffPeakDemand' => round($maxOffPeak["max_field"], 2),
+        'TimeOffPeakDemand' => round($maxOffPeak["max_time"], 2),
+        'MaxCurrent' => round($maxCurrent["max_field"], 2),
+        'TimeMaxCurrent' => round($maxCurrent["max_time"], 2),
+        'MaxReactivePower' => round($maxReactivePower["max_field"], 2),
+        'TimeMaxReactivePower' => round($maxReactivePower["max_time"], 2),
+
+       
+    ];
+
+    return $monthlyReport;
+}
+
+
 
 // Function to fetch records from a specific table
 function db_fetch_utility_rate($log, $utility) {

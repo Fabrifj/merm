@@ -449,9 +449,9 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
             </div>
     		<table class="tblLast30">
     		<tr>
-    			<td>Average Cost Per Lay Day <b>$<?php echo $COST_30["Grand_Total_Lay_Day"] ?></b></td>
-    			<td>Average kWh Per Lay Day <b><?php echo $VAL_30["kWh_day"] ?></b></td>
-    			<td>Cost Per kWh <b>$<?php echo $COST_30["Grand_Total_kWh"] ?></b></td>
+                <td>Average Cost Per Lay Day <b>$<?php echo $performance["avg_cost"] ?></b></td>
+    			<td>Average kWh Per Lay Day <b><?php echo $performance["avg_kwH"] ?></b></td>
+    			<td>Cost Per kWh <b>$<?php echo $cost_per_kwH ?></b></td>
     		</tr>
             </table>
         </div>
@@ -466,57 +466,57 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
 		'<table class="tblLast30">
 				 <tr valign="bottom">
 					<td align="center" style="background:none;">On Peak Energy:</td>
-					<td align="center" style="background:none;"><font color="black">'.$VAL["Peak_kWh_Total"].' kWh</font></td>
+					<td align="center" style="background:none;"><font color="black">'.$summaryReport["Peak_kWh_Total"].' kWh</font></td>
 					<td align="center" style="background:none;">Average Current:</td>
-					<td align="center" style="background:none;"><font color="black">'.$VAL["1_Current_Avg"].' Amps</font></td>
+					<td align="center" style="background:none;"><font color="black">'.$summaryReport["1_Current_Avg"].' Amps</font></td>
 				</tr>
 				<tr class="odd" valign="bottom">
 					<td align="center" style="background:none;">Off Peak Energy: </td>
-					<td align="center" style="background:none;">'.$VAL["Off_Peak_kWh_Total"].' kWh</td>
+					<td align="center" style="background:none;">'.$SUMMARYREPORT["Off_Peak_kWh_Total"].' kWh</td>
 					<td align="center" style="background:none;">Maximum Current: </td>
-					<td align="center" style="background:none;">'.$VAL["1_Current_Demand"].' Amps</td>
+					<td align="center" style="background:none;">'.$SUMMARYREPORT["MaxCurrent"].' Amps</td>
 				</tr>
 				<tr valign="bottom">
 					<td align="center" style="background:none;">On Peak Demand: </td>
-					<td align="center" style="background:none;">'.$VAL["Peak_Demand"]." kW".'</td>
+					<td align="center" style="background:none;">'.$SUMMARYREPORT["OnPeakDemand"]." kW".'</td>
 					<td align="center" style="background:none;">Time of Occurance: </td>
-					<td align="center" style="background:none;">'.$VAL["Current_Demand_Time"].'</td>
+					<td align="center" style="background:none;">'.$SUMMARYREPORT["TimeMaxCurrent"].'</td>
 				</tr>
 				<tr class="odd" valign="bottom">
 					<td align="center" style="background:none;">Time of Occurance: </td>
-					<td align="center" style="background:none;">'.$VAL["Peak_Demand_Time"].'</td>
+					<td align="center" style="background:none;">'.$SUMMARYREPORT["TimeOnPeakDemand"].'</td>
 					<td align="center" style="background:none;">Average Voltage: </td>
-					<td align="center" style="background:none;">'.$VAL["1_Voltage_Avg"]." Volts".'</td>
+					<td align="center" style="background:none;">'.$SUMMARYREPORT["1_Voltage_Avg"]." Volts".'</td>
 				</tr>
 				<tr valign="bottom">
 					<td align="center" style="background:none;">Off Peak Demand: </td>
-					<td align="center" style="background:none;">'.$VAL["Off_Peak_Demand"]." kW".'</td>
+					<td align="center" style="background:none;">'.$SUMMARYREPORT["OffPeakDemand"]." kW".'</td>
 					<td align="center" style="background:none;">Maximum Voltage: </td>
-					<td align="center" style="background:none;">'.$VAL["1_Voltage_Max"]." Volts".'</td>
+					<td align="center" style="background:none;">'.$SUMMARYREPORT["1_Voltage_Max"]." Volts".'</td>
 				</tr>
 				<tr class="odd" valign="bottom">
 					<td align="center" style="background:none;">Time of Occurance: </td>
-					<td align="center" style="background:none;">'.$VAL["Off_Peak_Demand_Time"].'</td>
+					<td align="center" style="background:none;">'.$SUMMARYREPORT["TimeOffPeakDemand"].'</td>
 					<td align="center" style="background:none;">Minimum Voltage: </td>
-					<td align="center" style="background:none;">'.$VAL["1_Voltage_Min"]." Volts".'</td>
+					<td align="center" style="background:none;">'.$SUMMARYREPORT["1_Voltage_Min"]." Volts".'</td>
 				</tr>
 				<tr valign="bottom">
 					<td align="center" style="background:none;">Average Power Factor: </td>
-					<td align="center" style="background:none;">'.$VAL["2_PF_Avg"]." &#37".'</td>
+					<td align="center" style="background:none;">'.$SUMMARYREPORT["2_PF_Avg"]." &#37".'</td>
 					<td align="center" style="background:none;">Average Reactive Power: </td>
-					<td align="center" style="background:none;">'.$VAL["1_kVAR_Avg"]." kVAR".'</td>
+					<td align="center" style="background:none;">'.$SUMMARYREPORT["1_kVAR_Avg"]." kVAR".'</td>
 				</tr>
 				<tr class="odd" valign="bottom">
 					<td align="center" style="background:none;">Maximum Power Factor: </td>
-					<td align="center" style="background:none;">'.$VAL["2_PF_Max"]." &#37".'</td>
+					<td align="center" style="background:none;">'.$SUMMARYREPORT["2_PF_Max"]." &#37".'</td>
 					<td align="center" style="background:none;">Maximum Reactive Power: </td>
-					<td align="center" style="background:none;">'.$VAL["1_kVAR_Max"]." kVAR".'</td>
+					<td align="center" style="background:none;">'.$SUMMARYREPORT["MaxReactivePower"]." kVAR".'</td>
 				</tr>
 				<tr valign="bottom">
 					<td align="center" style="background:none;">Minimum Power Factor: </td>
-					<td align="center" style="background:none;">'.$VAL["2_PF_Min"]." &#37".'</td>
+					<td align="center" style="background:none;">'.$SUMMARYREPORT["2_PF_Min"]." &#37".'</td>
 					<td align="center" style="background:none;">Time of Occurance: </td>
-					<td align="center" style="background:none;">'.$VAL["kVAR_Max_Time"].'</td>
+					<td align="center" style="background:none;">'.$SUMMARYREPORT["TimeMaxReactivePower"].'</td>
 				</tr>
 			</table>';
 
@@ -569,61 +569,41 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
             </div>
             <form id="f2" action="" method="POST">
  <?php
-                    $DATA = get_data($aquisuitetablename[0]);
-                    $Field = $DATA['Field'];
-                    $fcount = count($Field);
-                    $Title = $DATA['Title'];
-                    $tcount = count($Title);
+                    // Get the meters
+                  $metricsNames = EnergyMetrics::get_names();
 
-                    $utility=$VAL["utility"];
+                  // Current as default
+                  $selectedField = isset($_POST['data1']) ? $_POST['data1'] : 'current';
+                  $selectedField = isset($_POST['data2']) ? $_POST['data2'] : 'power_factor';
 
-                    echo'
-                    <input name="datapts" type="hidden" value="points" />
-                    <select onchange="update2()" name="data1" id="data1">
-                     <option value="'.$graph['units'][0]['field'].'" selected>'.$graph['units'][0]['name'].'</option>';
-                            $i=0;
+                  echo '
+                  <input name="datapts" type="hidden" value="points" />
+                  <select name="data1" id="data1" onchange="updateMeter()">
+                      <option value="current" selected>Current</option>';
 
-                            while($i<$fcount)
-                            {
-                                    if($Field[$i]!=$graph['units'][0]['field'])
-                                    {
-                                    echo '<option value="'.$Field[$i].'">'.$Title[$i].'</option>';
-                                    }
-                                    $i++;
-                            }
-                            switch($utility)
-                            {
-                                    case "Virginia_Dominion_Rates":
-                                    if($graph['data1']!="30_Min_Reactive_kVAR")
-                                    {
-                                    echo '<option value="30_Min_Reactive_kVAR">Reactive Power Demand</option>';
-                                    }
-                                    break;
-                            }
+                  foreach ($metricsNames as $name) {
+                      $metric = EnergyMetrics::get_units($name);
+                      if ($metric && $metric['field'] !== 'Current') {
+                          $selected = $metric['field'] == $selectedField ? 'selected' : '';
+                          echo '<option value="'.$metric['field'].'" '.$selected.'>'.$metric['name'].'</option>';
+                      }
+                  }
 
-                    echo '</select>';
-                    echo'
-                    <select onchange="update2()" name="data2" id="data2">
-                     <option value="'.$graph['units'][1]['field'].'" selected>'.$graph['units'][1]['name'].'</option>';
-                            $i=0;
-                            while($i<$fcount)
-                            {
-                                    if($Field[$i]!=$graph['units'][1]['field'])
-                                    {
-                                     echo '<option value="'.$Field[$i].'">'.$Title[$i].'</option>';
-                                    }
-                                    $i++;
-                            }
-                            switch($utility)
-                            {
-                                    case "Virginia_Dominion_Rates":
-                                    if($graph['data2']!="30_Min_Reactive_kVAR")
-                                    {
-                                    echo '<option value="30_Min_Reactive_kVAR">Reactive Power Demand</option>';
-                                    }
-                                    break;
-                            }
-                    echo '</select>';
+                  echo '</select>';
+                  echo '
+                  <input name="datapts" type="hidden" value="points" />
+                  <select name="data1" id="data1" onchange="updateMeter()">
+                      <option value="current" selected>Current</option>';
+
+                  foreach ($metricsNames as $name) {
+                      $metric = EnergyMetrics::get_units($name);
+                      if ($metric && $metric['field'] !== 'Power Factor') {
+                          $selected = $metric['field'] == $selectedField ? 'selected' : '';
+                          echo '<option value="'.$metric['field'].'" '.$selected.'>'.$metric['name'].'</option>';
+                      }
+                  }
+
+                  echo '</select>';
 ?>
 </form>
 </div>
