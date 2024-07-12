@@ -570,40 +570,41 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
             <form id="f2" action="" method="POST">
  <?php
                     // Get the meters
-                  $metricsNames = EnergyMetrics::get_names();
+                    $metricsNames = EnergyMetrics::get_names();
 
-                  // Current as default
-                  $selectedField1 = isset($_POST['data1']) ? $_POST['data1'] : 'current';
-                  $selectedField2 = isset($_POST['data2']) ? $_POST['data2'] : 'power_factor';
-
-                  echo '
-                  <input name="datapts" type="hidden" value="points" />
-                  <select name="data1" id="data1" onchange="updateMeter()">
-                      <option value="current" selected>Current</option>';
-
-                  foreach ($metricsNames as $name) {
-                      $metric = EnergyMetrics::get_units($name);
-                      if ($metric && $metric['field'] !== 'Current') {
-                          $selected = $metric['field'] == $selectedField1 ? 'selected' : '';
-                          echo '<option value="'.$metric['field'].'" '.$selected.'>'.$metric['name'].'</option>';
-                      }
-                  }
-
-                  echo '</select>';
-                  echo '
-                  <input name="datapts" type="hidden" value="points" />
-                  <select name="data1" id="data1" onchange="updateMeter()">
-                      <option value="current" selected>Current</option>';
-
-                  foreach ($metricsNames as $name) {
-                      $metric = EnergyMetrics::get_units($name);
-                      if ($metric && $metric['field'] !== 'Power Factor') {
-                          $selected = $metric['field'] == $selectedField2 ? 'selected' : '';
-                          echo '<option value="'.$metric['field'].'" '.$selected.'>'.$metric['name'].'</option>';
-                      }
-                  }
-
-                  echo '</select>';
+                    // Current as default for data1 and Power Factor as default for data2
+                    $selectedField1 = isset($_POST['data1']) ? $_POST['data1'] : 'current';
+                    $selectedField2 = isset($_POST['data2']) ? $_POST['data2'] : 'power_factor';
+                    
+                    echo '
+                    <input name="datapts" type="hidden" value="points" />
+                    <select name="data1" id="data1" onchange="updateMeter()">
+                        <option value="current" '.($selectedField1 == 'current' ? 'selected' : '').'>Current</option>';
+                    
+                    foreach ($metricsNames as $name) {
+                        $metric = EnergyMetrics::get_units($name);
+                        if ($metric && $metric['field'] !== 'Current') {
+                            $selected = $metric['field'] == $selectedField1 ? 'selected' : '';
+                            echo '<option value="'.$metric['field'].'" '.$selected.'>'.$metric['name'].'</option>';
+                        }
+                    }
+                    
+                    echo '</select>';
+                    
+                    echo '
+                    <input name="datapts" type="hidden" value="points" />
+                    <select name="data2" id="data2" onchange="updateMeter()">
+                        <option value="power_factor" '.($selectedField2 == 'power_factor' ? 'selected' : '').'>Power Factor</option>';
+                    
+                    foreach ($metricsNames as $name) {
+                        $metric = EnergyMetrics::get_units($name);
+                        if ($metric && $metric['field'] !== 'Power Factor') {
+                            $selected = $metric['field'] == $selectedField2 ? 'selected' : '';
+                            echo '<option value="'.$metric['field'].'" '.$selected.'>'.$metric['name'].'</option>';
+                        }
+                    }
+                    
+                    echo '</select>';
 ?>
 </form>
 </div>
