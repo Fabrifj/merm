@@ -375,8 +375,7 @@ foreach ($ship AS $key => $ship)
   }
 }
 
-if($ship_count==1)
-{
+if($ship_count==1){
   switch($module)
   {
   case "mod2":
@@ -432,14 +431,18 @@ if($ship_count==1)
       $Ship_daily_cost_baseline = [($baselines["Grand_Total_Lay_Day"]*1)];
       $Ship_daily_cost_baseline_g1 = [$baselines["Grand_Total_Lay_Day"]*0.9];
       $Ship_daily_cost_baseline_g2 = [$baselines["Grand_Total_Lay_Day"]*0.8];
+      
       $display =isset($_REQUEST['month']) ? $_REQUEST['month'] : "month";
-      $testLogger->logDebug($display );
+
+      $testLogger->logDebug("Mod6: ".$display );
+      $parts = explode('_', $ships[0]);
+      $loopname = $parts[0] . '_' . $parts[1];
     switch ($_REQUEST["month"] ) {
       case "month":
         try {
 
-          $save_startdate = date('F j, Y G:i:s T Y');
-          $save_enddate = date('F j, Y G:i:s T Y', strtotime('-30 days'));
+          $save_enddate = date('F j, Y G:i:s T Y');
+          $save_startdate = date('F j, Y G:i:s T Y', strtotime('-30 days'));
           $Ship_available = [];
 
           $Ship_kWh_Average = [];
@@ -461,8 +464,8 @@ if($ship_count==1)
         break;     
       case "annual":
         try {
-          $save_startdate = date('F j, Y G:i:s T Y');
-          $save_enddate = date('F j, Y G:i:s T Y', strtotime('-1 year'));
+          $save_enddate = date('F j, Y G:i:s T Y');
+          $save_startdate = date('F j, Y G:i:s T Y', strtotime('-1 year'));
           $Ship_available = [];
 
           $Ship_kWh_Average = [];
@@ -490,7 +493,8 @@ if($ship_count==1)
           $month = isset($_REQUEST["month"]) ? intval($_REQUEST["month"]) : date('m');
           
           $save_startdate = date('F j, Y G:i:s T', mktime(0, 0, 0, $month, 1, $year));
-          $save_enddate = date('F j, Y G:i:s T Y', strtotime($save_startdate));
+          $save_enddate = date('F j, Y G:i:s T', mktime(23, 59, 59, $month + 1, 0, $year)); // 0th day of the next month gives us the last day of the current month
+          
           $Ship_available = [];
 
           $Ship_kWh_Average = 0;
