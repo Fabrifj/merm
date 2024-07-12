@@ -445,18 +445,18 @@ if($ship_count==1){
           $save_startdate = date('F j, Y G:i', strtotime('-30 days'));
           $Ship_available = [];
 
-          $Ship_kWh_Average = 0;
-          $Ship_Demand = 0;
-          $Ship_daily_cost = 0;
+          $Ship_kWh_Average = [];
+          $Ship_Demand = [];
+          $Ship_daily_cost = [];
           $ship_data = fetch_last_30_days($testLogger, $loopname);
           if ($ship_data["avg_cost"] == 0) {
               $Ship_available[] = 1;
           } else {
               $Ship_available[] = 0;
           }
-          $Ship_kWh_Average = intval(isset($ship_data["avg_kwH"]) ? $ship_data["avg_kwH"] : 0);
-          $Ship_Demand = intval(isset($ship_data["avg_kw"]) ? $ship_data["avg_kw"] : 0);       
-          $Ship_daily_cost= intval((isset($ship_data["avg_cost"]) ? $ship_data["avg_cost"] : 0));
+          $Ship_kWh_Average[] = intval(isset($ship_data["avg_kwH"]) ? $ship_data["avg_kwH"] : 0);
+          $Ship_Demand[] = intval(isset($ship_data["avg_kw"]) ? $ship_data["avg_kw"] : 0);       
+          $Ship_daily_cost[]= intval((isset($ship_data["avg_cost"]) ? $ship_data["avg_cost"] : 0));
           
         } catch (Exception $e) {
             $testLogger->logError("Error fetching data for the last 30 days: " . $e->getMessage());
@@ -468,9 +468,9 @@ if($ship_count==1){
           $save_startdate = date('F j, Y G:i', strtotime('-1 year'));
           $Ship_available = [];
 
-          $Ship_kWh_Average = 0;
-          $Ship_Demand = 0;
-          $Ship_daily_cost = 0;
+          $Ship_kWh_Average = [];
+          $Ship_Demand = [];
+          $Ship_daily_cost = [];
           $ship_data = fetch_Annual($testLogger, $loopname);
 
           if ($ship_data["avg_cost"] == 0) {
@@ -497,9 +497,9 @@ if($ship_count==1){
           
           $Ship_available = [];
 
-          $Ship_kWh_Average = 0;
-          $Ship_Demand = 0;
-          $Ship_daily_cost = 0;
+          $Ship_kWh_Average = [];
+          $Ship_Demand = [];
+          $Ship_daily_cost = [];
           $ship_data = fetch_month_of_specific_year($testLogger, $loopname, $_REQUEST["year"],$_REQUEST["month"] );
 
           if ($ship_data["avg_cost"] == 0) {
@@ -507,9 +507,9 @@ if($ship_count==1){
           } else {
               $Ship_available[] = 0;
           }
-          $Ship_kWh_Average= intval(isset($ship_data["avg_kwH"]) ? $ship_data["avg_kwH"] : 0);
-          $Ship_Demand = intval(isset($ship_data["avg_kw"]) ? $ship_data["avg_kw"] : 0);
-          $Ship_daily_cost = intval((isset($ship_data["avg_cost"]) ? $ship_data["avg_cost"] : 0));
+          $Ship_kWh_Average[]= intval(isset($ship_data["avg_kwH"]) ? $ship_data["avg_kwH"] : 0);
+          $Ship_Demand[] = intval(isset($ship_data["avg_kw"]) ? $ship_data["avg_kw"] : 0);
+          $Ship_daily_cost[] = intval((isset($ship_data["avg_cost"]) ? $ship_data["avg_cost"] : 0));
         } catch (Exception $e) {
           $testLogger->logError("Error fetching data for the default report: " . $e->getMessage());
         }
