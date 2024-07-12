@@ -710,9 +710,48 @@ function db_fetch_utility_rate($log, $utility) {
     return db_fetch_all($result);
 }
 
+function fetch_data_mod1($log,  $loopname, $startDate, $endDate){
+    // Convert start and end dates to timestamps
+    $startTimestamp = strtotime($startDate);
+    $endTimestamp = strtotime($endDate);
+    $intervalSeconds = round(($endTimestamp - $startTimestamp) / 287);
+    $log->logDebug( " Loopname: " . $loopname . " Start: " . $startDate . " End: " . $endDate . " Interval Seconds: " . $intervalSeconds);
+    $query = sprintf(
+        "SELECT
+            loopname,
+            DATE_FORMAT(FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(time) / %d) * %d), '%%Y-%%m-%%d %%H:%%i:%%s') AS time_group,
+            (`peak_kw`+`off_peak_kw`) AS dkW,
+      		`real_power`
+        FROM Standard_ship_records
+        WHERE loopname = '%s'
+            AND time BETWEEN '%s' AND '%s'
+        GROUP BY loopname, time_group
+        ORDER BY time_group ASC;",
+        mysql_real_escape_string($intervalSeconds),
+        mysql_real_escape_string($intervalSeconds),
+        mysql_real_escape_string($loopname),
+        mysql_real_escape_string($startDate),
+        mysql_real_escape_string($endDate)
+    );
+    $result = db_query($log, $query);
 
-
-
+    if (!$result) {
+        $log->logError("Query failed");
+        return false;
+    }
+    $realpower = [];
+    $powerDemand = [];
+    while ($row = mysql_fetch_assoc($result)) {
+        $realpower []=$row["real_power"];
+        $powerDemand []=$row["dkW"];
+    }
+    // Fetch data for the graph
+    $values = [
+        "realPower" => $realpower,
+        "estimatedPower" => $powerDemand
+    ];
+    return $values;
+}
 
 // Function to close the connection
 function db_close() {

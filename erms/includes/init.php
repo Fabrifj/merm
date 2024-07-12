@@ -618,12 +618,66 @@ if($ship_count==1){
       "values" => $values,
       "cost" => $cost
     ];
-    $formattedMessage = print_r($graph, true);
-    $testLogger->logDebug($formattedMessage);
     break;
     // Energy Power and Cost Analysis
   case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
-    $graph=calculate_mod1_graph_data($ship, $utility, $VAL["date_value_start"], $VAL["date_value_end"]);
+    $parts = explode('_', $ships[0]);
+    $loopname = $parts[0] . '_' . $parts[1]; 
+    $startDate = date('F j, Y');
+    $testLogger->logInfo("Mod1 ".$startDate);
+    switch($VAL["display"]){
+      case "day":
+        $endDate =  date('Y-m-d H:i:s');
+        $startDate = date('Y-m-d H:i:s', strtotime('-1 day'));
+        break;
+      case "week":
+        $endDate =  date('Y-m-d H:i:s');
+        $startDate = date('Y-m-d H:i:s', strtotime('-1 week'));
+        break;
+      case "month":
+        $endDate =  date('Y-m-d H:i:s');
+        $startDate = date('Y-m-d H:i:s', strtotime('-1 month'));
+        break;
+      case "anydate":
+        $startDate =  $VAL["date_value_start"];
+        $endDate =  $VAL["date_value_end"];
+        break;  
+    }
+    $testLogger->logInfo("Mod1 ".$loopname." display: ".$VAL["display"]." range:".$startDate." -- ".$endDate);
+    $timezone = "America/New_York";
+
+    $startTimestamp = strtotime($startDate);
+    $endTimestamp = strtotime($endDate);
+    if ($startTimestamp > $endTimestamp) {
+      throw new Exception('Start date must be earlier than end date');
+    }
+    $intervalSeconds = round(($endTimestamp - $startTimestamp) / 286);
+    $log_interval = $intervalSeconds*1000;
+    $dates = getEvenlySpacedDates($startDate, $endDate, $intervalSeconds);
+    $data = fetch_data_mod1($testLogger,$loopname, $startDate, $endDate );
+    $peak_times = array();
+
+    $graph=[
+      "times" => $dates,
+      "peak_times" => $peak_times,
+      "timezone" => $timezone,
+      "log_interval" => $log_interval,
+      "date_start" => $dates[0],
+      "date_end" => $dates[count($dates) - 1],
+      "data" => array(
+        "y1" => $data,
+        "y2" => $data
+      )
+    ];
+
+
+    // $graph=calculate_mod1_graph_data($ship, $utility, $VAL["date_value_start"], $VAL["date_value_end"]);
+    
+    $formattedMessage = print_r($graph, true);
+    $testLogger->logDebug($formattedMessage);
+
+
+
     break;
     // Energy Meter Data
   case ERMS_Modules::EnergyMeterData: //"mod3":
