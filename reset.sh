@@ -1,5 +1,6 @@
 #!/bin/bash
-
+git restore upload/jp_graph/graphs/error_log
+git pull origin master --rebase
 sudo chown shipsenergy:shipsenergy /home/shipsenergy/public_html/upload/*
 sudo chown shipsenergy:shipsenergy /home/shipsenergy/public_html/upload/jp_graph/graphs/*
 sudo chown shipsenergy:shipsenergy /home/shipsenergy/public_html/erms/includes/*
