@@ -492,8 +492,8 @@ if($ship_count==1){
           $year = isset($_REQUEST["year"]) ? intval($_REQUEST["year"]) : date('Y');
           $month = isset($_REQUEST["month"]) ? intval($_REQUEST["month"]) : date('m');
           
-          $save_startdate = date('F j, Y G:i:s T', mktime(0, 0, 0, $month, 1, $year));
-          $save_enddate = date('F j, Y G:i:s T', mktime(23, 59, 59, $month + 1, 0, $year)); // 0th day of the next month gives us the last day of the current month
+          $save_startdate = date('F j, Y G:i:s T Y', mktime(0, 0, 0, $month, 1, $year));
+          $save_enddate = date('F j, Y G:i:s T Y', mktime(23, 59, 59, $month + 1, 0, $year)); // 0th day of the next month gives us the last day of the current month
           
           $Ship_available = [];
 
