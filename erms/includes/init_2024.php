@@ -1,5 +1,5 @@
 <?php
-date_default_timezone_set('UTC') ///!!!
+date_default_timezone_set('UTC'); ///!!!
 
 $Ship_Table_Name = "";
 $Time_Field = "time";
@@ -126,7 +126,7 @@ switch($module){
                 break;
         }
         $graph = [
-            "timezone" = 'UTC',
+            "timezone" => 'UTC',
             "ship" => $Title,
             "dates" => [$save_startdate, $save_enddate],
             "data" => [
