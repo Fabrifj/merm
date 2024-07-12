@@ -928,7 +928,7 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
 
     		echo '<tr>
     			<td>Time of Occurrence</font></td>
-    			<td style="background:none;"><font color="black">'.makeDate($shipData["TimeOfMaxOnPeakDemand"]).'</font></td>
+    			<td style="background:none;"><font color="black">'.makeDate2($shipData["TimeOfMaxOnPeakDemand"]).'</font></td>
     		</tr>
     		<tr>
     			<td>Maximum Off Peak Demand</font></td>
@@ -946,7 +946,7 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
                 echo
     		'<tr>
     			<td>Time of Occurrence</font></td>
-    			<td style="background:none;"><font color="black">'.makeDate($shipData["TimeOfMaxOffPeakDemand"]).'</font></td>
+    			<td style="background:none;"><font color="black">'.makeDate2($shipData["TimeOfMaxOffPeakDemand"]).'</font></td>
     		</tr>';
 
              if ($utility=="Virginia_Dominion_Rates")
@@ -1399,11 +1399,11 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
 
     		for ($m=0;$m<$max_month;$m++)
     		{
-    		    $strDate = makeDate($VAL_YEAR[$m]["Peak_Demand_Time"]);
+    		    $strDate = makeDate2($VAL_YEAR[$m]["Peak_Demand_Time"]);
     		    if ($strDate <  "1970-01-01 00:00:00")
     				echo '<td style="background:none;"><font color="black">'.'  '.'</font></td>';
     			else
-    				echo '<td style="background:none;"><font color="black">'.makeDate($VAL_YEAR[$m]["Peak_Demand_Time"]).'</font></td>';
+    				echo '<td style="background:none;"><font color="black">'.makeDate2($VAL_YEAR[$m]["Peak_Demand_Time"]).'</font></td>';
     		}
     		echo '<td style="background:none;"><font color="black">'.'  '.'</font></td>';
     		echo '<td style="background:none;"><font color="black">'.'  '.'</font></td>';
@@ -1432,11 +1432,11 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
 
     		for ($m=0;$m<$max_month;$m++)
     		{
-    		     $strDate = makeDate($VAL_YEAR[$m]["Off_Peak_Demand_Time"]);
+    		     $strDate = makeDate2($VAL_YEAR[$m]["Off_Peak_Demand_Time"]);
     		    if ($strDate <  "1970-01-01 00:00:00")
     				echo '<td style="background:none;"><font color="black">'.'  '.'</font></td>';
     			else
-    		        echo '<td style="background:none;"><font color="black">'.makeDate($VAL_YEAR[$m]["Off_Peak_Demand_Time"]).'</font></td>';
+    		        echo '<td style="background:none;"><font color="black">'.makeDate2($VAL_YEAR[$m]["Off_Peak_Demand_Time"]).'</font></td>';
     		 }
     		echo '<td style="background:none;"><font color="black">'.'  '.'</font></td>';
     		echo '<td style="background:none;"><font color="black">'.'  '.'</font></td>';
