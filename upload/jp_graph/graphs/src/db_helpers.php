@@ -821,9 +821,6 @@ function fetch_summary_report_mod3($log, $loopname, $start_date, $end_date) {
        
     ];
 
-    $formattedMessage = print_r($monthlyReport, true);
-    $log->logDebug($formattedMessage);
-
     return $monthlyReport;
 }
 

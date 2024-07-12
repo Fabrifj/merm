@@ -573,8 +573,8 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
                   $metricsNames = EnergyMetrics::get_names();
 
                   // Current as default
-                  $selectedField = isset($_POST['data1']) ? $_POST['data1'] : 'current';
-                  $selectedField = isset($_POST['data2']) ? $_POST['data2'] : 'power_factor';
+                  $selectedField1 = isset($_POST['data1']) ? $_POST['data1'] : 'current';
+                  $selectedField2 = isset($_POST['data2']) ? $_POST['data2'] : 'power_factor';
 
                   echo '
                   <input name="datapts" type="hidden" value="points" />
@@ -584,7 +584,7 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
                   foreach ($metricsNames as $name) {
                       $metric = EnergyMetrics::get_units($name);
                       if ($metric && $metric['field'] !== 'Current') {
-                          $selected = $metric['field'] == $selectedField ? 'selected' : '';
+                          $selected = $metric['field'] == $selectedField1 ? 'selected' : '';
                           echo '<option value="'.$metric['field'].'" '.$selected.'>'.$metric['name'].'</option>';
                       }
                   }
@@ -598,7 +598,7 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
                   foreach ($metricsNames as $name) {
                       $metric = EnergyMetrics::get_units($name);
                       if ($metric && $metric['field'] !== 'Power Factor') {
-                          $selected = $metric['field'] == $selectedField ? 'selected' : '';
+                          $selected = $metric['field'] == $selectedField2 ? 'selected' : '';
                           echo '<option value="'.$metric['field'].'" '.$selected.'>'.$metric['name'].'</option>';
                       }
                   }
