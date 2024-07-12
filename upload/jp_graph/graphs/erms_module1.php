@@ -52,7 +52,7 @@ $Title = "";
 include '../../../erms/includes/debugging.php';
 include '../../../schedules/schedules.php';
 include '../../../erms/includes/access_control.php';
-include '../../../erms/includes/data_methods.php';
+// include '../../../erms/includes/data_methods.php';
 include '../../../erms/includes/energy_methods.php';
 include '../../../erms/includes/gfx_methods.php';
 include_once ('../../../conn/mysql_connect-ro.php');
@@ -73,8 +73,8 @@ if(!isAuthenticated() || !isPermitted($_REQUEST['user'], $_REQUEST['shipClass'],
 $client_ip_address =  getRealIpAddr();
 $log->logInfo('Client IP['.$client_ip_address.']');
 // init 
-// include '../../../erms/includes/init.php';
-include '../../../erms/includes/init_2024.php';
+include '../../../erms/includes/init.php';
+// include '../../../erms/includes/init_2024.php';
 
 
 
