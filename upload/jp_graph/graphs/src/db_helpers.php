@@ -742,8 +742,8 @@ function fetch_data_mod1($log,  $loopname, $startDate, $endDate){
     $realpower = [];
     $powerDemand = [];
     while ($row = mysql_fetch_assoc($result)) {
-        $realpower []=$row["real_power"];
-        $powerDemand []=$row["dkW"];
+        $realpower []= round($row["real_power"],2);
+        $powerDemand []= round($row["dkW"],2);
     }
     // Fetch data for the graph
     $values = [
