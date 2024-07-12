@@ -472,51 +472,51 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
 				</tr>
 				<tr class="odd" valign="bottom">
 					<td align="center" style="background:none;">Off Peak Energy: </td>
-					<td align="center" style="background:none;">'.$SUMMARYREPORT["Off_Peak_kWh_Total"].' kWh</td>
+					<td align="center" style="background:none;">'.$summaryReport["Off_Peak_kWh_Total"].' kWh</td>
 					<td align="center" style="background:none;">Maximum Current: </td>
-					<td align="center" style="background:none;">'.$SUMMARYREPORT["MaxCurrent"].' Amps</td>
+					<td align="center" style="background:none;">'.$summaryReport["MaxCurrent"].' Amps</td>
 				</tr>
 				<tr valign="bottom">
 					<td align="center" style="background:none;">On Peak Demand: </td>
-					<td align="center" style="background:none;">'.$SUMMARYREPORT["OnPeakDemand"]." kW".'</td>
+					<td align="center" style="background:none;">'.$summaryReport["OnPeakDemand"]." kW".'</td>
 					<td align="center" style="background:none;">Time of Occurance: </td>
-					<td align="center" style="background:none;">'.$SUMMARYREPORT["TimeMaxCurrent"].'</td>
+					<td align="center" style="background:none;">'.makeDate2($summaryReport["TimeMaxCurrent"]).'</td>
 				</tr>
 				<tr class="odd" valign="bottom">
 					<td align="center" style="background:none;">Time of Occurance: </td>
-					<td align="center" style="background:none;">'.$SUMMARYREPORT["TimeOnPeakDemand"].'</td>
+					<td align="center" style="background:none;">'.makeDate2($summaryReport["TimeOnPeakDemand"]).'</td>
 					<td align="center" style="background:none;">Average Voltage: </td>
-					<td align="center" style="background:none;">'.$SUMMARYREPORT["1_Voltage_Avg"]." Volts".'</td>
+					<td align="center" style="background:none;">'.$summaryReport["1_Voltage_Avg"]." Volts".'</td>
 				</tr>
 				<tr valign="bottom">
 					<td align="center" style="background:none;">Off Peak Demand: </td>
-					<td align="center" style="background:none;">'.$SUMMARYREPORT["OffPeakDemand"]." kW".'</td>
+					<td align="center" style="background:none;">'.$summaryReport["OffPeakDemand"]." kW".'</td>
 					<td align="center" style="background:none;">Maximum Voltage: </td>
-					<td align="center" style="background:none;">'.$SUMMARYREPORT["1_Voltage_Max"]." Volts".'</td>
+					<td align="center" style="background:none;">'.$summaryReport["1_Voltage_Max"]." Volts".'</td>
 				</tr>
 				<tr class="odd" valign="bottom">
 					<td align="center" style="background:none;">Time of Occurance: </td>
-					<td align="center" style="background:none;">'.$SUMMARYREPORT["TimeOffPeakDemand"].'</td>
+					<td align="center" style="background:none;">'.makeDate2($summaryReport["TimeOffPeakDemand"]).'</td>
 					<td align="center" style="background:none;">Minimum Voltage: </td>
-					<td align="center" style="background:none;">'.$SUMMARYREPORT["1_Voltage_Min"]." Volts".'</td>
+					<td align="center" style="background:none;">'.$summaryReport["1_Voltage_Min"]." Volts".'</td>
 				</tr>
 				<tr valign="bottom">
 					<td align="center" style="background:none;">Average Power Factor: </td>
-					<td align="center" style="background:none;">'.$SUMMARYREPORT["2_PF_Avg"]." &#37".'</td>
+					<td align="center" style="background:none;">'.$summaryReport["2_PF_Avg"]." &#37".'</td>
 					<td align="center" style="background:none;">Average Reactive Power: </td>
-					<td align="center" style="background:none;">'.$SUMMARYREPORT["1_kVAR_Avg"]." kVAR".'</td>
+					<td align="center" style="background:none;">'.$summaryReport["1_kVAR_Avg"]." kVAR".'</td>
 				</tr>
 				<tr class="odd" valign="bottom">
 					<td align="center" style="background:none;">Maximum Power Factor: </td>
-					<td align="center" style="background:none;">'.$SUMMARYREPORT["2_PF_Max"]." &#37".'</td>
+					<td align="center" style="background:none;">'.$summaryReport["2_PF_Max"]." &#37".'</td>
 					<td align="center" style="background:none;">Maximum Reactive Power: </td>
-					<td align="center" style="background:none;">'.$SUMMARYREPORT["MaxReactivePower"]." kVAR".'</td>
+					<td align="center" style="background:none;">'.$summaryReport["MaxReactivePower"]." kVAR".'</td>
 				</tr>
 				<tr valign="bottom">
 					<td align="center" style="background:none;">Minimum Power Factor: </td>
-					<td align="center" style="background:none;">'.$SUMMARYREPORT["2_PF_Min"]." &#37".'</td>
+					<td align="center" style="background:none;">'.$summaryReport["2_PF_Min"]." &#37".'</td>
 					<td align="center" style="background:none;">Time of Occurance: </td>
-					<td align="center" style="background:none;">'.$SUMMARYREPORT["TimeMaxReactivePower"].'</td>
+					<td align="center" style="background:none;">'.makeDate2($summaryReport["TimeMaxReactivePower"]).'</td>
 				</tr>
 			</table>';
 

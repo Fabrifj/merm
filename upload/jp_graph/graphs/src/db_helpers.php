@@ -767,14 +767,14 @@ function fetch_summary_report_mod3($log, $loopname, $start_date, $end_date) {
     $monthlyReport = [
         'Year' => $start_date,
         'Month' => $end_date,
-        'OnPeakDemand' => round($maxPeak["max_field"], 2),
-        'TimeOnPeakDemand' => round($maxPeak["max_time"], 2),
-        'OffPeakDemand' => round($maxOffPeak["max_field"], 2),
-        'TimeOffPeakDemand' => round($maxOffPeak["max_time"], 2),
-        'MaxCurrent' => round($maxCurrent["max_field"], 2),
-        'TimeMaxCurrent' => round($maxCurrent["max_time"], 2),
-        'MaxReactivePower' => round($maxReactivePower["max_field"], 2),
-        'TimeMaxReactivePower' => round($maxReactivePower["max_time"], 2),
+        'OnPeakDemand' => round(isset($maxPeak["max_field"]) ? $maxPeak["max_field"] : 0, 2),
+        'TimeOnPeakDemand' => isset($maxPeak["max_time"]) ? $maxPeak["max_time"] : '1970-01-01 00:00:00',
+        'OffPeakDemand' => round(isset($maxOffPeak["max_field"]) ? $maxOffPeak["max_field"] : 0, 2),
+        'TimeOffPeakDemand' => isset($maxOffPeak["max_time"]) ? $maxOffPeak["max_time"] : '1970-01-01 00:00:00',
+        'MaxCurrent' => round(isset($maxCurrent["max_field"]) ? $maxCurrent["max_field"] : 0, 2),
+        'TimeMaxCurrent' => isset($maxCurrent["max_time"]) ? $maxCurrent["max_time"] : '1970-01-01 00:00:00',
+        'MaxReactivePower' => round(isset($maxReactivePower["max_field"]) ? $maxReactivePower["max_field"] : 0, 2),
+        'TimeMaxReactivePower' => isset($maxReactivePower["max_time"]) ? $maxReactivePower["max_time"] : '1970-01-01 00:00:00'
 
        
     ];
