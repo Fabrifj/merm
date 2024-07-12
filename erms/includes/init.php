@@ -514,8 +514,15 @@ if($ship_count==1){
           $testLogger->logError("Error fetching data for the default report: " . $e->getMessage());
         }
       break;
-      }    
-    
+    }    
+    $values = [
+      "kWh_day" => $Ship_kWh_Average,
+      "Peak_Demand" => $Ship_Demand,
+      "Lay_Days" => $ship_data["days"]
+    ];
+    $cost = [
+      "Grand_Total_Lay_Day" => $Ship_daily_cost
+    ];
 
 
     

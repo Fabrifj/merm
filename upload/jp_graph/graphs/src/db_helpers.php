@@ -99,6 +99,7 @@ function fetch_data_for_graph_mod1($log,$result) {
         'avg_cost' => $avg_cost,
         'avg_kw' => $avg_kw,
         'avg_kwH' => $avg_kwH,
+        'days' => $days
     ];
 }
 
