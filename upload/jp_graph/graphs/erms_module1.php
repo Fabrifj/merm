@@ -52,7 +52,7 @@ $Title = "";
 include '../../../erms/includes/debugging.php';
 include '../../../schedules/schedules.php';
 include '../../../erms/includes/access_control.php';
-// include '../../../erms/includes/data_methods.php';
+include '../../../erms/includes/data_methods.php';
 include '../../../erms/includes/energy_methods.php';
 include '../../../erms/includes/gfx_methods.php';
 include_once ('../../../conn/mysql_connect-ro.php');
