@@ -900,7 +900,7 @@ function fetch_data_mod1($log,  $loopname, $startDate, $endDate){
         "SELECT
             loopname,
             DATE_FORMAT(FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(time) / %d) * %d), '%%Y-%%m-%%d %%H:%%i:%%s') AS time_group,
-            AVG(`peak_kw`+`off_peak_kw`) AS dkW,
+            MAX(`peak_kw`+`off_peak_kw`) AS dkW,
       		AVG(`real_power`) AS real_power
         FROM Standard_ship_records
         WHERE loopname = '%s'
