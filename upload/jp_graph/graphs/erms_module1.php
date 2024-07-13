@@ -1172,7 +1172,7 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
            	echo '
                    <div class="consumption_box">
                     <div id="graph_range_sel_header">
-                        <span style="font-weight: bold;"><font color="black">'.$utilityRate->getUtility().'</font></span><br />
+                        <span style="font-weight: bold;"><font color="white">'.$utilityRate->getUtility().'</font></span><br />
                      </div>
 
                     <table class="tblDetailedSummaryRpt">
