@@ -722,35 +722,35 @@ function fetch_monthly_report_mod6($log, $loopname, $year, $month) {
     $monthlyReport = [
         'Year' => $year,
         'Month' => $month,
-        'EndOfMonthReading' => round($generalData["energy_consumption"], 2),
-        'TotalkWhConsumed' => round($generalData["accumulation"], 2),
-        'MaxOnPeakDemand' => round($maxPeak["max_peak_kw"], 2),
-        'OnPeakBilledDemand' => round($maxPeak["max_peak_kw"], 2), // Placeholder, update with correct key
-        'TimeOfMaxOnPeakDemand' => ($maxPeak["max_peak_kw"] != 0) ? $maxPeak["max_peak_time"] : 0, // Assuming this is a date/time value
-        'MaxOffPeakDemand' => round($maxOffPeak["max_off_peak_kw"], 2),
-        'OffPeakBilledDemand' => round($maxOffPeak["max_off_peak_kw"], 2), // Placeholder, update with correct key
-        'TimeOfMaxOffPeakDemand' => $maxOffPeak["max_off_peak_time"], // Assuming this is a date/time value
-        'LayDays' => $generalData["days"],
-        'OnPeakkWh' => round($generalData["sum_peak_kwh"], 2),
-        'OffPeakkWh' => round($generalData["sum_off_peak_kwh"], 2),
-        'AvgPower' => round($generalData["avg_real_power"], 2),
-        'BilledPowerFactor' => round($generalData["avg_power_factor"], 3),
-        'AvgPowerFactor' => round($generalData["avg_power_factor"], 3),
-        'LowestPowerFactor' => round($generalData["min_power_factor"], 3),
-        'HighestPowerFactor' => round($generalData["max_power_factor"], 3),
-        'TotalCO2' => round($totalCO2, 2), // Placeholder, update with actual calculation if applicable
-        'OnPeakEnergyCharges' => round($generalData["max_demand_cost_kw"], 2),
-        'OffPeakEnergyCharges' => round($generalData["max_off_demand_cost_kw"], 2),
+        'EndOfMonthReading' => round(isset($generalData["energy_consumption"]) ? $generalData["energy_consumption"] : 0, 2),
+        'TotalkWhConsumed' => round(isset($generalData["accumulation"]) ? $generalData["accumulation"] : 0, 2),
+        'MaxOnPeakDemand' => round(isset($maxPeak["max_peak_kw"]) ? $maxPeak["max_peak_kw"] : 0, 2),
+        'OnPeakBilledDemand' => round(isset($maxPeak["max_peak_kw"]) ? $maxPeak["max_peak_kw"] : 0, 2), // Placeholder, update with correct key if needed
+        'TimeOfMaxOnPeakDemand' => (isset($maxPeak["max_peak_kw"]) && $maxPeak["max_peak_kw"] != 0) ? $maxPeak["max_peak_time"] : 0, // Assuming this is a date/time value
+        'MaxOffPeakDemand' => round(isset($maxOffPeak["max_off_peak_kw"]) ? $maxOffPeak["max_off_peak_kw"] : 0, 2),
+        'OffPeakBilledDemand' => round(isset($maxOffPeak["max_off_peak_kw"]) ? $maxOffPeak["max_off_peak_kw"] : 0, 2), // Placeholder, update with correct key if needed
+        'TimeOfMaxOffPeakDemand' => isset($maxOffPeak["max_off_peak_time"]) ? $maxOffPeak["max_off_peak_time"] : 0, // Assuming this is a date/time value
+        'LayDays' => isset($generalData["days"]) ? $generalData["days"] : 0,
+        'OnPeakkWh' => round(isset($generalData["sum_peak_kwh"]) ? $generalData["sum_peak_kwh"] : 0, 2),
+        'OffPeakkWh' => round(isset($generalData["sum_off_peak_kwh"]) ? $generalData["sum_off_peak_kwh"] : 0, 2),
+        'AvgPower' => round(isset($generalData["avg_real_power"]) ? $generalData["avg_real_power"] : 0, 2),
+        'BilledPowerFactor' => round(isset($generalData["avg_power_factor"]) ? $generalData["avg_power_factor"] : 0, 3),
+        'AvgPowerFactor' => round(isset($generalData["avg_power_factor"]) ? $generalData["avg_power_factor"] : 0, 3),
+        'LowestPowerFactor' => round(isset($generalData["min_power_factor"]) ? $generalData["min_power_factor"] : 0, 3),
+        'HighestPowerFactor' => round(isset($generalData["max_power_factor"]) ? $generalData["max_power_factor"] : 0, 3),
+        'TotalCO2' => round(isset($totalCO2) ? $totalCO2 : 0, 2), // Placeholder, update with actual calculation if applicable
+        'OnPeakEnergyCharges' => round(isset($generalData["max_demand_cost_kw"]) ? $generalData["max_demand_cost_kw"] : 0, 2),
+        'OffPeakEnergyCharges' => round(isset($generalData["max_off_demand_cost_kw"]) ? $generalData["max_off_demand_cost_kw"] : 0, 2),
         'OtherEnergyCharges' => round(0, 2), // Placeholder, update with actual calculation if applicable
-        'TotalEnergyCharges' => round($totalPeakCost, 2),
-        'OnPeakDemandCharges' => round($generalData["sum_cost_kwh"], 2),
-        'OffPeakDemandCharges' => round($generalData["sum_off_cost_kwh"], 2),
+        'TotalEnergyCharges' => round(isset($totalPeakCost) ? $totalPeakCost : 0, 2),
+        'OnPeakDemandCharges' => round(isset($generalData["sum_cost_kwh"]) ? $generalData["sum_cost_kwh"] : 0, 2),
+        'OffPeakDemandCharges' => round(isset($generalData["sum_off_cost_kwh"]) ? $generalData["sum_off_cost_kwh"] : 0, 2),
         'OtherDemandCharges' => round(0, 2), // Placeholder, update with actual calculation if applicable
-        'TotalDemandCharges' => round($totalDemandCost, 2),
-        'TotalEstimatedBill' => round($totalDemandCost + $totalPeakCost, 2),
-        'FullBurdenPureDemandRate' => round(($maxDemand != 0) ? $totalDemandCost / $maxDemand : 0, 2),
-        'FullBurdenPureEnergyRate' => round(($totalPeak != 0) ? $totalPeakCost / $totalPeak : 0, 2),
-        'FullBurdenShorepowerRate' => round(($totalPeak != 0) ? ($totalDemandCost + $totalPeakCost) / $totalPeak : 0, 2),
+        'TotalDemandCharges' => round(isset($totalDemandCost) ? $totalDemandCost : 0, 2),
+        'TotalEstimatedBill' => round((isset($totalDemandCost) ? $totalDemandCost : 0) + (isset($totalPeakCost) ? $totalPeakCost : 0), 2),
+        'FullBurdenPureDemandRate' => round((isset($maxDemand) && $maxDemand != 0) ? (isset($totalDemandCost) ? $totalDemandCost : 0) / $maxDemand : 0, 2),
+        'FullBurdenPureEnergyRate' => round((isset($totalPeak) && $totalPeak != 0) ? (isset($totalPeakCost) ? $totalPeakCost : 0) / $totalPeak : 0, 2),
+        'FullBurdenShorepowerRate' => round((isset($totalPeak) && $totalPeak != 0) ? ((isset($totalDemandCost) ? $totalDemandCost : 0) + (isset($totalPeakCost) ? $totalPeakCost : 0)) / $totalPeak : 0, 2),
     ];
 
     return $monthlyReport;
