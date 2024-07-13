@@ -1864,13 +1864,12 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
     // Add the titles
     csvContent += keys.join(',') + '\r\n';
 
-    // Add the rows
+    // Add each value in a new row
     rows.forEach(function(row) {
-        var values = keys.map(function(key) {
+        keys.forEach(function(key) {
             var cellValue = row[key] ? row[key].toString().replace(/"/g, '""') : '';
-            return '"' + cellValue + '"';
-        }).join(',');
-        csvContent += values + '\r\n';
+            csvContent += '"' + cellValue + '",\r\n';
+        });
     });
 
     return csvContent;
