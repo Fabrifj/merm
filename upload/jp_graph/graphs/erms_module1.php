@@ -567,6 +567,8 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
             <div id="graph_range_sel_header">
               <span style="font-weight: bold;">Graph Data Points</span><br />
             </div>
+            <div class="printRptBtn"><button onClick="downloadMod3CSV();">Export Data</button> </div>
+
             <form id="f2" action="" method="POST">
  <?php
                     // Get the meters
@@ -606,7 +608,6 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
                     
                     echo '</select>';
 ?>
-    <div class="printRptBtn"><button onClick="downloadMod3CSV();">Export Data</button> </div>
 
 <!-- </form>
 </div>
