@@ -757,6 +757,10 @@ if($ship_count==1){
       "units" => $chartUnits,
       "data" => $shipsData,
     ];
+    $exportDataMod3=[
+      $field1 =>$shipsData[0] ,
+      $field2 =>$shipsData[1] 
+    ];
 
 
     // $graphData = ;

@@ -1845,13 +1845,14 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
         var postfix = month + "-" + year;
         link.setAttribute("href", encodedUri);
         link.setAttribute("download", noSpacesName + postfix + ".csv");
-        document.body.appendChild(link); // Necesario para Firefox
+        document.body.appendChild(link); 
         link.click();
         document.body.removeChild(link);
     }
 
     function downloadMod3CSV() {
-        var dataShips = <?php echo json_encode($shipData); ?>;
+        var dataShips = <?php echo json_encode($exportDataMod3); ?>;
+        console.log(dataShips); // Para verificar el contenido en la consola
         var csvContent = arrayToCSV(dataShips);
         var encodedUri = encodeURI("data:text/csv;charset=utf-8," + csvContent);
         var link = document.createElement("a");
@@ -1863,7 +1864,7 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
         var postfix = "EnergyMeterData"+month + "-" + year;
         link.setAttribute("href", encodedUri);
         link.setAttribute("download", noSpacesName + postfix + ".csv");
-        document.body.appendChild(link); // Necesario para Firefox
+        document.body.appendChild(link); 
         link.click();
         document.body.removeChild(link);
     }
