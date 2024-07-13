@@ -431,10 +431,10 @@ if($ship_count==1){
       
       $display =isset($_REQUEST['month']) ? $_REQUEST['month'] : "month";
 
-      $testLogger->logDebug("Mod6: ".$display );
+      $testLogger->logDebug("Mod0: ".$display );
       $parts = explode('_', $ships[0]);
       $loopname = $parts[0] . '_' . $parts[1];
-    switch ($_REQUEST["month"] ) {
+    switch ($display ) {
       case "month":
         try {
 
@@ -665,6 +665,27 @@ if($ship_count==1){
         "y1" => $data["realPower"],
         "y2" => $data["estimatedPower"]
       )
+    ];
+     // Fetch max peak data
+    $maxPeak = fetch_mod3_max_field($log, $loopname,"peak_kw" , $start_date, $end_date);
+
+     // Fetch max off peak data
+    $maxOffPeak = fetch_mod3_max_field($log, $loopname,"off_peak_kw" , $start_date, $end_date);
+
+    $detailed = fetch_month_of_specific_year($log, $loopname, $year, $month);
+
+    if($maxOffPeak["max_field"]>$maxPeak["max_field"]){
+      $maxKw = $maxOffPeak;
+    }else{
+      $maxKw = $maxPeak;
+    }
+
+    $detailedSummary = [
+      'AvgKw'=>$detailed["avg_kw"],
+      'MaxKw'=>$maxKw["max_field"],
+      'TimMaxKw'=>$maxKw["max_time"],
+      'TotalKwh'=>$detailed["avg_kwH"],
+      'KwhDay'=>$detailed["avg_kwH"]/$detailed["days"],
     ];
     break;
     // Energy Meter Data

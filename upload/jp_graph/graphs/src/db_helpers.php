@@ -83,7 +83,9 @@ function fetch_data_for_graph_mod1($log,$result) {
         $max_demand_kw = (float)$row['max_demand_kw'];
         $max_off_demand_kw = (float)$row['max_off_demand_kw'];
         $avg_daily_total_kwh = (float)$row['avg_daily_total_kwh'];
-
+        if ($days > 1) {
+            $days -= 1;
+        }
             // Calculate
         if ($days > 0) {
             $avg_demand = ($max_cost_kw + $max_off_cost_kw) / $days;
@@ -275,6 +277,59 @@ function fetch_month_of_specific_year($log, $loopname, $year, $month) {
     return fetch_data_for_graph_mod1($log,$result);
 
 }
+function fetch_month_of_specific_date($log, $loopname, $start_date, $end_date) {
+    $log->logDebug("Loopname: ". $loopname. " start_date: ". $start_date. " end_date: ". $end_date);
+    $query = sprintf(
+        "SELECT 
+                loopname,
+                ROUND(MAX(max_demand_kw), 2) AS max_demand_kw, 
+                ROUND(MAX(max_off_demand_kw), 2) AS max_off_demand_kw,
+                ROUND(MAX(max_cost_kw), 2) AS max_cost_kw, 
+                ROUND(MAX(max_off_cost_kw), 2) AS max_off_cost_kw,
+                ROUND(AVG(daily_cost_kwh), 2) AS avg_daily_cost_kwh, 
+                ROUND(AVG(daily_total_kwh), 2) AS avg_daily_total_kwh, 
+                COUNT(*) AS days
+            FROM (
+                SELECT 
+                    loopname,
+                    DATE(time) AS day,
+                    MAX(peak_kw) AS max_demand_kw,
+                    MAX(off_peak_kw) AS max_off_demand_kw,
+                    MAX(cost_kw) AS max_cost_kw,
+                    MAX(off_cost_kw) AS max_off_cost_kw,
+                    SUM(cost_kwh + off_cost_kwh) AS daily_cost_kwh,
+                    SUM(peak_kwh + off_peak_kwh) AS daily_total_kwh
+                FROM 
+                    Standard_ship_records 
+                WHERE 
+                    loopname = '%s' 
+                    AND time BETWEEN '%s' AND '%s'
+
+                GROUP BY 
+                    loopname, DATE(time)
+            ) AS daily_sums
+            WHERE 
+                daily_total_kwh > 0
+            GROUP BY 
+                loopname;",
+        mysql_real_escape_string($loopname),
+        mysql_real_escape_string($start_date),
+        mysql_real_escape_string($end_date)
+    );
+
+    $result = db_query($log, $query);
+
+    if (!$result) {
+        $log->logError("Query failed");
+        return false;
+    }
+
+    return fetch_data_for_graph_mod1($log,$result);
+
+}
+
+
+
 function pad_with_zeros($log,$array, $desired_length = 12) {
     $array_length = count($array);
     if ($array_length < $desired_length) {

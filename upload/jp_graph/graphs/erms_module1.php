@@ -755,23 +755,23 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
                         <table class="tblDetailedSummary">
                 		<tr>
                 			<td style="color:black;">Average Gallons</th>
-                			<td><b><?php echo $VAL["Demand_avg"] ?> kW</b></th>
+                			<td><b><?php echo $detailedSummary["AvgKw"] ?> kW</b></th>
                 		</tr>
                 		<tr class="odd">
                 			<td style="color:black;">Max Peak Demand</th>
-                			<td><b><?php echo $VAL["Peak_Demand"] ?> kW</b></th>
+                			<td><b><?php echo $detailedSummary["MaxKw"] ?> kW</b></th>
                 		</tr>
                 		<tr>
                 			<td style="color:black;">Time of Occurance</th>
-                			<td><b><?php echo date('Y-m-d H:i',strtotime($VAL["Peak_Demand_Time"])) ?></b></th>
+                			<td><b><?php echo date('Y-m-d H:i',strtotime($detailedSummary["TimMaxKw"])) ?></b></th>
                 		</tr>
                 		<tr class="odd">
                 			<td style="color:black;">Total Gallons</th>
-                			<td><b><?php echo $VAL["kWh_Total"] ?> kWh</b></th>
+                			<td><b><?php echo $detailedSummary["TotalKwh"] ?> kWh</b></th>
                 		</tr>
                 		<tr>
                 			<td style="color:black; border-bottom: 0px;">Gallons Per Lay Day</th>
-                			<td style="border-bottom: 0px;"><b><?php echo $VAL["kWh_day"] ?> kWh/day</b></th>
+                			<td style="border-bottom: 0px;"><b><?php echo $detailedSummary["KwhDay"] ?> kWh/day</b></th>
                 		</tr>
                         </table>
                     </div>
@@ -1172,7 +1172,7 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
            	echo '
                    <div class="consumption_box">
                     <div id="graph_range_sel_header">
-                        <span style="font-weight: bold;"><font color="black"><?php echo $utilityRate->getUtility(); ?></font></span><br />
+                        <span style="font-weight: bold;"><font color="black">'.$utilityRate->getUtility().'</font></span><br />
                      </div>
 
                     <table class="tblDetailedSummaryRpt">
