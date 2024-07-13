@@ -609,8 +609,9 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
 </form>
 </div>
 </br>
+    <div class="printRptBtn"><button onClick="downloadCSV();">Export</button> </div>
 
-    <div id="rawDataExport"></div>
+    <!-- <div id="rawDataExport"></div>
     <script type="text/javascript">
         $(function() {
             // Y-m-d H:i:s
@@ -674,7 +675,7 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
             $("#radio" ).buttonset();
         });
 	</script>
-    </div>
+    </div> -->
        </div>
 
 
@@ -1085,7 +1086,7 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
                         <span style="font-weight: bold;">Selected Chart</span><br />
                     </div>
                     <div>
-                        <a title="Click image to view larger" id="monthly_report_image" href="<?php echo $graph['graph'] ?>"><img src="<?php echo $graph['graph'] ?>" width="<?php echo ($graph['width']/3.5) ?>" height="<?php echo ($graph['height']/3.5) ?>" border="0"></a>
+                        <!-- <a title="Click image to view larger" id="monthly_report_image" href="<?php echo $graph['graph'] ?>"><img src="<?php echo $graph['graph'] ?>" width="<?php echo ($graph['width']/3.5) ?>" height="<?php echo ($graph['height']/3.5) ?>" border="0"></a> -->
                     </div>
                   </div>
                  <div class="printRptBtn"><button onClick="downloadCSV();">Export</button> </div>

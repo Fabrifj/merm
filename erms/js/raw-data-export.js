@@ -67,49 +67,49 @@
     onupdate: function () {
       setupJQueryTimePicker();
     },
-    view: function () {
-      var inputs = [
-        m("label[for=data_export_start_date_time]", { style: { display: "block" } }, "Start Date/Time"),
-        m("input#data_export_start_date_time[type=text][name=data_export_start_date_time]", {
-          onchange: function(e) { DataExportModel.current.data_export_start_date_time = e.target.value; },
-          value: DataExportModel.current.data_export_start_date_time
-        }),
-        m("label[for=data_export_stop_date_time]", { style: { display: "block" } }, "End Date/Time"),
-        m("input#data_export_stop_date_time[type=text][name=data_export_stop_date_time]", {
-          onchange: function(e) { DataExportModel.current.data_export_stop_date_time = e.target.value; },
-          value: DataExportModel.current.data_export_stop_date_time
-        }),
-        m("button[type=submit]", { style: { display: "block" } }, "Export Data")
-      ];
+    // view: function () {
+    //   var inputs = [
+    //     m("label[for=data_export_start_date_time]", { style: { display: "block" } }, "Start Date/Time"),
+    //     m("input#data_export_start_date_time[type=text][name=data_export_start_date_time]", {
+    //       onchange: function(e) { DataExportModel.current.data_export_start_date_time = e.target.value; },
+    //       value: DataExportModel.current.data_export_start_date_time
+    //     }),
+    //     m("label[for=data_export_stop_date_time]", { style: { display: "block" } }, "End Date/Time"),
+    //     m("input#data_export_stop_date_time[type=text][name=data_export_stop_date_time]", {
+    //       onchange: function(e) { DataExportModel.current.data_export_stop_date_time = e.target.value; },
+    //       value: DataExportModel.current.data_export_stop_date_time
+    //     }),
+    //     m("button[type=submit]", { style: { display: "block" } }, "Export Data")
+    //   ];
 
-      if(DataExportModel.current.ships_list.length > 1) {
-        inputs.unshift(DataExportModel.options())
-      }
+    //   if(DataExportModel.current.ships_list.length > 1) {
+    //     inputs.unshift(DataExportModel.options())
+    //   }
 
-      var selectionForm = [
-          m("form", {
-            style: {
-              marginTop: "1em",
-              marginBottom: "1em"
-            },
-            onsubmit: function (e) {
-              e.preventDefault();
-              DataExportModel.download()
-            }
-          }, inputs)
-        ];
+    //   var selectionForm = [
+    //       m("form", {
+    //         style: {
+    //           marginTop: "1em",
+    //           marginBottom: "1em"
+    //         },
+    //         onsubmit: function (e) {
+    //           e.preventDefault();
+    //           DataExportModel.download()
+    //         }
+    //       }, inputs)
+    //     ];
 
-      if(DataExportModel.error) {
-        selectionForm.unshift(m("div", { style: { color: "red", display: "block" } }, DataExportModel.error));
-      }
+    //   if(DataExportModel.error) {
+    //     selectionForm.unshift(m("div", { style: { color: "red", display: "block" } }, DataExportModel.error));
+    //   }
 
-      return m("div", { class: "iwbox1", style: { width: "200px" } }, [
-        m("div", { id: "graph_range_sel_header" }, [
-          m("span", "Raw Data Export")
-        ]),
-        m("div", { id: "date_time_panel" }, selectionForm)
-      ])
-    }
+    //   return m("div", { class: "iwbox1", style: { width: "200px" } }, [
+    //     m("div", { id: "graph_range_sel_header" }, [
+    //       m("span", "Raw Data Export")
+    //     ]),
+    //     m("div", { id: "date_time_panel" }, selectionForm)
+    //   ])
+    // }
   };
 
   global.DataExportForm = {
