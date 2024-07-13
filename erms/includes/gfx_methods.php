@@ -392,8 +392,6 @@ function getEvenlySpacedDates($startDate, $endDate, $intervalSeconds) {
 
         return $dates;
     } catch (Exception $e) {
-        // Handle any exceptions thrown during date conversion or interval calculation
-        // For simplicity, just rethrow the exception in this example
         throw $e;
     }
 }

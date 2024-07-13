@@ -709,6 +709,9 @@ if($ship_count==1){
           $endDate =  $VAL["date_value_end"];
           break;  
       }
+      $testLogger->logDebug("startDate: " . $startDate . " endDate: ".$endDate);
+      $startTimestamp = strtotime($startDate);
+      $endTimestamp = strtotime($endDate);
       // Get interval time
       $intervalSeconds = round(($endTimestamp - $startTimestamp) / 286);
       $log_interval = $intervalSeconds*1000;
@@ -719,21 +722,20 @@ if($ship_count==1){
       $chartUnits[] = $units2;
 
       $summaryReport = fetch_summary_report_mod3($testLogger, $loopname, $startDate, $endDate);
-      $shipsData = fetch_unitary_mod3_graph($testLogger, $loopname,$field1, $field2, $startDate, $endDate);
-
-      $graph = [
-        "times" => $dates,
-        "timezone" => $timezone,
-        "log_interval" => $log_interval ,
-        "date_start" => $dates[0],
-        "date_end" => $dates[count($dates) - 1],
-        "units" => $chartUnits,
-        "data" => $shipsData,
-      ];
+      // $shipsData = fetch_unitary_mod3_graph($testLogger, $loopname,$field1, $field2, $startDate, $endDate);
       $testLogger->logDebug("Fields1: " . $field1 . " Field2: ".$field2);
     } catch (Exception $e) {
       $testLogger->logError("Error fetching EnergyMeters: " . $e->getMessage());
     }
+    $graph = [
+      "times" => $dates,
+      "timezone" => $timezone,
+      "log_interval" => $log_interval ,
+      "date_start" => $dates[0],
+      "date_end" => $dates[count($dates) - 1],
+      "units" => $chartUnits,
+      "data" => $shipsData,
+    ];
     $formattedMessage = print_r($graph, true);
     $testLogger->logDebug($formattedMessage);
 
