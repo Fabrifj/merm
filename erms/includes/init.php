@@ -722,7 +722,7 @@ if($ship_count==1){
       $chartUnits[] = $units2;
 
       $summaryReport = fetch_summary_report_mod3($testLogger, $loopname, $startDate, $endDate);
-      // $shipsData = fetch_unitary_mod3_graph($testLogger, $loopname,$field1, $field2, $startDate, $endDate);
+      $shipsData = fetch_unitary_mod3_graph($testLogger, $loopname,$field1, $field2, $startDate, $endDate);
       $testLogger->logDebug("Fields1: " . $field1 . " Field2: ".$field2);
     } catch (Exception $e) {
       $testLogger->logError("Error fetching EnergyMeters: " . $e->getMessage());
