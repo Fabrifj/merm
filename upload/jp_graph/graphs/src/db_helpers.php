@@ -723,7 +723,7 @@ function fetch_monthly_report_mod6($log, $loopname, $year, $month) {
         'Year' => $year,
         'Month' => $month,
         'EndOfMonthReading' => round(isset($generalData["energy_consumption"]) ? $generalData["energy_consumption"] : 0, 2),
-        'TotalkWhConsumed' => round(isset($generalData["accumulation"]) ? $generalData["accumulation"] : 0, 2),
+        'TotalkWhConsumed' => round(isset($totalPeak) ? $totalPeak : 0, 2),
         'MaxOnPeakDemand' => round(isset($maxPeak["max_peak_kw"]) ? $maxPeak["max_peak_kw"] : 0, 2),
         'OnPeakBilledDemand' => round(isset($maxPeak["max_peak_kw"]) ? $maxPeak["max_peak_kw"] : 0, 2), // Placeholder, update with correct key if needed
         'TimeOfMaxOnPeakDemand' => (isset($maxPeak["max_peak_kw"]) && $maxPeak["max_peak_kw"] != 0) ? $maxPeak["max_peak_time"] : 0, // Assuming this is a date/time value
@@ -739,12 +739,12 @@ function fetch_monthly_report_mod6($log, $loopname, $year, $month) {
         'LowestPowerFactor' => round(isset($generalData["min_power_factor"]) ? $generalData["min_power_factor"] : 0, 3),
         'HighestPowerFactor' => round(isset($generalData["max_power_factor"]) ? $generalData["max_power_factor"] : 0, 3),
         'TotalCO2' => round(isset($totalCO2) ? $totalCO2 : 0, 2), // Placeholder, update with actual calculation if applicable
-        'OnPeakEnergyCharges' => round(isset($generalData["max_demand_cost_kw"]) ? $generalData["max_demand_cost_kw"] : 0, 2),
-        'OffPeakEnergyCharges' => round(isset($generalData["max_off_demand_cost_kw"]) ? $generalData["max_off_demand_cost_kw"] : 0, 2),
+        'OnPeakEnergyCharges' => round(isset($generalData["sum_cost_kwh"]) ? $generalData["sum_cost_kwh"] : 0, 2),
+        'OffPeakEnergyCharges' => round(isset($generalData["sum_off_cost_kwh"]) ? $generalData["sum_off_cost_kwh"] : 0, 2),
         'OtherEnergyCharges' => round(0, 2), // Placeholder, update with actual calculation if applicable
         'TotalEnergyCharges' => round(isset($totalPeakCost) ? $totalPeakCost : 0, 2),
-        'OnPeakDemandCharges' => round(isset($generalData["sum_cost_kwh"]) ? $generalData["sum_cost_kwh"] : 0, 2),
-        'OffPeakDemandCharges' => round(isset($generalData["sum_off_cost_kwh"]) ? $generalData["sum_off_cost_kwh"] : 0, 2),
+        'OnPeakDemandCharges' => round(isset($generalData["max_demand_cost_kw"]) ? $generalData["max_demand_cost_kw"] : 0, 2),
+        'OffPeakDemandCharges' => round(isset($generalData["max_off_demand_cost_kw"]) ? $generalData["max_off_demand_cost_kw"] : 0, 2),
         'OtherDemandCharges' => round(0, 2), // Placeholder, update with actual calculation if applicable
         'TotalDemandCharges' => round(isset($totalDemandCost) ? $totalDemandCost : 0, 2),
         'TotalEstimatedBill' => round((isset($totalDemandCost) ? $totalDemandCost : 0) + (isset($totalPeakCost) ? $totalPeakCost : 0), 2),
