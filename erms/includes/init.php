@@ -757,8 +757,7 @@ if($ship_count==1){
       "units" => $chartUnits,
       "data" => $shipsData,
     ];
-    $formattedMessage = print_r($graph, true);
-    $testLogger->logDebug($formattedMessage);
+
 
     // $graphData = ;
 
