@@ -351,7 +351,7 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
                 		</tr>
                 		<tr>
                 			<td style="color:black; border-bottom: 0px;">kWh Per Lay Day</td>
-                			<td style="border-bottom: 0px;"><b><?php echo $cost_per_kwH ?> kWh/day</b></td>
+                			<td style="border-bottom: 0px;"><b><?php echo $detailedSummary["KwhDay"] ?> kWh/day</b></td>
                 		</tr>
                         </table>
                     </div>
