@@ -667,12 +667,12 @@ if($ship_count==1){
       )
     ];
      // Fetch max peak data
-    $maxPeak = fetch_mod3_max_field($log, $loopname,"peak_kw" , $start_date, $end_date);
+    $maxPeak = fetch_mod3_max_field($log, $loopname,"peak_kw" , $startDate, $endDate);
 
      // Fetch max off peak data
-    $maxOffPeak = fetch_mod3_max_field($log, $loopname,"off_peak_kw" , $start_date, $end_date);
+    $maxOffPeak = fetch_mod3_max_field($log, $loopname,"off_peak_kw" , $startDate, $endDate);
 
-    $detailed = fetch_month_of_specific_date($log, $loopname, $start_date, $end_date);
+    $detailed = fetch_month_of_specific_date($log, $loopname, $startDate, $endDate);
 
     if($maxOffPeak["max_field"]>$maxPeak["max_field"]){
       $maxKw = $maxOffPeak;
