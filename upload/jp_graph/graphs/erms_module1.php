@@ -335,23 +335,23 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
                         <table class="tblDetailedSummary">
                 		<tr>
                 			<td style="color:black;">Average kW</td>
-                			<td><b><?php echo $VAL["Demand_avg"] ?> kW</b></td>
+                			<td><b><?php echo $detailedSummary["AvgKw"] ?> kW</b></td>
                 		</tr>
                 		<tr class="odd">
                 			<td style="color:black;">Max Peak Demand</td>
-                			<td><b><?php echo $VAL["Peak_Demand"] ?> kW</b></td>
+                			<td><b><?php echo $detailedSummary["MaxKw"] ?> kW</b></td>
                 		</tr>
                 		<tr>
                 			<td style="color:black;">Time of Occurrence</td>
-                			<td><b><?php echo date('Y-m-d H:i',strtotime($VAL["Peak_Demand_Time"])) ?></b></td>
+                			<td><b><?php echo date('Y-m-d H:i',strtotime($detailedSummary["TimMaxKw"])) ?></b></td>
                 		</tr>
                 		<tr class="odd">
                 			<td style="color:black;">Total kWh</td>
-                			<td><b><?php echo $VAL["kWh_Total"] ?> kWh</b></td>
+                			<td><b><?php echo $detailedSummary["TotalKwh"] ?> kWh</b></td>
                 		</tr>
                 		<tr>
                 			<td style="color:black; border-bottom: 0px;">kWh Per Lay Day</td>
-                			<td style="border-bottom: 0px;"><b><?php echo $VAL["kWh_day"] ?> kWh/day</b></td>
+                			<td style="border-bottom: 0px;"><b><?php echo $detailedSummary["KwhDay"] ?> kWh/day</b></td>
                 		</tr>
                         </table>
                     </div>
