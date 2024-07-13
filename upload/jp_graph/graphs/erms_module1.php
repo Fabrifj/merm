@@ -561,7 +561,6 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
                 </form>
             </div>
           </div>
-          <div class="printRptBtn"><button onClick="downloadMod3CSV();">Export Data</button> </div>
 
           <!-- Selected Data Points Summary -->
           <div class="iwbox1">
@@ -612,7 +611,8 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
 </form>
 </div>
 </br>
-    <div id="rawDataExport"></div>
+    <div class="printRptBtn"><button onClick="downloadMod3CSV();">Export Data</button> </div>
+
     <script type="text/javascript">
         $(function() {
             // Y-m-d H:i:s
