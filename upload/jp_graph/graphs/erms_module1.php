@@ -609,7 +609,7 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
                     echo '</select>';
 ?>
 
-<!-- </form>
+</form>
 </div>
 </br>
     <div id="rawDataExport"></div>
@@ -677,7 +677,7 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
         });
 	</script>
     </div>
-       </div> -->
+       </div>
 
 
 <?php
