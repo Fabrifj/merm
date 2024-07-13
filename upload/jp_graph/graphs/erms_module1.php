@@ -609,10 +609,10 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
 </form>
 </div>
 </br>
-    <div class="printRptBtn"><button onClick="downloadCSV();">Export</button> </div>
+    <div class="printRptBtn"><button onClick="downloadMod3CSV();">Export Data</button> </div>
 
-    <!-- <div id="rawDataExport"></div>
-    <script type="text/javascript">
+    <div id="rawDataExport"></div>
+    <!-- <script type="text/javascript">
         $(function() {
             // Y-m-d H:i:s
             $('#start_date_time').datetimepicker({
@@ -661,7 +661,7 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
                     }
                 }
             );
-    </script>
+    </script> -->
     <script type="text/javascript">
         $(function()
         {
@@ -675,7 +675,7 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
             $("#radio" ).buttonset();
         });
 	</script>
-    </div> -->
+    </div>
        </div>
 
 
@@ -1842,6 +1842,24 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
         var month = dt.getMonth() + 1;
         var year = dt.getFullYear();
         var postfix = month + "-" + year;
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", noSpacesName + postfix + ".csv");
+        document.body.appendChild(link); // Necesario para Firefox
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    function downloadMod3CSV() {
+        var dataShips = <?php echo json_encode($shipData); ?>;
+        var csvContent = arrayToCSV(dataShips);
+        var encodedUri = encodeURI("data:text/csv;charset=utf-8," + csvContent);
+        var link = document.createElement("a");
+        var shipName = "<?php echo $Title; ?>"; 
+        var noSpacesName = shipName.replace(" ", "");
+        var dt = new Date();
+        var month = dt.getMonth() + 1;
+        var year = dt.getFullYear();
+        var postfix = "EnergyMeterData"+month + "-" + year;
         link.setAttribute("href", encodedUri);
         link.setAttribute("download", noSpacesName + postfix + ".csv");
         document.body.appendChild(link); // Necesario para Firefox
