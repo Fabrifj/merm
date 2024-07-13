@@ -1850,10 +1850,36 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
         document.body.removeChild(link);
     }
 
+    function arrayToCSV2(data) {
+    if (!data || (typeof data !== 'object' && !Array.isArray(data)) || (Array.isArray(data) && data.length === 0)) {
+        console.error("Array invalido");
+        console.log(data);
+        return '';
+    }
+
+    var csvContent = '';
+    var rows = Array.isArray(data) ? data : [data];
+    var keys = Object.keys(rows[0]);
+
+    // Add the titles
+    csvContent += keys.join(',') + '\r\n';
+
+    // Add the rows
+    rows.forEach(function(row) {
+        var values = keys.map(function(key) {
+            var cellValue = row[key] ? row[key].toString().replace(/"/g, '""') : '';
+            return '"' + cellValue + '"';
+        }).join(',');
+        csvContent += values + '\r\n';
+    });
+
+    return csvContent;
+}
+
     function downloadMod3CSV() {
         var dataShips = <?php echo json_encode($exportDataMod3); ?>;
         console.log(dataShips); // Para verificar el contenido en la consola
-        var csvContent = arrayToCSV(dataShips);
+        var csvContent = arrayToCSV2(dataShips);
         var encodedUri = encodeURI("data:text/csv;charset=utf-8," + csvContent);
         var link = document.createElement("a");
         var shipName = "<?php echo $Title; ?>"; 
