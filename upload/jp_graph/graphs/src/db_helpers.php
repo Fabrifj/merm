@@ -878,7 +878,7 @@ function fetch_data_mod1($log,  $loopname, $startDate, $endDate){
     return $values;
 }
 
-function  fetch_unitary_mod3_graph($testLogger, $loopname,$field1, $field2, $startDate, $endDate){
+function  fetch_unitary_mod3_graph($log, $loopname,$field1, $field2, $startDate, $endDate){
    // Convert start and end dates to timestamps
    $startTimestamp = strtotime($startDate);
    $endTimestamp = strtotime($endDate);
