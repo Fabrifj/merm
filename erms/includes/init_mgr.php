@@ -132,8 +132,8 @@ switch($module) {
       $startingMonth = sprintf("%s-01-01 00:00:00", $request_year);
       $endingMonth = sprintf("%s-12-01 00:00:00", $request_year);
     }
-    $save_startdate = date('F j, Y G:i:s T Y',strtotime($startingMonth)); //save original dates for bar chart title
-    $save_enddate = date('F j, Y G:i:s T Y',(strtotime($endingMonth)));
+    $save_startdate = date('F j, Y G:i:',strtotime($startingMonth)); //save original dates for bar chart title
+    $save_enddate = date('F j, Y G:i:',(strtotime($endingMonth)));
     $baseline_calculated = false;
     break;
 }
@@ -216,8 +216,8 @@ foreach ($ship AS $key => $ship) {
 
 
       //echo $TITLE." start date: ".$VAL["date_value_start"]." end date: ".$VAL["date_value_end"]." Average kW: ".$VAL["Demand_avg"]." Peak Demand: ".$VAL["Peak_Demand"]."</br>";
-      $save_startdate = date('F j, Y G:i:s T Y',strtotime($VAL["date_value_start"])); //save original dates for bar chart title
-      $save_enddate = date('F j, Y G:i:s T Y',(strtotime($VAL["date_value_end"])));
+      $save_startdate = date('F j, Y G:i:',strtotime($VAL["date_value_start"])); //save original dates for bar chart title
+      $save_enddate = date('F j, Y G:i:',(strtotime($VAL["date_value_end"])));
 
     //   $VAL["Peak_Demand"] += $VAL["Peak_Demand"];
     //   $VAL_30["kWh_day"] += $VAL_30["kWh_day"];
@@ -457,8 +457,8 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
     case "month":
       try {
 
-        $startDate = date('F j, Y G:i:s T Y');
-        $save_enddate = date('F j, Y G:i:s T Y', strtotime('-30 days'));
+        $startDate = date('F j, Y G:i:');
+        $endDate = date('F j, Y G:i:', strtotime('-30 days'));
         $Ship_available = [];
 
         $Ship_kWh_Average = [];
@@ -483,8 +483,8 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
     
     case "annual":
       try {
-        $startDate = date('F j, Y G:i:s T Y');
-        $enddate = date('F j, Y G:i:s T Y', strtotime('-1 year'));
+        $startDate = date('F j, Y G:i:');
+        $endDate = date('F j, Y G:i:', strtotime('-1 year'));
         $Ship_available = [];
 
         $Ship_kWh_Average = [];
@@ -513,8 +513,8 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
         $year = isset($_REQUEST["year"]) ? intval($_REQUEST["year"]) : date('Y');
         $month = isset($_REQUEST["month"]) ? intval($_REQUEST["month"]) : date('m');
         
-        $startdate = date('F j, Y G:i:s T', mktime(0, 0, 0, $month, 1, $year));
-        $enddate = date('Y-m-t', strtotime($startdate));
+        $startDate = date('F j, Y G:i:s T', mktime(0, 0, 0, $month, 1, $year));
+        $endDate = date('Y-m-t', strtotime($startDate));
         $Ship_available = [];
 
         $Ship_kWh_Average = [];
@@ -546,7 +546,7 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
     "months" => $months,
     "ship_link" => $Ship_Link_Array,
     "ship_available" => $Ship_available,
-    "dates" => [$startdate, $enddate]
+    "dates" => [$startDate, $endDate]
   ];
 
   $graph["data"] = [
