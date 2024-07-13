@@ -457,7 +457,7 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
     case "month":
       try {
 
-        $save_startdate = date('F j, Y G:i:s T Y');
+        $startDate = date('F j, Y G:i:s T Y');
         $save_enddate = date('F j, Y G:i:s T Y', strtotime('-30 days'));
         $Ship_available = [];
 
@@ -483,8 +483,8 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
     
     case "annual":
       try {
-        $save_startdate = date('F j, Y G:i:s T Y');
-        $save_enddate = date('F j, Y G:i:s T Y', strtotime('-1 year'));
+        $startDate = date('F j, Y G:i:s T Y');
+        $enddate = date('F j, Y G:i:s T Y', strtotime('-1 year'));
         $Ship_available = [];
 
         $Ship_kWh_Average = [];
@@ -513,8 +513,8 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
         $year = isset($_REQUEST["year"]) ? intval($_REQUEST["year"]) : date('Y');
         $month = isset($_REQUEST["month"]) ? intval($_REQUEST["month"]) : date('m');
         
-        $save_startdate = date('F j, Y G:i:s T', mktime(0, 0, 0, $month, 1, $year));
-        $save_enddate = date('Y-m-t', strtotime($save_startdate));
+        $startdate = date('F j, Y G:i:s T', mktime(0, 0, 0, $month, 1, $year));
+        $enddate = date('Y-m-t', strtotime($startdate));
         $Ship_available = [];
 
         $Ship_kWh_Average = [];
@@ -546,7 +546,7 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
     "months" => $months,
     "ship_link" => $Ship_Link_Array,
     "ship_available" => $Ship_available,
-    "dates" => [$save_startdate, $save_enddate]
+    "dates" => [$startdate, $enddate]
   ];
 
   $graph["data"] = [

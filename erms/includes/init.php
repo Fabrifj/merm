@@ -684,7 +684,7 @@ if($ship_count==1){
       'AvgKw'=>$detailed["avg_kw"],
       'MaxKw'=>$maxKw["max_field"],
       'TimMaxKw'=>$maxKw["max_time"],
-      'TotalKwh'=>$detailed["avg_kwH"],
+      'TotalKwh'=>$detailed["avg_kwH"]*$detailed["days"],
       'KwhDay'=>$detailed["avg_kwH"],
     ];
     break;
