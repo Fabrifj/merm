@@ -606,13 +606,13 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
                     
                     echo '</select>';
 ?>
-</form>
-</div>
-</br>
     <div class="printRptBtn"><button onClick="downloadMod3CSV();">Export Data</button> </div>
 
+<!-- </form>
+</div>
+</br>
     <div id="rawDataExport"></div>
-    <!-- <script type="text/javascript">
+    <script type="text/javascript">
         $(function() {
             // Y-m-d H:i:s
             $('#start_date_time').datetimepicker({
@@ -661,7 +661,7 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
                     }
                 }
             );
-    </script> -->
+    </script>
     <script type="text/javascript">
         $(function()
         {
@@ -676,7 +676,7 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
         });
 	</script>
     </div>
-       </div>
+       </div> -->
 
 
 <?php
