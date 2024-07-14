@@ -1851,29 +1851,31 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
     }
 
     function arrayToCSV2(data) {
-    if (!data || (typeof data !== 'object' && !Array.isArray(data)) || (Array.isArray(data) && data.length === 0)) {
-        console.error("Array invalido");
-        console.log(data);
-        return '';
+        if (!data || typeof data !== 'object') {
+            console.error("Array inválido");
+            console.log(data);
+            return '';
+        }
+
+            // Extraer las llaves del objeto
+        var keys = Object.keys(data);
+
+            // Iniciar el contenido del CSV con los nombres de los campos
+        var csvContent = keys.join(',') + '\r\n';
+
+            // Obtener el número máximo de filas
+        var maxLength = Math.max(data[keys[0]].length, data[keys[1]].length);
+
+            // Añadir los datos fila por fila
+        for (var i = 0; i < maxLength; i++) {
+            var row = keys.map(function(key) {
+                return data[key][i] !== undefined ? data[key][i] : '';
+            }).join(',');
+            csvContent += row + '\r\n';
+        }
+
+        return csvContent;
     }
-
-    var csvContent = '';
-    var rows = Array.isArray(data) ? data : [data];
-    var keys = Object.keys(rows[0]);
-
-    // Add the titles
-    csvContent += keys.join(',') + '\r\n';
-
-    // Add each value in a new row
-    rows.forEach(function(row) {
-        keys.forEach(function(key) {
-            var cellValue = row[key] ? row[key].toString().replace(/"/g, '""') : '';
-            csvContent += '"' + cellValue + '",\r\n';
-        });
-    });
-
-    return csvContent;
-}
 
     function downloadMod3CSV() {
         var dataShips = <?php echo json_encode($exportDataMod3); ?>;
