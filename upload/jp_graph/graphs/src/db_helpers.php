@@ -198,8 +198,7 @@ function fetch_last_90_days($log, $loopname) {
                 loopname, DATE_FORMAT(time, '%Y-%m')
         ) AS monthly_sums
         GROUP BY 
-            loopname;
-        ",
+            loopname;",
         mysql_real_escape_string($loopname)
     );
 
