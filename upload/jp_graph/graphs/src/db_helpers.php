@@ -443,8 +443,8 @@ function fetch_data_for_graph_mod8($log,$result) {
     ];
 }
 
-function fetch_year_ago_mod8($log, $loopname, $startDate) {
-    $log->logDebug("Loopname: " . $loopname . " StartDate: " . $startDate);
+function fetch_year_ago_mod8($log, $loopname, $endDate) {
+    $log->logDebug("Loopname: " . $loopname . " endDate: " . $endDate);
 
     $query = sprintf(
             "SELECT 
@@ -482,7 +482,7 @@ function fetch_year_ago_mod8($log, $loopname, $startDate) {
             ORDER BY 
                 month_year ASC;",
             mysql_real_escape_string($loopname), 
-            mysql_real_escape_string($startDate)
+            mysql_real_escape_string($endDate)
         );
 
     $result = db_query($log, $query);

@@ -759,8 +759,8 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
     $endDateSelected = date('Y-m');
   }else{
         // Start date is January 1st of the given year
-    $endDate = $VAL['report_year']."-01-1";
-    $endDateSelected = $VAL['report_year']."-01";
+    $endDate = $VAL['report_year']."-12-30";
+    $endDateSelected = $VAL['report_year']."-12";
 
   }
   $startDateSelected = date('Y-m', strtotime("$endDate -12 months"));
@@ -778,10 +778,6 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
     $Ship_available = [];
     foreach ($ships as $aq){
       $results =  fetch_year_ago_mod8($testLogger, $ships_data[$aq]["loopname"], $endDate);
-      
-      $testLogger->logDebug("Test query result");
-      $formattedMessage = print_r($results, true);
-      $testLogger->logDebug($formattedMessage);
 
       $Ship_available[] =1;
       $ships_data[$aq]["kWh_day"] = $results["avg_kwH"];
