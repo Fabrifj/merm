@@ -437,17 +437,17 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
   // $b_gtldG1 = $baselines["Grand_Total_Lay_Day"]*0.9;
   // $b_gtldG2 = $baselines["Grand_Total_Lay_Day"]*0.8;
 
-  // for($i = 0; $i < $ship_count; $i++) {
-  //   $Ship_kWh_Average_Baseline[] = 0;
-  //   $Ship_kWh_Average_Baseline_G1[] = 0;
-  //   $Ship_kWh_Average_Baseline_G2[] = 0;
-  //   $Ship_Demand_Baseline[] = 0;
-  //   $Ship_Demand_Baseline_G1[] = 0;
-  //   $Ship_Demand_Baseline_G2[] = 0;
-  //   $Ship_daily_cost_baseline[] = 0;
-  //   $Ship_daily_cost_baseline_g1[] = 0;
-  //   $Ship_daily_cost_baseline_g2[] = 0;
-  // }
+  for($i = 0; $i < $ship_count; $i++) {
+    $Ship_kWh_Average_Baseline[] = 0;
+    $Ship_kWh_Average_Baseline_G1[] = 0;
+    $Ship_kWh_Average_Baseline_G2[] = 0;
+    $Ship_Demand_Baseline[] = 0;
+    $Ship_Demand_Baseline_G1[] = 0;
+    $Ship_Demand_Baseline_G2[] = 0;
+    $Ship_daily_cost_baseline[] = 0;
+    $Ship_daily_cost_baseline_g1[] = 0;
+    $Ship_daily_cost_baseline_g2[] = 0;
+  }
 
   // Fetch values from Standard_ship_records
   $_REQUEST["month"] =isset($_REQUEST["month"]) ? $_REQUEST["month"] : "month";
@@ -459,16 +459,30 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
   $Ship_Demand = [];
   $Ship_daily_cost = [];
 
-  $Ship_kWh_Average_Baseline=[];
-  $Ship_kWh_Average_Baseline_G1=[];
-  $Ship_kWh_Average_Baseline_G2=[];
-  $Ship_Demand_Baseline=[];
-  $Ship_Demand_Baseline_G1=[];
-  $Ship_Demand_Baseline_G2=[];
-  $Ship_daily_cost_baseline=[];
-  $Ship_daily_cost_baseline_g1=[];
-  $Ship_daily_cost_baseline_g2=[];
+  // $Ship_kWh_Average_Baseline=[];
+  // $Ship_kWh_Average_Baseline_G1=[];
+  // $Ship_kWh_Average_Baseline_G2=[];
+  // $Ship_Demand_Baseline=[];
+  // $Ship_Demand_Baseline_G1=[];
+  // $Ship_Demand_Baseline_G2=[];
+  // $Ship_daily_cost_baseline=[];
+  // $Ship_daily_cost_baseline_g1=[];
+  // $Ship_daily_cost_baseline_g2=[];
 
+  // $baselines = fetch_last_90_days($testLogger, $ships_data[$aq]["loopname"]);
+
+  // $Ship_kWh_Average_Baseline[] = isset($baselines["avg_kwH"]) ? ($baselines["avg_kwH"] * 1) : 0;
+  // $Ship_kWh_Average_Baseline_G1[] = isset($baselines["avg_kwH"]) ? ($baselines["avg_kwH"] * 0.9) : 0;
+  // $Ship_kWh_Average_Baseline_G2[] = isset($baselines["avg_kwH"]) ? ($baselines["avg_kwH"] * 0.8) : 0;
+
+  // $Ship_Demand_Baseline[] = isset($baselines["avg_kw"]) ? ($baselines["avg_kw"] * 1) : 0;
+  // $Ship_Demand_Baseline_G1[] = isset($baselines["avg_kw"]) ? ($baselines["avg_kw"] * 0.9) : 0;
+  // $Ship_Demand_Baseline_G2[] = isset($baselines["avg_kw"]) ? ($baselines["avg_kw"] * 0.8) : 0;
+
+  // $Ship_daily_cost_baseline[] = isset($baselines["avg_cost"]) ? ($baselines["avg_cost"] * 1) : 0;
+  // $Ship_daily_cost_baseline_g1[] = isset($baselines["avg_cost"]) ? ($baselines["avg_cost"] * 0.9) : 0;
+  // $Ship_daily_cost_baseline_g2[] = isset($baselines["avg_cost"]) ? ($baselines["avg_cost"] * 0.8) : 0;
+   
   switch ($_REQUEST["month"] ) {
     case "month":
       try {
@@ -486,22 +500,7 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
           }
           $Ship_kWh_Average[] = intval(isset($ship_data["avg_kwH"]) ? $ship_data["avg_kwH"] : 0);
           $Ship_Demand[] = intval(isset($ship_data["avg_kw"]) ? $ship_data["avg_kw"] : 0);       
-          $Ship_daily_cost[] = intval((isset($ship_data["avg_cost"]) ? $ship_data["avg_cost"] : 0));
-
-          $baselines = fetch_last_90_days($testLogger, $ships_data[$aq]["loopname"]);
-
-          $Ship_kWh_Average_Baseline[] = isset($baselines["avg_kwH"]) ? ($baselines["avg_kwH"] * 1) : 0;
-          $Ship_kWh_Average_Baseline_G1[] = isset($baselines["avg_kwH"]) ? ($baselines["avg_kwH"] * 0.9) : 0;
-          $Ship_kWh_Average_Baseline_G2[] = isset($baselines["avg_kwH"]) ? ($baselines["avg_kwH"] * 0.8) : 0;
-
-          $Ship_Demand_Baseline[] = isset($baselines["avg_kw"]) ? ($baselines["avg_kw"] * 1) : 0;
-          $Ship_Demand_Baseline_G1[] = isset($baselines["avg_kw"]) ? ($baselines["avg_kw"] * 0.9) : 0;
-          $Ship_Demand_Baseline_G2[] = isset($baselines["avg_kw"]) ? ($baselines["avg_kw"] * 0.8) : 0;
-
-          $Ship_daily_cost_baseline[] = isset($baselines["avg_cost"]) ? ($baselines["avg_cost"] * 1) : 0;
-          $Ship_daily_cost_baseline_g1[] = isset($baselines["avg_cost"]) ? ($baselines["avg_cost"] * 0.9) : 0;
-          $Ship_daily_cost_baseline_g2[] = isset($baselines["avg_cost"]) ? ($baselines["avg_cost"] * 0.8) : 0;
-                      
+          $Ship_daily_cost[] = intval((isset($ship_data["avg_cost"]) ? $ship_data["avg_cost"] : 0));           
         }
 
 
