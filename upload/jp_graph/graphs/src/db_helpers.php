@@ -456,7 +456,7 @@ function fetch_year_ago_mod8($log, $loopname, $endDate) {
                 ROUND(MAX(max_off_cost_kw), 2) AS max_off_cost_kw,
                 ROUND(AVG(daily_cost_kwh), 2) AS avg_daily_cost_kwh, 
                 ROUND(AVG(daily_total_kwh), 2) AS avg_daily_total_kwh, 
-                COUNT(*) AS days
+                COUNT(CASE WHEN daily_total_kwh > 0 THEN 1 END) AS days
             FROM (
                 SELECT 
                     loopname,
@@ -475,8 +475,6 @@ function fetch_year_ago_mod8($log, $loopname, $endDate) {
                 GROUP BY 
                     loopname, day
             ) AS daily_sums
-            WHERE 
-                daily_total_kwh > 0
             GROUP BY 
                 loopname, MONTH(day)
             ORDER BY 
