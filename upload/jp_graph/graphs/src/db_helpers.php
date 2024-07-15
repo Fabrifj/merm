@@ -427,6 +427,7 @@ function fetch_data_for_graph_mod8($log,$result) {
             $avg_kwH[] = $avg_daily_total_kwh;
         } else {
             $log->logError("Error: 'days' is zero or less.\n");
+            $avg_kwH[] = 0;
         }
     }
 
