@@ -437,17 +437,17 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
   // $b_gtldG1 = $baselines["Grand_Total_Lay_Day"]*0.9;
   // $b_gtldG2 = $baselines["Grand_Total_Lay_Day"]*0.8;
 
-  for($i = 0; $i < $ship_count; $i++) {
-    $Ship_kWh_Average_Baseline[] = 0;
-    $Ship_kWh_Average_Baseline_G1[] = 0;
-    $Ship_kWh_Average_Baseline_G2[] = 0;
-    $Ship_Demand_Baseline[] = 0;
-    $Ship_Demand_Baseline_G1[] = 0;
-    $Ship_Demand_Baseline_G2[] = 0;
-    $Ship_daily_cost_baseline[] = 0;
-    $Ship_daily_cost_baseline_g1[] = 0;
-    $Ship_daily_cost_baseline_g2[] = 0;
-  }
+  // for($i = 0; $i < $ship_count; $i++) {
+  //   $Ship_kWh_Average_Baseline[] = 0;
+  //   $Ship_kWh_Average_Baseline_G1[] = 0;
+  //   $Ship_kWh_Average_Baseline_G2[] = 0;
+  //   $Ship_Demand_Baseline[] = 0;
+  //   $Ship_Demand_Baseline_G1[] = 0;
+  //   $Ship_Demand_Baseline_G2[] = 0;
+  //   $Ship_daily_cost_baseline[] = 0;
+  //   $Ship_daily_cost_baseline_g1[] = 0;
+  //   $Ship_daily_cost_baseline_g2[] = 0;
+  // }
 
   // Fetch values from Standard_ship_records
   $_REQUEST["month"] =isset($_REQUEST["month"]) ? $_REQUEST["month"] : "month";
