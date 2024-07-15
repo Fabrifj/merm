@@ -448,7 +448,11 @@ function fetch_data_for_graph_mod8($log,$result) {
 
 function fetch_year_ago_mod8($log, $loopname, $endDate) {
     $log->logDebug("Loopname: " . $loopname . " endDate: " . $endDate);
+    $date = new DateTime($endingMonth);
 
+    // Extraer el año y el mes
+    $year = $date->format('Y');
+    $month = $date->format('m');
     $query = sprintf(
             "SELECT 
                 loopname,
@@ -475,7 +479,7 @@ function fetch_year_ago_mod8($log, $loopname, $endDate) {
                     Standard_ship_records 
                 WHERE 
                     loopname = '%s' 
-                    AND time >= DATE_SUB('%s', INTERVAL 12 MONTH)
+                    AND time >= DATE_SUB(DATE_FORMAT(CURDATE(), '%Y-%m-01'), INTERVAL 12 MONTH)
                 GROUP BY 
                     loopname, day
             ) AS daily_sums
@@ -483,7 +487,8 @@ function fetch_year_ago_mod8($log, $loopname, $endDate) {
                 loopname,Year, MONTH(day)
             ORDER BY Year ASC, month_year ASC;",
             mysql_real_escape_string($loopname), 
-            mysql_real_escape_string($endDate)
+            $year,
+            $month
         );
 
     $result = db_query($log, $query);
