@@ -448,16 +448,12 @@ function fetch_data_for_graph_mod8($log,$result) {
 
 function fetch_year_ago_mod8($log, $loopname, $endDate) {
     $log->logDebug("Loopname: " . $loopname . " endDate: " . $endDate);
-    $date = new DateTime($endingMonth);
 
-    // Extraer el año y el mes
-    $year = $date->format('Y');
-    $month = $date->format('m');
     $query = sprintf(
             "SELECT 
                 loopname,
-                YEAR(day) AS YEAR,
-                MONTH(day) AS month_year,
+                year,
+                month,
                 ROUND(MAX(max_demand_kw), 2) AS max_demand_kw, 
                 ROUND(MAX(max_off_demand_kw), 2) AS max_off_demand_kw,
                 ROUND(MAX(max_cost_kw), 2) AS max_cost_kw, 
@@ -468,6 +464,8 @@ function fetch_year_ago_mod8($log, $loopname, $endDate) {
             FROM (
                 SELECT 
                     loopname,
+                    YEAR(time) AS year,
+                    MONTH(time) AS month,
                     DATE(time) AS day,
                     MAX(peak_kw) AS max_demand_kw,
                     MAX(off_peak_kw) AS max_off_demand_kw,
@@ -478,17 +476,17 @@ function fetch_year_ago_mod8($log, $loopname, $endDate) {
                 FROM 
                     Standard_ship_records 
                 WHERE 
-                    loopname = '%s' 
-                    AND time >= DATE_SUB(DATE_FORMAT(CURDATE(), '%s-%s-01'), INTERVAL 12 MONTH)
+                    loopname = 'Cape_Rise' 
+                    AND time >= DATE_SUB('2024-7-01', INTERVAL 12 MONTH)
                 GROUP BY 
-                    loopname, day
+                    loopname, year,month, day
             ) AS daily_sums
             GROUP BY 
-                loopname,Year, MONTH(day)
-            ORDER BY Year ASC, month_year ASC;",
+                loopname,year, month
+            ORDER BY year ASC, month ASC
+			LIMIT 1, 12;",
             mysql_real_escape_string($loopname), 
-            $year,
-            $month
+            mysql_real_escape_string($endDate)
         );
 
     $result = db_query($log, $query);

@@ -779,8 +779,10 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
   // $startDateSelected = date('Y-m', strtotime("$endDate -12 months"));
 
   $months = [];
+  $endDateObj = new DateTime($endDate);
+
   for ($i = 11; $i >= 0; $i--) {
-      $month = date("F", strtotime("-$i month", strtotime($endingMonth)));
+      $month = $endDateObj->modify("-$i month")->format("F");
       $months[] = $month;
   }
 
