@@ -430,10 +430,10 @@ function fetch_data_for_graph_mod8($log,$result) {
         }
     }
 
-    // Ensure each array has exactly 12 values by padding with zeros if necessary
-    $avg_cost = pad_with_zeros($log,$avg_cost);
-    $avg_kw = pad_with_zeros($log,$avg_kw);
-    $avg_kwH = pad_with_zeros($log,$avg_kwH);
+    // // Ensure each array has exactly 12 values by padding with zeros if necessary
+    // $avg_cost = pad_with_zeros($log,$avg_cost);
+    // $avg_kw = pad_with_zeros($log,$avg_kw);
+    // $avg_kwH = pad_with_zeros($log,$avg_kwH);
 
      
     return [
