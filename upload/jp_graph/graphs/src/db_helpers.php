@@ -452,6 +452,7 @@ function fetch_year_ago_mod8($log, $loopname, $endDate) {
     $query = sprintf(
             "SELECT 
                 loopname,
+                YEAR(day) AS YEAR,
                 MONTH(day) AS month_year,
                 ROUND(MAX(max_demand_kw), 2) AS max_demand_kw, 
                 ROUND(MAX(max_off_demand_kw), 2) AS max_off_demand_kw,
@@ -481,7 +482,7 @@ function fetch_year_ago_mod8($log, $loopname, $endDate) {
             GROUP BY 
                 loopname, MONTH(day)
             ORDER BY 
-                month_year DESC;",
+                ORDER BY Year ASC, month_year ASC;;",
             mysql_real_escape_string($loopname), 
             mysql_real_escape_string($endDate)
         );
