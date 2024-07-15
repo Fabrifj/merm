@@ -479,7 +479,7 @@ function fetch_year_ago_mod8($log, $loopname, $endDate) {
                     Standard_ship_records 
                 WHERE 
                     loopname = '%s' 
-                    AND time >= DATE_SUB(DATE_FORMAT(CURDATE(), '%Y-%m-01'), INTERVAL 12 MONTH)
+                    AND time >= DATE_SUB(DATE_FORMAT(CURDATE(), '%s-%s-01'), INTERVAL 12 MONTH)
                 GROUP BY 
                     loopname, day
             ) AS daily_sums

@@ -762,8 +762,8 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
     $startingMonth = sprintf("%s-01-01", $request_year);
     $endingMonth = sprintf("%s-12-01", $request_year);
   }
-  $save_startdate = date('F j, Y',strtotime($startingMonth));
-  $save_enddate = date('F j, Y',(strtotime($endingMonth)));
+  $save_startdate = date('F Y',strtotime($startingMonth));
+  $save_enddate = date('F Y',(strtotime($endingMonth)));
   // Get times ! 
   //               Fabri updates 
   // $testLogger->logInfo("Mod8 ".$VAL["report_year"]);
