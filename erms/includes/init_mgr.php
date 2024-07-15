@@ -780,7 +780,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
 
   $months = [];
   for ($i = 11; $i >= 0; $i--) {
-      $month = date("F", strtotime("-$i month", strtotime($endDate)));
+      $month = date("F", strtotime("-$i month", strtotime($endingMonth)));
       $months[] = $month;
   }
 
