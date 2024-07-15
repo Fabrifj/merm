@@ -310,19 +310,19 @@ foreach ($ship AS $key => $ship) {
         $repYear = date('Y', $startingMonthTime);
         $repMonth = date("-m-01 00:00:00", $startingMonthTime);
         debugPrint('(init) Annual Month '.$repMonth);
-        // $VAL_30 = mod_values($Time_Field, $ship, 'month', $ship_count, $repMonth, $repYear); //30 day summary for top of graph on individual ship page
-        // $VAL = &$VAL_30; //for multiple ship bar chart the monthly and initial values are the same
-        // debugPrint('(init) After mod values 30 '.$ship);
-        // if ($VAL["Avail_Data"] == true) {
-        //   //echo 'aGraphing from: '.$VAL_30["date_value_start"].' to: '.$VAL_30["date_value_end"].'<br />';
-        //   debugPrint('(init) Avail_Data TRUE');
-        //   debugPrint('(init)'.$ship.' Lay Days '.$VAL_30["Lay_Days"].' val kWh_Day ',$VAL["kWh_day"]);
+        $VAL_30 = mod_values($Time_Field, $ship, 'month', $ship_count, $repMonth, $repYear); //30 day summary for top of graph on individual ship page
+        $VAL = &$VAL_30; //for multiple ship bar chart the monthly and initial values are the same
+        debugPrint('(init) After mod values 30 '.$ship);
+        if ($VAL["Avail_Data"] == true) {
+          //echo 'aGraphing from: '.$VAL_30["date_value_start"].' to: '.$VAL_30["date_value_end"].'<br />';
+          debugPrint('(init) Avail_Data TRUE');
+          debugPrint('(init)'.$ship.' Lay Days '.$VAL_30["Lay_Days"].' val kWh_Day ',$VAL["kWh_day"]);
 
-        //   $COST_30 = mod_cost($Time_Field,$ship,$VAL_30);
-        //   debugPrint("(mod_cost): GRAND TOTAL LAY DAY ".$COST_30["Grand_Total_Lay_Day"]);
-        // } else {
-        //   $COST_30["Grand_Total_Lay_Day"] = 0;
-        // }
+          $COST_30 = mod_cost($Time_Field,$ship,$VAL_30);
+          debugPrint("(mod_cost): GRAND TOTAL LAY DAY ".$COST_30["Grand_Total_Lay_Day"]);
+        } else {
+          $COST_30["Grand_Total_Lay_Day"] = 0;
+        }
 
         $ships_data[$ship_aquisuite]["kWh_day"][] = $VAL["kWh_day"];
         $ships_data[$ship_aquisuite]["Peak_Demand"][] = $VAL["Peak_Demand"]*1;
