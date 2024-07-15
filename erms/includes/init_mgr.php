@@ -453,18 +453,30 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
   $_REQUEST["month"] =isset($_REQUEST["month"]) ? $_REQUEST["month"] : "month";
   $testLogger->logDebug($_REQUEST["month"] );
   
+  $Ship_available = [];
+      
+  $Ship_kWh_Average = [];
+  $Ship_Demand = [];
+  $Ship_daily_cost = [];
+
+  $Ship_kWh_Average_Baseline=[];
+  $Ship_kWh_Average_Baseline_G1=[];
+  $Ship_kWh_Average_Baseline_G2=[];
+  $Ship_Demand_Baseline=[];
+  $Ship_Demand_Baseline_G1=[];
+  $Ship_Demand_Baseline_G2=[];
+  $Ship_daily_cost_baseline=[];
+  $Ship_daily_cost_baseline_g1=[];
+  $Ship_daily_cost_baseline_g2=[];
+
   switch ($_REQUEST["month"] ) {
     case "month":
       try {
 
-        $endDate = date('F j, Y G:i:');
-        $startDate = date('F j, Y G:i:', strtotime('-30 days'));
-        $Ship_available = [];
-
-        $Ship_kWh_Average = [];
-        $Ship_Demand = [];
-        $Ship_daily_cost = [];
-          
+        $endDate = date('F j, Y G');
+        $startDate = date('F j, Y G:', strtotime('-30 days'));
+        
+        
         foreach ($ships as $aq) {
           $ship_data = fetch_last_30_days($testLogger, $ships_data[$aq]["loopname"]);
           if ($ship_data["avg_cost"] == 0) {
@@ -475,7 +487,21 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
           $Ship_kWh_Average[] = intval(isset($ship_data["avg_kwH"]) ? $ship_data["avg_kwH"] : 0);
           $Ship_Demand[] = intval(isset($ship_data["avg_kw"]) ? $ship_data["avg_kw"] : 0);       
           $Ship_daily_cost[] = intval((isset($ship_data["avg_cost"]) ? $ship_data["avg_cost"] : 0));
+
+          $baselines = fetch_last_90_deys($testLogger, $ships_data[$aq]["loopname"]);
+
+          $Ship_kWh_Average_Baseline[] = ($baselines["avg_kwH"]*1);
+          $Ship_kWh_Average_Baseline_G1[] = ($baselines["avg_kwH"]*0.9);
+          $Ship_kWh_Average_Baseline_G2[] = ($baselines["avg_kwH"]*0.8);
+          $Ship_Demand_Baseline[] = ($baselines["avg_kw"]*1);
+          $Ship_Demand_Baseline_G1[] = $baselines["avg_kw"]*0.9;
+          $Ship_Demand_Baseline_G2[] = $baselines["avg_kw"]*0.8;
+          $Ship_daily_cost_baseline[] = ($baselines["avg_cost"]*1);
+          $Ship_daily_cost_baseline_g1[] = $baselines["avg_cost"]*0.9;
+          $Ship_daily_cost_baseline_g2[] = $baselines["avg_cost"]*0.8;          
         }
+
+
       } catch (Exception $e) {
         $testLogger->logError("Error fetching data for the last 30 days: " . $e->getMessage());
       }
@@ -483,13 +509,8 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
     
     case "annual":
       try {
-        $endDate = date('F j, Y G:i:');
-        $startDate = date('F j, Y G:i:', strtotime('-1 year'));
-        $Ship_available = [];
-
-        $Ship_kWh_Average = [];
-        $Ship_Demand = [];
-        $Ship_daily_cost = [];
+        $endDate = date('F j, Y G');
+        $startDate = date('F j, Y G:', strtotime('-1 year'));
           
         foreach ($ships as $aq) {
           $ship_data = fetch_Annual($testLogger, $ships_data[$aq]["loopname"]);
@@ -513,13 +534,9 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
         $year = isset($_REQUEST["year"]) ? intval($_REQUEST["year"]) : date('Y');
         $month = isset($_REQUEST["month"]) ? intval($_REQUEST["month"]) : date('m');
         
-        $endDate = date('F j, Y G:i:s T', mktime(0, 0, 0, $month, 1, $year));
-        $startDate = date('Y-m-t', strtotime($endDate));
-        $Ship_available = [];
+        $endDate = date('F j, Y G', mktime(0, 0, 0, $month, 1, $year));
+        $startDate = date('F j, Y G', strtotime($endDate));
 
-        $Ship_kWh_Average = [];
-        $Ship_Demand = [];
-        $Ship_daily_cost = [];
           
         foreach ($ships as $aq) {
           $ship_data = fetch_month_of_specific_year($testLogger, $ships_data[$aq]["loopname"], $_REQUEST["year"],$_REQUEST["month"] );
