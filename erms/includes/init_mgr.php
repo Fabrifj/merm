@@ -308,103 +308,103 @@ foreach ($ship AS $key => $ship) {
   case ERMS_Modules::PerformanceTrending: // mod 8
       $testLogger->logInfo("Mod8.2 ");
 
-      for ($imonth = 0;$imonth< 12; $imonth++) {
-        $startingMonthTime = strtotime("+".$imonth." month", strtotime($startingMonth));
-        $repYear = date('Y', $startingMonthTime);
-        $repMonth = date("-m-01 00:00:00", $startingMonthTime);
-        debugPrint('(init) Annual Month '.$repMonth);
-        $VAL_30 = mod_values($Time_Field, $ship, 'month', $ship_count, $repMonth, $repYear); //30 day summary for top of graph on individual ship page
-        $VAL = &$VAL_30; //for multiple ship bar chart the monthly and initial values are the same
-        debugPrint('(init) After mod values 30 '.$ship);
-        if ($VAL["Avail_Data"] == true) {
-          //echo 'aGraphing from: '.$VAL_30["date_value_start"].' to: '.$VAL_30["date_value_end"].'<br />';
-          debugPrint('(init) Avail_Data TRUE');
-          debugPrint('(init)'.$ship.' Lay Days '.$VAL_30["Lay_Days"].' val kWh_Day ',$VAL["kWh_day"]);
+      // for ($imonth = 0;$imonth< 12; $imonth++) {
+      //   $startingMonthTime = strtotime("+".$imonth." month", strtotime($startingMonth));
+      //   $repYear = date('Y', $startingMonthTime);
+      //   $repMonth = date("-m-01 00:00:00", $startingMonthTime);
+      //   debugPrint('(init) Annual Month '.$repMonth);
+      //   $VAL_30 = mod_values($Time_Field, $ship, 'month', $ship_count, $repMonth, $repYear); //30 day summary for top of graph on individual ship page
+      //   $VAL = &$VAL_30; //for multiple ship bar chart the monthly and initial values are the same
+      //   debugPrint('(init) After mod values 30 '.$ship);
+      //   if ($VAL["Avail_Data"] == true) {
+      //     //echo 'aGraphing from: '.$VAL_30["date_value_start"].' to: '.$VAL_30["date_value_end"].'<br />';
+      //     debugPrint('(init) Avail_Data TRUE');
+      //     debugPrint('(init)'.$ship.' Lay Days '.$VAL_30["Lay_Days"].' val kWh_Day ',$VAL["kWh_day"]);
 
-          $COST_30 = mod_cost($Time_Field,$ship,$VAL_30);
-          debugPrint("(mod_cost): GRAND TOTAL LAY DAY ".$COST_30["Grand_Total_Lay_Day"]);
-        } else {
-          $COST_30["Grand_Total_Lay_Day"] = 0;
-        }
+      //     $COST_30 = mod_cost($Time_Field,$ship,$VAL_30);
+      //     debugPrint("(mod_cost): GRAND TOTAL LAY DAY ".$COST_30["Grand_Total_Lay_Day"]);
+      //   } else {
+      //     $COST_30["Grand_Total_Lay_Day"] = 0;
+      //   }
 
-        $ships_data[$ship_aquisuite]["kWh_day"][] = $VAL["kWh_day"];
-        $ships_data[$ship_aquisuite]["Peak_Demand"][] = $VAL["Peak_Demand"]*1;
-        $ships_data[$ship_aquisuite]["Grand_Total_Lay_Day"][] = $COST_30["Grand_Total_Lay_Day"];
+      //   $ships_data[$ship_aquisuite]["kWh_day"][] = $VAL["kWh_day"];
+      //   $ships_data[$ship_aquisuite]["Peak_Demand"][] = $VAL["Peak_Demand"]*1;
+      //   $ships_data[$ship_aquisuite]["Grand_Total_Lay_Day"][] = $COST_30["Grand_Total_Lay_Day"];
 
-        if(!$baseline_calculated) {
-          // calculate baseline and goals once for each month
-          $formatted_month = date_parse($VAL["report_month"]);
-          debugPrint(sprintf("report month in baseline %s", $VAL["report_month"]));
-          $months[] = $VAL["report_month"];
-          $metrics = array("kWh_day", "Peak_Demand", "Grand_Total_Lay_Day");
+      //   if(!$baseline_calculated) {
+      //     // calculate baseline and goals once for each month
+      //     $formatted_month = date_parse($VAL["report_month"]);
+      //     debugPrint(sprintf("report month in baseline %s", $VAL["report_month"]));
+      //     $months[] = $VAL["report_month"];
+      //     $metrics = array("kWh_day", "Peak_Demand", "Grand_Total_Lay_Day");
 
-          // $baselines = get_monthly_baselines($ships_data[$ship_aquisuite]["owner"], $ships_data[$ship_aquisuite]["ship_class"], $ship_group, $metrics, $formatted_month['month']);
-          // $Ship_kWh_Average_Baseline[] = ($baselines["kWh_day"]*1);
-          // $Ship_kWh_Average_Baseline_G1[] = ($baselines["kWh_day"]*0.9);
-          // $Ship_kWh_Average_Baseline_G2[] = ($baselines["kWh_day"]*0.8);
-          // $Ship_Demand_Baseline[] = ($baselines["Peak_Demand"]*1);
-          // $Ship_Demand_Baseline_G1[] = $baselines["Peak_Demand"]*0.9;
-          // $Ship_Demand_Baseline_G2[] = $baselines["Peak_Demand"]*0.8;
-          // $Ship_daily_cost_baseline[] = ($baselines["Grand_Total_Lay_Day"]*1);
-          // $Ship_daily_cost_baseline_g1[] = $baselines["Grand_Total_Lay_Day"]*0.9;
-          // $Ship_daily_cost_baseline_g2[] = $baselines["Grand_Total_Lay_Day"]*0.8;
+      //     // $baselines = get_monthly_baselines($ships_data[$ship_aquisuite]["owner"], $ships_data[$ship_aquisuite]["ship_class"], $ship_group, $metrics, $formatted_month['month']);
+      //     // $Ship_kWh_Average_Baseline[] = ($baselines["kWh_day"]*1);
+      //     // $Ship_kWh_Average_Baseline_G1[] = ($baselines["kWh_day"]*0.9);
+      //     // $Ship_kWh_Average_Baseline_G2[] = ($baselines["kWh_day"]*0.8);
+      //     // $Ship_Demand_Baseline[] = ($baselines["Peak_Demand"]*1);
+      //     // $Ship_Demand_Baseline_G1[] = $baselines["Peak_Demand"]*0.9;
+      //     // $Ship_Demand_Baseline_G2[] = $baselines["Peak_Demand"]*0.8;
+      //     // $Ship_daily_cost_baseline[] = ($baselines["Grand_Total_Lay_Day"]*1);
+      //     // $Ship_daily_cost_baseline_g1[] = $baselines["Grand_Total_Lay_Day"]*0.9;
+      //     // $Ship_daily_cost_baseline_g2[] = $baselines["Grand_Total_Lay_Day"]*0.8;
           
-          $Ship_kWh_Average_Baseline[] = 0;
-          $Ship_kWh_Average_Baseline_G1[] = 0;
-          $Ship_kWh_Average_Baseline_G2[] = 0;
-          $Ship_Demand_Baseline[] = 0;
-          $Ship_Demand_Baseline_G1[] = 0;
-          $Ship_Demand_Baseline_G2[] = 0;
-          $Ship_daily_cost_baseline[] = 0;
-          $Ship_daily_cost_baseline_g1[] = 0;
-          $Ship_daily_cost_baseline_g2[] = 0;
-        }
+      //     $Ship_kWh_Average_Baseline[] = 0;
+      //     $Ship_kWh_Average_Baseline_G1[] = 0;
+      //     $Ship_kWh_Average_Baseline_G2[] = 0;
+      //     $Ship_Demand_Baseline[] = 0;
+      //     $Ship_Demand_Baseline_G1[] = 0;
+      //     $Ship_Demand_Baseline_G2[] = 0;
+      //     $Ship_daily_cost_baseline[] = 0;
+      //     $Ship_daily_cost_baseline_g1[] = 0;
+      //     $Ship_daily_cost_baseline_g2[] = 0;
+      //   }
 
-        $ships_data[$ship_aquisuite]["Lay_Days"] = $VAL["Grand_Total_Lay_Day"];
-        $ships_data[$ship_aquisuite]["has_data"] = true;
-        $ships_data[$ship_aquisuite]["has_all_lay_days"] = true;
-        $S_avail = 0;
+      //   $ships_data[$ship_aquisuite]["Lay_Days"] = $VAL["Grand_Total_Lay_Day"];
+      //   $ships_data[$ship_aquisuite]["has_data"] = true;
+      //   $ships_data[$ship_aquisuite]["has_all_lay_days"] = true;
+      //   $S_avail = 0;
 
-        if ($VAL["Lay_Days"] < 29) {
-         $S_avail = 2;
-         $ships_data[$ship_aquisuite]["has_all_lay_days"] = false;
-        }
+      //   if ($VAL["Lay_Days"] < 29) {
+      //    $S_avail = 2;
+      //    $ships_data[$ship_aquisuite]["has_all_lay_days"] = false;
+      //   }
 
-        if ($VAL["Avail_Data"] == 0) {
-         $S_avail = 1;
-         $ships_data[$ship_aquisuite]["has_data"] = false;
-        }
+      //   if ($VAL["Avail_Data"] == 0) {
+      //    $S_avail = 1;
+      //    $ships_data[$ship_aquisuite]["has_data"] = false;
+      //   }
 
-        $Ship_available[] = $S_avail;
-        $Ship_available[] = ($VAL["Avail_Data"] == 0 ? 0 : 1);
+      //   $Ship_available[] = $S_avail;
+      //   $Ship_available[] = ($VAL["Avail_Data"] == 0 ? 0 : 1);
 
 
-        // echo $TITLE." start date: ".$VAL["date_value_start"]." end date: ".$VAL["date_value_end"]." Average kW: ".$VAL["Demand_avg"]." Peak Demand: ".$VAL["Peak_Demand"]."</br>";
+      //   // echo $TITLE." start date: ".$VAL["date_value_start"]." end date: ".$VAL["date_value_end"]." Average kW: ".$VAL["Demand_avg"]." Peak Demand: ".$VAL["Peak_Demand"]."</br>";
 
-        $VAL["Peak_Demand"] += $VAL["Peak_Demand"];
-        $VAL_30["kWh_day"] += $VAL_30["kWh_day"];
+      //   $VAL["Peak_Demand"] += $VAL["Peak_Demand"];
+      //   $VAL_30["kWh_day"] += $VAL_30["kWh_day"];
 
-        $Grand_Total_Lay_Day += $COST_30["Grand_Total_Lay_Day"];
-        $Grand_Total_kWh += $COST_30["Grand_Total_kWh"];
+      //   $Grand_Total_Lay_Day += $COST_30["Grand_Total_Lay_Day"];
+      //   $Grand_Total_kWh += $COST_30["Grand_Total_kWh"];
 
-        debugPrint('(init) Grand Total Lay Day 30['.$COST_30["Grand_Total_Lay_Day"].'] Grand Total Lay Day['.$Grand_Total_Lay_Day.']');
-        debugPrint('(init) Grand Total kWh 30['.$COST_30["Grand_Total_kWh"].'] Grand Total kWh['.$Grand_Total_kWh.']');
+      //   debugPrint('(init) Grand Total Lay Day 30['.$COST_30["Grand_Total_Lay_Day"].'] Grand Total Lay Day['.$Grand_Total_Lay_Day.']');
+      //   debugPrint('(init) Grand Total kWh 30['.$COST_30["Grand_Total_kWh"].'] Grand Total kWh['.$Grand_Total_kWh.']');
 
-        $Ships_Sum += $VAL["kW_sum"];
-        $Ships_Sum_Count += $VAL["kW_count"];
-      }
-      $pattern = "/([a-zA-Z0-9])+_([a-zA-Z0-9_-])+/";
-      $space=preg_match($pattern, $ship_aquisuite);
-      if($space==1) {
-        $TITLE=str_replace('_',' ',$ship_aquisuite);
-        $TITLE=substr_replace($TITLE,'',-12);
-        $TITLE=trim($TITLE);
-      }
-      $Ship_Array[] = $TITLE;
-      $ship_home_path = sprintf('/upload/jp_graph/graphs/erms_module1.php?display=day&user=%s&module=mod1&ship=%s&shipClass=%s', $username, $ship_aquisuite, $ships_data[$ship_aquisuite]["ship_class"]);
-      $ships_data[$ship_aquisuite]["home_path"] = $ship_home_path;
-      $Ship_Link_Array[] = $ship_home_path;
-      $baseline_calculated = true;
+      //   $Ships_Sum += $VAL["kW_sum"];
+      //   $Ships_Sum_Count += $VAL["kW_count"];
+      // }
+      // $pattern = "/([a-zA-Z0-9])+_([a-zA-Z0-9_-])+/";
+      // $space=preg_match($pattern, $ship_aquisuite);
+      // if($space==1) {
+      //   $TITLE=str_replace('_',' ',$ship_aquisuite);
+      //   $TITLE=substr_replace($TITLE,'',-12);
+      //   $TITLE=trim($TITLE);
+      // }
+      // $Ship_Array[] = $TITLE;
+      // $ship_home_path = sprintf('/upload/jp_graph/graphs/erms_module1.php?display=day&user=%s&module=mod1&ship=%s&shipClass=%s', $username, $ship_aquisuite, $ships_data[$ship_aquisuite]["ship_class"]);
+      // $ships_data[$ship_aquisuite]["home_path"] = $ship_home_path;
+      // $Ship_Link_Array[] = $ship_home_path;
+      // $baseline_calculated = true;
     break;
     case ERMS_Modules::EnergyMeterTrending: //"mod3"
       $VAL_30 = mod_values($Time_Field, $ship, '', $ship_count, $_REQUEST["month"],$request_year); //30 day summary for top of graph on individual ship page
