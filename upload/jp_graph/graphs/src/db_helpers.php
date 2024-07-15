@@ -476,8 +476,8 @@ function fetch_year_ago_mod8($log, $loopname, $endDate) {
                 FROM 
                     Standard_ship_records 
                 WHERE 
-                    loopname = 'Cape_Rise' 
-                    AND time >= DATE_SUB('2024-7-01', INTERVAL 12 MONTH)
+                    loopname = '%s' 
+                    AND time >= DATE_SUB('%s', INTERVAL 12 MONTH)
                 GROUP BY 
                     loopname, year,month, day
             ) AS daily_sums

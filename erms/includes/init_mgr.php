@@ -755,7 +755,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
   //$COST_30["Grand_Total_kWh"] = $Grand_Total_kWh/$ship_count;
   $testLogger->logInfo("Mod8 ".$VAL["report_year"]);
 
-  if($request_year == "last12") {
+  if($request_year == "last12" ||$request_year =="2024" ) {
     $startingMonth = date("Y-m-01", strtotime("-12 months"));
     $endingMonth = date("Y-m-01");
   } else {
@@ -779,10 +779,8 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
   // $startDateSelected = date('Y-m', strtotime("$endDate -12 months"));
 
   $months = [];
-  $endDateObj = new DateTime($endDate);
-
   for ($i = 11; $i >= 0; $i--) {
-      $month = $endDateObj->modify("-$i month")->format("F");
+      $month = date("F", strtotime("-$i month", strtotime($endDate)));
       $months[] = $month;
   }
 
