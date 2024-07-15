@@ -124,7 +124,7 @@ switch($module) {
     }
   debugPrint('(init) Save Start '.$save_startdate.' End '.$save_enddate.' end day '.$endday);
     break;
-  case ERMS_Modules::PerformanceTrending: //
+  case ERMS_Modules::PerformanceTrending: // mod8
     if($request_year == "last12") {
       $startingMonth = date("Y-m-01 00:00:00", strtotime("-12 months"));
       $endingMonth = date("Y-m-01 00:00:00");
@@ -310,19 +310,19 @@ foreach ($ship AS $key => $ship) {
         $repYear = date('Y', $startingMonthTime);
         $repMonth = date("-m-01 00:00:00", $startingMonthTime);
         debugPrint('(init) Annual Month '.$repMonth);
-        $VAL_30 = mod_values($Time_Field, $ship, 'month', $ship_count, $repMonth, $repYear); //30 day summary for top of graph on individual ship page
-        $VAL = &$VAL_30; //for multiple ship bar chart the monthly and initial values are the same
-        debugPrint('(init) After mod values 30 '.$ship);
-        if ($VAL["Avail_Data"] == true) {
-          //echo 'aGraphing from: '.$VAL_30["date_value_start"].' to: '.$VAL_30["date_value_end"].'<br />';
-          debugPrint('(init) Avail_Data TRUE');
-          debugPrint('(init)'.$ship.' Lay Days '.$VAL_30["Lay_Days"].' val kWh_Day ',$VAL["kWh_day"]);
+        // $VAL_30 = mod_values($Time_Field, $ship, 'month', $ship_count, $repMonth, $repYear); //30 day summary for top of graph on individual ship page
+        // $VAL = &$VAL_30; //for multiple ship bar chart the monthly and initial values are the same
+        // debugPrint('(init) After mod values 30 '.$ship);
+        // if ($VAL["Avail_Data"] == true) {
+        //   //echo 'aGraphing from: '.$VAL_30["date_value_start"].' to: '.$VAL_30["date_value_end"].'<br />';
+        //   debugPrint('(init) Avail_Data TRUE');
+        //   debugPrint('(init)'.$ship.' Lay Days '.$VAL_30["Lay_Days"].' val kWh_Day ',$VAL["kWh_day"]);
 
-          $COST_30 = mod_cost($Time_Field,$ship,$VAL_30);
-          debugPrint("(mod_cost): GRAND TOTAL LAY DAY ".$COST_30["Grand_Total_Lay_Day"]);
-        } else {
-          $COST_30["Grand_Total_Lay_Day"] = 0;
-        }
+        //   $COST_30 = mod_cost($Time_Field,$ship,$VAL_30);
+        //   debugPrint("(mod_cost): GRAND TOTAL LAY DAY ".$COST_30["Grand_Total_Lay_Day"]);
+        // } else {
+        //   $COST_30["Grand_Total_Lay_Day"] = 0;
+        // }
 
         $ships_data[$ship_aquisuite]["kWh_day"][] = $VAL["kWh_day"];
         $ships_data[$ship_aquisuite]["Peak_Demand"][] = $VAL["Peak_Demand"]*1;
@@ -487,8 +487,8 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
     case "month":
       try {
 
-        $endDate = date('F j, Y G');
-        $startDate = date('F j, Y G:', strtotime('-30 days'));
+        $endDate = date('F j, Y');
+        $startDate = date('F j, Y:', strtotime('-30 days'));
         
         
         foreach ($ships as $aq) {
@@ -511,8 +511,8 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
     
     case "annual":
       try {
-        $endDate = date('F j, Y G');
-        $startDate = date('F j, Y G:', strtotime('-1 year'));
+        $endDate = date('F j, Y');
+        $startDate = date('F j, Y:', strtotime('-1 year'));
           
         foreach ($ships as $aq) {
           $ship_data = fetch_Annual($testLogger, $ships_data[$aq]["loopname"]);
@@ -536,8 +536,8 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
         $year = isset($_REQUEST["year"]) ? intval($_REQUEST["year"]) : date('Y');
         $month = isset($_REQUEST["month"]) ? intval($_REQUEST["month"]) : date('m');
         
-        $endDate = date('F j, Y G', mktime(0, 0, 0, $month, 1, $year));
-        $startDate = date('F j, Y G', strtotime($endDate));
+        $endDate = date('F j, Y', mktime(0, 0, 0, $month, 1, $year));
+        $startDate = date('F j, Y', strtotime($endDate));
 
           
         foreach ($ships as $aq) {
