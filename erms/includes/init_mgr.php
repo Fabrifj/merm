@@ -125,6 +125,8 @@ switch($module) {
   debugPrint('(init) Save Start '.$save_startdate.' End '.$save_enddate.' end day '.$endday);
     break;
   case ERMS_Modules::PerformanceTrending: // mod8
+    $testLogger->logInfo("Mod8.1 ");
+
     if($request_year == "last12") {
       $startingMonth = date("Y-m-01 00:00:00", strtotime("-12 months"));
       $endingMonth = date("Y-m-01 00:00:00");
@@ -304,6 +306,7 @@ foreach ($ship AS $key => $ship) {
     // }
     break;
   case ERMS_Modules::PerformanceTrending: // mod 8
+      $testLogger->logInfo("Mod8.2 ");
 
       for ($imonth = 0;$imonth< 12; $imonth++) {
         $startingMonthTime = strtotime("+".$imonth." month", strtotime($startingMonth));

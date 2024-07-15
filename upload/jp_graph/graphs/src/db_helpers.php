@@ -481,7 +481,7 @@ function fetch_year_ago_mod8($log, $loopname, $endDate) {
             GROUP BY 
                 loopname, MONTH(day)
             ORDER BY 
-                month_year ASC;",
+                month_year DESC;",
             mysql_real_escape_string($loopname), 
             mysql_real_escape_string($endDate)
         );
