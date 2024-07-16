@@ -539,8 +539,8 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
         $year = isset($_REQUEST["year"]) ? intval($_REQUEST["year"]) : date('Y');
         $month = isset($_REQUEST["month"]) ? intval($_REQUEST["month"]) : date('m');
         
-        $endDate = date('F j, Y', mktime(0, 0, 0, $month, 1, $year));
-        $startDate = date('F j, Y', strtotime($endDate));
+        $endDate = date('F j, Y', mktime(0, 0, 0, $month + 1, 0, $year));
+        $startDate = date('F j, Y', mktime(0, 0, 0, $month, 1, $year));
 
           
         foreach ($ships as $aq) {
@@ -754,8 +754,8 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
   //$COST_30["Grand_Total_Lay_Day"] = $Grand_Total_Lay_Day/$ship_count;
   //$COST_30["Grand_Total_kWh"] = $Grand_Total_kWh/$ship_count;
   $testLogger->logInfo("Mod8 ".$VAL["report_year"]);
-
-  if($request_year == "last12" ||$request_year =="2024" ) {
+  $year = date('Y');
+  if($request_year == "last12" ||$request_year ==$year ) {
     $startingMonth = date("Y-m-01", strtotime("-12 months"));
     $endingMonth = date("Y-m-01");
   } else {
