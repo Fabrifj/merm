@@ -752,6 +752,7 @@ if($ship_count==1){
       "data" => $shipsData,
     ];
     $exportDataMod3=[
+      "Date" => $dates,
       $field1 =>$shipsData[0] ,
       $field2 =>$shipsData[1] 
     ];
