@@ -153,11 +153,7 @@ function fetch_last_30_days($log, $loopname) {
     return fetch_data_for_graph_mod1($log,$result);
 }
 function fetch_last_90_days($log, $loopname) {
-    if (empty($loopname)) {
-        $log->logError("Escaped loopname is empty");
-        return false;
-    }
-    
+
     $query = sprintf(
         "SELECT 
             loopname,
@@ -171,7 +167,7 @@ function fetch_last_90_days($log, $loopname) {
         FROM (
             SELECT 
                 loopname,
-                DATE_FORMAT(time, '%Y-%m') AS month,
+                DATE_FORMAT(time, '%%Y-%%m') AS month,
                 MAX(max_demand_kw) AS max_demand_kw, 
                 MAX(max_off_demand_kw) AS max_off_demand_kw,
                 MAX(max_cost_kw) AS max_cost_kw, 
@@ -200,7 +196,7 @@ function fetch_last_90_days($log, $loopname) {
             WHERE 
                 daily_total_kwh > 0
             GROUP BY 
-                loopname, DATE_FORMAT(time, '%%Y-%%m')
+                loopname, month
         ) AS monthly_sums
         GROUP BY 
             loopname;",
