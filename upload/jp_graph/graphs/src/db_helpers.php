@@ -162,7 +162,7 @@ function fetch_last_90_days($log, $loopname) {
             ROUND(AVG(max_off_cost_kw), 2) AS max_off_cost_kw,
             ROUND(AVG(avg_daily_cost_kwh), 2) AS avg_daily_cost_kwh, 
             ROUND(AVG(avg_daily_total_kwh), 2) AS avg_daily_total_kwh, 
-            SUM(days) AS total_days
+            AVG(days) AS total_days
         FROM (
             SELECT 
                 loopname,
@@ -201,7 +201,7 @@ function fetch_last_90_days($log, $loopname) {
             loopname;",
         mysql_real_escape_string($loopname)
     );
-
+    $log->logDebug($query);
     $result = db_query($log, $query);
 
     if (!$result) {
