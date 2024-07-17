@@ -419,15 +419,15 @@ if($ship_count==1){
         "Grand_Total_Lay_Day" => $Ship_daily_cost
       ];
     }
-    $Ship_kWh_Average_Baseline = [($baselines["kWh_day"]*1)];
-    $Ship_kWh_Average_Baseline_G1 = [($baselines["kWh_day"]*0.9)];
-    $Ship_kWh_Average_Baseline_G2 = [($baselines["kWh_day"]*0.8)];
-    $Ship_Demand_Baseline = [($baselines["Peak_Demand"]*1)];
-    $Ship_Demand_Baseline_G1 = [($baselines["Peak_Demand"]*0.9)];
-    $Ship_Demand_Baseline_G2 = [($baselines["Peak_Demand"]*0.8)];
-    $Ship_daily_cost_baseline = [($baselines["Grand_Total_Lay_Day"]*1)];
-    $Ship_daily_cost_baseline_g1 = [$baselines["Grand_Total_Lay_Day"]*0.9];
-    $Ship_daily_cost_baseline_g2 = [$baselines["Grand_Total_Lay_Day"]*0.8];
+    $Ship_kWh_Average_Baseline[] = ($baselines["kWh_day"]*1);
+    $Ship_kWh_Average_Baseline_G1[] =  ($baselines["kWh_day"]*0.9);
+    $Ship_kWh_Average_Baseline_G2[] = ($baselines["kWh_day"]*0.8);
+    $Ship_Demand_Baseline[] = $b_pd = ($baselines["Peak_Demand"]*1);
+    $Ship_Demand_Baseline_G1[] =  $baselines["Peak_Demand"]*0.9;
+    $Ship_Demand_Baseline_G2[] =  $baselines["Peak_Demand"]*0.8;
+    $Ship_daily_cost_baseline[] = ($baselines["Grand_Total_Lay_Day"]*1);
+    $Ship_daily_cost_baseline_g1[] = $baselines["Grand_Total_Lay_Day"]*0.9;
+    $Ship_daily_cost_baseline_g2[] = $baselines["Grand_Total_Lay_Day"]*0.8;
       
     $display =isset($_REQUEST['month']) ? $_REQUEST['month'] : "month";
 
