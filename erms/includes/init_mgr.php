@@ -424,32 +424,32 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
   // $formatted_month = date_parse($VAL["report_month"]);
   $metrics = array("kWh_day", "Peak_Demand", "Grand_Total_Lay_Day");
 
-  // if(!$annual_report) {
-  //   $baselines = get_monthly_baselines($ship_data["owner"], $ship_data["ship_class"], $ship_group, $metrics, $formatted_month['month']);
-  // } else {
-  //   $baselines = get_annual_baselines($ship_data["owner"], $ship_data["ship_class"], $ship_group, $metrics);
-  // }
+  if(!$annual_report) {
+    $baselines = get_monthly_baselines($ship_data["owner"], $ship_data["ship_class"], $ship_group, $metrics, $formatted_month['month']);
+  } else {
+    $baselines = get_annual_baselines($ship_data["owner"], $ship_data["ship_class"], $ship_group, $metrics);
+  }
 
-  // $b_kWh_d = ($baselines["kWh_day"]*1);
-  // $b_kWh_dG1 = ($baselines["kWh_day"]*0.9);
-  // $b_kWh_dG2 = ($baselines["kWh_day"]*0.8);
-  // $b_pd = ($baselines["Peak_Demand"]*1);
-  // $b_pdG1 = $baselines["Peak_Demand"]*0.9;
-  // $b_pdG2 = $baselines["Peak_Demand"]*0.8;
-  // $b_gtld = ($baselines["Grand_Total_Lay_Day"]*1);
-  // $b_gtldG1 = $baselines["Grand_Total_Lay_Day"]*0.9;
-  // $b_gtldG2 = $baselines["Grand_Total_Lay_Day"]*0.8;
+  $b_kWh_d = ($baselines["kWh_day"]*1);
+  $b_kWh_dG1 = ($baselines["kWh_day"]*0.9);
+  $b_kWh_dG2 = ($baselines["kWh_day"]*0.8);
+  $b_pd = ($baselines["Peak_Demand"]*1);
+  $b_pdG1 = $baselines["Peak_Demand"]*0.9;
+  $b_pdG2 = $baselines["Peak_Demand"]*0.8;
+  $b_gtld = ($baselines["Grand_Total_Lay_Day"]*1);
+  $b_gtldG1 = $baselines["Grand_Total_Lay_Day"]*0.9;
+  $b_gtldG2 = $baselines["Grand_Total_Lay_Day"]*0.8;
 
   for($i = 0; $i < $ship_count; $i++) {
-    $Ship_kWh_Average_Baseline[] = 0;
-    $Ship_kWh_Average_Baseline_G1[] = 0;
-    $Ship_kWh_Average_Baseline_G2[] = 0;
-    $Ship_Demand_Baseline[] = 0;
-    $Ship_Demand_Baseline_G1[] = 0;
-    $Ship_Demand_Baseline_G2[] = 0;
-    $Ship_daily_cost_baseline[] = 0;
-    $Ship_daily_cost_baseline_g1[] = 0;
-    $Ship_daily_cost_baseline_g2[] = 0;
+    $Ship_kWh_Average_Baseline[] = ($baselines["kWh_day"]*1);
+    $Ship_kWh_Average_Baseline_G1[] =  ($baselines["kWh_day"]*0.9);
+    $Ship_kWh_Average_Baseline_G2[] = ($baselines["kWh_day"]*0.8);
+    $Ship_Demand_Baseline[] = $b_pd = ($baselines["Peak_Demand"]*1);
+    $Ship_Demand_Baseline_G1[] =  $baselines["Peak_Demand"]*0.9;
+    $Ship_Demand_Baseline_G2[] =  $baselines["Peak_Demand"]*0.8;
+    $Ship_daily_cost_baseline[] = ($baselines["Grand_Total_Lay_Day"]*1);
+    $Ship_daily_cost_baseline_g1[] = $baselines["Grand_Total_Lay_Day"]*0.9;
+    $Ship_daily_cost_baseline_g2[] = $baselines["Grand_Total_Lay_Day"]*0.8;
   }
 
   // Fetch values from Standard_ship_records
