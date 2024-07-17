@@ -195,7 +195,7 @@ function fetch_last_90_days($log, $loopname) {
             WHERE 
                 daily_total_kwh > 0
             GROUP BY 
-                loopname, DATE_FORMAT(time, '%Y-%m')
+                loopname, DATE_FORMAT(time, '%%Y-%%m')
         ) AS monthly_sums
         GROUP BY 
             loopname;",
