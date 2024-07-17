@@ -462,17 +462,17 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
   $Ship_Demand = [];
   $Ship_daily_cost = [];
 
-  $Ship_kWh_Average_Baseline=[];
-  $Ship_kWh_Average_Baseline_G1=[];
-  $Ship_kWh_Average_Baseline_G2=[];
-  $Ship_Demand_Baseline=[];
-  $Ship_Demand_Baseline_G1=[];
-  $Ship_Demand_Baseline_G2=[];
-  $Ship_daily_cost_baseline=[];
-  $Ship_daily_cost_baseline_g1=[];
-  $Ship_daily_cost_baseline_g2=[];
   try {
-
+    $Ship_kWh_Average_Baseline=[];
+    $Ship_kWh_Average_Baseline_G1=[];
+    $Ship_kWh_Average_Baseline_G2=[];
+    $Ship_Demand_Baseline=[];
+    $Ship_Demand_Baseline_G1=[];
+    $Ship_Demand_Baseline_G2=[];
+    $Ship_daily_cost_baseline=[];
+    $Ship_daily_cost_baseline_g1=[];
+    $Ship_daily_cost_baseline_g2=[];
+    
     $baselines = fetch_last_90_days($testLogger, $ships_data[$aq]["loopname"]);
     for($i = 0; $i < $ship_count; $i++) {
       $Ship_kWh_Average_Baseline[] = isset($baselines["avg_kwH"]) ? ($baselines["avg_kwH"] * 1) : 0;
