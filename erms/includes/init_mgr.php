@@ -700,6 +700,8 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
     "values" => $VAL,
     "cost" => $COST_30
   ];
+  $formattedMessage = print_r($graph["data"], true);
+  $testLogger->logDebug($formattedMessage);
 
 
 

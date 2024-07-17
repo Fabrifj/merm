@@ -202,7 +202,6 @@ function fetch_last_90_days($log, $loopname) {
             loopname;",
         mysql_real_escape_string($loopname)
     );
-    $log->logDebug($query);
     $result = db_query($log, $query);
 
     if (!$result) {
