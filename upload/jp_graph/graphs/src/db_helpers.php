@@ -167,7 +167,7 @@ function fetch_last_90_days($log, $loopname) {
         FROM (
             SELECT 
                 loopname,
-                DATE_FORMAT(time, '%%Y-%%m') AS month,
+                Month(time) AS month,
                 MAX(max_demand_kw) AS max_demand_kw, 
                 MAX(max_off_demand_kw) AS max_off_demand_kw,
                 MAX(max_cost_kw) AS max_cost_kw, 
