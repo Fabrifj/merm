@@ -582,6 +582,9 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
           $Ship_daily_cost[] = intval((isset($ship_data["avg_cost"]) ? $ship_data["avg_cost"] : 0));
           //Baselines
           $baselines = fetch_last_90_days($testLogger, $ships_data[$aq]["loopname"]);
+          
+          $formattedMessage = print_r($baselines, true);
+          $testLogger->logDebug($formattedMessage);
           $Ship_kWh_Average_Baseline[] = isset($baselines["avg_kwH"]) ? ($baselines["avg_kwH"] * 1) : 0;
           $Ship_kWh_Average_Baseline_G1[] = isset($baselines["avg_kwH"]) ? ($baselines["avg_kwH"] * 0.9) : 0;
           $Ship_kWh_Average_Baseline_G2[] = isset($baselines["avg_kwH"]) ? ($baselines["avg_kwH"] * 0.8) : 0;
@@ -600,7 +603,8 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
       }
       break;
   }
-
+  // $formattedMessage = print_r($Ship_kWh_Average_Baseline, true);
+  // $testLogger->logDebug($formattedMessage);
   
 
   //
@@ -700,8 +704,8 @@ case ERMS_Modules::PowerAndCostAnalysis: //"mod1":
     "values" => $VAL,
     "cost" => $COST_30
   ];
-  $formattedMessage = print_r($graph["data"], true);
-  $testLogger->logDebug($formattedMessage);
+  // $formattedMessage = print_r($graph["data"], true);
+  // $testLogger->logDebug($formattedMessage);
 
 
 
