@@ -164,7 +164,7 @@ function fetch_last_90_days($log, $loopname) {
             ROUND(AVG(max_off_cost_kw), 2) AS max_off_cost_kw,
             ROUND(AVG(avg_daily_cost_kwh), 2) AS avg_daily_cost_kwh, 
             ROUND(AVG(avg_daily_total_kwh), 2) AS avg_daily_total_kwh, 
-            AVG(days) AS  
+            AVG(days) AS  days
         FROM (
             SELECT 
                 loopname,
