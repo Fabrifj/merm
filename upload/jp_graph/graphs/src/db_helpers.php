@@ -83,9 +83,9 @@ function fetch_data_for_graph_mod1($log,$result) {
         $max_demand_kw = (float)$row['max_demand_kw'];
         $max_off_demand_kw = (float)$row['max_off_demand_kw'];
         $avg_daily_total_kwh = (float)$row['avg_daily_total_kwh'];
-        if ($days > 1) {
-            $days -= 1;
-        }
+        // if ($days > 1) {
+        //     $days -= 1;
+        // }
             // Calculate
         if ($days > 0) {
             $avg_demand = ($max_cost_kw + $max_off_cost_kw) / $days;
@@ -135,6 +135,7 @@ function fetch_last_30_days($log, $loopname) {
                     AND time >= NOW() - INTERVAL 30 DAY
                 GROUP BY 
                     loopname, DATE(time)
+                LIMIT 1, 31
             ) AS daily_sums
             WHERE 
                 daily_total_kwh > 0
@@ -163,7 +164,7 @@ function fetch_last_90_days($log, $loopname) {
             ROUND(AVG(max_off_cost_kw), 2) AS max_off_cost_kw,
             ROUND(AVG(avg_daily_cost_kwh), 2) AS avg_daily_cost_kwh, 
             ROUND(AVG(avg_daily_total_kwh), 2) AS avg_daily_total_kwh, 
-            AVG(days) AS days
+            AVG(days) AS  
         FROM (
             SELECT 
                 loopname,
