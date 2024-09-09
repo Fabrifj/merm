@@ -74,7 +74,6 @@ $client_ip_address =  getRealIpAddr();
 $log->logInfo('Client IP['.$client_ip_address.']');
 // init 
 include '../../../erms/includes/init.php';
-// include '../../../erms/includes/init_2024.php';
 
 
 
@@ -86,6 +85,7 @@ $log->logInfo('ERMS MODULE 2nd');
 setModLinks($username, $_REQUEST['shipClass'], $shipDeviceClass[0]);
 // TODO need to clean this up somehow
 $module_name = $_SESSION['user_data']['shipMods'][$module]["text"];
+$indicator = $loopname ;
 $year = isset($_REQUEST["year"]) ? intval($_REQUEST["year"]) : date('Y');
 $month = isset($_REQUEST["month"]) ? intval($_REQUEST["month"]) : $month = date('m');
 
