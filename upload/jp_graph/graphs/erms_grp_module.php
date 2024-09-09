@@ -70,7 +70,14 @@ $log->logInfo('ERMS GRP MODULE 1');
 include '../../../erms/includes/init_mgr.php';
 $log->logInfo('ERMS GRP MODULE 2nd');
 setModLinks($username, $shipClass);
-setBreadcrumbs("manager", $_SESSION['user_data']['mgrMods'][$module]["text"], $_SESSION['user_data']['shipGroup']);
+$shipClasses = [
+  "010" => "Capes D'sclass",
+  "012" => "Capes K'sclass",
+  "011" => "Capes R'sclass"
+];
+$indicator = $shipClasses[$_REQUEST['shipClass']];
+
+setBreadcrumbs("manager", $_SESSION['user_data']['mgrMods'][$module]["text"], $indicator);
 
 ?>
 
