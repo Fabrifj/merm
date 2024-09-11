@@ -1114,6 +1114,23 @@ if(isset($COST_30))
     }
   }
 }
+// Functions 
+function convertToTimezone($timezone, $dates) {
+  $targetTimezone = new DateTimeZone($timezone);
+  
+  $convertedDates = [];
+
+  foreach ($dates as $date) {
+      $dateTime = new DateTime($date, new DateTimeZone('GMT'));
+
+      $dateTime->setTimezone($targetTimezone);
+
+      $convertedDates[] = $dateTime->format('Y-m-d H:i:s'); 
+  }
+
+  return $convertedDates;
+}
+
 
 //$VAL["date_value_start"] = date('Y-m-d H:i:s', strtotime($saveDate));  //debug
 
