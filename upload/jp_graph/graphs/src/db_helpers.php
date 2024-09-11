@@ -1072,7 +1072,7 @@ function  getTimezone($log, $loopname){
         LEFT JOIN timezone
         ON Aquisuite_List.timezoneaquisuite = timezone.timezoneaquisuite 
         WHERE loopname = '%s';",
-        mysql_real_escape_string($intervalSeconds));
+        mysql_real_escape_string($loopname));
     // Execute the query
    $result = db_query($log, $query);
 
