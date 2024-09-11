@@ -772,7 +772,11 @@ if($ship_count==1){
       $testLogger->logError("Error fetching EnergyMeters: " . $e->getMessage());
     }
 
-    $timezone = $ships_data[$aquisuitetablename[$key]]["timezone"]; 
+    $timezone = $ship_data["timezone"]; 
+    $testLogger->logDebug("timezone 1 : " . $timezone);
+    $testLogger->logDebug("timezone 2 : " . $aquisuitetablename[0]);
+
+
     $dates_timezone =  convertToTimezone($timezone, $dates) ;
 
     $graph = [
