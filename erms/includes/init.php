@@ -705,6 +705,7 @@ if($ship_count==1){
     }else{
       $maxKw = $maxPeak;
     }
+    $testLogger->logDebug("time" . $maxKw["max_time"])
 
     $detailedSummary = [
       'AvgKw'=>$detailed["avg_kw"],
