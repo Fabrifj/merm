@@ -775,7 +775,10 @@ if($ship_count==1){
     $timezone = $ship_data["timezone"]; 
     $testLogger->logDebug("timezone 1 : " . $timezone);
     $testLogger->logDebug("timezone 2 : " . $aquisuitetablename[0]);
-    $testLogger->logDebug("timezone 2 : " . $ships_data[$aquisuitetablename[0]]["timezone"]);
+    $testLogger->logDebug("timezone 3 : " . $ships_data[$aquisuitetablename[0]]["timezone"]);
+    
+    $formattedMessage = print_r($ships_data, true);
+    $testLogger->logDebug($formattedMessage);
 
 
     $dates_timezone =  convertToTimezone($timezone, $dates) ;
