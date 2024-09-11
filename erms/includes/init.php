@@ -665,7 +665,6 @@ if($ship_count==1){
         break;  
     }
     $testLogger->logInfo("Mod1 ".$loopname." display: ".$VAL["display"]." range:".$startDate." -- ".$endDate);
-    $timezone = "America/New_York";
 
     $startTimestamp = strtotime($startDate);
     $endTimestamp = strtotime($endDate);
@@ -678,13 +677,16 @@ if($ship_count==1){
     $data = fetch_data_mod1($testLogger,$loopname, $startDate, $endDate );
     $peak_times = array();
 
+    $timezone = getTimezone($testLogger,$loopname);
+    $dates_timezone =  convertToTimezone($timezone, $dates) ;
+
     $graph=[
-      "times" => $dates,
+      "times" => $dates_timezone,
       "peak_times" => $peak_times,
       "timezone" => $timezone,
       "log_interval" => $log_interval,
-      "date_start" => $dates[0],
-      "date_end" => $dates[count($dates) - 1],
+      "date_start" => $dates_timezone[0],
+      "date_end" => $dates_timezone[count($dates_timezone) - 1],
       "data" => array(
         "y1" => $data["realPower"],
         "y2" => $data["estimatedPower"]
@@ -707,7 +709,7 @@ if($ship_count==1){
     $detailedSummary = [
       'AvgKw'=>$detailed["avg_kw"],
       'MaxKw'=>$maxKw["max_field"],
-      'TimMaxKw'=>$maxKw["max_time"],
+      'TimMaxKw'=>convertToTimezone($timezone, $maxKw["max_time"]),
       'TotalKwh'=>$detailed["avg_kwH"]*$detailed["days"],
       'KwhDay'=>$detailed["avg_kwH"],
     ];
@@ -773,10 +775,6 @@ if($ship_count==1){
     }
 
     $timezone = getTimezone($testLogger,$loopname);
-    $testLogger->logDebug("timezone 1 : " . $timezone);
-
-
-
     $dates_timezone =  convertToTimezone($timezone, $dates) ;
 
     $graph = [
