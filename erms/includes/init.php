@@ -972,7 +972,9 @@ function convertToTimezone($timezone, $dates) {
   $targetTimezone = new DateTimeZone($timezone);
   
   $convertedDates = [];
-
+  if (!is_array($dates)) {
+    $dates = [$dates];
+  }
   foreach ($dates as $date) {
       $dateTime = new DateTime($date, new DateTimeZone('GMT'));
 
@@ -980,7 +982,9 @@ function convertToTimezone($timezone, $dates) {
 
       $convertedDates[] = $dateTime->format('Y-m-d H:i:s'); 
   }
-
+  if (count($convertedDates) == 1) {
+    return $convertedDates[0];
+  }
   return $convertedDates;
 }
 
