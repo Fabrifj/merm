@@ -709,8 +709,6 @@ if($ship_count==1){
     $newmaxkwTime = convertToTimezone($timezone, $maxKw["max_time"]);
     $testLogger->logDebug("time 2 " . $newmaxkwTime);
 
-    $formattedMessage = print_r($newmaxkwTime, true);
-    $testLogger->logDebug($formattedMessage);
 
 
 
