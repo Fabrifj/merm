@@ -705,12 +705,7 @@ if($ship_count==1){
     }else{
       $maxKw = $maxPeak;
     }
-    $testLogger->logDebug("time " . $maxKw["max_time"]);
-    $newmaxkwTime = convertToTimezone($timezone, $maxKw["max_time"]);
-    $testLogger->logDebug("time 2 " . $newmaxkwTime);
-
-
-
+   
 
     $detailedSummary = [
       'AvgKw'=>$detailed["avg_kw"],
@@ -773,7 +768,10 @@ if($ship_count==1){
       $chartUnits[] = $units1;
       $chartUnits[] = $units2;
 
-      $summaryReport = fetch_summary_report_mod3($testLogger, $loopname, $startDate, $endDate);
+      
+
+
+
       $shipsData = fetch_unitary_mod3_graph($testLogger, $loopname,$field1, $field2, $startDate, $endDate);
       $testLogger->logDebug("Fields1: " . $field1 . " Field2: ".$field2);
     } catch (Exception $e) {
@@ -797,6 +795,11 @@ if($ship_count==1){
       $field1 =>$shipsData[0] ,
       $field2 =>$shipsData[1] 
     ];
+    $summaryReport = fetch_summary_report_mod3($testLogger, $loopname, $startDate, $endDate);
+    $summaryReport["TimeOnPeakDemand"] = convertToTimezone($timezone, $summaryReport["TimeOnPeakDemand"]);
+    $summaryReport["TimeOffPeakDemand"] = convertToTimezone($timezone, $summaryReport["TimeOffPeakDemand"]);
+    $summaryReport["TimeMaxCurrent"] = convertToTimezone($timezone, $summaryReport["TimeMaxCurrent"]);
+    $summaryReport["TimeMaxReactivePower"] = convertToTimezone($timezone, $summaryReport["TimeMaxReactivePower"]);
 
 
     // $graphData = ;
