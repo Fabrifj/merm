@@ -1020,7 +1020,7 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
       foreach ($ships as $aq) {
         $shipValues = fetch_mod3_graph($testLogger, $field, $ships_data[$aq]["loopname"], $startDate, $endDate);
         $shipName = $ships_data[$aq]["title"];
-        $timezone = "America/New_York";
+        $timezone = $ships_data[$aq]["timezone"];
 
         if (is_array($shipValues)) {
           $numericValues = array_map('floatval', $shipValues);
@@ -1041,13 +1041,14 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
           );
         }
       }
-  
+      $dates_timezone =  convertToTimezone($timezone, $dates) ;
+
       $graph = [
-          "times" => $dates,
+          "times" => $dates_timezone,
           "timezone" => $timezone,
           "log_interval" => $log_interval ,
-          "date_start" => $dates[0],
-          "date_end" => $dates[count($dates) - 1],
+          "date_start" => $dates_timezone[0],
+          "date_end" => $dates_timezone[count($dates_timezone) - 1],
           "units" => $chartUnits,
           "data" => $shipsData,
       ];

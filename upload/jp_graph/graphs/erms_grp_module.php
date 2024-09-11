@@ -71,9 +71,9 @@ include '../../../erms/includes/init_mgr.php';
 $log->logInfo('ERMS GRP MODULE 2nd');
 setModLinks($username, $shipClass);
 $shipClasses = [
-  "010" => "Capes D'sclass",
-  "012" => "Capes K'sclass",
-  "011" => "Capes R'sclass"
+  "010" => "Cape D's class",
+  "012" => "Cape K's class",
+  "011" => "Cape R's class"
 ];
 $indicator = $shipClasses[$_REQUEST['shipClass']];
 

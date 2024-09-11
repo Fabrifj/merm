@@ -723,7 +723,6 @@ if($ship_count==1){
     $parts = explode('_', $ships[0]);
     $loopname = $parts[0] . '_' . $parts[1];
     $indicator =$loopname;
-    $timezone = "America/New_York";
 
     $testLogger->logInfo(' MODE 3 Monthly Report ' . $loopname . " Display: ".$VAL["display"]);
     try {
@@ -772,17 +771,21 @@ if($ship_count==1){
     } catch (Exception $e) {
       $testLogger->logError("Error fetching EnergyMeters: " . $e->getMessage());
     }
+
+    $timezone = $ships_data[$aquisuitetablename[$key]]["timezone"]; 
+    $dates_timezone =  convertToTimezone($timezone, $dates) ;
+
     $graph = [
-      "times" => $dates,
+      "times" => $dates_timezone,
       "timezone" => $timezone,
       "log_interval" => $log_interval ,
-      "date_start" => $dates[0],
-      "date_end" => $dates[count($dates) - 1],
+      "date_start" => $dates_timezone[0],
+      "date_end" => $dates_timezone[count($dates_timezone) - 1],
       "units" => $chartUnits,
       "data" => $shipsData,
     ];
     $exportDataMod3=[
-      "Date" => $dates,
+      "Date" => $dates_timezone,
       $field1 =>$shipsData[0] ,
       $field2 =>$shipsData[1] 
     ];
@@ -954,6 +957,24 @@ if(isset($COST_30))
     }
   }
 }
+// Functions 
+function convertToTimezone($timezone, $dates) {
+  $targetTimezone = new DateTimeZone($timezone);
+  
+  $convertedDates = [];
+
+  foreach ($dates as $date) {
+      $dateTime = new DateTime($date, new DateTimeZone('GMT'));
+
+      $dateTime->setTimezone($targetTimezone);
+
+      $convertedDates[] = $dateTime->format('Y-m-d H:i:s'); 
+  }
+
+  return $convertedDates;
+}
+
+
 
 //$VAL["date_value_start"] = date('Y-m-d H:i:s', strtotime($saveDate));  //debug
 
