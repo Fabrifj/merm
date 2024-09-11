@@ -1067,6 +1067,23 @@ function  fetch_unitary_mod3_graph($log, $loopname,$field1, $field2, $startDate,
    // Fetch data for the graph
    return fetch_data_for_graph_mod3($log, $result);
 }
+function  getTimezone($log, $loopname){
+    $query =  sprintf("SELECT timezone.timezonephp FROM Aquisuite_List 
+        LEFT JOIN timezone
+        ON Aquisuite_List.timezoneaquisuite = timezone.timezoneaquisuite 
+        WHERE loopname = '%s';",
+        mysql_real_escape_string($intervalSeconds));
+    // Execute the query
+   $result = db_query($log, $query);
+
+   if (!$result) {
+       $log->logError("Query failed");
+       return false;
+   }  
+   $row = mysql_fetch_assoc($result);
+   return $row["timezonephp"];
+}
+
 
 // Function to close the connection
 function db_close() {
