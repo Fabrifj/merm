@@ -70,13 +70,6 @@
           }
         },
       },
-      tooltip: {
-        formatter: function () {
-          var value = parseFloat(this.y).toFixed(2);
-          return '<b>' + this.series.name + '</b><br/>' +
-                 'Value: ' + global.formatNumber(value, 2, '', ' ' + opts.units[this.series.index].units);
-        }
-      },
       plotOptions: {
         series: {
           lineWidth: 1.5,
