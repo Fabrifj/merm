@@ -70,7 +70,7 @@
     decimals = decimals || 0;
     pref = pref || '';
     suff = suff || '';
-    var formatted = parseFloat(Math.round(num * 100) / 100).toFixed(decimals);
+    var formatted = parseFloat(num).toFixed(decimals);
     var parts = formatted.toString().split('.');
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     var commaFormatted = parts.join('.');
