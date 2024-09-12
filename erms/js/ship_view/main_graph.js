@@ -29,13 +29,13 @@
           visible: true,
           tooltip: {
             pointFormatter: function () {
-              return '<span style="color:'+this.color+'">\u25CF</span> '+this.series.name+': <b>'+(global.formatNumber(this.y, 0, '', ' kWh'))+'</b><br/>'
+              return '<span style="color:'+this.color+'">\u25CF</span> '+this.series.name+': <b>'+(global.formatNumber(this.y, 1, '', ' kWh'))+'</b><br/>'
             }
           },
           dataLabels: {
             enabled: true,
             formatter: function () {
-              return global.formatNumber(this.y, 0, '', ' kWh');
+              return global.formatNumber(this.y, 1, '', ' kWh');
             }
           }
         },
@@ -45,13 +45,13 @@
           visible: true,
           tooltip: {
             pointFormatter: function () {
-              return '<span style="color:'+this.color+'">\u25CF</span> '+this.series.name+': <b>'+(global.formatNumber(this.y, 0, '', ' kW'))+'</b><br/>'
+              return '<span style="color:'+this.color+'">\u25CF</span> '+this.series.name+': <b>'+(global.formatNumber(this.y, 1, '', ' kW'))+'</b><br/>'
             }
           },
           dataLabels: {
             enabled: true,
             formatter: function () {
-              return global.formatNumber(this.y, 0, '', ' kW');
+              return global.formatNumber(this.y, 1, '', ' kW');
             }
           }
         },
