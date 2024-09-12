@@ -335,11 +335,11 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
                         <table class="tblDetailedSummary">
                 		<tr>
                 			<td style="color:black;">Average kW</td>
-                			<td><b><?php echo $detailedSummary["AvgKw"] ?> kW</b></td>
+                			<td><b><?php echo number_format($detailedSummary["AvgKw"],2) ?> kW</b></td>
                 		</tr>
                 		<tr class="odd">
                 			<td style="color:black;">Max Peak Demand</td>
-                			<td><b><?php echo $detailedSummary["MaxKw"] ?> kW</b></td>
+                			<td><b><?php echo number_format($detailedSummary["MaxKw"],2) ?> kW</b></td>
                 		</tr>
                 		<tr>
                 			<td style="color:black;">Time of Occurrence</td>
@@ -347,11 +347,11 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
                 		</tr>
                 		<tr class="odd">
                 			<td style="color:black;">Total kWh</td>
-                			<td><b><?php echo $detailedSummary["TotalKwh"] ?> kWh</b></td>
+                			<td><b><?php echo number_format($detailedSummary["TotalKwh"],2) ?> kWh</b></td>
                 		</tr>
                 		<tr>
                 			<td style="color:black; border-bottom: 0px;">kWh Per Lay Day</td>
-                			<td style="border-bottom: 0px;"><b><?php echo $detailedSummary["KwhDay"] ?> kWh/day</b></td>
+                			<td style="border-bottom: 0px;"><b><?php echo number_format($detailedSummary["KwhDay"],2) ?> kWh/day</b></td>
                 		</tr>
                         </table>
                     </div>
@@ -449,9 +449,9 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
             </div>
     		<table class="tblLast30">
     		<tr>
-                <td>Average Cost Per Lay Day <b>$<?php echo $performance["avg_cost"] ?></b></td>
-    			<td>Average kWh Per Lay Day <b><?php echo $performance["avg_kwH"] ?></b></td>
-    			<td>Cost Per kWh <b>$<?php echo $cost_per_kwH ?></b></td>
+                <td>Average Cost Per Lay Day <b>$<?php echo number_format($performance["avg_cost"],2) ?></b></td>
+    			<td>Average kWh Per Lay Day <b><?php echo number_format($performance["avg_kwH"],2) ?></b></td>
+    			<td>Cost Per kWh <b>$<?php echo number_format($cost_per_kwH,2) ?></b></td>
     		</tr>
             </table>
         </div>
@@ -466,19 +466,19 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
 		'<table class="tblLast30">
 				 <tr valign="bottom">
 					<td align="center" style="background:none;">On Peak Energy:</td>
-					<td align="center" style="background:none;"><font color="black">'.$summaryReport["OnPeakEnergy"].' kWh</font></td>
+					<td align="center" style="background:none;"><font color="black">'.number_format($summaryReport["OnPeakEnergy"],2).' kWh</font></td>
 					<td align="center" style="background:none;">Average Current:</td>
-					<td align="center" style="background:none;"><font color="black">'.$summaryReport["AvgCurrent"].' Amps</font></td>
+					<td align="center" style="background:none;"><font color="black">'.number_format($summaryReport["AvgCurrent"],2).' Amps</font></td>
 				</tr>
 				<tr class="odd" valign="bottom">
 					<td align="center" style="background:none;">Off Peak Energy: </td>
-					<td align="center" style="background:none;">'.$summaryReport["OffPeakEnergy"].' kWh</td>
+					<td align="center" style="background:none;">'.number_format($summaryReport["OffPeakEnergy"],2).' kWh</td>
 					<td align="center" style="background:none;">Maximum Current: </td>
-					<td align="center" style="background:none;">'.$summaryReport["MaxCurrent"].' Amps</td>
+					<td align="center" style="background:none;">'.number_format($summaryReport["MaxCurrent"],2).' Amps</td>
 				</tr>
 				<tr valign="bottom">
 					<td align="center" style="background:none;">On Peak Demand: </td>
-					<td align="center" style="background:none;">'.$summaryReport["OnPeakDemand"]." kW".'</td>
+					<td align="center" style="background:none;">'.number_format($summaryReport["OnPeakDemand"],2)." kW".'</td>
 					<td align="center" style="background:none;">Time of Occurance: </td>
 					<td align="center" style="background:none;">'.makeDate2($summaryReport["TimeMaxCurrent"]).'</td>
 				</tr>
@@ -486,35 +486,35 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
 					<td align="center" style="background:none;">Time of Occurance: </td>
 					<td align="center" style="background:none;">'.makeDate2($summaryReport["TimeOnPeakDemand"]).'</td>
 					<td align="center" style="background:none;">Average Voltage: </td>
-					<td align="center" style="background:none;">'.$summaryReport["AvgVoltage"]." Volts".'</td>
+					<td align="center" style="background:none;">'.number_format($summaryReport["AvgVoltage"],2)." Volts".'</td>
 				</tr>
 				<tr valign="bottom">
 					<td align="center" style="background:none;">Off Peak Demand: </td>
-					<td align="center" style="background:none;">'.$summaryReport["OffPeakDemand"]." kW".'</td>
+					<td align="center" style="background:none;">'.number_format($summaryReport["OffPeakDemand"],2)." kW".'</td>
 					<td align="center" style="background:none;">Maximum Voltage: </td>
-					<td align="center" style="background:none;">'.$summaryReport["MaxVoltage"]." Volts".'</td>
+					<td align="center" style="background:none;">'.number_format($summaryReport["MaxVoltage"],2)." Volts".'</td>
 				</tr>
 				<tr class="odd" valign="bottom">
 					<td align="center" style="background:none;">Time of Occurance: </td>
 					<td align="center" style="background:none;">'.makeDate2($summaryReport["TimeOffPeakDemand"]).'</td>
 					<td align="center" style="background:none;">Minimum Voltage: </td>
-					<td align="center" style="background:none;">'.$summaryReport["MinVoltage"]." Volts".'</td>
+					<td align="center" style="background:none;">'.number_format($summaryReport["MinVoltage"],2)." Volts".'</td>
 				</tr>
 				<tr valign="bottom">
 					<td align="center" style="background:none;">Average Power Factor: </td>
-					<td align="center" style="background:none;">'.$summaryReport["AvgPowerFactor"]." &#37".'</td>
+					<td align="center" style="background:none;">'.number_format($summaryReport["AvgPowerFactor"],2)." &#37".'</td>
 					<td align="center" style="background:none;">Average Reactive Power: </td>
-					<td align="center" style="background:none;">'.$summaryReport["AvgReactivePower"]." kVAR".'</td>
+					<td align="center" style="background:none;">'.number_format($summaryReport["AvgReactivePower"],2)." kVAR".'</td>
 				</tr>
 				<tr class="odd" valign="bottom">
 					<td align="center" style="background:none;">Maximum Power Factor: </td>
-					<td align="center" style="background:none;">'.$summaryReport["MaxPowerFactor"]." &#37".'</td>
+					<td align="center" style="background:none;">'.number_format($summaryReport["MaxPowerFactor"],2)." &#37".'</td>
 					<td align="center" style="background:none;">Maximum Reactive Power: </td>
-					<td align="center" style="background:none;">'.$summaryReport["MaxReactivePower"]." kVAR".'</td>
+					<td align="center" style="background:none;">'.number_format($summaryReport["MaxReactivePower"],2)." kVAR".'</td>
 				</tr>
 				<tr valign="bottom">
 					<td align="center" style="background:none;">Minimum Power Factor: </td>
-					<td align="center" style="background:none;">'.$summaryReport["MinPowerFactor"]." &#37".'</td>
+					<td align="center" style="background:none;">'.number_format($summaryReport["MinPowerFactor"],2)." &#37".'</td>
 					<td align="center" style="background:none;">Time of Occurance: </td>
 					<td align="center" style="background:none;">'.makeDate2($summaryReport["TimeMaxReactivePower"]).'</td>
 				</tr>
