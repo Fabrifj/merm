@@ -1086,12 +1086,46 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
                     <div id="graph_range_sel_header">
                         <span style="font-weight: bold;">Selected Chart</span><br />
                     </div>
-                    <div>
-                        <a title="Click image to view larger" id="monthly_report_image" href="<?php echo $graph['graph'] ?>"><img src="<?php echo $graph['graph'] ?>" width="<?php echo ($graph['width']/3.5) ?>" height="<?php echo ($graph['height']/3.5) ?>" border="0"></a> 
+                    <div id="chart-container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto;"></div>
                     </div>
-                  </div>
-                 <div class="printRptBtn"><button onClick="downloadCSV();">Export</button> </div>
-               </div>
+
+                    <div class="printRptBtn">
+                    <button onClick="downloadCSV();">Export CSV</button>
+                    </div>
+
+                    <script src="https://code.highcharts.com/highcharts.js"></script>
+                    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+                    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+                    <script type="text/javascript">
+                    Highcharts.chart('chart-container', {
+                        chart: {
+                        type: 'pie'
+                        },
+                        title: {
+                        text: 'Pie chart'
+                        },
+                        series: [{
+                        name: 'Values',
+                        data: [
+                            ['Total Energy Charges', $shipData["TotalEnergyCharges"]],
+                            ['Total Demand Charges', $shipData["TotalDemandCharges"]],
+                            ['Total Taxes & Fees', $taxesAddFees]
+                        ]
+                        }],
+                        exporting: {
+                        buttons: {
+                            contextButton: {
+                            menuItems: ['downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadCSV']
+                            }
+                        }
+                        }
+                    });
+
+                    function downloadCSV() {
+                        Highcharts.charts[0].downloadCSV();
+                    }
+                    </script>
           </div>
     </div>
 
