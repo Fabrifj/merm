@@ -868,9 +868,9 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
             </div>
     		<table class="tblLast30">
     		<tr>
-    			<td>kWh per day <b><?php echo $performance["avg_kwH"] ?></b></td>
-    			<td>Cost per day <b>$<?php echo $performance["avg_cost"] ?></b></td>
-    			<td>Cost per kWh <b>$<?php echo $performance["avg_cost"]/$performance["avg_kwH"] ?></b></td>
+    			<td>kWh per day <b><?php echo number_format($performance["avg_kwH"],2) ?></b></td>
+    			<td>Cost per day <b>$<?php echo number_format($performance["avg_cost"],2) ?></b></td>
+    			<td>Cost per kWh <b>$<?php echo number_format($performance["avg_cost"]/$performance["avg_kwH"],2) ?></b></td>
     		</tr>
             </table>
         </div>
@@ -889,15 +889,15 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
     		<table id="TblConsumeDetailSummary" class="tblDetailedSummaryRpt">
 		<tr>
 			<td>Meter End of the Month Reading</font></td>
-			<td  style="background:none;"><font color="black">'.$shipData["EndOfMonthReading"].'</font></td>
+			<td  style="background:none;"><font color="black">'.number_format($shipData["EndOfMonthReading"],2).'</font></td>
 		</tr>
     		<tr>
     			<td>Total kWh Consumed</font></td>
-    			<td style="background:none;"><font color="black">'.$shipData["TotalkWhConsumed"].' kWh</font></td>
+    			<td style="background:none;"><font color="black">'.number_format($shipData["TotalkWhConsumed"],2).' kWh</font></td>
     		</tr>
      		<tr>
     			<td>Maximum On Peak Demand</font></td>
-    			<td style="background:none;"><font color="black">'.$shipData["MaxOnPeakDemand"].' kW</font></td>
+    			<td style="background:none;"><font color="black">'.number_format($shipData["MaxOnPeakDemand"],2).' kW</font></td>
     		</tr>';
 
  		if ($utility=="SCE&G_Rates")
@@ -905,7 +905,7 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
 		  echo
 		  '<tr>
 			<td>On Peak Billed 15 Minute Demand</font></td>
-			<td style="background:none;"><font color="black">'.$shipData["OnPeakBilledDemand"].' kW</font></td>
+			<td style="background:none;"><font color="black">'.number_format($shipData["OnPeakBilledDemand"],2).' kW</font></td>
 		  </tr>';
                  }
 
@@ -915,14 +915,14 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
     		</tr>
     		<tr>
     			<td>Maximum Off Peak Demand</font></td>
-    			<td style="background:none;"><font color="black">'.$shipData["MaxOffPeakDemand"].' kW</font></td>
+    			<td style="background:none;"><font color="black">'.number_format($shipData["MaxOffPeakDemand"],2).' kW</font></td>
     		</tr>';
               if ($utility=="SCE&G_Rates")
 	      {
 		echo
 		  '<tr>
 		     	<td>Off Peak Billed 15 Minute Demand</font></td>
-		        <td style="background:none;"><font color="black">'.$shipData["OffPeakBilledDemand"].' kW</font></td>
+		        <td style="background:none;"><font color="black">'.number_format($shipData["OffPeakBilledDemand"],2).' kW</font></td>
 		    </tr>';
 		}
 
@@ -937,7 +937,7 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
 		  echo
 		   '<tr>
 		 	<td>Maximum 30 Minute Reactive Demand</font></td>
-			<td style="background:none;"><font color="black">'.$shipData["OnPeakBilledDemand"].' kVAR</font></td>
+			<td style="background:none;"><font color="black">'.number_format($shipData["OnPeakBilledDemand"],2).' kVAR</font></td>
 		   </tr>';
 		}
 
@@ -948,17 +948,17 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
     		</tr>
     		<tr>
     			<td>On Peak kWh</font></td>
-    			<td style="background:none;"><font color="black">'.$shipData["OnPeakkWh"].' kWh</font></td>
+    			<td style="background:none;"><font color="black">'.number_format($shipData["OnPeakkWh"],2).' kWh</font></td>
     		</tr>
     		<tr>
     			<td>Off Peak kWh</font></td>
-    			<td style="background:none;"><font color="black">'.$shipData["OffPeakkWh"].' kWh</font></td>
+    			<td style="background:none;"><font color="black">'.number_format($shipData["OffPeakkWh"],2).' kWh</font></td>
     		</tr>';
 
 			echo
 		'<tr>
 			<td>Average Power</font></td>
-			<td style="background:none;"><font color="black">'.$shipData["AvgPower"].' kW</font></td>
+			<td style="background:none;"><font color="black">'.number_format($shipData["AvgPower"],2).' kW</font></td>
 		</tr>';
 
 			if ($utility=="SCE&G_Rates")
@@ -966,25 +966,25 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
 			echo
                     '<tr>
 			<td>Billed Power Factor</font></td>
-			<td style="background:none;"><font color="black">'.$shipData["BilledPowerFactor"].'</font></td>
+			<td style="background:none;"><font color="black">'.number_format($shipData["BilledPowerFactor"],2).'</font></td>
                     </tr>';
 			}
 			echo
 		'<tr>
 			<td>Average Power Factor</font></td>
-			<td style="background:none;"><font color="black">'.$shipData["AvgPowerFactor"].'</font></td>
+			<td style="background:none;"><font color="black">'.number_format($shipData["AvgPowerFactor"],2).'</font></td>
 		</tr>
 		<tr>
 			<td>Lowest Power Factor</font></td>
-			<td style="background:none;"><font color="black">'.$shipData["LowestPowerFactor"].'</font></td>
+			<td style="background:none;"><font color="black">'.number_format($shipData["LowestPowerFactor"],2).'</font></td>
 		</tr>
 		<tr>
 			<td>Highest Power Factor</font></td>
-			<td style="background:none;"><font color="black">'.$shipData["HighestPowerFactor"].'</font></td>
+			<td style="background:none;"><font color="black">'.number_format($shipData["HighestPowerFactor"],2).'</font></td>
 		</tr>
                 <tr>
     		      <td>Total CO<sub>2</sub></font></td>
-    		      <td style="background:none;"><font color="black">'.$shipData["TotalCO2"].' MT</font></td>
+    		      <td style="background:none;"><font color="black">'.number_format($shipData["TotalCO2"],2).' MT</font></td>
     		</tr>
             </table>
         </div>
@@ -1064,19 +1064,19 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
                         <table id="TblEnergyCostOverview" class="tblDetailedSummary">
                 		<tr>
                 			<td style="color:black;">Total Energy Charges</td>
-                			<td><b>$<?php echo $shipData["TotalEnergyCharges"] ?></b></td>
+                			<td><b>$<?php echo number_format($shipData["TotalEnergyCharges"],2) ?></b></td>
                 		</tr>
                 		<tr class="odd">
                 			<td style="color:black;">Total Demand Charges</td>
-                			<td><b>$<?php echo $shipData["TotalDemandCharges"] ?></b></td>
+                			<td><b>$<?php echo number_format($shipData["TotalDemandCharges"],2) ?></b></td>
                 		</tr>
                 		<tr>
                 			<td style="color:black;">Total Taxes &amp; Fees</td>
-                			<td><b>$<?php echo $taxesAddFees ?></b></td>
+                			<td><b>$<?php echo number_format($taxesAddFees,2) ?></b></td>
                 		</tr>
                 		<tr class="odd">
                 			<td style="color:black; border-bottom: 0px;">Total Cost</td>
-                			<td><b>$<?php echo $totalCost ?></b></td>
+                			<td><b>$<?php echo number_format($totalCost,2) ?></b></td>
                 		</tr>
                         </table>
                     </div>
@@ -1111,51 +1111,51 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
 
 				<tr>
 					<td>On Peak Energy Charges</font></td>
-					<td  style="background:none;"><font color="black">'.'$'.$shipData["OnPeakEnergyCharges"].'</font></td>
+					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["OnPeakEnergyCharges"],2).'</font></td>
 				</tr>
 				<tr class="odd">
 					<td>Off Peak Energy Charges</font></td>
-         				<td  style="background:none;"><font color="black">'.'$'.$shipData["OffPeakEnergyCharges"].'</font></td>
+         				<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["OffPeakEnergyCharges"],2).'</font></td>
 				</tr>
 				<tr>
 					<td>Other Energy Charges</td>
-					<td  style="background:none;"><font color="black">'.'$'.$shipData["OtherEnergyCharges"].'</font></td>
+					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["OtherEnergyCharges"],2).'</font></td>
 				</tr>
 				<tr class="odd">
 					<td>Total Energy Charges</td>
-					<td  style="background:none;"><font color="black">'.'$'.$shipData["TotalEnergyCharges"].'</font></td>
+					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["TotalEnergyCharges"],2).'</font></td>
 				</tr>
 				<tr>
 					<td>On Peak Demand Charges</td>
-					<td  style="background:none;"><font color="black">'.'$'.$shipData["OnPeakDemandCharges"].'</font></td>
+					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["OnPeakDemandCharges"],2).'</font></td>
 				</tr>
 				<tr class="odd">
 					<td>Off Peak Demand Charges</td>
-					<td  style="background:none;"><font color="black">'.'$'.$shipData["OffPeakDemandCharges"].'</font></td>
+					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["OffPeakDemandCharges"],2).'</font></td>
 				</tr>
 				<tr>
 					<td>Other Demand Charges</td>
-					<td  style="background:none;"><font color="black">'.'$'.$shipData["OtherDemandCharges"].'</font></td>
+					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["OtherDemandCharges"],2).'</font></td>
 				</tr>
 				<tr class="odd">
 					<td>Total Demand Charges</td>
-					<td  style="background:none;"><font color="black">'.'$'.$shipData["TotalDemandCharges"].'</font></td>
+					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["TotalDemandCharges"],2).'</font></td>
 				</tr>
 				<tr>
 					<td>Total Estimated Bill</td>
-					<td  style="background:none;"><font color="black">'.'$'.$shipData["TotalEstimatedBill"].'</font></td>
+					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["TotalEstimatedBill"],2).'</font></td>
 				</tr>
 				<tr class="odd">
 					<td>Full Burden Pure Demand Rate($/kW)</td>
-					<td  style="background:none;"><font color="black">'.'$'.$shipData["FullBurdenPureDemandRate"].'/kW</font></td>
+					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["FullBurdenPureDemandRate"],2).'/kW</font></td>
 				</tr>
 				<tr>
 					<td>Full Burden Pure Energy Rate($/kWh)</td>
-					<td  style="background:none;"><font color="black">'.'$'.$shipData["FullBurdenPureEnergyRate"].'/kWh</font></td>
+					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["FullBurdenPureEnergyRate"],2).'/kWh</font></td>
 				</tr>
 				<tr class="odd">
 					<td>Full Burden Rate of Shorepower($/kWh)</td>
-					<td  style="background:none;"><font color="black">'.'$'.$shipData["FullBurdenShorepowerRate"].'/kWh</font></td>
+					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["FullBurdenShorepowerRate"],2).'/kWh</font></td>
 				</tr>
 <!-- end detailed report info -->
 </table>
@@ -1246,25 +1246,25 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
 
     		echo '<tr><td>kWh per day(kWh)</font></td>';
     	    for ($m=0;$m<$max_month;$m++)
-    	        echo '<td style="background:none;"><font color="black">'.$VAL_YEAR[$m]["kWh_day"].'</font></td>';
-            echo '<td style="background:none;"><font color="black">'.$monthly_average["kWh_day"].'</font></td>';
+    	        echo '<td style="background:none;"><font color="black">'.number_format($VAL_YEAR[$m]["kWh_day"],2).'</font></td>';
+            echo '<td style="background:none;"><font color="black">'.number_format($monthly_average["kWh_day"],2).'</font></td>';
 
 
     	   echo'</tr><tr class="odd"><td>Cost per day</font></td>';
 
     	   for ($m=0;$m<$max_month;$m++)
            {
-    	      echo '<td style="background:none;"><font color="black">'.$COST_YEAR[$m]["Grand_Total_Lay_Day"].'</font></td>';
+    	      echo '<td style="background:none;"><font color="black">'.number_format($COST_YEAR[$m]["Grand_Total_Lay_Day"],2).'</font></td>';
            }
-           echo '<td style="background:none;"><font color="black">'.$monthly_average["Grand_Total_Lay_Day"].'</font></td>';
+           echo '<td style="background:none;"><font color="black">'.number_format($monthly_average["Grand_Total_Lay_Day"],2).'</font></td>';
 
     	   echo'</tr><tr><td>Cost per kWh </font></td>';
 
     	   for ($m=0;$m<$max_month;$m++)
            {
-    	      echo '<td style="background:none;"><font color="black">'.$COST_YEAR[$m]["Grand_Total_kWh"].'</font></td>';
+    	      echo '<td style="background:none;"><font color="black">'. number_format($COST_YEAR[$m]["Grand_Total_kWh"],2).'</font></td>';
            }
-    	   echo '<td style="background:none;"><font color="black">'.$monthly_average["Grand_Total_kWh"].'</font></td>';
+    	   echo '<td style="background:none;"><font color="black">'.number_format($monthly_average["Grand_Total_kWh"],2).'</font></td>';
 
     		echo '</tr></table>';
 			echo '</div>';
