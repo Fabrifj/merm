@@ -38,10 +38,12 @@
           name: opts.units[y].name,
           data: data,
           tooltip: {
+            valueDecimals: 2,
             pointFormatter: function () {
                 var value = parseFloat(this.y).toFixed(2);
                 return '<span style="color:'+this.color+'">\u25CF</span> '+this.series.name+': <b>'+(global.formatNumber(value, 2, '', ' '+opts.units[y].units))+'</b><br/>';
             }
+            
 
           }
         };
