@@ -379,7 +379,7 @@ if($ship_count==1){
   case "mod7":
     if($module=="mod2")
     {
-      $graph=erms_bar_graph($Time_Field,$ship,$VAL["date_value_start"],$VAL["date_value_end"]);
+      // $graph=erms_bar_graph($Time_Field,$ship,$VAL["date_value_start"],$VAL["date_value_end"]);
     }
     else
     {
@@ -388,7 +388,7 @@ if($ship_count==1){
     }
     break;
   case "mod4":
-    $graph=erms_bar_graph($Time_Field,$ship,$VAL["date_value_start"],$VAL["date_value_end"]);
+    // $graph=erms_bar_graph($Time_Field,$ship,$VAL["date_value_start"],$VAL["date_value_end"]);
     break;
   case ERMS_Modules::Overview: // mod0
     $ship_data = $ships_data[$aquisuitetablename[$key]];
