@@ -13,10 +13,10 @@
       this.graph.plotOptions.series.pointInterval = opts.pointInterval;
       this.graph.plotOptions.series.pointStart = opts.pointStart;
       this.graph.tooltip = {
-        valueDecimals: 2, 
-        pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y:.2f}</b><br/>',
+        valueDecimals: 2,
         useHTML: true
       };
+
     },
     getyAxis: function (opts) {
       return _.map(opts.units, function (units, y) {
@@ -44,10 +44,9 @@
           data: data,
           tooltip: {
             pointFormatter: function () {
-              var value = this.y.toFixed(2);
-              return '<span style="color:'+this.color+'">\u25CF</span> '+this.series.name+': <b>'+(value)+'</b><br/>';
+              return '<span style="color:'+this.color+'">\u25CF</span> '+this.series.name+': <b>'+(global.formatNumber(this.y, 1, '', ' kWh'))+'</b><br/>'
             }
-          }
+          },
         };
       });
     },
