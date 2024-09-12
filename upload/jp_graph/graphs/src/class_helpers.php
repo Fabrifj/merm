@@ -17,7 +17,7 @@ class EnergyMetrics
         'power_factor_phase_c' => ['name' => 'Power Factor phase C', 'units' => ''],
         'voltage_phase_ab' => ['name' => 'Voltage phase A-B', 'units' => 'Volts'],
         'voltage_phase_bc' => ['name' => 'Voltage phase B-C', 'units' => 'Volts'],
-        'voltage_phase_ca' => ['name' => 'Voltage phase C-A', 'units' => 'Volts'],
+        'voltage_phase_ac' => ['name' => 'Voltage phase A-C', 'units' => 'Volts'],
         'voltage_phase_an' => ['name' => 'Voltage phase A-N', 'units' => 'Volts'],
         'voltage_phase_bn' => ['name' => 'Voltage phase B-N', 'units' => 'Volts'],
         'voltage_phase_cn' => ['name' => 'Voltage phase C-N', 'units' => 'Volts'],

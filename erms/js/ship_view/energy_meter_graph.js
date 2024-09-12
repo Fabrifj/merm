@@ -39,7 +39,7 @@
           data: data,
           tooltip: {
             pointFormatter: function () {
-                return '<span style="color:'+this.color+'">\u25CF</span> '+this.series.name+': <b>'+(global.formatNumber(this.y, 0, '', ' '+opts.units[y].units))+'</b><br/>';
+                return '<span style="color:'+this.color+'">\u25CF</span> '+this.series.name+': <b>'+(global.formatNumber(this.y, 1, '', ' '+opts.units[y].units))+'</b><br/>';
             }
 
           }
