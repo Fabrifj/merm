@@ -18572,7 +18572,7 @@
                 // Insert options for valueDecimals, valuePrefix, and valueSuffix
                 var series = this.series,
                     seriesTooltipOptions = series.tooltipOptions,
-                    valueDecimals = pick(seriesTooltipOptions.valueDecimals, ''),
+                    valueDecimals = pick(seriesTooltipOptions.valueDecimals, 1),
                     valuePrefix = seriesTooltipOptions.valuePrefix || '',
                     valueSuffix = seriesTooltipOptions.valueSuffix || '';
 
