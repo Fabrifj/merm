@@ -1102,12 +1102,14 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
                         series: [{
                         name: 'Values',
                         data: [
-                            ['Total Energy Charges', $shipData["TotalEnergyCharges"]],
-                            ['Total Demand Charges', $shipData["TotalDemandCharges"]],
-                            ['Total Taxes & Fees', $taxesAddFees]
+                            ['Total Energy Charges', <?php echo $shipData["TotalEnergyCharges"]; ?>],
+                            ['Total Demand Charges', <?php echo $shipData["TotalDemandCharges"]; ?>],
+                            ['Total Taxes & Fees', <?php echo $taxesAddFees; ?>]
                         ]
-                        }];
+                        }]
+                    });
                     </script>
+
           </div>
     </div>
 
