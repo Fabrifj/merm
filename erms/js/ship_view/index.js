@@ -67,7 +67,7 @@
   }
 
   global.formatNumber = function formatNumber (num, decimals, pref, suff) {
-    decimals = decimals || 0;
+    decimals = decimals || 1;
     pref = pref || '';
     suff = suff || '';
     var formatted = parseFloat(num).toFixed(decimals);
