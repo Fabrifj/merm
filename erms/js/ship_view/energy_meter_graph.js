@@ -39,7 +39,8 @@
           data: data,
           tooltip: {
             pointFormatter: function () {
-                return '<span style="color:'+this.color+'">\u25CF</span> '+this.series.name+': <b>'+(global.formatNumber(this.y, 4, '', ' '+opts.units[y].units))+'</b><br/>';
+                var value = parseFloat(this.y).toFixed(2);
+                return '<span style="color:'+this.color+'">\u25CF</span> '+this.series.name+': <b>'+(global.formatNumber(value, 2, '', ' '+opts.units[y].units))+'</b><br/>';
             }
 
           }
