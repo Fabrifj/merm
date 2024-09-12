@@ -1086,7 +1086,7 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
                     <div id="graph_range_sel_header">
                         <span style="font-weight: bold;">Selected Chart</span><br />
                     </div>
-                    <div id="chart-container" style="min-width: 310px; height: 400px; margin: 0 auto;"></div>
+                    <div id="chart-container" style="min-width: 310px; height: 300px; margin: 0 auto;"></div>
                     </div>
 
                     <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -1097,7 +1097,10 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
                         type: 'pie'
                         },
                         title: {
-                        text: 'Pie chart'
+                        text: 'Total cost'
+                        },
+                        tooltip: {
+                        pointFormat: '{series.name}: <b>${point.y:.2f}</b>'
                         },
                         series: [{
                         name: 'Values',
