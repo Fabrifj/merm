@@ -18578,7 +18578,7 @@
 
                 // Loop over the point array map and replace unformatted values with sprintf formatting markup
                 each(series.pointArrayMap || ['y'], function(key) {
-                    key = '{point.' + key; // without the closing bracket
+                    key = '{point.' + key; // sin el corchete de cierre
                     if (valuePrefix || valueSuffix) {
                         pointFormat = pointFormat.replace(key + '}', valuePrefix + key + '}' + valueSuffix);
                     }
