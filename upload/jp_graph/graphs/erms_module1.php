@@ -989,6 +989,68 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
             </table>
         </div>
 	';
+    // <!-- Energy Cost summary box -->
+    echo
+		'
+       <div class="consumption_box">
+            <div id="graph_range_sel_header">
+                <span style="font-weight: bold;">Energy Cost Detailed Summary</span><br />
+            </div>
+
+    		<table id="TblEnergyCostDetail" class="tblDetailedSummaryRpt">
+
+				<tr>
+					<td>On Peak Energy Charges</font></td>
+					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["OnPeakEnergyCharges"],2).'</font></td>
+				</tr>
+				<tr class="odd">
+					<td>Off Peak Energy Charges</font></td>
+         				<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["OffPeakEnergyCharges"],2).'</font></td>
+				</tr>
+				<tr>
+					<td>Other Energy Charges</td>
+					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["OtherEnergyCharges"],2).'</font></td>
+				</tr>
+				<tr class="odd">
+					<td>Total Energy Charges</td>
+					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["TotalEnergyCharges"],2).'</font></td>
+				</tr>
+				<tr>
+					<td>On Peak Demand Charges</td>
+					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["OnPeakDemandCharges"],2).'</font></td>
+				</tr>
+				<tr class="odd">
+					<td>Off Peak Demand Charges</td>
+					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["OffPeakDemandCharges"],2).'</font></td>
+				</tr>
+				<tr>
+					<td>Other Demand Charges</td>
+					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["OtherDemandCharges"],2).'</font></td>
+				</tr>
+				<tr class="odd">
+					<td>Total Demand Charges</td>
+					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["TotalDemandCharges"],2).'</font></td>
+				</tr>
+				<tr>
+					<td>Total Estimated Bill</td>
+					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["TotalEstimatedBill"],2).'</font></td>
+				</tr>
+				<tr class="odd">
+					<td>Full Burden Pure Demand Rate($/kW)</td>
+					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["FullBurdenPureDemandRate"],2).'/kW</font></td>
+				</tr>
+				<tr>
+					<td>Full Burden Pure Energy Rate($/kWh)</td>
+					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["FullBurdenPureEnergyRate"],2).'/kWh</font></td>
+				</tr>
+				<tr class="odd">
+					<td>Full Burden Rate of Shorepower($/kWh)</td>
+					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["FullBurdenShorepowerRate"],2).'/kWh</font></td>
+				</tr>
+    <!-- end detailed report info -->
+    </table>
+    </div>
+    ';
 
 ?>
             </div>
@@ -1116,75 +1178,9 @@ $cost_per_kwH = ($performance["avg_kwH"] != 0) ? ($performance["avg_cost"] / $pe
           </div>
     </div>
 
-<!-- Energy Cost summary box -->
 
- 	<div class="wrapper">
-        <div class="chart_left">
-<?php
-		echo
-		'
-       <div class="consumption_box">
-            <div id="graph_range_sel_header">
-                <span style="font-weight: bold;">Energy Cost Detailed Summary</span><br />
-            </div>
 
-    		<table id="TblEnergyCostDetail" class="tblDetailedSummaryRpt">
 
-				<tr>
-					<td>On Peak Energy Charges</font></td>
-					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["OnPeakEnergyCharges"],2).'</font></td>
-				</tr>
-				<tr class="odd">
-					<td>Off Peak Energy Charges</font></td>
-         				<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["OffPeakEnergyCharges"],2).'</font></td>
-				</tr>
-				<tr>
-					<td>Other Energy Charges</td>
-					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["OtherEnergyCharges"],2).'</font></td>
-				</tr>
-				<tr class="odd">
-					<td>Total Energy Charges</td>
-					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["TotalEnergyCharges"],2).'</font></td>
-				</tr>
-				<tr>
-					<td>On Peak Demand Charges</td>
-					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["OnPeakDemandCharges"],2).'</font></td>
-				</tr>
-				<tr class="odd">
-					<td>Off Peak Demand Charges</td>
-					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["OffPeakDemandCharges"],2).'</font></td>
-				</tr>
-				<tr>
-					<td>Other Demand Charges</td>
-					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["OtherDemandCharges"],2).'</font></td>
-				</tr>
-				<tr class="odd">
-					<td>Total Demand Charges</td>
-					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["TotalDemandCharges"],2).'</font></td>
-				</tr>
-				<tr>
-					<td>Total Estimated Bill</td>
-					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["TotalEstimatedBill"],2).'</font></td>
-				</tr>
-				<tr class="odd">
-					<td>Full Burden Pure Demand Rate($/kW)</td>
-					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["FullBurdenPureDemandRate"],2).'/kW</font></td>
-				</tr>
-				<tr>
-					<td>Full Burden Pure Energy Rate($/kWh)</td>
-					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["FullBurdenPureEnergyRate"],2).'/kWh</font></td>
-				</tr>
-				<tr class="odd">
-					<td>Full Burden Rate of Shorepower($/kWh)</td>
-					<td  style="background:none;"><font color="black">'.'$'.number_format($shipData["FullBurdenShorepowerRate"],2).'/kWh</font></td>
-				</tr>
-<!-- end detailed report info -->
-</table>
-</div>
-';
-?>
-      </div>
-    </div>
 
 <!-- Utility Rate box -->
 
