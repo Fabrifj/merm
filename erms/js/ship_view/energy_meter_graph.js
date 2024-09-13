@@ -6,7 +6,7 @@
     chart: {},
     setOptions: function (opts) {
       this.opts = opts;
-      this.graph.title.text = GRAPH_TITLE;
+      this.graph.title.text = "Pene";
       this.graph.subtitle.text = opts.subtitle;
       this.graph.series = this.getSeries(opts);
       this.graph.yAxis = this.getyAxis(opts);
@@ -57,10 +57,10 @@
         type: 'spline',
       },
       title: {
-        text: "Pene"
+        text: GRAPH_TITLE
       },
       subtitle: {
-        text: 'Pene'
+        text: ''
       },
       xAxis: {
         type: 'datetime',
