@@ -57,7 +57,7 @@
         type: 'spline',
       },
       title: {
-        text: GRAPH_TITLE
+        text: "Pene"
       },
       subtitle: {
         text: 'Pene'
