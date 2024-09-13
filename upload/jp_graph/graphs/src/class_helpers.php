@@ -7,7 +7,7 @@ class EnergyMetrics
         'real_power' => ['name' => 'Real Power', 'units' => 'kW'],
         'reactive_power' => ['name' => 'Reactive Power', 'units' => 'kVAR'],
         'apparent_power' => ['name' => 'Apparent Power', 'units' => 'kVA'],
-        'power_factor' => ['name' => 'Power Factor', 'units' => ''],
+        'power_factor' => ['name' => 'Power Factor', 'units' => '%'],
         'current' => ['name' => 'Current', 'units' => 'Amps'],
         'real_power_phase_a' => ['name' => 'Real Power phase A', 'units' => 'kW'],
         'real_power_phase_b' => ['name' => 'Real Power phase B', 'units' => 'kW'],
