@@ -803,8 +803,8 @@ case ERMS_Modules::PerformanceTrending: //"mod8":
   $testLogger->logInfo("Mod8 ".$VAL["report_year"]);
   $year = date('Y');
   if($request_year == "last12" ||$request_year ==$year ) {
-    $startingMonth = date("Y-m-01", strtotime("-12 months"));
-    $endingMonth = date("Y-m-01");
+    $startingMonth = date("Y-m-01", strtotime("-13 months"));
+    $endingMonth = date("Y-m-01", strtotime("-1 months"));
   } else {
     $startingMonth = sprintf("%s-01-01", $request_year);
     $endingMonth = sprintf("%s-12-01", $request_year);
