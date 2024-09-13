@@ -7,7 +7,7 @@
     setOptions: function (opts) {
       this.opts = opts;
       this.graph.title.text = "Pene";
-      this.graph.subtitle.text = opts.subtitle;
+      this.graph.subtitle.text = "Pene";
       this.graph.series = this.getSeries(opts);
       this.graph.yAxis = this.getyAxis(opts);
       this.graph.plotOptions.series.pointInterval = opts.pointInterval;
