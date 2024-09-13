@@ -44,10 +44,11 @@
           data: data,
           tooltip: {
             pointFormatter: function () {
-              var value = this.y.toFixed(2);
-              return '<span style="color:'+valu+'</b><br/>';              
-              // return '<span style="color:'+this.color+'">\u25CF</span> '+this.series.name+': <b>'+(global.formatNumber(value, 2, '', ' '+opts.units[y].units))+'</b><br/>';
-          },
+              var value = this.y.toFixed(2); 
+              return '<span style="color:' + this.series.color + '">\u25CF</span> ' + this.series.name + ': <b>' + value + ' ' + opts.units[y].units + '</b><br/>';
+              // return '<span style="color:' + this.series.color + '">\u25CF</span> ' + this.series.name + ': <b>' + value + ' ' + opts.units[y].units + '</b><br/>';
+            }
+          }
         };
       });
     },
@@ -59,7 +60,7 @@
         text: GRAPH_TITLE
       },
       subtitle: {
-        text: ''
+        text: 'Pene'
       },
       xAxis: {
         type: 'datetime',
