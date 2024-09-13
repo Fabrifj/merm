@@ -160,7 +160,7 @@ and (min-width : 1824px) {
    position: relative;
    float: left;
    left: 25px;
-   width: 200px;
+   width: 230px;
    margin-top: 5px;
    background-color: #ffffff;
 }
